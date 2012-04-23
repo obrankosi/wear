@@ -22,16 +22,21 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import educar.controllers.IController;
-import educar.controllers.LoginController;
+import educar.controllers.RegistrarController;
 
-public class LoginView implements IView {
+public class RootView extends JFrame implements IView {
+    /**
+     * 
+     */
+    //esto puede ir o no lo agrega el eclipse por un supuesto warning
+    private static final long serialVersionUID = 1L;
     private JFrame jfWindow;
     JTextField tfUsername;
     JPasswordField pfPassword;
 
-    public LoginView() {
+    public RootView() {
 	jfWindow = new JFrame();
-	Container container = jfWindow.getContentPane();
+	java.awt.Container container = jfWindow.getContentPane();
 
 	setupMainContainer(container);
 
@@ -47,14 +52,14 @@ public class LoginView implements IView {
 
 	((JComponent) container).setBorder(new EmptyBorder(20, 20, 20, 20));
 
-	JLabel lblWelcome = new JLabel("Welcome to Educar");
-	lblWelcome.setAlignmentX(Component.CENTER_ALIGNMENT);
-	lblWelcome.setFont(new Font("Serif", Font.BOLD, 16));
-	lblWelcome.setBorder(new EmptyBorder(10, 10, 10, 10));
-	container.add(lblWelcome);
+	JLabel lblAddAdm = new JLabel("Registrar Administrador");
+	lblAddAdm.setAlignmentX(Component.CENTER_ALIGNMENT);
+	lblAddAdm.setFont(new Font("Serif", Font.BOLD, 16));
+	lblAddAdm.setBorder(new EmptyBorder(10, 10, 10, 10));
+	container.add(lblAddAdm);
 
 	// Lay out the buttons from left to right.
-	JLabel lblUserName = new JLabel("username:");
+	JLabel lblUserName = new JLabel("usuario     ");
 	tfUsername = new JTextField(20);
 	JPanel usernamePane = new JPanel();
 	usernamePane
@@ -62,31 +67,34 @@ public class LoginView implements IView {
 	usernamePane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 	usernamePane.add(Box.createHorizontalGlue());
 	usernamePane.add(lblUserName);
-	usernamePane.add(Box.createRigidArea(new Dimension(10, 0)));
+	Component rigidArea = Box.createRigidArea(new Dimension(10, 0));
+	usernamePane.add(rigidArea);
 	usernamePane.add(tfUsername);
 	container.add(usernamePane);
 
 	// Lay out the buttons from left to right.
-	JLabel lblPassword = new JLabel("Password:");
+	JLabel lblPassword = new JLabel("password ");
 	pfPassword = new JPasswordField(20);
 	JPanel passwordPane = new JPanel();
 	passwordPane
 		.setLayout(new BoxLayout(passwordPane, BoxLayout.LINE_AXIS));
 	passwordPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-	passwordPane.add(Box.createHorizontalGlue());
 	passwordPane.add(lblPassword);
 	passwordPane.add(Box.createRigidArea(new Dimension(10, 0)));
 	passwordPane.add(pfPassword);
 	container.add(passwordPane, BorderLayout.PAGE_END);
 
-	JButton bLogin = new JButton("Login");
-	bLogin.setAlignmentX(Component.RIGHT_ALIGNMENT);
-	container.add(bLogin);
+	JButton bRegistrar = new JButton("Registrar");
+	bRegistrar.setAlignmentX(Component.CENTER_ALIGNMENT);
+	container.add(bRegistrar);
 
-	LoginListener buttonListener = new LoginListener();
-	IController loginController = new LoginController();
-	loginController.setView(this);
-	buttonListener.associate(bLogin, loginController);
+	// creo un listener para el botn y su controlador
+	RegistrarListener buttonListener = new RegistrarListener();
+	IController RegistrarController = new RegistrarController();
+	// le paso esta view al controlador para poder obtener el nameuser y el
+	// password
+	RegistrarController.setView(this);
+	buttonListener.associate(bRegistrar, RegistrarController);
     }
 
     public void present(String model) {
@@ -104,5 +112,4 @@ public class LoginView implements IView {
     public void close() {
 	jfWindow.dispose();
     }
-
 }
