@@ -7,3 +7,13 @@ CREATE TABLE Alumnos (
 	telefono VARCHAR(90),
 	direccion VARCHAR(90)
 );
+
+DROP TRIGGER triggerAltaAlumnos;
+DELIMITER $$
+CREATE TRIGGER triggerAltaAlumnos
+	AFTER INSERT ON educar_dev.alumnos
+		FOR EACH ROW
+			BEGIN
+				INSERT INTO educar_dev.users (username, password, role) VALUES (NEW.dni, RIGHT(NEW.dni, 5), "Alumno");
+			END$$
+DELIMITER ;
