@@ -16,7 +16,9 @@ import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 
-public class gestionAlumnosView extends JFrame {
+import educar.gui.IView;
+
+public class gestionAlumnosView extends JFrame implements IView{
 
 	private JPanel contentPane;
 	private JTextField tfDni_alta;
@@ -125,5 +127,31 @@ public class gestionAlumnosView extends JFrame {
 		
 		JPanel panel_baja = new JPanel();
 		tabbedPane.addTab("Baja", null, panel_baja, null);
+	}
+
+
+	public String getName() {
+		return tfNombre_alta.getText().trim();
+	}
+	public String getLastname() {
+		return tfApellido_alta.getText().trim();
+	}
+	public String getFechaNac() {
+		return tfFechaNac_alta.getText().trim();
+	}
+	public String getTelefono() {
+		return tfTelefono_alta.getText().trim();
+	}
+	public String getDireccion() {
+		return tfDireccion_alta.getText().trim();
+	}
+	public void close() {
+		this.dispose();
+	}
+
+	@Override
+	public void present(String model) {
+		// TODO Auto-generated method stub
+		
 	}
 }
