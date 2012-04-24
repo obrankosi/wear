@@ -1,13 +1,15 @@
 package educar.gui;
 
-import java.awt.Button;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import educar.controllers.IController;
+import educar.controllers.AdminController.AdminController;
+import educar.gui.Listener.AdminListener;
 
 public class AdminView extends JFrame implements IView {
 
@@ -21,6 +23,7 @@ public class AdminView extends JFrame implements IView {
      * Create the frame.
      */
     public AdminView() {
+
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 450, 300);
 	contentPane = new JPanel();
@@ -28,39 +31,50 @@ public class AdminView extends JFrame implements IView {
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 
-	Button buttonGDocentes = new Button("Gestionar Docente");
+	JButton buttonGDocentes = new JButton("Gestionar Docente");
 	buttonGDocentes.setBounds(117, 10, 141, 36);
 	contentPane.add(buttonGDocentes);
 
-	Button buttonGAlumnos = new Button("Gestionar Alumno");
+	AdminListener bGstDocente = new AdminListener();
+
+	JButton buttonGAlumnos = new JButton("Gestionar Alumno");
 	buttonGAlumnos.setBounds(117, 52, 141, 36);
 	contentPane.add(buttonGAlumnos);
 
-	Button buttonGMaterias = new Button("Gestionar Materia");
+	AdminListener bGstAlumnos = new AdminListener();
+
+	JButton buttonGMaterias = new JButton("Gestionar Materia");
 	buttonGMaterias.setBounds(117, 94, 141, 36);
 	contentPane.add(buttonGMaterias);
 
-	Button buttonGFacultad = new Button("Gestionar Facultad");
+	AdminListener bGstMateria = new AdminListener();
+
+	JButton buttonGFacultad = new JButton("Gestionar Facultad");
 	buttonGFacultad.setBounds(117, 136, 141, 36);
 	contentPane.add(buttonGFacultad);
 
-	Button buttonGCargos = new Button("**Gestionar Cargo");
+	AdminListener bGstFacultad = new AdminListener();
+
+	JButton buttonGCargos = new JButton("**Gestionar Cargo");
 	buttonGCargos.setBounds(117, 178, 141, 36);
 	contentPane.add(buttonGCargos);
 
-	Button buttonClose = new Button("cerrar");
-	buttonClose.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		buttonCloseActionPerformed(arg0);
-	    }
-	});
+	/* pendiente */
+
+	JButton buttonClose = new JButton("cerrar");
 	buttonClose.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
 	buttonClose.setBounds(352, 241, 86, 23);
 	contentPane.add(buttonClose);
+
+	// creo un listener para el botn y su controlador
+	AdminListener buttonListener = new AdminListener();
+	IController adminController = new AdminController();
+	// le paso esta view al controlador
+	adminController.setView(this);
+	buttonListener.associate(buttonClose, adminController);
     }
 
-    // accion al evento del btn close
-    private void buttonCloseActionPerformed(ActionEvent arg0) {
+    public void close() {
 	this.dispose();
     }
 

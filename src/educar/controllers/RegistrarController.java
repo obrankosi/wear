@@ -10,16 +10,25 @@ public class RegistrarController implements IController {
 
     @Override
     public void process(String model) {
-	// creo el usuario nuevo y lo guardo en la BD
-	admin = new User(rView.getUsername(), rView.getPassword(), "admin");
-	if (admin.save()) {
-	   //cierra la ventana de rootView
-	    rView.close();
-	    rView.present("Administrador Agregado");
+	try {
+	    if (rView.getUsername().compareTo("") == 0
+		    || rView.getPassword().compareTo("") == 0) {
+		throw new Exception();
+	    }
+	    // creo el usuario nuevo y lo guardo en la BD
+	    admin = new User(rView.getUsername(), rView.getPassword(), "admin");
+	    if (admin.save()) {
+		// cierra la ventana de rootView
+		rView.close();
+		rView.present("Administrador Agregado");
 
-	} else
-	    rView
-		    .present("No se pudo agregar administrador, verifique que el nombre de usuario no exista");
+	    } else
+		rView
+			.present("No se pudo agregar administrador, verifique que el nombre de usuario no exista");
+
+	} catch (Exception e) {
+	    rView.present("Ingrese los campos faltantes");
+	}
     }
 
     @Override

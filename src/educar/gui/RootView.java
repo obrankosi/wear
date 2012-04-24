@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import educar.controllers.IController;
 import educar.controllers.RegistrarController;
+import educar.gui.Listener.RootListener;
 
 public class RootView extends JFrame implements IView {
     /**
@@ -89,9 +90,9 @@ public class RootView extends JFrame implements IView {
 	container.add(bRegistrar);
 
 	// creo un listener para el botn y su controlador
-	RegistrarListener buttonListener = new RegistrarListener();
+	RootListener buttonListener = new RootListener();
 	IController RegistrarController = new RegistrarController();
-	// le paso esta view al controlador para poder obtener el nameuser y el
+	// le paso esta view al controlador para poder obtener el userName y el
 	// password
 	RegistrarController.setView(this);
 	buttonListener.associate(bRegistrar, RegistrarController);

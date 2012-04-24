@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import educar.controllers.IController;
 import educar.controllers.LoginController;
+import educar.gui.Listener.LoginListener;
 
 public class LoginView implements IView {
     private JFrame jfWindow;
