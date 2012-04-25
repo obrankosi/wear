@@ -31,11 +31,12 @@ public class AdminController implements IController {
 	if (model.compareTo("Gestionar Facultad") == 0) {
 	    view.close();
 	}
+>>>>>>> .r16
     }
 
     @Override
     public void setView(IView view) {
 	// TODO Auto-generated method stub
-	this.view = (AdminView) view;
+    	this.view = (AdminView) view;
     }
 }
