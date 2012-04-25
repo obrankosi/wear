@@ -16,7 +16,10 @@ import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 
+import educar.controllers.IController;
+import educar.controllers.RegistrarController;
 import educar.gui.IView;
+import educar.gui.Listener.RootListener;
 
 public class gestionAlumnosView extends JFrame implements IView{
 
@@ -27,6 +30,8 @@ public class gestionAlumnosView extends JFrame implements IView{
 	private JTextField tfFechaNac_alta;
 	private JTextField tfTelefono_alta;
 	private JTextField tfDireccion_alta;
+	private JTextField tfDni_modif;
+	private JTextField tfNombre_modif;
 
 	/**
 	 * Launch the application.
@@ -124,9 +129,33 @@ public class gestionAlumnosView extends JFrame implements IView{
 		
 		JPanel panel_modif = new JPanel();
 		tabbedPane.addTab("Modificacion", null, panel_modif, null);
+		panel_modif.setLayout(null);
+		
+		JLabel lblDni_modif = new JLabel("dni");
+		lblDni_modif.setBounds(10, 11, 46, 14);
+		panel_modif.add(lblDni_modif);
+		
+		tfDni_modif = new JTextField();
+		tfDni_modif.setBounds(39, 8, 113, 20);
+		panel_modif.add(tfDni_modif);
+		tfDni_modif.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(162, 7, 78, 23);
+		panel_modif.add(btnBuscar);
+		
+		JLabel lblNombre_modif = new JLabel("nombre");
+		lblNombre_modif.setBounds(10, 49, 46, 14);
+		panel_modif.add(lblNombre_modif);
+		
+		tfNombre_modif = new JTextField();
+		tfNombre_modif.setBounds(66, 46, 86, 20);
+		panel_modif.add(tfNombre_modif);
+		tfNombre_modif.setColumns(10);
 		
 		JPanel panel_baja = new JPanel();
 		tabbedPane.addTab("Baja", null, panel_baja, null);
+		
 	}
 
 
