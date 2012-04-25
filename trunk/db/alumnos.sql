@@ -8,7 +8,7 @@ CREATE TABLE Alumnos (
 	direccion VARCHAR(90)
 );
 
-DROP TRIGGER triggerAltaAlumnos;
+DROP TRIGGER IF EXISTS triggerAltaAlumnos;
 DELIMITER $$
 CREATE TRIGGER triggerAltaAlumnos
 	AFTER INSERT ON educar_dev.alumnos
