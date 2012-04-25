@@ -209,6 +209,11 @@ public class gestionAlumnosView extends JFrame implements IView {
 	return tfDireccion_alta.getText().trim();
     }
 
+    public String getDni() {
+	return tfDni_alta.getText().trim();
+    }
+
+    
     public void close() {
 	this.dispose();
     }
