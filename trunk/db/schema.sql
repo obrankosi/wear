@@ -53,13 +53,13 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `educar_dev`.`Alumnos`;
 CREATE TABLE  `educar_dev`.`Alumnos` (
   `dni_a` int(11) NOT NULL,
-  `nombre_a` varchar(30) NOT NULL,
-  `nro_alumno` int(11) NOT NULL AUTO_INCREMENT,
   `apellido_a` varchar(30) NOT NULL,
-  `edad_a` int(11) NOT NULL,
+  `nombre_a` varchar(30) NOT NULL,
   `fechaNac_a` date NOT NULL,
+  `edad_a` int(11) NOT NULL,
   `telefono_a` varchar(30) DEFAULT NULL,
   `direccion_a` varchar(50) DEFAULT NULL,
+  `nro_alumno` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`dni_a`),
   UNIQUE KEY `dni_a` (`dni_a`),
   UNIQUE KEY `nro_alumno` (`nro_alumno`)
@@ -74,20 +74,6 @@ LOCK TABLES `Alumnos` WRITE;
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
 
-
---
--- Definition of trigger `educar_dev`.`triggerAltaAlumnos`
---
-
-DROP TRIGGER /*!50030 IF EXISTS */ `educar_dev`.`triggerAltaAlumnos`;
-
-DELIMITER $$
-
-CREATE DEFINER = `root`@`localhost` TRIGGER  `educar_dev`.`triggerAltaAlumnos` AFTER INSERT ON `Alumnos` FOR EACH ROW BEGIN
-				INSERT INTO educar_dev.users (username, password, role) VALUES (NEW.dni_a, RIGHT(NEW.dni_a, 5), "Alumno");
-END $$
-
-DELIMITER ;
 
 --
 -- Definition of table `educar_dev`.`Cargo`
