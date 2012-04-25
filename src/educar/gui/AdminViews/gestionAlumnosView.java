@@ -32,6 +32,10 @@ public class gestionAlumnosView extends JFrame implements IView{
 	private JTextField tfDireccion_alta;
 	private JTextField tfDni_modif;
 	private JTextField tfNombre_modif;
+	private JTextField tfApellido_modif;
+	private JTextField tfFechaNac_modif;
+	private JTextField tfTelefono_modif;
+	private JTextField tfDireccion_modif;
 
 	/**
 	 * Launch the application.
@@ -55,7 +59,7 @@ public class gestionAlumnosView extends JFrame implements IView{
 	public gestionAlumnosView() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 271, 261);
+		setBounds(100, 100, 271, 298);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -140,9 +144,9 @@ public class gestionAlumnosView extends JFrame implements IView{
 		panel_modif.add(tfDni_modif);
 		tfDni_modif.setColumns(10);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(162, 7, 78, 23);
-		panel_modif.add(btnBuscar);
+		JButton btnBuscar_modif = new JButton("Buscar");
+		btnBuscar_modif.setBounds(162, 7, 78, 23);
+		panel_modif.add(btnBuscar_modif);
 		
 		JLabel lblNombre_modif = new JLabel("nombre");
 		lblNombre_modif.setBounds(10, 49, 46, 14);
@@ -152,6 +156,50 @@ public class gestionAlumnosView extends JFrame implements IView{
 		tfNombre_modif.setBounds(66, 46, 86, 20);
 		panel_modif.add(tfNombre_modif);
 		tfNombre_modif.setColumns(10);
+		
+		JLabel lblApellido_modif = new JLabel("apellido");
+		lblApellido_modif.setBounds(10, 80, 46, 14);
+		panel_modif.add(lblApellido_modif);
+		
+		tfApellido_modif = new JTextField();
+		tfApellido_modif.setBounds(66, 77, 86, 20);
+		panel_modif.add(tfApellido_modif);
+		tfApellido_modif.setColumns(10);
+		
+		JLabel lblFechanac_modif = new JLabel("fechaNac");
+		lblFechanac_modif.setBounds(10, 105, 46, 14);
+		panel_modif.add(lblFechanac_modif);
+		
+		JLabel lblTelefono_modif = new JLabel("Telefono");
+		lblTelefono_modif.setBounds(10, 130, 46, 14);
+		panel_modif.add(lblTelefono_modif);
+		
+		JLabel lblDireccion_modif = new JLabel("Direccion");
+		lblDireccion_modif.setBounds(10, 155, 46, 14);
+		panel_modif.add(lblDireccion_modif);
+		
+		tfFechaNac_modif = new JTextField();
+		tfFechaNac_modif.setBounds(66, 102, 86, 20);
+		panel_modif.add(tfFechaNac_modif);
+		tfFechaNac_modif.setColumns(10);
+		
+		tfTelefono_modif = new JTextField();
+		tfTelefono_modif.setBounds(66, 127, 86, 20);
+		panel_modif.add(tfTelefono_modif);
+		tfTelefono_modif.setColumns(10);
+		
+		tfDireccion_modif = new JTextField();
+		tfDireccion_modif.setBounds(66, 152, 86, 20);
+		panel_modif.add(tfDireccion_modif);
+		tfDireccion_modif.setColumns(10);
+		
+		JButton btnClear_modif = new JButton("Clear");
+		btnClear_modif.setBounds(39, 198, 89, 23);
+		panel_modif.add(btnClear_modif);
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.setBounds(151, 198, 89, 23);
+		panel_modif.add(btnActualizar);
 		
 		JPanel panel_baja = new JPanel();
 		tabbedPane.addTab("Baja", null, panel_baja, null);
