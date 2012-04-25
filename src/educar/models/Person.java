@@ -93,15 +93,19 @@ public class Person {
 	    Person.getPersonByDni(this.getDni(), tableName);
 	    return false;
 	} catch (PersonNotFound e1) {
-	    jpa.destroy(tableName, "dni", this.getDni());
+	    if (tableName.compareTo("Alumnos") == 0)
+		jpa.destroy(tableName, "dni_a", this.getDni());
+	    else
+		jpa.destroy(tableName, "dni_docente", this.getDni());
 	    return true;
 	}
     }
 
-    /*Return una persona buscada por dni
-     * null en el caso que no exista;*/
+    /*
+     * Return una persona buscada por dni null en el caso que no exista;
+     */
 
-    public Person getPerson (String dni, String tableName){
+    public Person getPerson(String dni, String tableName) {
 	Person person = null;
 	try {
 	    person = Person.getPersonByDni(dni, tableName);
@@ -111,8 +115,8 @@ public class Person {
 	    return person;
 	}
     }
-    
-    public  String getDni() {
+
+    public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;
     }
