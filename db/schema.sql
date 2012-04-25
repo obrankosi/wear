@@ -53,16 +53,17 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `educar_dev`.`Alumnos`;
 CREATE TABLE  `educar_dev`.`Alumnos` (
   `dni_a` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
+  `nombre_a` varchar(30) NOT NULL,
   `nro_alumno` int(11) NOT NULL AUTO_INCREMENT,
   `apellido_a` varchar(30) NOT NULL,
+  `edad_a` int(11) NOT NULL,
   `fechaNac_a` date NOT NULL,
   `telefono_a` varchar(30) DEFAULT NULL,
   `direccion_a` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`dni_a`),
   UNIQUE KEY `dni_a` (`dni_a`),
   UNIQUE KEY `nro_alumno` (`nro_alumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Alumnos`
