@@ -1,11 +1,8 @@
 package educar.models;
 
-import java.awt.List;
-import java.lang.reflect.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
 
 import educar.db.JPA;
 

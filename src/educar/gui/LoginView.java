@@ -1,4 +1,4 @@
-package educar.gui;
+	package educar.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

@@ -28,6 +28,7 @@ public class LoginController implements IController {
 	String role = Session.getCurrentUser().getRole();
 	// Segun el tipo de usario, es la View que abre
 	if (role.equals("root")) {
+	    view.close();
 	    new RootView().setVisible(true);
 	}
 	if (role.equals("admin")) {

@@ -36,24 +36,38 @@ public class AdminView extends JFrame implements IView {
 	contentPane.add(buttonGDocentes);
 
 	AdminListener bGstDocente = new AdminListener();
+	IController adminCD = new AdminController();
+	adminCD.setView(this);
+	bGstDocente.associate(buttonGDocentes, adminCD);
+
 
 	JButton buttonGAlumnos = new JButton("Gestionar Alumno");
 	buttonGAlumnos.setBounds(117, 52, 141, 36);
 	contentPane.add(buttonGAlumnos);
 
 	AdminListener bGstAlumnos = new AdminListener();
+	IController adminCA = new AdminController();
+	adminCA.setView(this);
+	bGstAlumnos.associate(buttonGAlumnos, adminCA);
 
+	
 	JButton buttonGMaterias = new JButton("Gestionar Materia");
 	buttonGMaterias.setBounds(117, 94, 141, 36);
 	contentPane.add(buttonGMaterias);
 
 	AdminListener bGstMateria = new AdminListener();
+	IController adminCM = new AdminController();
+	adminCM.setView(this);
+	bGstMateria.associate(buttonGMaterias, adminCM);
 
 	JButton buttonGFacultad = new JButton("Gestionar Facultad");
 	buttonGFacultad.setBounds(117, 136, 141, 36);
 	contentPane.add(buttonGFacultad);
-
+	
 	AdminListener bGstFacultad = new AdminListener();
+	IController adminCF = new AdminController();
+	adminCF.setView(this);
+	bGstFacultad.associate(buttonGFacultad, adminCF);
 
 	JButton buttonGCargos = new JButton("**Gestionar Cargo");
 	buttonGCargos.setBounds(117, 178, 141, 36);
