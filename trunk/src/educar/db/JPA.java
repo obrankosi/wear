@@ -94,12 +94,6 @@ public class JPA {
      *            SQL (i.e. "UPDATE table set name = 'TEST NAME' where id = 10")
      * 
      *            i.e.:
-     * 
-     * 
-     * 
-     * 
-     * 
-     *            
      *            conexion.update("UPDATE db.table set name= 'TEST NAME' where id = 10"
      *            );
      */
