@@ -129,7 +129,7 @@ public class gestionAlumnosView extends JFrame implements IView,
 	gestionCClear_mod.setView(this);
 	bClear_mod.associate(btnClear_modif, gestionCClear_mod);
 
-	JButton btnActualizar = new JButton("Actualizar");
+	JButton btnActualizar = new JButton(MODIFY);
 	btnActualizar.setBounds(154, 198, 86, 23);
 	panel_modif.add(btnActualizar);
 	// asocio
@@ -138,7 +138,7 @@ public class gestionAlumnosView extends JFrame implements IView,
 	gestionCUpdate.setView(this);
 	bUpdate.associate(btnActualizar, gestionCUpdate);
 
-	JButton btnClear = new JButton(MODIFY);
+	JButton btnClear = new JButton(CLEAR);
 	btnClear.setBounds(77, 198, 57, 23);
 	panel_modif.add(btnClear);
 	// asocio
