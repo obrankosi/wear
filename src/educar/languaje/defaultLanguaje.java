@@ -42,4 +42,5 @@ public interface defaultLanguaje {
 	public static final String SEARCH = "Buscar";
 
 	public static final String DELETE = "Borrar";
+	public static final String MODIFY = "modificar";
 }

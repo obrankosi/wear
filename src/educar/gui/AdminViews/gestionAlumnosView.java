@@ -138,14 +138,14 @@ public class gestionAlumnosView extends JFrame implements IView,
 	gestionCUpdate.setView(this);
 	bUpdate.associate(btnActualizar, gestionCUpdate);
 
-	JButton btnDel = new JButton("CLEAR");
-	btnDel.setBounds(77, 198, 57, 23);
-	panel_modif.add(btnDel);
+	JButton btnClear = new JButton(MODIFY);
+	btnClear.setBounds(77, 198, 57, 23);
+	panel_modif.add(btnClear);
 	// asocio
 	AdminListener bDel = new AdminListener();
 	IController gestionCDel = new gestionAlumnosController();
 	gestionCDel.setView(this);
-	bDel.associate(btnDel, gestionCDel);
+	bDel.associate(btnClear, gestionCDel);
 
 	JPanel panel_alta = new JPanel();
 	tabbedPane.addTab("Alta", null, panel_alta, null);

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import educar.db.DbConnection;
 import educar.db.JPA;
 
 public class Alumno {
@@ -37,8 +38,8 @@ public class Alumno {
     private String dir;
     private static JPA jpa = new JPA();
 
-    private void Person(String dni, String name, String lastName, String fN,
-	    String age, String dir, String tel) {
+    private void Person(String dni, String lastName, String name, String fN,
+	    String age, String tel, String dir) {
 	this.name = name;
 	this.lastName = lastName;
 	this.fN = fN;
@@ -137,8 +138,9 @@ public class Alumno {
 	}
     }
 
-    public void Update(){
-	
+    public static void update(String[] values){//numero de alumno es auto incremetal
+	String[] columns = {"dni","apellido_a","nombre_a","fechaNac_a","edad_a","telefono_a","direccion_a"};
+	jpa.update("Alumnos", columns, values,columns[0],values[0]);
     }
     
     public String getDni() {
