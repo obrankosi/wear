@@ -137,6 +137,10 @@ public class Alumno {
 	}
     }
 
+    public void Update(){
+	
+    }
+    
     public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;
