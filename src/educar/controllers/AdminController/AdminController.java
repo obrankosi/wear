@@ -6,6 +6,7 @@ import educar.gui.IView;
 import educar.gui.RootView;
 import educar.gui.AdminViews.SubjectView;
 import educar.gui.AdminViews.gestionAlumnosView;
+import educar.gui.AdminViews.gestionDocentesView;
 import educar.languaje.defaultLanguaje;
 
 public class AdminController implements IController, defaultLanguaje {
@@ -18,7 +19,7 @@ public class AdminController implements IController, defaultLanguaje {
 	}
 	if (model.compareTo(MANAGE_TEACHER) == 0) {
 	    view.close();
-	    new RootView(); // TEACHER VIEW
+	    new gestionDocentesView(); // TEACHER VIEW
 	}
 	if (model.compareTo(MANAGE_STUDENT) == 0) {
 	    view.close();

@@ -6,26 +6,26 @@ import java.sql.SQLException;
 
 import educar.db.JPA;
 
-public class Alumno {
+public class Docente {
 
-    public Alumno(String dni, String name, String lastName, String fN,
+    public Docente(String dni, String name, String lastName, String fN,
 	    String age, String dir, String tel) {
 	Person(dni, name, lastName, fN, age, dir, tel);
 	// TODO Auto-generated constructor stub
     }
 
     public boolean save() {
-	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
-		"edad_a", "telefono_a","direccion_a" };
-	return save("Alumnos", columns);
+	String[] columns = { "dni_docente", "apellido_d", "nombre_d",
+		"fechaNac_d", "edad_d", "tel_d", "direccion_d" };
+	return save("Docente", columns);
     }
 
     public boolean destroy() {
-	return destroy("Alumnos");
+	return destroy("Docente");
     }
 
-    public static Alumno getAlumno(String dni) {
-	return getPerson(dni, "Alumnos");
+    public static Docente getDocente(String dni) {
+	return getPerson(dni, "Docente");
     }
 
     private String name;
@@ -54,7 +54,7 @@ public class Alumno {
      */
     private boolean save(String tableName, String[] nameColumns) {
 	try {
-	    Alumno.getPersonByDni(dni, tableName);
+	    Docente.getPersonByDni("dni_docente", tableName);
 	    return false;
 	} catch (PersonNotFound e1) {
 	    String[] columns = nameColumns;
@@ -85,16 +85,16 @@ public class Alumno {
      * dni a buscar, nombre de la tabla, nombre de la columna
      */
 
-    private static Alumno getPersonByDni(String dni2, String tableName)
+    private static Docente getPersonByDni(String dni2, String tableName)
 	    throws PersonNotFound {
 	// TODO Auto-generated method stub
 	ResultSet rs = null;
-	Alumno u = null;
-	rs = jpa.getByField(tableName, "dni", dni2);
+	Docente u = null;
+	rs = jpa.getByField(tableName, "dni_docente", dni2);
 
 	try {
 	    if (rs.next()) {
-		u = new Alumno(rs.getString(1), rs.getString(2), rs
+		u = new Docente(rs.getString(1), rs.getString(2), rs
 			.getString(3), rs.getString(4), rs.getString(5), rs
 			.getString(6), rs.getString(7));
 	    } else {
@@ -111,14 +111,7 @@ public class Alumno {
      * borra una persona entera por dni ,Return True ssi el borrado fues exitoso
      */
     private boolean destroy(String tableName) {
-	// try {
-	// alumno = Alumno.getPersonByDni(this.getDni(), tableName);
-	// jpa.destroy(tableName, "dni_a", this.getDni());
-	// return true;
-	// } catch (PersonNotFound e1) {
-	// return false;
-	// }
-	jpa.destroy(tableName, "dni", this.getDni());
+	jpa.destroy(tableName, "dni_docente", this.getDni());
 	return true;
     }
 
@@ -126,10 +119,10 @@ public class Alumno {
      * Return una persona buscada por dni null en el caso que no exista;
      */
 
-    private static Alumno getPerson(String dni, String tableName) {
-	Alumno person = null;
+    private static Docente getPerson(String dni, String tableName) {
+	Docente person = null;
 	try {
-	    person = Alumno.getPersonByDni(dni, tableName);
+	    person = Docente.getPersonByDni(dni, tableName);
 	    return person;
 	} catch (PersonNotFound e) {
 	    // TODO Auto-generated catch block
@@ -137,11 +130,12 @@ public class Alumno {
 	}
     }
 
-    public static void update(String[] values){//numero de alumno es auto incremetal
-	String[] columns = {"dni","apellido_a","nombre_a","fechaNac_a","edad_a","telefono_a","direccion_a"};
-	jpa.update("Alumnos", columns, values,columns[0],values[0]);
+    public static void update(String[] values) {
+	String[] columns = { "dni_docente", "apellido_d", "nombre_d",
+		"fechaNac_d", "edad_d", "tel_d", "direccion_d" };
+	jpa.update("Docente", columns, values, columns[0], values[0]);
     }
-    
+
     public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;
