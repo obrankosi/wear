@@ -99,8 +99,22 @@ public class JPA {
      */
     public void update(String tableName, String column, String value, String id) {
 	String query = "UPDATE " + DbConnection.bd + "." + tableName;
-	query += " set " + column + "= \"" + value + "\" WHERE id=" + id + ";";
 
+	query += " set " + column + "= \"" + value + "\" WHERE id =" + id + ";";
+	runUpdate(query);
+    }
+
+    // modularizar el id!!
+    public void update(String tableName, String[] column, String[] values,
+	    String columnId, String id) {
+	String updateValues = column[0] + "= \"" + values[0] + "\"";
+	for (int i = 1; i < values.length; i++) {
+	    updateValues += "," + column[i] + " = \"" + values[i] + "\"";
+	}
+	String query = "UPDATE " + DbConnection.bd + "." + tableName;
+	query += " set " + updateValues + " WHERE " + columnId + " = " + id
+		+ ";";
+	System.out.println(query + "************************");
 	runUpdate(query);
     }
 

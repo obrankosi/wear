@@ -1,5 +1,7 @@
 package educar.controllers.AdminController;
 
+import com.mysql.jdbc.UpdatableResultSet;
+
 import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.AdminViews.gestionAlumnosView;
@@ -21,6 +23,9 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	}
 	if (model.compareTo(SEARCH) == 0) {
 	    searchAStudentInDbase();
+	}
+	if (model.compareTo(MODIFY) == 0) {
+	    modifyStudent();
 	}
 
     }
@@ -52,7 +57,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	    if (student.destroy()) {
 		view.present("borrado del alumno exitoso");
 	    }
-		
+
 	}
 
     }
@@ -82,6 +87,16 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	    }
 	} else
 	    view.present("faltan completar campos");
+    }
+
+    private void modifyStudent() {// ponerle la edad !!!!
+	// {
+	// searchAStudentInDbase();
+	String[] values = { view.getDniMod(), view.getLastnameMod(),
+		view.getNameMod(), view.getFechaNacMod(), "22",
+		view.getTelefonoMod(), view.getDireccionMod() };
+	Alumno.update(values);
+	// view.deleteViewFieldsMod();
     }
 
 }
