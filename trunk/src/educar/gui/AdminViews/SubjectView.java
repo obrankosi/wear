@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -97,9 +98,15 @@ public class SubjectView extends JFrame implements IView {
 		btnActualizar.setBounds(189, 198, 90, 23);
 		panel_modif.add(btnActualizar);
 
-		JButton btnDel = new JButton("Delete");
-		btnDel.setBounds(101, 198, 78, 23);
-		panel_modif.add(btnDel);
+		JButton btnDelete_modif = new JButton("Delete");
+		btnDelete_modif.setBounds(101, 198, 78, 23);
+		panel_modif.add(btnDelete_modif);
+		// asocio con controlador
+		AdminListener bDelete_mod = new AdminListener();
+		IController gestionCDelete_mod = new subjectManagementController();
+		gestionCDelete_mod.setView(this);
+		bDelete_mod.associate(btnDelete_modif, gestionCDelete_mod);
+
 
 		// //////////////////////////
 		// PANEL DE ALTAS
@@ -180,8 +187,7 @@ public class SubjectView extends JFrame implements IView {
 
 	@Override
 	public void present(String model) {
-		// TODO Auto-generated method stub
-
+		JOptionPane.showMessageDialog(null, model);
 	}
 
 }

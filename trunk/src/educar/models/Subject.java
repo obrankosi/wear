@@ -8,7 +8,7 @@ import educar.db.JPA;
 
 public class Subject {
 
-	private String subjectCode;
+	private static String subjectCode;
 	private String subjectName;
 	private String responsableTeacher;
 	private static JPA jpa = new JPA();
@@ -22,10 +22,10 @@ public class Subject {
 	// busca en la base de datos la materia ingresada, si no existe, la inserta
 	// y retorna
 	// true, de lo contrario, retorna false sin ingresar nada (materia ya
-	// existente)
+	// existente) 
 	public boolean save(String tableName) {
 		try {
-			Subject.getSubjectByCode(subjectCode, tableName);
+			Subject.getSubjectByCode(tableName);
 			return false;
 		} catch (SubjectNotFound e1) {
 			String[] columns = { "cod_materia", "nombre_mat", "dni_docente" };
@@ -48,39 +48,33 @@ public class Subject {
 
 	}
 
-	
-	
-	
-	
-	
 	/*
-	 * retorna una materia que buscada en la BD
-	 * en caso de que no exista, devuelve null
+	 * retorna una materia que buscada en la BD en caso de que no exista,
+	 * devuelve null
 	 */
 
 	public Subject getSubject() {
 		Subject subject = null;
 		try {
-			subject = this.getSubjectByCode(subjectCode, "Materia");
+			subject = Subject.getSubjectByCode("Materia");
 			return subject;
 		} catch (SubjectNotFound e) {
 			// TODO Auto-generated catch block
 			return subject;
 		}
-		
+
 	}
-	
-	
-	
-	/* 
+
+
+	/*
 	 * busca en la BD una materia por su código (es único)
 	 */
-	private Subject getSubjectByCode(String code, String tableName)
+	private static Subject getSubjectByCode(String tableName)
 			throws SubjectNotFound {
 		// TODO Auto-generated method stub
 		ResultSet rs = null;
 		Subject u = null;
-		rs = jpa.getByField(tableName, "cod_materia", code);
+		rs = jpa.getByField(tableName, "cod_materia", getCode());
 
 		try {
 			if (rs.next()) {
@@ -96,42 +90,35 @@ public class Subject {
 		return u;
 	}
 
-	
-	
 
 
-	
-	
-	
-	
+
+	/*
+	 * borra una materia por su código, retorna true ssi el borrado fue exitoso 
+	 * si la materia no existe, retorna false
+	 */
 	public boolean deleteSubject() {
 		return this.destroy("cod_materia");
 	}
-	
-	/*
-	 * borra una materia por código, retorna true ssi el borrado fue exitoso
-	 * si la materia no existe, retorna false
-	 */
+
+
 	private boolean destroy(String tableName) {
 		try {
-			Subject.getSubjectByCode(this.getCode(), tableName);
+			this.getSubjectByCode(tableName);
 			jpa.destroy(tableName, "cod_materia", this.getCode());
 			return true;
 		} catch (SubjectNotFound error) {
 			return false;
 		}
 	}
-		
-	
 
-	
-	//////////
+	// ////////
 	public void setCode(String code) {
 		this.subjectCode = code;
 	}
 
-	public String getCode() {
-		return this.subjectCode;
+	public static String getCode() {
+		return subjectCode;
 	}
 
 	public void setName(String name) {
