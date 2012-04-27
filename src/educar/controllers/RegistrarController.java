@@ -2,9 +2,10 @@ package educar.controllers;
 
 import educar.gui.IView;
 import educar.gui.RootView;
+import educar.languaje.defaultLanguaje;
 import educar.models.User;
 
-public class RegistrarController implements IController {
+public class RegistrarController implements IController, defaultLanguaje {
     private User admin;
     private RootView rView;
 

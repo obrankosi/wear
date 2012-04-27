@@ -21,4 +21,9 @@ public class Session {
 	public static void setCurrentUser(User currentUser) {
 		Session.currentUser = currentUser;
 	}
+	
+	
+	
+	
+	
 }

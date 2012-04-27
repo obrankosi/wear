@@ -4,32 +4,35 @@ import educar.controllers.IController;
 import educar.gui.AdminView;
 import educar.gui.IView;
 import educar.gui.RootView;
+import educar.gui.AdminViews.SubjectView;
 import educar.gui.AdminViews.gestionAlumnosView;
+import educar.languaje.defaultLanguaje;
 
-public class AdminController implements IController {
+public class AdminController implements IController, defaultLanguaje {
     private AdminView view;
 
     @Override
     public void process(String model) {
-	if (model.compareTo("cerrar") == 0) {
+	if (model.compareTo(CLOSE_WINDOW) == 0) {
 	    view.close();
 	}
-	if (model.compareTo("Gestionar Docente") == 0) {
+	if (model.compareTo(MANAGE_TEACHER) == 0) {
 	    view.close();
-	    new RootView();
+	    new RootView(); // TEACHER VIEW
 	}
-	if (model.compareTo("Gestionar Alumno") == 0) {
+	if (model.compareTo(MANAGE_STUDENT) == 0) {
 	    view.close();
-	    new gestionAlumnosView().setVisible(true);
+	    new gestionAlumnosView();
 	}
-	if (model.compareTo("Gestionar Cargo") == 0) {
-	    view.close();
+	if (model.compareTo(MANAGE_CHARGE) == 0) {
+	    view.close(); // CHARGE VIEW
 	}
-	if (model.compareTo("Gestionar Materia") == 0) {
+	if (model.compareTo(MANAGE_SUBJECT) == 0) {
 	    view.close();
+	    new SubjectView(); // SUBJECT VIEW
 	}
-	if (model.compareTo("Gestionar Facultad") == 0) {
-	    view.close();
+	if (model.compareTo(MANAGE_FACULTY) == 0) {
+	    view.close(); // FACULTY VIEW 
 	}
 
     }

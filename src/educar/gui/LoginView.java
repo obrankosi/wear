@@ -24,21 +24,22 @@ import javax.swing.border.EmptyBorder;
 import educar.controllers.IController;
 import educar.controllers.LoginController;
 import educar.gui.Listener.LoginListener;
+import educar.languaje.defaultLanguaje;
 
-public class LoginView implements IView {
+public class LoginView implements IView, defaultLanguaje {
     private JFrame jfWindow;
     JTextField tfUsername;
     JPasswordField pfPassword;
 
     public LoginView() {
 	jfWindow = new JFrame();
+	jfWindow.setVisible(true);
+	jfWindow.setResizable(false);
+	
 	Container container = jfWindow.getContentPane();
-
 	setupMainContainer(container);
 
 	jfWindow.pack();
-	jfWindow.setVisible(true);
-	jfWindow.setResizable(false);
 	jfWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
@@ -48,14 +49,14 @@ public class LoginView implements IView {
 
 	((JComponent) container).setBorder(new EmptyBorder(20, 20, 20, 20));
 
-	JLabel lblWelcome = new JLabel("Welcome to Educar");
+	JLabel lblWelcome = new JLabel(WELCOME);
 	lblWelcome.setAlignmentX(Component.CENTER_ALIGNMENT);
 	lblWelcome.setFont(new Font("Serif", Font.BOLD, 16));
 	lblWelcome.setBorder(new EmptyBorder(10, 10, 10, 10));
 	container.add(lblWelcome);
 
 	// Lay out the buttons from left to right.
-	JLabel lblUserName = new JLabel("username:");
+	JLabel lblUserName = new JLabel(USERNAME + ":");
 	tfUsername = new JTextField(20);
 	JPanel usernamePane = new JPanel();
 	usernamePane
@@ -68,7 +69,7 @@ public class LoginView implements IView {
 	container.add(usernamePane);
 
 	// Lay out the buttons from left to right.
-	JLabel lblPassword = new JLabel("Password:");
+	JLabel lblPassword = new JLabel(PASSWORD + ":");
 	pfPassword = new JPasswordField(20);
 	JPanel passwordPane = new JPanel();
 	passwordPane
@@ -80,7 +81,7 @@ public class LoginView implements IView {
 	passwordPane.add(pfPassword);
 	container.add(passwordPane, BorderLayout.PAGE_END);
 
-	JButton bLogin = new JButton("Login");
+	JButton bLogin = new JButton(LOGIN);
 	bLogin.setAlignmentX(Component.RIGHT_ALIGNMENT);
 	container.add(bLogin);
 

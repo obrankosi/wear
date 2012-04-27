@@ -14,7 +14,7 @@ public class LoginController implements IController {
 	if (null != view)
 	    if (User.authenticate(((LoginView) view).getUsername(),
 		    ((LoginView) view).getPassword())) {
-		view.present("you are logged in as: "
+		view.present("You are logged in as: "
 			+ Session.getCurrentUser().getUsername());
 		view.close();
 		openView(Session.getCurrentUser());
@@ -28,8 +28,8 @@ public class LoginController implements IController {
 	String role = Session.getCurrentUser().getRole();
 	// Segun el tipo de usario, es la View que abre
 	if (role.equals("root")) {
-	    view.close();
-	    new RootView().setVisible(true);
+	    //view.close();
+	    new RootView();
 	}
 	if (role.equals("admin")) {
 	    new AdminView().setVisible(true);
