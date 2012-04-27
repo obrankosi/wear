@@ -119,7 +119,6 @@ public class JPA {
     public void destroy(String tableName, String columnName, String id) {
 	String query = "DELETE from " + DbConnection.bd + "." + tableName;
 	query += " Where " + columnName + " = \"" + id + "\";";
-
 	runUpdate(query);
     }
 

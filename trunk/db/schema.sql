@@ -52,7 +52,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `educar_dev`.`Alumnos`;
 CREATE TABLE  `educar_dev`.`Alumnos` (
-  `dni_a` int(11) NOT NULL,
+  `dni` int(11) NOT NULL,
   `apellido_a` varchar(30) NOT NULL,
   `nombre_a` varchar(30) NOT NULL,
   `fechaNac_a` date NOT NULL,
@@ -60,10 +60,10 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
   `telefono_a` varchar(30) DEFAULT NULL,
   `direccion_a` varchar(50) DEFAULT NULL,
   `nro_alumno` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`dni_a`),
-  UNIQUE KEY `dni_a` (`dni_a`),
+  PRIMARY KEY (`dni`) USING BTREE,
+  UNIQUE KEY `dni_a` (`dni`),
   UNIQUE KEY `nro_alumno` (`nro_alumno`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Alumnos`
@@ -71,9 +71,28 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
 
 /*!40000 ALTER TABLE `Alumnos` DISABLE KEYS */;
 LOCK TABLES `Alumnos` WRITE;
+INSERT INTO `educar_dev`.`Alumnos` VALUES  (12,'edaa','edaa','2012-12-11',22,'2345','edaa',4),
+ (333,'xxx','xxx','2000-12-12',22,'xxx','xxx',2),
+ (666,'due','deu','2012-12-12',22,'due','due',5),
+ (3563,'xxx','xxx','2000-12-12',22,'xxx','xxx',3),
+ (9999,'eduar','xxx','2000-12-12',22,'xxx','xxx',1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
 
+
+--
+-- Definition of trigger `educar_dev`.`triggerAltaAlumnos`
+--
+
+DROP TRIGGER /*!50030 IF EXISTS */ `educar_dev`.`triggerAltaAlumnos`;
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `educar_dev`.`triggerAltaAlumnos` AFTER INSERT ON `Alumnos` FOR EACH ROW BEGIN
+   INSERT INTO educar_dev.users (username, password, role) VALUES (NEW.dni, RIGHT(NEW.dni, 5), "Alumno");
+END $$
+
+DELIMITER ;
 
 --
 -- Definition of table `educar_dev`.`Cargo`
@@ -183,7 +202,7 @@ CREATE TABLE  `educar_dev`.`users` (
   `role` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`users`
@@ -210,7 +229,8 @@ INSERT INTO `educar_dev`.`users` VALUES  (5,'edu','33361090','admin'),
  (30,'jua','carlos','admin'),
  (31,'34574548','74548','Alumno'),
  (32,'3457454','57454','Alumno'),
- (33,'12345678','45678','Alumno');
+ (33,'12345678','45678','Alumno'),
+ (34,'666','666','Alumno');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

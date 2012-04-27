@@ -8,6 +8,7 @@ public interface defaultLanguaje {
 	public static final String PASSWORD = "Password";
 	public static final String LOGIN = "Login";
 	
+	
 	public static final String MANAGE_TEACHER = "Gestionar Docente";
 	public static final String MANAGE_STUDENT = "Gestionar Estudiante";
 	public static final String MANAGE_CHARGE = "Gestionar Cargo";
@@ -36,4 +37,9 @@ public interface defaultLanguaje {
 	public static final String MODIFY_SUBJECT = "Modificar Materia";
 	public static final String DELETE_SUBJECT = "Borrar Materia";
 	
+	public static final String ADD = "agregar";
+	public static final String CLEAR = "Limpiar";
+	public static final String SEARCH = "Buscar";
+
+	public static final String DELETE = "Borrar";
 }
