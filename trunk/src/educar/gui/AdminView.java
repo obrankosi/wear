@@ -1,6 +1,7 @@
 package educar.gui;
 
 import java.awt.Font;
+import educar.languaje.defaultLanguaje;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,7 +12,7 @@ import educar.controllers.IController;
 import educar.controllers.AdminController.AdminController;
 import educar.gui.Listener.AdminListener;
 
-public class AdminView extends JFrame implements IView {
+public class AdminView extends JFrame implements IView, defaultLanguaje {
 
     /**
      * 
@@ -31,7 +32,7 @@ public class AdminView extends JFrame implements IView {
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 
-	JButton buttonGDocentes = new JButton("Gestionar Docente");
+	JButton buttonGDocentes = new JButton(MANAGE_TEACHER);
 	buttonGDocentes.setBounds(117, 10, 141, 36);
 	contentPane.add(buttonGDocentes);
 
@@ -41,7 +42,7 @@ public class AdminView extends JFrame implements IView {
 	bGstDocente.associate(buttonGDocentes, adminCD);
 
 
-	JButton buttonGAlumnos = new JButton("Gestionar Alumno");
+	JButton buttonGAlumnos = new JButton(MANAGE_STUDENT);
 	buttonGAlumnos.setBounds(117, 52, 141, 36);
 	contentPane.add(buttonGAlumnos);
 
@@ -51,7 +52,7 @@ public class AdminView extends JFrame implements IView {
 	bGstAlumnos.associate(buttonGAlumnos, adminCA);
 
 	
-	JButton buttonGMaterias = new JButton("Gestionar Materia");
+	JButton buttonGMaterias = new JButton(MANAGE_SUBJECT);
 	buttonGMaterias.setBounds(117, 94, 141, 36);
 	contentPane.add(buttonGMaterias);
 
@@ -60,7 +61,7 @@ public class AdminView extends JFrame implements IView {
 	adminCM.setView(this);
 	bGstMateria.associate(buttonGMaterias, adminCM);
 
-	JButton buttonGFacultad = new JButton("Gestionar Facultad");
+	JButton buttonGFacultad = new JButton(MANAGE_FACULTY);
 	buttonGFacultad.setBounds(117, 136, 141, 36);
 	contentPane.add(buttonGFacultad);
 	
@@ -69,18 +70,18 @@ public class AdminView extends JFrame implements IView {
 	adminCF.setView(this);
 	bGstFacultad.associate(buttonGFacultad, adminCF);
 
-	JButton buttonGCargos = new JButton("**Gestionar Cargo");
+	JButton buttonGCargos = new JButton(MANAGE_CHARGE);
 	buttonGCargos.setBounds(117, 178, 141, 36);
 	contentPane.add(buttonGCargos);
 
 	/* pendiente */
 
-	JButton buttonClose = new JButton("cerrar");
+	JButton buttonClose = new JButton(CLOSE_WINDOW);
 	buttonClose.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
 	buttonClose.setBounds(352, 241, 86, 23);
 	contentPane.add(buttonClose);
 
-	// creo un listener para el botn y su controlador
+	// creo un listener para el boton y su controlador
 	AdminListener buttonListener = new AdminListener();
 	IController adminController = new AdminController();
 	// le paso esta view al controlador
