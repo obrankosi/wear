@@ -56,8 +56,15 @@ public class User {
 		}
 	}
 
-	public void destroy() {
-		jpa.destroy("users", "username", this.getUsername());
+	public boolean destroy() {
+		try {
+		    jpa.destroy("users", "username", this.getUsername());
+		    return true;
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		    return false;
+		}
 	}
 
 	public static User getUserByUsername(String username) throws userNotFound {

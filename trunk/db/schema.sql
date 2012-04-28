@@ -63,7 +63,7 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
   PRIMARY KEY (`dni`) USING BTREE,
   UNIQUE KEY `dni_a` (`dni`),
   UNIQUE KEY `nro_alumno` (`nro_alumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Alumnos`
@@ -71,6 +71,7 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
 
 /*!40000 ALTER TABLE `Alumnos` DISABLE KEYS */;
 LOCK TABLES `Alumnos` WRITE;
+INSERT INTO `educar_dev`.`Alumnos` VALUES  (3111,'edu','kkkkk','1212-12-12',22,'1212','edu',1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
 
@@ -135,8 +136,8 @@ CREATE TABLE  `educar_dev`.`Dicta` (
   `cod_mat` int(11) NOT NULL,
   PRIMARY KEY (`dni_doc`,`cod_mat`),
   KEY `cfCodMat` (`cod_mat`),
-  CONSTRAINT `cfDniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE,
-  CONSTRAINT `cfCodMat` FOREIGN KEY (`cod_mat`) REFERENCES `Materia` (`cod_materia`) ON UPDATE CASCADE
+  CONSTRAINT `cfCodMat` FOREIGN KEY (`cod_mat`) REFERENCES `Materia` (`cod_materia`) ON UPDATE CASCADE,
+  CONSTRAINT `cfDniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -172,7 +173,7 @@ CREATE TABLE  `educar_dev`.`Docente` (
 
 /*!40000 ALTER TABLE `Docente` DISABLE KEYS */;
 LOCK TABLES `Docente` WRITE;
-INSERT INTO `educar_dev`.`Docente` VALUES  (443,'xxx','xxx','2000-12-12',22,101,'xxx'),
+INSERT INTO `educar_dev`.`Docente` VALUES  (443,'xxx','eduoooo','2000-12-12',22,101,'xxx'),
  (888,'xxx','xxx','2000-12-12',22,0,'xxx'),
  (1014,'xxx','xxx','2000-12-12',22,0,'xxx'),
  (1140,'xxx','xxx','2000-12-12',22,101,'xxx'),
@@ -259,8 +260,8 @@ CREATE TABLE  `educar_dev`.`Materia` (
   UNIQUE KEY `cod_materia` (`cod_materia`),
   KEY `codFacultad` (`facultad`),
   KEY `dniDocente` (`dni_docente`),
-  CONSTRAINT `codFacultad` FOREIGN KEY (`facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
-  CONSTRAINT `dniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`)
+  CONSTRAINT `dniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE,
+  CONSTRAINT `codFacultad` FOREIGN KEY (`facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
@@ -312,9 +313,9 @@ CREATE TABLE  `educar_dev`.`TieneActividad` (
   PRIMARY KEY (`dni_alumno`,`codigo_a`,`codigo_r`),
   KEY `cfCodActividad` (`codigo_a`),
   KEY `cfCodResolucion` (`codigo_r`),
-  CONSTRAINT `cfDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `Alumnos` (`dni`) ON UPDATE CASCADE,
   CONSTRAINT `cfCodActividad` FOREIGN KEY (`codigo_a`) REFERENCES `Actividad` (`cod_actividad`) ON UPDATE CASCADE,
-  CONSTRAINT `cfCodResolucion` FOREIGN KEY (`codigo_r`) REFERENCES `Resolucion` (`codigo_res`) ON UPDATE CASCADE
+  CONSTRAINT `cfCodResolucion` FOREIGN KEY (`codigo_r`) REFERENCES `Resolucion` (`codigo_res`) ON UPDATE CASCADE,
+  CONSTRAINT `cfDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `Alumnos` (`dni`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -340,9 +341,9 @@ CREATE TABLE  `educar_dev`.`Trabaja` (
   PRIMARY KEY (`codigo_fac`,`dni_doc`,`codigo_cargo`),
   KEY `dniDoc` (`dni_doc`),
   KEY `codCargo` (`codigo_cargo`),
+  CONSTRAINT `codCargo` FOREIGN KEY (`codigo_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE,
   CONSTRAINT `codFac` FOREIGN KEY (`codigo_fac`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
-  CONSTRAINT `dniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE,
-  CONSTRAINT `codCargo` FOREIGN KEY (`codigo_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE
+  CONSTRAINT `dniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -365,8 +366,8 @@ CREATE TABLE  `educar_dev`.`cursa` (
   `cod_mat` int(11) NOT NULL,
   PRIMARY KEY (`dni_a`,`cod_mat`),
   KEY `cfCodMateria` (`cod_mat`),
-  CONSTRAINT `cfDniA` FOREIGN KEY (`dni_a`) REFERENCES `Alumnos` (`dni`) ON UPDATE CASCADE,
-  CONSTRAINT `cfCodMateria` FOREIGN KEY (`cod_mat`) REFERENCES `Materia` (`cod_materia`) ON UPDATE CASCADE
+  CONSTRAINT `cfCodMateria` FOREIGN KEY (`cod_mat`) REFERENCES `Materia` (`cod_materia`) ON UPDATE CASCADE,
+  CONSTRAINT `cfDniA` FOREIGN KEY (`dni_a`) REFERENCES `Alumnos` (`dni`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -391,7 +392,7 @@ CREATE TABLE  `educar_dev`.`users` (
   `role` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`users`
@@ -415,7 +416,8 @@ INSERT INTO `educar_dev`.`users` VALUES  (5,'edu','33361090','admin'),
  (27,'','','admin'),
  (28,'mdcdkc','4','admin'),
  (29,'askdjfñl','12','admin'),
- (30,'jua','carlos','admin');
+ (30,'jua','carlos','admin'),
+ (31,'31111','31111','Alumno');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

@@ -1,6 +1,8 @@
 package educar.db;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
@@ -18,16 +20,20 @@ public class JPA {
 	return res;
     }
 
-    public void runUpdate(String sentence) {
+    // exception agregada por las dudas que no se pueda realizar un DELET o
+    // UPDATE
+    // debido a las restricciones de la base de datos
+    public void runUpdate(String sentence) throws SQLException {
+	Statement stm = (Statement) DbConnection.getInstance()
+		.createStatement();
 	try {
-	    Statement stm = (Statement) DbConnection.getInstance()
-		    .createStatement();
 	    stm.executeUpdate(sentence);// para realizar delet,update en la bd
 	    // con cualquier tabla
-	} catch (Exception ex) {
-	    ex.printStackTrace();
-
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
 	}
+
     }
 
     /**
@@ -50,10 +56,10 @@ public class JPA {
      * 
      *         // do insertion conn.create(stm); sentencia preCompilada nos va a
      *         mejorar la eficiencia siempre que no la cree de nuevo esto lo
-     *         podems hacer si la llevamos como un atriburo de la clace
-     *         una ves que la conecte queda conectada. a diferencia de statement
-     *         tener cuidado con los tipos!!
-     *         aca esta echo para INsertar pero tambien se puder hacer para delelt y update
+     *         podems hacer si la llevamos como un atriburo de la clace una ves
+     *         que la conecte queda conectada. a diferencia de statement tener
+     *         cuidado con los tipos!! aca esta echo para INsertar pero tambien
+     *         se puder hacer para delelt y update
      */
     public PreparedStatement newRecord(String table, String[] columns) {
 	PreparedStatement stmt = null;
@@ -80,9 +86,6 @@ public class JPA {
 	return stmt;
     }
 
-    
-    
-    
     /**
      * do insertion
      * 
@@ -92,7 +95,7 @@ public class JPA {
      */
     public void create(java.sql.PreparedStatement stm) {
 	try {
-	    stm.executeUpdate();//ejecuta la sentencia sql
+	    stm.executeUpdate();// ejecuta la sentencia sql
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}
@@ -106,22 +109,31 @@ public class JPA {
      * 
      *            i.e.:
      *            conexion.update("UPDATE db.table set name= 'TEST NAME' where id = 10"
-     *            );
-     *            columnId = nombre de la columna a comparar
+     *            ); columnId = nombre de la columna a comparar
+     * @throws SQLException
      */
-    public void update(String tableName, String column, String value,String columnId, String id) {
+    public void update(String tableName, String column, String value,
+	    String columnId, String id) throws SQLException {
 	String query = "UPDATE " + DbConnection.bd + "." + tableName;
 
-	query += " set " + column + "= \"" + value + "\" WHERE " +  columnId + " = " + id + ";";
-	runUpdate(query);
+	query += " set " + column + "= \"" + value + "\" WHERE " + columnId
+		+ " = " + id + ";";
+	try {
+	    runUpdate(query);    
+	} catch (Exception e) {
+	    // TODO: handle exception
+	   throw  new SQLException();
+	}
+	
     }
 
     /*
      * arma el string de la sentencia en esta caso para una actualizacion, luego
      * llama a a runUpdate que la ejecuta con statement
+     * Lanza una exception por si no pudo actualizar debio a una restriccion de la tabla
      */
     public void update(String tableName, String[] column, String[] values,
-	    String columnId, String id) {
+	    String columnId, String id) throws SQLException {
 	String updateValues = column[0] + "= \"" + values[0] + "\"";
 	for (int i = 1; i < values.length; i++) {
 	    updateValues += "," + column[i] + " = \"" + values[i] + "\"";
@@ -129,7 +141,13 @@ public class JPA {
 	String query = "UPDATE " + DbConnection.bd + "." + tableName;
 	query += " set " + updateValues + " WHERE " + columnId + " = " + id
 		+ ";";
-	runUpdate(query);
+	try {
+		runUpdate(query);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+	}
+
     }
 
     /**
@@ -143,12 +161,19 @@ public class JPA {
      *            "value to destroy"
      * 
      *            i.e.: conn.destroy("table", "id", "3");
+     * @throws SQLException
      * 
      */
-    public void destroy(String tableName, String columnName, String id) {
+    public void destroy(String tableName, String columnName, String id)
+	    throws SQLException {
 	String query = "DELETE from " + DbConnection.bd + "." + tableName;
 	query += " Where " + columnName + " = \"" + id + "\";";
-	runUpdate(query);
+	try {
+	    runUpdate(query);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+	}
     }
 
     /**
@@ -174,13 +199,13 @@ public class JPA {
      * @param tableName
      * @param id
      * 
-     *            i.e.: conn.show("table", 1);
-     *            columnId = nombre de columna que va a comparar
+     *            i.e.: conn.show("table", 1); columnId = nombre de columna que
+     *            va a comparar
      */
-    public ResultSet show(String tableName,String columnId, String id) {
+    public ResultSet show(String tableName, String columnId, String id) {
 	ResultSet result = null;
 	String query = "SELECT * from " + DbConnection.bd + "." + tableName
-		+ " WHERE "+columnId+" = " + id + ";";
+		+ " WHERE " + columnId + " = " + id + ";";
 
 	result = runQuery(query);
 
