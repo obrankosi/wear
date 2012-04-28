@@ -8,22 +8,41 @@ import educar.db.JPA;
 
 public class Docente {
 
+    /**
+     * @param dni
+     * @param name
+     * @param lastName
+     * @param fN
+     * @param age
+     * @param dir
+     * @param tel
+     */
     public Docente(String dni, String name, String lastName, String fN,
 	    String age, String dir, String tel) {
 	Person(dni, name, lastName, fN, age, dir, tel);
 	// TODO Auto-generated constructor stub
     }
 
+    /**
+     * @return
+     */
     public boolean save() {
 	String[] columns = { "dni_docente", "apellido_d", "nombre_d",
 		"fechaNac_d", "edad_d", "tel_d", "direccion_d" };
 	return save("Docente", columns);
     }
 
+    /**
+     * @return
+     */
     public boolean destroy() {
 	return destroy("Docente");
     }
 
+    /**
+     * @param dni
+     * @return
+     */
     public static Docente getDocente(String dni) {
 	return getPerson(dni, "Docente");
     }
@@ -136,6 +155,11 @@ public class Docente {
 	}
     }
  // excption por si no puede hacer el update en la base de datos
+    /**
+     * @param values
+     * @param primaryKey
+     * @throws SQLException
+     */
     public static void update(String[] values,String primaryKey) throws SQLException {
 	String[] columns = { "dni_docente", "apellido_d", "nombre_d",
 		"fechaNac_d", "edad_d", "tel_d", "direccion_d" };

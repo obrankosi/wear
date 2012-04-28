@@ -12,12 +12,22 @@ public class User {
 	private String password;
 	private String role;
 
+	/**
+	 * @param username
+	 * @param password
+	 * @param role
+	 */
 	public User(String username, String password, String role) {
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setRole(role);
 	}
 
+	/**
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public static boolean authenticate(String username, String password) {
 		try {
 			User u = getUserByUsername(username);
@@ -33,6 +43,9 @@ public class User {
 		return false;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean save() {
 		try {
 			User.getUserByUsername(username);
@@ -56,17 +69,24 @@ public class User {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean destroy() {
 		try {
 		    jpa.destroy("users", "username", this.getUsername());
 		    return true;
 		} catch (SQLException e) {
 		    // TODO Auto-generated catch block
-		    e.printStackTrace();
 		    return false;
 		}
 	}
 
+	/**
+	 * @param username
+	 * @return
+	 * @throws userNotFound
+	 */
 	public static User getUserByUsername(String username) throws userNotFound {
 		ResultSet rs = null;
 		User u = null;

@@ -8,22 +8,41 @@ import educar.db.JPA;
 
 public class Alumno {
 
+    /**
+     * @param dni
+     * @param name
+     * @param lastName
+     * @param fN
+     * @param age
+     * @param dir
+     * @param tel
+     */
     public Alumno(String dni, String name, String lastName, String fN,
 	    String age, String dir, String tel) {
 	Person(dni, name, lastName, fN, age, dir, tel);
 	// TODO Auto-generated constructor stub
     }
 
+    /**
+     * @return
+     */
     public boolean save() {
 	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
 		"edad_a", "telefono_a", "direccion_a" };
 	return save("Alumnos", columns);
     }
 
+    /**
+     * @return
+     */
     public boolean destroy() {
 	return destroy("Alumnos");
     }
 
+    /**
+     * @param dni
+     * @return
+     */
     public static Alumno getAlumno(String dni) {
 	return getPerson(dni, "Alumnos");
     }
@@ -140,6 +159,11 @@ public class Alumno {
     }
 
     // excption por si no puede hacer el update en la base de datos
+    /**
+     * @param values
+     * @param primaryKey
+     * @throws SQLException
+     */
     public static void update(String[] values, String primaryKey)
 	    throws SQLException {// numero de
 	// alumno es
