@@ -10,7 +10,8 @@ public class JPA {
 	try {
 	    Statement sent = (Statement) DbConnection.getInstance()
 		    .createStatement();
-	    res = sent.executeQuery(sentence);
+	    res = sent.executeQuery(sentence);// para realizar selec con alguna
+	    // tabla de la base de datos
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}
@@ -21,10 +22,11 @@ public class JPA {
 	try {
 	    Statement stm = (Statement) DbConnection.getInstance()
 		    .createStatement();
-	    stm.executeUpdate(sentence);
+	    stm.executeUpdate(sentence);// para realizar delet,update en la bd
+	    // con cualquier tabla
 	} catch (Exception ex) {
 	    ex.printStackTrace();
-	    
+
 	}
     }
 
@@ -46,7 +48,12 @@ public class JPA {
      * 
      *         // Set name stm.setString(2, "Text to insert");
      * 
-     *         // do insertion conn.create(stm);
+     *         // do insertion conn.create(stm); sentencia preCompilada nos va a
+     *         mejorar la eficiencia siempre que no la cree de nuevo esto lo
+     *         podems hacer si la llevamos como un atriburo de la clace
+     *         una ves que la conecte queda conectada. a diferencia de statement
+     *         tener cuidado con los tipos!!
+     *         aca esta echo para INsertar pero tambien se puder hacer para delelt y update
      */
     public PreparedStatement newRecord(String table, String[] columns) {
 	PreparedStatement stmt = null;
@@ -73,6 +80,9 @@ public class JPA {
 	return stmt;
     }
 
+    
+    
+    
     /**
      * do insertion
      * 
@@ -82,7 +92,7 @@ public class JPA {
      */
     public void create(java.sql.PreparedStatement stm) {
 	try {
-	    stm.executeUpdate();
+	    stm.executeUpdate();//ejecuta la sentencia sql
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}
@@ -97,15 +107,19 @@ public class JPA {
      *            i.e.:
      *            conexion.update("UPDATE db.table set name= 'TEST NAME' where id = 10"
      *            );
+     *            columnId = nombre de la columna a comparar
      */
-    public void update(String tableName, String column, String value, String id) {
+    public void update(String tableName, String column, String value,String columnId, String id) {
 	String query = "UPDATE " + DbConnection.bd + "." + tableName;
 
-	query += " set " + column + "= \"" + value + "\" WHERE id =" + id + ";";
+	query += " set " + column + "= \"" + value + "\" WHERE " +  columnId + " = " + id + ";";
 	runUpdate(query);
     }
 
-    // modularizar el id!!
+    /*
+     * arma el string de la sentencia en esta caso para una actualizacion, luego
+     * llama a a runUpdate que la ejecuta con statement
+     */
     public void update(String tableName, String[] column, String[] values,
 	    String columnId, String id) {
 	String updateValues = column[0] + "= \"" + values[0] + "\"";
@@ -115,7 +129,6 @@ public class JPA {
 	String query = "UPDATE " + DbConnection.bd + "." + tableName;
 	query += " set " + updateValues + " WHERE " + columnId + " = " + id
 		+ ";";
-	System.out.println(query + "************************");
 	runUpdate(query);
     }
 
@@ -130,6 +143,7 @@ public class JPA {
      *            "value to destroy"
      * 
      *            i.e.: conn.destroy("table", "id", "3");
+     * 
      */
     public void destroy(String tableName, String columnName, String id) {
 	String query = "DELETE from " + DbConnection.bd + "." + tableName;
@@ -161,14 +175,40 @@ public class JPA {
      * @param id
      * 
      *            i.e.: conn.show("table", 1);
+     *            columnId = nombre de columna que va a comparar
      */
-    public ResultSet show(String tableName, String id) {
+    public ResultSet show(String tableName,String columnId, String id) {
 	ResultSet result = null;
 	String query = "SELECT * from " + DbConnection.bd + "." + tableName
-		+ " WHERE id=" + id + ";";
+		+ " WHERE "+columnId+" = " + id + ";";
 
 	result = runQuery(query);
 
+	return result;
+    }
+
+    /*
+     * es la proyeccion de sql todos los elementos sin where columnName =
+     * columna1,columna2....columnaN
+     */
+    public ResultSet proyeccion(String tableName, String columnName) {
+	ResultSet result = null;
+	String query = "SELECT " + columnName + " from " + DbConnection.bd
+		+ "." + tableName + ";";
+	result = runQuery(query);
+	return result;
+    }
+
+    /*
+     * es la proyeccion de sql con where, donde columnName =
+     * columna1,columna2....columnaN nameId = nombreDeLaColumna
+     */
+    public ResultSet proyeccion(String tableName, String columnName,
+	    String nameId, String id) {
+	ResultSet result = null;
+	String query = "SELECT " + columnName + " from " + DbConnection.bd
+		+ "." + tableName + " WHERE " + nameId + " = " + id + ";";
+	result = runQuery(query);
 	return result;
     }
 

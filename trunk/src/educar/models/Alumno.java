@@ -136,6 +136,9 @@ public class Alumno {
 	jpa.update("Alumnos", columns, values,columns[0],values[0]);
     }
     
+    
+    
+    
     public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;

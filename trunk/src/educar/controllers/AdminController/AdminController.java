@@ -15,7 +15,7 @@ public class AdminController implements IController, defaultLanguaje {
     @Override
     public void process(String model) {
 	if (model.compareTo(CLOSE_WINDOW) == 0) {
-	    view.close();
+	    view.dispose();
 	}
 	if (model.compareTo(MANAGE_TEACHER) == 0) {
 	    view.close();

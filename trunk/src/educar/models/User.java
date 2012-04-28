@@ -51,7 +51,7 @@ public class User {
 				return false;
 			}
 
-			jpa.create(stm);
+			jpa.create(stm);//inserta en la base de datos 
 			return true;
 		}
 	}
