@@ -1,5 +1,9 @@
 package educar.controllers.AdminController;
 
+import java.sql.SQLException;
+
+import javax.print.attribute.standard.PresentationDirection;
+
 import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.AdminViews.gestionAlumnosView;
@@ -8,7 +12,7 @@ import educar.models.Alumno;
 
 public class gestionAlumnosController implements IController, defaultLanguaje {
     private gestionAlumnosView view;
-    private Alumno student = null;
+    private static Alumno student = null;
 
     @Override
     public void process(String model) {
@@ -92,13 +96,18 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
     }
 
     private void modifyStudent() {// ponerle la edad !!!!
-	// {
-	// searchAStudentInDbase();
 	String[] values = { view.getDniMod(), view.getLastnameMod(),
 		view.getNameMod(), view.getFechaNacMod(), "22",
 		view.getTelefonoMod(), view.getDireccionMod() };
-	Alumno.update(values);
+
+	try {
+	    Alumno.update(values, student.getDni());
+	    view.present("acutalizacion realizada");
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    view.present("NO se pude actualizar");
+	}
 	// view.deleteViewFieldsMod();
     }
-
 }

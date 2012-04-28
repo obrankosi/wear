@@ -111,8 +111,14 @@ public class Docente {
      * borra una persona entera por dni ,Return True ssi el borrado fues exitoso
      */
     private boolean destroy(String tableName) {
-	jpa.destroy(tableName, "dni_docente", this.getDni());
-	return true;
+	try {
+	    jpa.destroy(tableName, "dni_docente", this.getDni());
+	    return true;
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    return false;
+	}
+
     }
 
     /*
@@ -129,11 +135,18 @@ public class Docente {
 	    return person;
 	}
     }
-
-    public static void update(String[] values) {
+ // excption por si no puede hacer el update en la base de datos
+    public static void update(String[] values,String primaryKey) throws SQLException {
 	String[] columns = { "dni_docente", "apellido_d", "nombre_d",
 		"fechaNac_d", "edad_d", "tel_d", "direccion_d" };
-	jpa.update("Docente", columns, values, columns[0], values[0]);
+	try {
+	    jpa.update("Docente", columns, values, columns[0],primaryKey);    
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+	    
+	}
+	
     }
 
     public String getDni() {

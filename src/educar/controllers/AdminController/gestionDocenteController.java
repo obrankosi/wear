@@ -1,5 +1,7 @@
 package educar.controllers.AdminController;
 
+import java.sql.SQLException;
+
 import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.AdminViews.gestionDocentesView;
@@ -9,7 +11,7 @@ import educar.models.Docente;
 
 public class gestionDocenteController implements IController, defaultLanguaje {
     private gestionDocentesView view;
-    private Docente teacher = null;
+    private static Docente teacher = null;
 
     @Override
     public void process(String model) {
@@ -59,7 +61,8 @@ public class gestionDocenteController implements IController, defaultLanguaje {
 	    // encontrar el docente
 	    if (teacher.destroy()) {
 		view.present("borrado del docente exitoso");
-	    }
+	    }else
+		view.present("No se puede borrar el docente verifique que no tenga materia a cargos o tareas");
 
 	}
 
@@ -98,7 +101,13 @@ public class gestionDocenteController implements IController, defaultLanguaje {
 	String[] values = { view.getDniModif(), view.getApellidoModif(),
 		view.getNombreModif(), view.getFechaModif(), "22",
 		view.getTelefonoModif(), view.getDireccionModif() };
-	teacher.update(values);
+	try {
+	    teacher.update(values,teacher.getDni());
+	    view.present("actualizacion realizada");
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    view.present("NO se puede actualizar");
+	}
 	// view.deleteViewFieldsMod();
     }
 
