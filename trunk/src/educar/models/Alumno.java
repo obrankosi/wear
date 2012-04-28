@@ -111,16 +111,10 @@ public class Alumno {
      * borra una persona entera por dni ,Return True ssi el borrado fues exitoso
      */
     private boolean destroy(String tableName) {
-	// try {
-	// alumno = Alumno.getPersonByDni(this.getDni(), tableName);
-	// jpa.destroy(tableName, "dni_a", this.getDni());
-	// return true;
-	// } catch (PersonNotFound e1) {
-	// return false;
-	// }
 	jpa.destroy(tableName, "dni", this.getDni());
 	return true;
-    }
+	
+	}
 
     /*
      * Return una persona buscada por dni null en el caso que no exista;
