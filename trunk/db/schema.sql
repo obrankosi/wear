@@ -63,7 +63,7 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
   PRIMARY KEY (`dni`) USING BTREE,
   UNIQUE KEY `dni_a` (`dni`),
   UNIQUE KEY `nro_alumno` (`nro_alumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Alumnos`
@@ -71,7 +71,8 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
 
 /*!40000 ALTER TABLE `Alumnos` DISABLE KEYS */;
 LOCK TABLES `Alumnos` WRITE;
-INSERT INTO `educar_dev`.`Alumnos` VALUES  (3111,'edu','kkkkk','1212-12-12',22,'1212','edu',1);
+INSERT INTO `educar_dev`.`Alumnos` VALUES  (3111,'edu','kkkkk','1212-12-12',22,'1212','edu',1),
+ (22222,'zzzzzz','zzzzzz','1212-12-12',12,'12','zzzzz',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
 
@@ -86,6 +87,21 @@ DELIMITER $$
 
 CREATE DEFINER = `root`@`localhost` TRIGGER  `educar_dev`.`triggerAltaAlumnos` AFTER INSERT ON `Alumnos` FOR EACH ROW BEGIN
    INSERT INTO educar_dev.users (username, password, role) VALUES (NEW.dni, RIGHT(NEW.dni, 5), "Alumno");
+END $$
+
+DELIMITER ;
+
+--
+-- Definition of trigger `educar_dev`.`triggerUpdateUserPorAlumnos`
+--
+
+DROP TRIGGER /*!50030 IF EXISTS */ `educar_dev`.`triggerUpdateUserPorAlumnos`;
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `educar_dev`.`triggerUpdateUserPorAlumnos` AFTER UPDATE ON `Alumnos` FOR EACH ROW BEGIN
+   UPDATE educar_dev.users SET educar_dev.users.username = NEW.dni 
+WHERE educar_dev.users.username = OLD.dni ;  
 END $$
 
 DELIMITER ;
@@ -173,14 +189,16 @@ CREATE TABLE  `educar_dev`.`Docente` (
 
 /*!40000 ALTER TABLE `Docente` DISABLE KEYS */;
 LOCK TABLES `Docente` WRITE;
-INSERT INTO `educar_dev`.`Docente` VALUES  (443,'xxx','eduoooo','2000-12-12',22,101,'xxx'),
+INSERT INTO `educar_dev`.`Docente` VALUES  (55,'zzzzzz','zzzzzz','1212-12-12',12,12,'zzzzz'),
  (888,'xxx','xxx','2000-12-12',22,0,'xxx'),
  (1014,'xxx','xxx','2000-12-12',22,0,'xxx'),
  (1140,'xxx','xxx','2000-12-12',22,101,'xxx'),
  (1234,'v','v','1223-12-12',33,1234,'v'),
  (3411,'ss','ss','2012-12-12',43,567,'ss'),
+ (4000,'xxx','eduoooo','2000-12-12',22,101,'xxx'),
  (4444,'xxx','xxx','2000-12-12',22,0,'xxx'),
  (4445,'xxx','xxx','2000-12-12',22,34,'xxx'),
+ (5757,'zzzzzz','zzzzzz','1212-12-12',12,12,'zzzzz'),
  (7777,'v','v','1223-12-12',33,1234,'v'),
  (8884,'xxx','xxx','2000-12-12',22,6578,'xxx'),
  (10140,'xxx','xxx','2000-12-12',22,101,'xxx'),
@@ -208,6 +226,21 @@ END $$
 DELIMITER ;
 
 --
+-- Definition of trigger `educar_dev`.`triggerUpdateUserPorDocente`
+--
+
+DROP TRIGGER /*!50030 IF EXISTS */ `educar_dev`.`triggerUpdateUserPorDocente`;
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `educar_dev`.`triggerUpdateUserPorDocente` AFTER UPDATE ON `Docente` FOR EACH ROW BEGIN
+   UPDATE educar_dev.users SET educar_dev.users.username = NEW.dni_docente 
+WHERE educar_dev.users.username = OLD.dni_docente;  
+END $$
+
+DELIMITER ;
+
+--
 -- Definition of trigger `educar_dev`.`triggerBajaUserPorDocente`
 --
 
@@ -228,10 +261,9 @@ DELIMITER ;
 DROP TABLE IF EXISTS `educar_dev`.`Facultad`;
 CREATE TABLE  `educar_dev`.`Facultad` (
   `cod_facultad` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
   `descripcion_fac` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cod_facultad`),
-  UNIQUE KEY `nombre` (`nombre`)
+  UNIQUE KEY `cod_facultad` (`cod_facultad`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
@@ -270,7 +302,7 @@ CREATE TABLE  `educar_dev`.`Materia` (
 
 /*!40000 ALTER TABLE `Materia` DISABLE KEYS */;
 LOCK TABLES `Materia` WRITE;
-INSERT INTO `educar_dev`.`Materia` VALUES  (3,'matematica',443,1);
+INSERT INTO `educar_dev`.`Materia` VALUES  (3,'matematica',4000,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Materia` ENABLE KEYS */;
 
@@ -392,7 +424,7 @@ CREATE TABLE  `educar_dev`.`users` (
   `role` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`users`
@@ -417,7 +449,10 @@ INSERT INTO `educar_dev`.`users` VALUES  (5,'edu','33361090','admin'),
  (28,'mdcdkc','4','admin'),
  (29,'askdjfñl','12','admin'),
  (30,'jua','carlos','admin'),
- (31,'31111','31111','Alumno');
+ (31,'31111','31111','Alumno'),
+ (32,'575757','75757','Docente'),
+ (35,'55','5','Docente'),
+ (36,'22222','2','Alumno');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
