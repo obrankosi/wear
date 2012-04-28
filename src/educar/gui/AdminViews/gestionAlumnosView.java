@@ -215,7 +215,7 @@ public class gestionAlumnosView extends JFrame implements IView,
 	gestionCAdd_alta.setView(this);
 	bAdd_alta.associate(btnAdd_alta, gestionCAdd_alta);
 
-	JButton btnClear_alta = new JButton("Clear");
+	JButton btnClear_alta = new JButton(CLEAR);
 	btnClear_alta.setBounds(52, 198, 89, 23);
 	panel_alta.add(btnClear_alta);
 	// asocio

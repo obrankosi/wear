@@ -24,6 +24,7 @@ public class JPA {
 	    stm.executeUpdate(sentence);
 	} catch (Exception ex) {
 	    ex.printStackTrace();
+	    
 	}
     }
 

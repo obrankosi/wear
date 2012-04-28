@@ -80,7 +80,7 @@ public class gestionDocenteController implements IController, defaultLanguaje {
 		    view.getApellidoAlta(), view.getFechaAlta(), "22", view
 			    .getTelefonoAlta(), view.getDireccionAlta());
 	    if (docente.save()) {
-		view.present("docente agregado correctamente");
+		view.present("docente agregado correctamente. Se creo el Usuario para docente");
 
 	    } else {
 		// datos ingresados no son validos hacer una funcion que avise
