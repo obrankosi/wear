@@ -78,7 +78,8 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 		    view.getLastnameAlta(), view.getFechaNacAlta(), "22", view
 			    .getTelefonoAlta(), view.getDireccionAlta());
 	    if (alumno.save()) {
-		view.present("alumno agregado correctamente. Se creo el Usuario para el alumno ");
+		view
+			.present("alumno agregado correctamente. Se creo el Usuario para el alumno ");
 
 	    } else {
 		// datos ingresados no son validos hacer una funcion que avise
