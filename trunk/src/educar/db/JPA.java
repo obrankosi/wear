@@ -7,6 +7,10 @@ import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class JPA {
+    /**
+     * @param sentence
+     * @return
+     */
     public ResultSet runQuery(String sentence) {
 	ResultSet res = null;
 	try {
@@ -23,6 +27,10 @@ public class JPA {
     // exception agregada por las dudas que no se pueda realizar un DELET o
     // UPDATE
     // debido a las restricciones de la base de datos
+    /**
+     * @param sentence
+     * @throws SQLException
+     */
     public void runUpdate(String sentence) throws SQLException {
 	Statement stm = (Statement) DbConnection.getInstance()
 		.createStatement();
@@ -119,18 +127,26 @@ public class JPA {
 	query += " set " + column + "= \"" + value + "\" WHERE " + columnId
 		+ " = " + id + ";";
 	try {
-	    runUpdate(query);    
+	    runUpdate(query);
 	} catch (Exception e) {
 	    // TODO: handle exception
-	   throw  new SQLException();
+	    throw new SQLException();
 	}
-	
+
     }
 
     /*
      * arma el string de la sentencia en esta caso para una actualizacion, luego
-     * llama a a runUpdate que la ejecuta con statement
-     * Lanza una exception por si no pudo actualizar debio a una restriccion de la tabla
+     * llama a a runUpdate que la ejecuta con statement Lanza una exception por
+     * si no pudo actualizar debio a una restriccion de la tabla
+     */
+    /**
+     * @param tableName
+     * @param column
+     * @param values
+     * @param columnId
+     * @param id
+     * @throws SQLException
      */
     public void update(String tableName, String[] column, String[] values,
 	    String columnId, String id) throws SQLException {
@@ -142,7 +158,7 @@ public class JPA {
 	query += " set " + updateValues + " WHERE " + columnId + " = " + id
 		+ ";";
 	try {
-		runUpdate(query);
+	    runUpdate(query);
 	} catch (Exception e) {
 	    // TODO: handle exception
 	    throw new SQLException();
@@ -216,6 +232,11 @@ public class JPA {
      * es la proyeccion de sql todos los elementos sin where columnName =
      * columna1,columna2....columnaN
      */
+    /**
+     * @param tableName
+     * @param columnName
+     * @return
+     */
     public ResultSet proyeccion(String tableName, String columnName) {
 	ResultSet result = null;
 	String query = "SELECT " + columnName + " from " + DbConnection.bd
@@ -227,6 +248,13 @@ public class JPA {
     /*
      * es la proyeccion de sql con where, donde columnName =
      * columna1,columna2....columnaN nameId = nombreDeLaColumna
+     */
+    /**
+     * @param tableName
+     * @param columnName
+     * @param nameId
+     * @param id
+     * @return
      */
     public ResultSet proyeccion(String tableName, String columnName,
 	    String nameId, String id) {

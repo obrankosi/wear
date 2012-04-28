@@ -4,9 +4,10 @@ import educar.gui.IView;
 import educar.gui.RootView;
 import educar.languaje.defaultLanguaje;
 import educar.models.User;
+import educar.models.userNotFound;
 
 public class RegistrarController implements IController, defaultLanguaje {
-    private User admin;
+    private static User admin;
     private RootView rView;
 
     @Override
@@ -36,6 +37,24 @@ public class RegistrarController implements IController, defaultLanguaje {
     public void setView(IView view) {
 	// TODO Auto-generated method stub
 	this.rView = (RootView) view;
+    }
+
+    /**
+     * 
+     */
+    private void deleteAdministrator() {
+	try {
+	    admin = User.getUserByUsername(rView.getUsername());
+	} catch (userNotFound e) {
+	    // TODO Auto-generated catch block
+	    rView.present("El nombre de usuario  no existe");
+	}
+	if (admin.destroy()) {
+	    rView.present("Administrador Borrado con exito");
+	} else {
+	    rView.present("NO se pudo borrar el administrador ");
+	}
+
     }
 
 }
