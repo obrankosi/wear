@@ -227,9 +227,10 @@ DELIMITER ;
 DROP TABLE IF EXISTS `educar_dev`.`Facultad`;
 CREATE TABLE  `educar_dev`.`Facultad` (
   `cod_facultad` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
   `descripcion_fac` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cod_facultad`),
-  UNIQUE KEY `cod_facultad` (`cod_facultad`)
+  UNIQUE KEY `nombre` (`nombre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
