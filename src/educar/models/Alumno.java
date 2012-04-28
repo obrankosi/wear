@@ -3,6 +3,10 @@ package educar.models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Hashtable;
+import java.util.LinkedList;
+
+import org.hamcrest.StringDescription;
 
 import educar.db.JPA;
 
@@ -16,7 +20,7 @@ public class Alumno {
 
     public boolean save() {
 	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
-		"edad_a", "telefono_a","direccion_a" };
+		"edad_a", "telefono_a", "direccion_a" };
 	return save("Alumnos", columns);
     }
 
@@ -36,6 +40,7 @@ public class Alumno {
     private String tel;
     private String dir;
     private static JPA jpa = new JPA();
+//    private Hashtable<String, String> alumnos;
 
     private void Person(String dni, String lastName, String name, String fN,
 	    String age, String tel, String dir) {
@@ -113,8 +118,8 @@ public class Alumno {
     private boolean destroy(String tableName) {
 	jpa.destroy(tableName, "dni", this.getDni());
 	return true;
-	
-	}
+
+    }
 
     /*
      * Return una persona buscada por dni null en el caso que no exista;
@@ -131,14 +136,30 @@ public class Alumno {
 	}
     }
 
-    public static void update(String[] values){//numero de alumno es auto incremetal
-	String[] columns = {"dni","apellido_a","nombre_a","fechaNac_a","edad_a","telefono_a","direccion_a"};
-	jpa.update("Alumnos", columns, values,columns[0],values[0]);
+    public static void update(String[] values) {// numero de alumno es auto
+	// incremetal
+	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
+		"edad_a", "telefono_a", "direccion_a" };
+	jpa.update("Alumnos", columns, values, columns[0], values[0]);
     }
-    
-    
-    
-    
+
+    /*
+     * retorna un arreglo de string donde cada string es: DNI,NOMBRE,APELLIDO
+    para poder mostrarlo en una lista 
+    public static String[] tAlumnos() throws SQLException {
+	ResultSet rst = jpa.proyeccion("Alumnos", "dni,nombre_a,apellido_a");
+	String[] result = null;
+	int i = 0;
+	while (rst.next()) {
+	    System.out.println(rst.getString(1) + " " + rst.getArray(2) + " "
+		    + rst.getString(3));
+	    result[i] = rst.getString(1) + " " + rst.getArray(2) + " "
+		    + rst.getString(3);
+	    i++;
+	}
+	return result;
+    }
+ */
     public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;
