@@ -35,18 +35,16 @@ import educar.controllers.AdminController.subjectManagementController;
 import educar.gui.IView;
 import educar.gui.Listener.AdminListener;
 import educar.languaje.defaultLanguaje;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class administrador extends JFrame implements IView, defaultLanguaje {
 
     private static final JComponent manuAlumno = null;
-    private static JPanel administrador;
+    private JPanel administrador;
     private JPanel menuAccionesPanel;
     private JScrollPane menuAccionesScroll;
     private JPanel menuAcciones;
     private JScrollPane menuAdminScroll;
-    private static JTabbedPane menuAlumno;
+    private JTabbedPane menuAlumno;
     private JTabbedPane menuDocente;
     private JTabbedPane menuCargo;
     private JTabbedPane menuFacultad;
@@ -698,10 +696,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionBuscarMA.setView(this);
 	bBuscarMA.associate(btnBuscarModificarAlumno, gestionBuscarMA);
 
-	//ACA SIGUIR HACIENDOOOOOOOO ************
-//	******************************************************
-//	******************************************************
-//	******************************************************
+	// ACA SIGUIR HACIENDOOOOOOOO ************
+	// ******************************************************
+	// ******************************************************
+	// ******************************************************
 	listaModificarAlumno = new List();
 	listaModificarAlumno.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent arg0) {
@@ -712,7 +710,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	});
 	panelModificarAlumno.add(listaModificarAlumno);
 	listaModificarAlumno.setBounds(916, 58, 229, 464);
-	listaModificarAlumno.add("juan carlos es amigo de un amigo mio, el cual no sabe cual es ");
+	listaModificarAlumno
+		.add("juan carlos es amigo de un amigo mio, el cual no sabe cual es ");
 	listaModificarAlumno.add("pedro almodobar");
 
 	JLabel lblNombreModificarAlumno = new JLabel("NOMBRE");
@@ -1326,6 +1325,25 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFApellidoModificarAlumno.setText(s);
     }
 
+    public void setDniAlta_A(String s) {
+	txtFDniAltaAlumno.setText(s);
+    }
+    public void setNombreAlta_A(String  s){
+	txtFNombreAltaAlumno.setText(s);
+    }
+
+    public void setApellidoAlta_A(String  s){
+	txtFApellidoAltaAlumno.setText(s);
+    }
+    public void setDireccionAlta_A(String  s){
+	txtFDireccionAltaAlumno.setText(s);
+    }
+    public void setFechaNacAlta_A(String  s){
+	txtFFechaNacAltaAlumno.setText(s);
+    }
+    public void setTelefonoAlta_A(String  s){
+	txtFTelefonoAltaAlumno.setText(s);
+    }
     public String getNameAlta_A() {
 	return txtFNombreAltaAlumno.getText().trim();
     }
@@ -1376,6 +1394,16 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
     public void close() {
 	this.dispose();
+    }
+
+    public void deleteViewFieldsAlta_A() {
+	this.setNombreAlta_A("");
+	this.setDireccionAlta_A("");
+	this.setDniAlta_A("");
+	this.setApellidoAlta_A("");
+	this.setFechaNacAlta_A("");
+	this.setTelefonoAlta_A("");
+
     }
 
     public void deleteViewFieldsMod_A() {
