@@ -30,10 +30,10 @@ public class AdminListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		IController controller = componentControllerMap.get(e.getSource());// me
 																			// da
-																			// el
-																			// controlador
-																			// del
-																			// evnto
+		// el
+		// controlador
+		// del
+		// evnto
 		if (null != controller) {
 			controller.process(e.getActionCommand());
 		}

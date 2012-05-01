@@ -1,12 +1,13 @@
 package educar.db;
 
 import java.sql.DriverManager;
+
 import com.mysql.jdbc.Connection;
 
 public class DbConnection {
 	public static String bd = "educar_dev";
 	private static String login = "root";
-	private static String password = "1";
+	private static String password = "root";
 	private static String url = "jdbc:mysql://localhost/"+bd;
 	private static DbConnection instance;
 	private static Connection conn;
@@ -33,5 +34,3 @@ public class DbConnection {
 	    conn = null;
 	}
 }
-
-
