@@ -1,31 +1,38 @@
 package educar.controllers.AdminController;
 
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
+import educar.models.Alumno;
 import educar.models.Docente;
 
 public class gestionDocenteController implements IController, defaultLanguaje {
     private administrador view;
     private static Docente teacher = null;
+    private static LinkedList<String> teachersList;
 
     @Override
     public void process(String model) {
 	// TODO agregar docente
 	if (model.compareTo(ADD) == 0) {
 	    AddTeacher();
+	    showTeacherInList();
 	}
 	if (model.compareTo(DELETE) == 0) {
 	    deletTeacher();
+	    showTeacherInList();
 	}
 	if (model.compareTo(SEARCH) == 0) {
 	    searchTeacherInDbase();
+	    showTeacherInList();
 	}
 	if (model.compareTo(MODIFY) == 0) {
 	    modifyTeacher();
+	    showTeacherInList();
 	}
 	if (model.compareTo(CLEAR) == 0) {
 	    view.deleteViewFieldsMod_D();
@@ -97,19 +104,31 @@ public class gestionDocenteController implements IController, defaultLanguaje {
     }
 
     private void modifyTeacher() {
-	// {
-	// searchAteacherInDbase();
-	String[] values = { view.getDniModif_D(), view.getApellidoModif_D(),
-		view.getNombreModif_D(), view.getFechaModif_D(),
-		view.getTelefonoModif_D(), view.getDireccionModif_D() };
-	try {
-	    teacher.update(values, teacher.getDni());
-	    view.present("actualizacion realizada");
-	} catch (SQLException e) {
-	    // TODO Auto-generated catch block
-	    view.present("NO se puede actualizar");
+//	teacher = Docente.getDocente(view.getDniModif_D());
+	if (teacher != null) {
+	    String[] values = { view.getDniModif_D(),
+		    view.getApellidoModif_D(), view.getNombreModif_D(),
+		    view.getFechaModif_D(), view.getTelefonoModif_D(),
+		    view.getDireccionModif_D() };
+	    try {
+		teacher.update(values, teacher.getDni());
+		view.present("actualizacion realizada");
+	    } catch (SQLException e) {
+		view.present("NO se puede actualizar");
+	    }
+	} else {
+	    view.present("el alumno no existe");
 	}
-	// view.deleteViewFieldsMod();
+
+    }
+
+    private void showTeacherInList() {
+	try {
+	    teachersList = Docente.ListDocente();
+	    view.setListDocente_ABM(teachersList);
+	} catch (SQLException e) {
+	    view.present("no entro por la lista de alumnos");
+	}
     }
 
 }

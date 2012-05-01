@@ -8,6 +8,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -127,6 +128,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     private JButton btnBuscarModificarDocente;
     private JButton btnLimpiarAltaDocente;
     private JButton btnGuardarAltaDocente;
+    private List listaModificarMateria;
 
     /**
      * Create the frame.
@@ -710,9 +712,6 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	});
 	panelModificarAlumno.add(listaModificarAlumno);
 	listaModificarAlumno.setBounds(916, 58, 229, 464);
-	listaModificarAlumno
-		.add("juan carlos es amigo de un amigo mio, el cual no sabe cual es ");
-	listaModificarAlumno.add("pedro almodobar");
 
 	JLabel lblNombreModificarAlumno = new JLabel("NOMBRE");
 	lblNombreModificarAlumno.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1089,7 +1088,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFCodigoModificarMateria.setBounds(229, 118, 305, 45);
 	panelModificarMateria.add(txtFCodigoModificarMateria);
 
-	List listaModificarMateria = new List();
+	listaModificarMateria = new List();
 	listaModificarMateria.setBounds(916, 58, 229, 464);
 	panelModificarMateria.add(listaModificarMateria);
 
@@ -1328,22 +1327,27 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     public void setDniAlta_A(String s) {
 	txtFDniAltaAlumno.setText(s);
     }
-    public void setNombreAlta_A(String  s){
+
+    public void setNombreAlta_A(String s) {
 	txtFNombreAltaAlumno.setText(s);
     }
 
-    public void setApellidoAlta_A(String  s){
+    public void setApellidoAlta_A(String s) {
 	txtFApellidoAltaAlumno.setText(s);
     }
-    public void setDireccionAlta_A(String  s){
+
+    public void setDireccionAlta_A(String s) {
 	txtFDireccionAltaAlumno.setText(s);
     }
-    public void setFechaNacAlta_A(String  s){
+
+    public void setFechaNacAlta_A(String s) {
 	txtFFechaNacAltaAlumno.setText(s);
     }
-    public void setTelefonoAlta_A(String  s){
+
+    public void setTelefonoAlta_A(String s) {
 	txtFTelefonoAltaAlumno.setText(s);
     }
+
     public String getNameAlta_A() {
 	return txtFNombreAltaAlumno.getText().trim();
     }
@@ -1673,11 +1677,54 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	JOptionPane.showMessageDialog(null, model);
     }
 
-    public void setListAlumnos_ABM(List listaAlumnos){
-	listaAltaAlumno = listaAlumnos;
-	listaModificarAlumno = listaAlumnos;
-	
+    /**
+     * @param listaAlumnos
+     */
+    public void setListAlumnos_ABM(LinkedList<String> listaAlumnos) {
+	listaModificarAlumno.removeAll();
+	listaAltaAlumno.removeAll();
+	for (int i = 0; i < listaAlumnos.size(); i++) {
+	    listaModificarAlumno.add(listaAlumnos.get(i), i);
+	    listaAltaAlumno.add(listaAlumnos.get(i), i);
+	}
     }
-    
+
+    /**
+     * @param listaDocente
+     */
+    public void setListDocente_ABM(LinkedList<String> listaDocente) {
+	listaModificarDocente.removeAll();
+	listaAltaDocente.removeAll();
+	for (int i = 0; i < listaDocente.size(); i++) {
+	    listaModificarDocente.add(listaDocente.get(i), i);
+	    listaAltaDocente.add(listaDocente.get(i), i);
+	}
+    }
+
+    /**
+     * @param listaFacultad
+     */
+    public void setListFacultad_ABM(LinkedList<String> listaFacultad) {
+	listaAltaFacultad.removeAll();
+	listaMoificarFacultad.removeAll();
+	for (int i = 0; i < listaFacultad.size(); i++) {
+	    listaAltaFacultad.add(listaFacultad.get(i), i);
+	    listaMoificarFacultad.add(listaFacultad.get(i), i);
+	}
+    }
+
+    /**
+     * @param listaMateria
+     */
+    public void setListMateria_ABM(LinkedList<String> listaMateria) {
+	listaAltaMateria.removeAll();
+	listaModificarMateria.removeAll();
+	for (int i = 0; i < listaMateria.size(); i++) {
+	    listaModificarMateria.add(listaMateria.get(i), i);
+	    listaAltaMateria.add(listaMateria.get(i), i);
+	}
+    }
+
     // /////////////////////////////////////////////////////////////////////////////////
 }
+	

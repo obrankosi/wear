@@ -3,6 +3,7 @@ package educar.models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import educar.db.JPA;
 
@@ -46,6 +47,21 @@ public class Docente {
 	return getPerson(dni, "Docente");
     }
 
+    /*
+     * retorna una lista de string donde cada string es: DNI,NOMBRE,APELLIDO
+     * para poder mostrarlo en una lista
+     */
+    public static LinkedList<String> ListDocente() throws SQLException {
+	rst = jpa.proyeccion(" Docente ",
+		" dni_docente,nombre_d, apellido_d");
+	LinkedList<String> result = new LinkedList<String>();
+	while (rst.next()) {
+	    result.add(rst.getString(1) + " " + rst.getString(2) + " "
+		    + rst.getString(3));
+	}
+	return result;
+    }
+
     private String name;
     private String lastName;
     private String fN;
@@ -53,6 +69,7 @@ public class Docente {
     private String tel;
     private String dir;
     private static JPA jpa = new JPA();
+    private static ResultSet rst;
 
     private void Person(String dni, String lastName, String name, String fN,
 	    String tel, String dir) {
@@ -70,14 +87,12 @@ public class Docente {
      */
     private boolean save(String tableName, String[] nameColumns) {
 	try {
-	    Docente.getPersonByDni("dni_docente", tableName);
+	    Docente.getPersonByDni(this.dni, tableName);//si la persona no existe tira una ex personnotfound
 	    return false;
 	} catch (PersonNotFound e1) {
 	    String[] columns = nameColumns;
-
 	    PreparedStatement stm = jpa.newRecord("educar_dev." + tableName,
 		    columns);
-
 	    try {
 		stm.setString(1, dni);
 		stm.setString(2, name);

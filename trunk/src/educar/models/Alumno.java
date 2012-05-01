@@ -1,9 +1,9 @@
 package educar.models;
 
-import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import educar.db.JPA;
 
@@ -47,22 +47,20 @@ public class Alumno {
 	return getPerson(dni, "Alumnos");
     }
 
-    
     /*
      * retorna una lista de string donde cada string es: DNI,NOMBRE,APELLIDO
      * para poder mostrarlo en una lista
      */
-    public static List ListAlumnos() throws SQLException {
+    public static LinkedList<String> ListAlumnos() throws SQLException {
 	rst = jpa.proyeccion(" Alumnos ", " dni,nombre_a , apellido_a");
-	List result = new List();
+	LinkedList<String> result = new LinkedList<String>();
 	while (rst.next()) {
 	    result.add(rst.getString(1) + " " + rst.getString(2) + " "
 		    + rst.getString(3));
 	}
 	return result;
     }
-    
-    
+
     private String name;
     private String lastName;
     private String fN;
@@ -90,14 +88,12 @@ public class Alumno {
      */
     private boolean save(String tableName, String[] nameColumns) {
 	try {
-	    Alumno.getPersonByDni(dni, tableName);
+	    Alumno.getPersonByDni(this.dni, tableName);//si no lo encuntra tira una ex de personnotfound
 	    return false;
 	} catch (PersonNotFound e1) {
 	    String[] columns = nameColumns;
-
 	    PreparedStatement stm = jpa.newRecord("educar_dev." + tableName,
 		    columns);
-
 	    try {
 		stm.setString(1, dni);
 		stm.setString(2, name);
@@ -193,8 +189,6 @@ public class Alumno {
 	}
 
     }
-
-    
 
     public String getDni() {
 	// TODO Auto-generated method stub

@@ -1,8 +1,7 @@
 package educar.controllers.AdminController;
 
-import java.awt.Dimension;
-import java.awt.List;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import educar.controllers.IController;
 import educar.gui.IView;
@@ -13,13 +12,15 @@ import educar.models.Alumno;
 public class gestionAlumnosController implements IController, defaultLanguaje {
     private administrador view;
     private static Alumno student = null;
-    private static List studentsList;
+    private static LinkedList<String> studentsList;
 
     @Override
     public void process(String model) {
 	// TODO agregar alumno
 	if (model.compareTo(ADD) == 0) {
 	    AddStudent();
+	    view.deleteViewFieldsAlta_A();
+	    showStudentInList();
 	}
 	if (model.compareTo(DELETE) == 0) {
 	    deletStudent();
@@ -27,6 +28,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	}
 	if (model.compareTo(SEARCH) == 0) {
 	    searchAStudentInDbase();
+	    showStudentInList();
 	}
 	if (model.compareTo(MODIFY) == 0) {
 	    showStudentInList();
@@ -101,7 +103,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
     }
 
     private void modifyStudent() {// ponerle la edad !!!!
-	student = Alumno.getAlumno(view.getDniMod_A());
+//	student = Alumno.getAlumno(view.getDniMod_A()); si pongo esto no puedo modifcar el dni
 	if (student != null) {
 	    String[] values = { view.getDniMod_A(), view.getLastnameMod_A(),
 		    view.getNameMod_A(), view.getFechaNacMod_A(),
@@ -115,21 +117,8 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 		e.printStackTrace();
 		view.present("NO se pude actualizar");
 	    }
-	    // view.deleteViewFieldsMod();
 	} else {
 	    view.present("el alumno no existe");
-	}
-    }
-
-    // si se selecciono un estudiante de la lista lo que tengo que hacer es
-    // poner su numero de documento en la solapa de busacar para que despues el
-    // usuario o administrador lo busque
-    // asumo que cuando se clicque dos veces sobre un docente lo que hace la
-    // view es poner en el campo BUSCAR el dni del alumno
-    private void StudentSelectedFromList() {
-	student = Alumno.getAlumno(view.getDniAlta_A());
-	if (student != null) {
-	    this.setFieldModifyStudentView();
 	}
     }
 
@@ -150,4 +139,5 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	view.setTfFechaNac_modif_A(student.getfN());
 	view.setTfTelefono_modif_A(student.getTel());
     }
+
 }
