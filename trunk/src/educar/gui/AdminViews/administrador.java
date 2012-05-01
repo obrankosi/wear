@@ -29,12 +29,14 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import educar.controllers.ChargeController;
 import educar.controllers.IController;
 import educar.controllers.AdminController.gestionAlumnosController;
 import educar.controllers.AdminController.gestionDocenteController;
 import educar.controllers.AdminController.subjectManagementController;
 import educar.gui.IView;
 import educar.gui.Listener.AdminListener;
+import educar.gui.Listener.ChargeListener;
 import educar.languaje.defaultLanguaje;
 
 public class administrador extends JFrame implements IView, defaultLanguaje {
@@ -116,10 +118,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     private JButton btnBuscarModificarAlumno;
     private JButton btnBorrarModificarAlumno;
     private JPanel panelModificarAlumno;
-    private static List listaModificarAlumno;
+    private List listaModificarAlumno;
     private JButton btnLimpiarModificarAlumno;
     private JButton btnGuardarModificarAlumno;
-    private static List listaAltaAlumno;
+    private  List listaAltaAlumno;
     private JButton btnLimpiarAltaAlumno;
     private JButton btnGuardarAltaAlumno;
     private JButton btnLimpiarModificarDocente;
@@ -985,25 +987,45 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreModificarCargo.setBounds(229, 232, 305, 45);
 	panelModificarCargo.add(txtFNombreModificarCargo);
 
-	btnLimpiarModificarCargo = new JButton("LIMPIAR");
+	btnLimpiarModificarCargo = new JButton(CLEAR);
 	btnLimpiarModificarCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	btnLimpiarModificarCargo.setBounds(220, 522, 190, 58);
 	panelModificarCargo.add(btnLimpiarModificarCargo);
+	
+	ChargeListener bLimpiarMC= new ChargeListener(); 
+	IController gestionLimpiarMC = new ChargeController();
+	gestionLimpiarMC.setView(this);
+	bLimpiarMC.associate(btnLimpiarModificarCargo, gestionLimpiarMC);
 
-	btnBorrarModificarCargo = new JButton("BORRAR");
+	btnBorrarModificarCargo = new JButton(DELETE);
 	btnBorrarModificarCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	btnBorrarModificarCargo.setBounds(420, 522, 190, 58);
 	panelModificarCargo.add(btnBorrarModificarCargo);
 
-	btnBuscarModificarCargo = new JButton("BUSCAR");
+	ChargeListener bBorrarMC= new ChargeListener(); 
+	IController gestionBorrarMC = new ChargeController();
+	gestionBorrarMC.setView(this);
+	bBorrarMC.associate(btnBorrarModificarCargo, gestionBorrarMC);
+
+	btnBuscarModificarCargo = new JButton(SEARCH);
 	btnBuscarModificarCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	btnBuscarModificarCargo.setBounds(584, 116, 190, 47);
 	panelModificarCargo.add(btnBuscarModificarCargo);
 
-	btnGuardarModificarCargo = new JButton(" GUARDAR");
+	ChargeListener bBuscarMC= new ChargeListener(); 
+	IController gestionBuscarMC = new ChargeController();
+	gestionBuscarMC.setView(this);
+	bBuscarMC.associate(btnBuscarModificarCargo, gestionBuscarMC);
+	
+	btnGuardarModificarCargo = new JButton(ADD);
 	btnGuardarModificarCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarModificarCargo.setBounds(620, 522, 190, 58);
 	panelModificarCargo.add(btnGuardarModificarCargo);
+
+	ChargeListener bGuardarMC= new ChargeListener(); 
+	IController gestionGuardarMC = new ChargeController();
+	gestionGuardarMC.setView(this);
+	bGuardarMC.associate(btnGuardarModificarCargo, gestionGuardarMC);
 
 	JPanel panelAltaCargo = new JPanel();
 	panelAltaCargo.setLayout(null);
@@ -1050,6 +1072,12 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	btnGuardarAltaCargo.setBounds(408, 441, 190, 58);
 	panelAltaCargo.add(btnGuardarAltaCargo);
 	menuAccionesPanel.add(menuMateria);
+	
+	ChargeListener bGuardarAC= new ChargeListener(); 
+	IController gestionGuardarAC = new ChargeController();
+	gestionGuardarAC.setView(this);
+	bGuardarAC.associate(btnGuardarAltaCargo, gestionGuardarAC);
+
 	// ////////////////////////////////// MODIFICAR MATERIA
 	// //////////////////////////
 	JPanel panelModificarMateria = new JPanel();
