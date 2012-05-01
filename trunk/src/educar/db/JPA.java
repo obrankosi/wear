@@ -20,6 +20,7 @@ public class JPA {
 	    // tabla de la base de datos
 	} catch (Exception ex) {
 	    ex.printStackTrace();
+	    System.out.println("la consulta : "+ sentence + "fallo");
 	}
 	return res;
     }

@@ -1,5 +1,7 @@
 package educar.controllers.AdminController;
 
+import java.awt.Dimension;
+import java.awt.List;
 import java.sql.SQLException;
 
 import educar.controllers.IController;
@@ -11,6 +13,7 @@ import educar.models.Alumno;
 public class gestionAlumnosController implements IController, defaultLanguaje {
     private administrador view;
     private static Alumno student = null;
+    private static List studentsList;
 
     @Override
     public void process(String model) {
@@ -20,11 +23,13 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	}
 	if (model.compareTo(DELETE) == 0) {
 	    deletStudent();
+	    showStudentInList();
 	}
 	if (model.compareTo(SEARCH) == 0) {
 	    searchAStudentInDbase();
 	}
 	if (model.compareTo(MODIFY) == 0) {
+	    showStudentInList();
 	    modifyStudent();
 	}
 	if (model.compareTo(CLEAR) == 0) {
@@ -125,6 +130,15 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	student = Alumno.getAlumno(view.getDniAlta_A());
 	if (student != null) {
 	    this.setFieldModifyStudentView();
+	}
+    }
+
+    private void showStudentInList() {
+	try {
+	    studentsList = Alumno.ListAlumnos();
+	    view.setListAlumnos_ABM(studentsList);
+	} catch (SQLException e) {
+	    view.present("no entro por la lista de alumnos");
 	}
     }
 

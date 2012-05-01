@@ -115,10 +115,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     private JButton btnBuscarModificarAlumno;
     private JButton btnBorrarModificarAlumno;
     private JPanel panelModificarAlumno;
-    private List listaModificarAlumno;
+    private static List listaModificarAlumno;
     private JButton btnLimpiarModificarAlumno;
     private JButton btnGuardarModificarAlumno;
-    private List listaAltaAlumno;
+    private static List listaAltaAlumno;
     private JButton btnLimpiarAltaAlumno;
     private JButton btnGuardarAltaAlumno;
     private JButton btnLimpiarModificarDocente;
@@ -1673,5 +1673,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	JOptionPane.showMessageDialog(null, model);
     }
 
+    public void setListAlumnos_ABM(List listaAlumnos){
+	listaAltaAlumno = listaAlumnos;
+	listaModificarAlumno = listaAlumnos;
+	
+    }
+    
     // /////////////////////////////////////////////////////////////////////////////////
 }
