@@ -56,7 +56,6 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
   `apellido_a` varchar(30) NOT NULL,
   `nombre_a` varchar(30) NOT NULL,
   `fechaNac_a` date NOT NULL,
-  `edad_a` int(11) NOT NULL,
   `telefono_a` varchar(30) DEFAULT NULL,
   `direccion_a` varchar(50) DEFAULT NULL,
   `nro_alumno` int(11) NOT NULL AUTO_INCREMENT,
@@ -71,8 +70,8 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
 
 /*!40000 ALTER TABLE `Alumnos` DISABLE KEYS */;
 LOCK TABLES `Alumnos` WRITE;
-INSERT INTO `educar_dev`.`Alumnos` VALUES  (3111,'edu','kkkkk','1212-12-12',22,'1212','edu',1),
- (22222,'zzzzzz','zzzzzz','1212-12-12',12,'12','zzzzz',2);
+INSERT INTO `educar_dev`.`Alumnos` VALUES  (3111,'edu','kkkkk','1212-12-12','1212','edu',1),
+ (22222,'zzzzzz','zzzzzz','1212-12-12','12','zzzzz',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
 
@@ -176,7 +175,6 @@ CREATE TABLE  `educar_dev`.`Docente` (
   `apellido_d` varchar(20) NOT NULL,
   `nombre_d` varchar(20) NOT NULL,
   `fechaNac_d` date NOT NULL,
-  `edad_d` int(11) NOT NULL,
   `tel_d` int(11) DEFAULT NULL,
   `direccion_d` varchar(30) NOT NULL,
   PRIMARY KEY (`dni_docente`),
@@ -189,24 +187,24 @@ CREATE TABLE  `educar_dev`.`Docente` (
 
 /*!40000 ALTER TABLE `Docente` DISABLE KEYS */;
 LOCK TABLES `Docente` WRITE;
-INSERT INTO `educar_dev`.`Docente` VALUES  (55,'zzzzzz','zzzzzz','1212-12-12',12,12,'zzzzz'),
- (888,'xxx','xxx','2000-12-12',22,0,'xxx'),
- (1014,'xxx','xxx','2000-12-12',22,0,'xxx'),
- (1140,'xxx','xxx','2000-12-12',22,101,'xxx'),
- (1234,'v','v','1223-12-12',33,1234,'v'),
- (3411,'ss','ss','2012-12-12',43,567,'ss'),
- (4000,'xxx','eduoooo','2000-12-12',22,101,'xxx'),
- (4444,'xxx','xxx','2000-12-12',22,0,'xxx'),
- (4445,'xxx','xxx','2000-12-12',22,34,'xxx'),
- (5757,'zzzzzz','zzzzzz','1212-12-12',12,12,'zzzzz'),
- (7777,'v','v','1223-12-12',33,1234,'v'),
- (8884,'xxx','xxx','2000-12-12',22,6578,'xxx'),
- (10140,'xxx','xxx','2000-12-12',22,101,'xxx'),
- (44444,'v','v','1223-12-12',33,1234,'v'),
- (65432,'laala','laala','2012-12-12',12,12,'laala'),
- (89563,'xxx','xxx','2000-12-12',22,45,'xxx'),
- (99777,'hhh','hhh','1212-12-12',55,77,'hhh'),
- (121212,'vcv','dcdfc','1212-12-12',22,34,'dfdf');
+INSERT INTO `educar_dev`.`Docente` VALUES  (55,'zzzzzz','zzzzzz','1212-12-12',12,'zzzzz'),
+ (888,'xxx','xxx','2000-12-12',0,'xxx'),
+ (1014,'xxx','xxx','2000-12-12',0,'xxx'),
+ (1140,'xxx','xxx','2000-12-12',101,'xxx'),
+ (1234,'v','v','1223-12-12',1234,'v'),
+ (3411,'ss','ss','2012-12-12',567,'ss'),
+ (4000,'xxx','eduoooo','2000-12-12',101,'xxx'),
+ (4444,'xxx','xxx','2000-12-12',0,'xxx'),
+ (4445,'xxx','xxx','2000-12-12',34,'xxx'),
+ (5757,'zzzzzz','zzzzzz','1212-12-12',12,'zzzzz'),
+ (7777,'v','v','1223-12-12',1234,'v'),
+ (8884,'xxx','xxx','2000-12-12',6578,'xxx'),
+ (10140,'xxx','xxx','2000-12-12',101,'xxx'),
+ (44444,'v','v','1223-12-12',1234,'v'),
+ (65432,'laala','laala','2012-12-12',12,'laala'),
+ (89563,'xxx','xxx','2000-12-12',45,'xxx'),
+ (99777,'hhh','hhh','1212-12-12',77,'hhh'),
+ (121212,'vcv','dcdfc','1212-12-12',34,'dfdf');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Docente` ENABLE KEYS */;
 
@@ -292,8 +290,8 @@ CREATE TABLE  `educar_dev`.`Materia` (
   UNIQUE KEY `cod_materia` (`cod_materia`),
   KEY `codFacultad` (`facultad`),
   KEY `dniDocente` (`dni_docente`),
-  CONSTRAINT `dniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE,
-  CONSTRAINT `codFacultad` FOREIGN KEY (`facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE
+  CONSTRAINT `codFacultad` FOREIGN KEY (`facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
+  CONSTRAINT `dniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --

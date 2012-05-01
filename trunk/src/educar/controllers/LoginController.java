@@ -4,6 +4,7 @@ import educar.gui.AdminView;
 import educar.gui.IView;
 import educar.gui.LoginView;
 import educar.gui.RootView;
+import educar.gui.AdminViews.administrador;
 import educar.models.Session;
 import educar.models.User;
 
@@ -32,7 +33,7 @@ public class LoginController implements IController {
 	    new RootView();
 	}
 	if (role.equals("admin")) {
-	    new AdminView().setVisible(true);
+	    new administrador();
 	}
 	// if (role.equals("teacher")) {
 	// goTeacherWindow();
