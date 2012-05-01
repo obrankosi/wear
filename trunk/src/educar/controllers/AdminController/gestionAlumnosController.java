@@ -28,7 +28,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	    modifyStudent();
 	}
 	if (model.compareTo(CLEAR) == 0) {
-	    view.deleteViewFieldsMod_A();
+	    view.deleteViewFieldsAlta_A();
 	}
 
     }
