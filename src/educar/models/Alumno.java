@@ -1,5 +1,6 @@
 package educar.models;
 
+import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,6 +47,22 @@ public class Alumno {
 	return getPerson(dni, "Alumnos");
     }
 
+    
+    /*
+     * retorna una lista de string donde cada string es: DNI,NOMBRE,APELLIDO
+     * para poder mostrarlo en una lista
+     */
+    public static List ListAlumnos() throws SQLException {
+	rst = jpa.proyeccion(" Alumnos ", " dni,nombre_a , apellido_a");
+	List result = new List();
+	while (rst.next()) {
+	    result.add(rst.getString(1) + " " + rst.getString(2) + " "
+		    + rst.getString(3));
+	}
+	return result;
+    }
+    
+    
     private String name;
     private String lastName;
     private String fN;
@@ -53,6 +70,7 @@ public class Alumno {
     private String tel;
     private String dir;
     private static JPA jpa = new JPA();
+    private static ResultSet rst;
 
     // private Hashtable<String, String> alumnos;
 
@@ -176,15 +194,8 @@ public class Alumno {
 
     }
 
-    /*
-     * retorna un arreglo de string donde cada string es: DNI,NOMBRE,APELLIDO
-     * para poder mostrarlo en una lista public static String[] tAlumnos()
-     * throws SQLException { ResultSet rst = jpa.proyeccion("Alumnos",
-     * "dni,nombre_a,apellido_a"); String[] result = null; int i = 0; while
-     * (rst.next()) { System.out.println(rst.getString(1) + " " +
-     * rst.getArray(2) + " " + rst.getString(3)); result[i] = rst.getString(1) +
-     * " " + rst.getArray(2) + " " + rst.getString(3); i++; } return result; }
-     */
+    
+
     public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;
