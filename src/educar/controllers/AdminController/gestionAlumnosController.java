@@ -2,16 +2,14 @@ package educar.controllers.AdminController;
 
 import java.sql.SQLException;
 
-import javax.print.attribute.standard.PresentationDirection;
-
 import educar.controllers.IController;
 import educar.gui.IView;
-import educar.gui.AdminViews.gestionAlumnosView;
+import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.Alumno;
 
 public class gestionAlumnosController implements IController, defaultLanguaje {
-    private gestionAlumnosView view;
+    private administrador view;
     private static Alumno student = null;
 
     @Override
@@ -30,24 +28,24 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	    modifyStudent();
 	}
 	if (model.compareTo(CLEAR) == 0) {
-	    view.deleteViewFieldsMod();
+	    view.deleteViewFieldsMod_A();
 	}
 
     }
 
     private void searchAStudentInDbase() {
 	// TODO Auto-generated method stub
-	student = Alumno.getAlumno(view.getDniMod());
+	student = Alumno.getAlumno(view.getDniMod_A());
 	if (student != null) {
-	    view.setTfNombre_modif(student.getName());
-	    view.setTfApellido_modif(student.getLastName());
-	    view.setTfDireccion_modif(student.getDir());
-	    view.setTfDni_modif(student.getDni());
-	    view.setTfFechaNac_modif(student.getfN());
-	    view.setTfTelefono_modif(student.getTel());
+	    view.setTfNombre_modif_A(student.getName());
+	    view.setTfApellido_modif_A(student.getLastName());
+	    view.setTfDireccion_modif_A(student.getDir());
+	    view.setTfDni_modif_A(student.getDni());
+	    view.setTfFechaNac_modif_A(student.getfN());
+	    view.setTfTelefono_modif_A(student.getTel());
 	} else {
 	    view.present("El dni del alumno no existe ");
-	    view.deleteViewFieldsMod();
+	    view.deleteViewFieldsMod_A();
 	}
 
     }
@@ -55,12 +53,14 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
     // se supones que tiene un alumno lo borro student tiene un alumno
     private void deletStudent() {//
 	searchAStudentInDbase();
-	if (!(view.getDniMod().compareTo("") == 0)) {// si no tengo un documento
+	if (!(view.getDniMod_A().compareTo("") == 0)) {// si no tengo un
+	    // documento
 	    // en
 	    // pantalla es porque no pudo
 	    // encontrar el alumno
 	    if (student.destroy()) {
 		view.present("borrado del alumno exitoso");
+		view.deleteViewFieldsMod_A();
 	    }
 
 	}
@@ -70,17 +70,17 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
     @Override
     public void setView(IView view) {
 	// TODO Auto-generated method stub
-	this.view = (gestionAlumnosView) view;
+	this.view = (administrador) view;
     }
 
     private void AddStudent() {
-	// TODO ("3563", "xxx", "xxx","2000-12-12","22","xxx","xxx") falta
-	// agregar a la vista edad!
-	if (view.fieldsIsOkAlta()) {// si no ingreso algun campo no permite
+	// TODO ("3563", "xxx", "xxx","2000-12-12","xxx","xxx") falta
+	if (view.fieldsIsOkAlta_A()) {// si no ingreso algun campo no permite
 	    // guardad
-	    Alumno alumno = new Alumno(view.getDniAlta(), view.getNameAlta(),
-		    view.getLastnameAlta(), view.getFechaNacAlta(), "22", view
-			    .getTelefonoAlta(), view.getDireccionAlta());
+	    Alumno alumno = new Alumno(view.getDniAlta_A(), view
+		    .getNameAlta_A(), view.getLastnameAlta_A(), view
+		    .getFechaNacAlta_A(), view.getTelefonoAlta_A(), view
+		    .getDireccionAlta_A());
 	    if (alumno.save()) {
 		view
 			.present("alumno agregado correctamente. Se creo el Usuario para el alumno ");
@@ -96,18 +96,44 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
     }
 
     private void modifyStudent() {// ponerle la edad !!!!
-	String[] values = { view.getDniMod(), view.getLastnameMod(),
-		view.getNameMod(), view.getFechaNacMod(), "22",
-		view.getTelefonoMod(), view.getDireccionMod() };
+	student = Alumno.getAlumno(view.getDniMod_A());
+	if (student != null) {
+	    String[] values = { view.getDniMod_A(), view.getLastnameMod_A(),
+		    view.getNameMod_A(), view.getFechaNacMod_A(),
+		    view.getTelefonoMod_A(), view.getDireccionMod_A() };
 
-	try {
-	    Alumno.update(values, student.getDni());
-	    view.present("acutalizacion realizada");
-	} catch (SQLException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	    view.present("NO se pude actualizar");
+	    try {
+		Alumno.update(values, student.getDni());
+		view.present("acutalizacion realizada");
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		view.present("NO se pude actualizar");
+	    }
+	    // view.deleteViewFieldsMod();
+	} else {
+	    view.present("el alumno no existe");
 	}
-	// view.deleteViewFieldsMod();
+    }
+
+    // si se selecciono un estudiante de la lista lo que tengo que hacer es
+    // poner su numero de documento en la solapa de busacar para que despues el
+    // usuario o administrador lo busque
+    // asumo que cuando se clicque dos veces sobre un docente lo que hace la
+    // view es poner en el campo BUSCAR el dni del alumno
+    private void StudentSelectedFromList() {
+	student = Alumno.getAlumno(view.getDniAlta_A());
+	if (student != null) {
+	    this.setFieldModifyStudentView();
+	}
+    }
+
+    private void setFieldModifyStudentView() {
+	view.setTfNombre_modif_A(student.getName());
+	view.setTfApellido_modif_A(student.getLastName());
+	view.setTfDireccion_modif_A(student.getDir());
+	view.setTfDni_modif_A(student.getDni());
+	view.setTfFechaNac_modif_A(student.getfN());
+	view.setTfTelefono_modif_A(student.getTel());
     }
 }

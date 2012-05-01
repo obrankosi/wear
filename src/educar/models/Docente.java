@@ -13,13 +13,12 @@ public class Docente {
      * @param name
      * @param lastName
      * @param fN
-     * @param age
      * @param dir
      * @param tel
      */
     public Docente(String dni, String name, String lastName, String fN,
-	    String age, String dir, String tel) {
-	Person(dni, name, lastName, fN, age, dir, tel);
+	    String dir, String tel) {
+	Person(dni, name, lastName, fN, dir, tel);
 	// TODO Auto-generated constructor stub
     }
 
@@ -28,7 +27,7 @@ public class Docente {
      */
     public boolean save() {
 	String[] columns = { "dni_docente", "apellido_d", "nombre_d",
-		"fechaNac_d", "edad_d", "tel_d", "direccion_d" };
+		"fechaNac_d", "tel_d", "direccion_d" };
 	return save("Docente", columns);
     }
 
@@ -50,21 +49,19 @@ public class Docente {
     private String name;
     private String lastName;
     private String fN;
-    private String age;
     private String dni;
     private String tel;
     private String dir;
     private static JPA jpa = new JPA();
 
     private void Person(String dni, String lastName, String name, String fN,
-	    String age, String tel, String dir) {
+	    String tel, String dir) {
 	this.name = name;
 	this.lastName = lastName;
 	this.fN = fN;
 	this.dni = dni;
 	this.tel = tel;
 	this.dir = dir;
-	this.age = age;
     }
 
     /*
@@ -86,9 +83,8 @@ public class Docente {
 		stm.setString(2, name);
 		stm.setString(3, lastName);
 		stm.setString(4, fN);
-		stm.setString(5, age);
-		stm.setString(6, tel);
-		stm.setString(7, dir);
+		stm.setString(5, tel);
+		stm.setString(6, dir);
 	    } catch (SQLException e) {
 		e.printStackTrace();
 		return false;
@@ -115,7 +111,7 @@ public class Docente {
 	    if (rs.next()) {
 		u = new Docente(rs.getString(1), rs.getString(2), rs
 			.getString(3), rs.getString(4), rs.getString(5), rs
-			.getString(6), rs.getString(7));
+			.getString(6));
 	    } else {
 		throw new PersonNotFound();
 	    }
@@ -154,32 +150,30 @@ public class Docente {
 	    return person;
 	}
     }
- // excption por si no puede hacer el update en la base de datos
+
+    // excption por si no puede hacer el update en la base de datos
     /**
      * @param values
      * @param primaryKey
      * @throws SQLException
      */
-    public static void update(String[] values,String primaryKey) throws SQLException {
+    public static void update(String[] values, String primaryKey)
+	    throws SQLException {
 	String[] columns = { "dni_docente", "apellido_d", "nombre_d",
-		"fechaNac_d", "edad_d", "tel_d", "direccion_d" };
+		"fechaNac_d", "tel_d", "direccion_d" };
 	try {
-	    jpa.update("Docente", columns, values, columns[0],primaryKey);    
+	    jpa.update("Docente", columns, values, columns[0], primaryKey);
 	} catch (Exception e) {
 	    // TODO: handle exception
 	    throw new SQLException();
-	    
+
 	}
-	
+
     }
 
     public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;
-    }
-
-    public String getAge() {
-	return age;
     }
 
     public String getDir() {
@@ -212,10 +206,6 @@ public class Docente {
 
     public void setDir(String dir) {
 	this.dir = dir;
-    }
-
-    public void setAge(String age) {
-	this.age = age;
     }
 
     public String getTel() {

@@ -37,10 +37,10 @@ public interface defaultLanguaje {
 	public static final String MODIFY_SUBJECT = "Modificar Materia";
 	public static final String DELETE_SUBJECT = "Borrar Materia";
 	
-	public static final String ADD = "agregar";
+	public static final String ADD = "Guardar";
 	public static final String CLEAR = "Limpiar";
 	public static final String SEARCH = "Buscar";
 
 	public static final String DELETE = "Borrar";
-	public static final String MODIFY = "modificar";
+	public static final String MODIFY = "Modificar";
 }

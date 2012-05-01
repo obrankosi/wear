@@ -13,13 +13,12 @@ public class Alumno {
      * @param name
      * @param lastName
      * @param fN
-     * @param age
      * @param dir
      * @param tel
      */
     public Alumno(String dni, String name, String lastName, String fN,
-	    String age, String dir, String tel) {
-	Person(dni, name, lastName, fN, age, dir, tel);
+	    String dir, String tel) {
+	Person(dni, name, lastName, fN, dir, tel);
 	// TODO Auto-generated constructor stub
     }
 
@@ -28,7 +27,7 @@ public class Alumno {
      */
     public boolean save() {
 	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
-		"edad_a", "telefono_a", "direccion_a" };
+		"telefono_a", "direccion_a" };
 	return save("Alumnos", columns);
     }
 
@@ -50,7 +49,6 @@ public class Alumno {
     private String name;
     private String lastName;
     private String fN;
-    private String age;
     private String dni;
     private String tel;
     private String dir;
@@ -59,14 +57,13 @@ public class Alumno {
     // private Hashtable<String, String> alumnos;
 
     private void Person(String dni, String lastName, String name, String fN,
-	    String age, String tel, String dir) {
+	    String tel, String dir) {
 	this.name = name;
 	this.lastName = lastName;
 	this.fN = fN;
 	this.dni = dni;
 	this.tel = tel;
 	this.dir = dir;
-	this.age = age;
     }
 
     /*
@@ -88,9 +85,8 @@ public class Alumno {
 		stm.setString(2, name);
 		stm.setString(3, lastName);
 		stm.setString(4, fN);
-		stm.setString(5, age);
-		stm.setString(6, tel);
-		stm.setString(7, dir);
+		stm.setString(5, tel);
+		stm.setString(6, dir);
 	    } catch (SQLException e) {
 		e.printStackTrace();
 		return false;
@@ -117,7 +113,7 @@ public class Alumno {
 	    if (rs.next()) {
 		u = new Alumno(rs.getString(1), rs.getString(2), rs
 			.getString(3), rs.getString(4), rs.getString(5), rs
-			.getString(6), rs.getString(7));
+			.getString(6));
 	    } else {
 		throw new PersonNotFound();
 	    }
@@ -170,7 +166,7 @@ public class Alumno {
 	// auto
 	// incremetal
 	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
-		"edad_a", "telefono_a", "direccion_a" };
+		"telefono_a", "direccion_a" };
 	try {
 	    jpa.update("Alumnos", columns, values, columns[0], primaryKey);
 	} catch (Exception e) {
@@ -192,10 +188,6 @@ public class Alumno {
     public String getDni() {
 	// TODO Auto-generated method stub
 	return dni;
-    }
-
-    public String getAge() {
-	return age;
     }
 
     public String getDir() {
@@ -228,10 +220,6 @@ public class Alumno {
 
     public void setDir(String dir) {
 	this.dir = dir;
-    }
-
-    public void setAge(String age) {
-	this.age = age;
     }
 
     public String getTel() {
