@@ -619,6 +619,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	btnGuardarModificarFacultad.setBounds(620, 522, 190, 58);
 	panelModificarFacultad.add(btnGuardarModificarFacultad);
 
+	AdminListener bGuardarMF = new AdminListener(); // / MA=modificar alumno
+	IController gestionGuardarMF = new gestionFacultadController();
+	gestionGuardarMF.setView(this);
+	bGuardarMF.associate(btnGuardarModificarFacultad, gestionGuardarMF);
+	
 	JPanel panelAltaFacultad = new JPanel();
 	panelAltaFacultad.setLayout(null);
 	panelAltaFacultad.setBackground(SystemColor.inactiveCaptionBorder);
@@ -665,10 +670,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaFacultad.add(btnGuardarAltaFacultad);
 	menuAccionesPanel.add(menuAlumno);
 	
-	AdminListener bGuardarMF = new AdminListener(); // / MA=modificar alumno
-	IController gestionGuardarMF = new gestionFacultadController();
-	gestionGuardarMF.setView(this);
-	bGuardarMF.associate(btnGuardarModificarFacultad, gestionGuardarMF);
+	AdminListener bGuardarAF = new AdminListener(); // / MA=modificar alumno
+	IController gestionGuardarAF = new gestionFacultadController();
+	gestionGuardarAF.setView(this);
+	bGuardarAF.associate(btnGuardarModificarFacultad, gestionGuardarAF);
 	
 	// //////////////////////////////////////////// panel MODIFICAR ALUMNO
 	// /////////////////////////////
