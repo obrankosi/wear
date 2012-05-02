@@ -11,8 +11,8 @@ public class Educar {
      * @param args
      */
     public static void main(String[] args) {
-	view = new LoginView();
-	session = new Session();
+    	view = new LoginView();
+    	session = new Session();
     }
 
 }
