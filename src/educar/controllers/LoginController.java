@@ -1,6 +1,6 @@
 package educar.controllers;
 
-import educar.gui.AdminView;
+//import educar.gui.AdminView;
 import educar.gui.IView;
 import educar.gui.LoginView;
 import educar.gui.RootView;

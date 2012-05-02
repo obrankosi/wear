@@ -33,6 +33,7 @@ import educar.controllers.ChargeController;
 import educar.controllers.IController;
 import educar.controllers.AdminController.gestionAlumnosController;
 import educar.controllers.AdminController.gestionDocenteController;
+import educar.controllers.AdminController.gestionFacultadController;
 import educar.controllers.AdminController.subjectManagementController;
 import educar.gui.IView;
 import educar.gui.Listener.AdminListener;
@@ -583,22 +584,37 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreModificarFacultad.setBounds(229, 232, 305, 45);
 	panelModificarFacultad.add(txtFNombreModificarFacultad);
 
-	btnLimpiarModificarFacultad = new JButton("LIMPIAR");
+	btnLimpiarModificarFacultad = new JButton("CLEAR");
 	btnLimpiarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnLimpiarModificarFacultad.setBounds(220, 522, 190, 58);
 	panelModificarFacultad.add(btnLimpiarModificarFacultad);
 
-	btnBorrarModificarFacultad = new JButton("BORRAR");
+	AdminListener bLimpiarMF = new AdminListener(); // / MA=modificar alumno
+	IController gestionLimpiarMF = new gestionFacultadController();
+	gestionLimpiarMF.setView(this);
+	bLimpiarMF.associate(btnLimpiarModificarFacultad, gestionLimpiarMF);
+	
+	btnBorrarModificarFacultad = new JButton("DELETE");
 	btnBorrarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnBorrarModificarFacultad.setBounds(420, 522, 190, 58);
 	panelModificarFacultad.add(btnBorrarModificarFacultad);
 
-	btnBuscarModificarFacultad = new JButton("BUSCAR");
+	AdminListener bBorrarMF = new AdminListener(); // / MF=modificar facultad
+	IController gestionBorrarMF = new gestionFacultadController();
+	gestionBorrarMF.setView(this);
+	bBorrarMF.associate(btnBorrarModificarFacultad, gestionBorrarMF);
+	
+	btnBuscarModificarFacultad = new JButton("SEARCH");
 	btnBuscarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnBuscarModificarFacultad.setBounds(584, 116, 190, 47);
 	panelModificarFacultad.add(btnBuscarModificarFacultad);
 
-	btnGuardarModificarFacultad = new JButton(" GUARDAR");
+	AdminListener bBuscarMF = new AdminListener(); // / MA=modificar alumno
+	IController gestionBuscarMF = new gestionFacultadController();
+	gestionBuscarMF.setView(this);
+	bBuscarMF.associate(btnBuscarModificarFacultad, gestionBuscarMF);
+	
+	btnGuardarModificarFacultad = new JButton("MODIFY");
 	btnGuardarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarModificarFacultad.setBounds(620, 522, 190, 58);
 	panelModificarFacultad.add(btnGuardarModificarFacultad);
@@ -643,11 +659,17 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreAltaFacultad.setBounds(343, 232, 305, 45);
 	panelAltaFacultad.add(txtFNombreAltaFacultad);
 
-	btnGuardarAltaFacultad = new JButton(" GUARDAR");
+	btnGuardarAltaFacultad = new JButton("ADD");
 	btnGuardarAltaFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarAltaFacultad.setBounds(408, 441, 190, 58);
 	panelAltaFacultad.add(btnGuardarAltaFacultad);
 	menuAccionesPanel.add(menuAlumno);
+	
+	AdminListener bGuardarMF = new AdminListener(); // / MA=modificar alumno
+	IController gestionGuardarMF = new gestionFacultadController();
+	gestionGuardarMF.setView(this);
+	bGuardarMF.associate(btnGuardarModificarFacultad, gestionGuardarMF);
+	
 	// //////////////////////////////////////////// panel MODIFICAR ALUMNO
 	// /////////////////////////////
 	panelModificarAlumno = new JPanel();
@@ -1633,7 +1655,20 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     public void setNombreAltaFacultad(String s) {
 	txtFNombreAltaFacultad.setText(s);
     }
-
+    
+    public boolean fieldsIsOkAlta_F() {
+    	return !(this.getNombreAltaFacultad().compareTo("") == 0);
+    }
+    
+    public void deleteViewFieldsMod_F() {
+    	this.setCodigoModificarFacultad("");
+    	this.setNombreModificarFacultad("");
+    }
+    
+    public void deleteViewFieldsAlta_F() {
+    	this.setNombreAltaFacultad("");
+    }
+    
     // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // *************************************************************************************************
