@@ -31,8 +31,8 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	    showStudentInList();
 	}
 	if (model.compareTo(MODIFY) == 0) {
-	    showStudentInList();
 	    modifyStudent();
+	    showStudentInList();
 	}
 	if (model.compareTo(CLEAR) == 0) {
 	    view.deleteViewFieldsAlta_A();

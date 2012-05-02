@@ -584,7 +584,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreModificarFacultad.setBounds(229, 232, 305, 45);
 	panelModificarFacultad.add(txtFNombreModificarFacultad);
 
-	btnLimpiarModificarFacultad = new JButton("CLEAR");
+	btnLimpiarModificarFacultad = new JButton(CLEAR);
 	btnLimpiarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnLimpiarModificarFacultad.setBounds(220, 522, 190, 58);
 	panelModificarFacultad.add(btnLimpiarModificarFacultad);
@@ -594,7 +594,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionLimpiarMF.setView(this);
 	bLimpiarMF.associate(btnLimpiarModificarFacultad, gestionLimpiarMF);
 	
-	btnBorrarModificarFacultad = new JButton("DELETE");
+	btnBorrarModificarFacultad = new JButton(DELETE);
 	btnBorrarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnBorrarModificarFacultad.setBounds(420, 522, 190, 58);
 	panelModificarFacultad.add(btnBorrarModificarFacultad);
@@ -604,7 +604,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionBorrarMF.setView(this);
 	bBorrarMF.associate(btnBorrarModificarFacultad, gestionBorrarMF);
 	
-	btnBuscarModificarFacultad = new JButton("SEARCH");
+	btnBuscarModificarFacultad = new JButton(SEARCH);
 	btnBuscarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnBuscarModificarFacultad.setBounds(584, 116, 190, 47);
 	panelModificarFacultad.add(btnBuscarModificarFacultad);
@@ -614,7 +614,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionBuscarMF.setView(this);
 	bBuscarMF.associate(btnBuscarModificarFacultad, gestionBuscarMF);
 	
-	btnGuardarModificarFacultad = new JButton("MODIFY");
+	btnGuardarModificarFacultad = new JButton(MODIFY);
 	btnGuardarModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarModificarFacultad.setBounds(620, 522, 190, 58);
 	panelModificarFacultad.add(btnGuardarModificarFacultad);
@@ -664,7 +664,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreAltaFacultad.setBounds(343, 232, 305, 45);
 	panelAltaFacultad.add(txtFNombreAltaFacultad);
 
-	btnGuardarAltaFacultad = new JButton("ADD");
+	btnGuardarAltaFacultad = new JButton(ADD);
 	btnGuardarAltaFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarAltaFacultad.setBounds(408, 441, 190, 58);
 	panelAltaFacultad.add(btnGuardarAltaFacultad);

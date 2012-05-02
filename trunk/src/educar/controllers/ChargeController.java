@@ -1,11 +1,9 @@
 package educar.controllers;
 
 import educar.gui.IView;
-import educar.gui.RootView;
 import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.User;
-import educar.models.userNotFound;
 
 public class ChargeController implements IController, defaultLanguaje {
     private static User docente;
