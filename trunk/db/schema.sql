@@ -62,7 +62,7 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
   PRIMARY KEY (`dni`) USING BTREE,
   UNIQUE KEY `dni_a` (`dni`),
   UNIQUE KEY `nro_alumno` (`nro_alumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Alumnos`
@@ -70,8 +70,16 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
 
 /*!40000 ALTER TABLE `Alumnos` DISABLE KEYS */;
 LOCK TABLES `Alumnos` WRITE;
-INSERT INTO `educar_dev`.`Alumnos` VALUES  (3111,'edu','kkkkk','1212-12-12','1212','edu',1),
- (22222,'zzzzzz','zzzzzz','1212-12-12','12','zzzzz',2);
+INSERT INTO `educar_dev`.`Alumnos` VALUES  (101,'DEPETRIS','EDU','2012-12-12','45445','DINKELDIEN',3),
+ (666,'edu','edu','1212-12-12','5454','edu',7),
+ (1110,'i','jk','1212-12-12','333','j',19),
+ (1111,'a','a','1212-12-12','111','a',18),
+ (2266,'z','z','1212-12-12','12','z',11),
+ (2326,'j','d','1212-12-12','44','j',10),
+ (9143,'ed','ed','1212-12-12','433','ed',20),
+ (22222,'zzzzzz','zzzzzz','1212-12-12','12','zzzzz',2),
+ (3336109,'depetris','eduardo','1212-12-12','4652120','calle 1 240',5),
+ (34885245,'coria','gaston','1990-05-05','15467809','calle 1 240',4);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
 
@@ -187,8 +195,9 @@ CREATE TABLE  `educar_dev`.`Docente` (
 
 /*!40000 ALTER TABLE `Docente` DISABLE KEYS */;
 LOCK TABLES `Docente` WRITE;
-INSERT INTO `educar_dev`.`Docente` VALUES  (55,'zzzzzz','zzzzzz','1212-12-12',12,'zzzzz'),
- (888,'xxx','xxx','2000-12-12',0,'xxx'),
+INSERT INTO `educar_dev`.`Docente` VALUES  (44,'a','a','1212-12-12',12,'a'),
+ (55,'EDU','EDU','1212-12-12',2323,'EDU'),
+ (555,'lolo','lolo','1212-12-12',7676,'lolo'),
  (1014,'xxx','xxx','2000-12-12',0,'xxx'),
  (1140,'xxx','xxx','2000-12-12',101,'xxx'),
  (1234,'v','v','1223-12-12',1234,'v'),
@@ -359,6 +368,34 @@ UNLOCK TABLES;
 
 
 --
+-- Definition of table `educar_dev`.`TieneCargo`
+--
+
+DROP TABLE IF EXISTS `educar_dev`.`TieneCargo`;
+CREATE TABLE  `educar_dev`.`TieneCargo` (
+  `cod_cargo` int(11) NOT NULL,
+  `cod_facultad` int(11) NOT NULL,
+  `dni_docente` int(11) NOT NULL,
+  `hs_dedicacion` int(11) NOT NULL,
+  PRIMARY KEY (`cod_cargo`,`cod_facultad`,`dni_docente`),
+  KEY `fkCodFacultad` (`cod_facultad`),
+  KEY `fkDniDocente` (`dni_docente`),
+  CONSTRAINT `fkCodCargo` FOREIGN KEY (`cod_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE,
+  CONSTRAINT `fkCodFacultad` FOREIGN KEY (`cod_facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
+  CONSTRAINT `fkDniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `educar_dev`.`TieneCargo`
+--
+
+/*!40000 ALTER TABLE `TieneCargo` DISABLE KEYS */;
+LOCK TABLES `TieneCargo` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `TieneCargo` ENABLE KEYS */;
+
+
+--
 -- Definition of table `educar_dev`.`Trabaja`
 --
 
@@ -366,12 +403,8 @@ DROP TABLE IF EXISTS `educar_dev`.`Trabaja`;
 CREATE TABLE  `educar_dev`.`Trabaja` (
   `codigo_fac` int(11) NOT NULL,
   `dni_doc` int(11) NOT NULL,
-  `codigo_cargo` int(11) NOT NULL,
-  `hs_dedicacion` int(11) NOT NULL,
-  PRIMARY KEY (`codigo_fac`,`dni_doc`,`codigo_cargo`),
+  PRIMARY KEY (`codigo_fac`,`dni_doc`),
   KEY `dniDoc` (`dni_doc`),
-  KEY `codCargo` (`codigo_cargo`),
-  CONSTRAINT `codCargo` FOREIGN KEY (`codigo_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE,
   CONSTRAINT `codFac` FOREIGN KEY (`codigo_fac`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
   CONSTRAINT `dniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -422,7 +455,7 @@ CREATE TABLE  `educar_dev`.`users` (
   `role` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`users`
@@ -449,8 +482,20 @@ INSERT INTO `educar_dev`.`users` VALUES  (5,'edu','33361090','admin'),
  (30,'jua','carlos','admin'),
  (31,'31111','31111','Alumno'),
  (32,'575757','75757','Docente'),
- (35,'55','5','Docente'),
- (36,'22222','2','Alumno');
+ (36,'22222','2','Alumno'),
+ (37,'101','101','Alumno'),
+ (38,'55','55','Docente'),
+ (39,'555','555','Docente'),
+ (40,'34885245','85245','Alumno'),
+ (41,'3336109','61090','Alumno'),
+ (43,'666','666','Alumno'),
+ (46,'2326','2326','Alumno'),
+ (47,'2266','2266','Alumno'),
+ (54,'1111','1111','Alumno'),
+ (55,'1110','1110','Alumno'),
+ (56,'9143','91','Alumno'),
+ (59,'44','44','Docente'),
+ (61,'antropologia1','1','admin');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
