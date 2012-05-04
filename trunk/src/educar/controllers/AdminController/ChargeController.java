@@ -1,12 +1,13 @@
-package educar.controllers;
+package educar.controllers.AdminController;
 
+import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
-import educar.models.User;
+import educar.models.AdminModels.Docente;
 
 public class ChargeController implements IController, defaultLanguaje {
-    private static User docente;
+    private Docente  docente;
     private administrador rView;
 	
     @Override

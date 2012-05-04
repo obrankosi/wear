@@ -3,6 +3,7 @@ package educar.gui.AdminViews;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.List;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
@@ -29,17 +30,15 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import educar.controllers.ChargeController;
 import educar.controllers.IController;
+import educar.controllers.AdminController.ChargeController;
 import educar.controllers.AdminController.gestionAlumnosController;
 import educar.controllers.AdminController.gestionDocenteController;
 import educar.controllers.AdminController.gestionFacultadController;
 import educar.controllers.AdminController.subjectManagementController;
 import educar.gui.IView;
 import educar.gui.Listener.AdminListener;
-import educar.gui.Listener.ChargeListener;
 import educar.languaje.defaultLanguaje;
-import java.awt.GridLayout;
 
 public class administrador extends JFrame implements IView, defaultLanguaje {
 
@@ -1041,7 +1040,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		btnLimpiarModificarCargo.setBounds(220, 522, 190, 58);
 		panelModificarCargo.add(btnLimpiarModificarCargo);
 
-		ChargeListener bLimpiarMC = new ChargeListener();
+		AdminListener bLimpiarMC = new AdminListener();
 		IController gestionLimpiarMC = new ChargeController();
 		gestionLimpiarMC.setView(this);
 		bLimpiarMC.associate(btnLimpiarModificarCargo, gestionLimpiarMC);
@@ -1051,7 +1050,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		btnBorrarModificarCargo.setBounds(420, 522, 190, 58);
 		panelModificarCargo.add(btnBorrarModificarCargo);
 
-		ChargeListener bBorrarMC = new ChargeListener();
+		AdminListener bBorrarMC = new AdminListener();
 		IController gestionBorrarMC = new ChargeController();
 		gestionBorrarMC.setView(this);
 		bBorrarMC.associate(btnBorrarModificarCargo, gestionBorrarMC);
@@ -1061,7 +1060,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		btnBuscarModificarCargo.setBounds(584, 116, 190, 47);
 		panelModificarCargo.add(btnBuscarModificarCargo);
 
-		ChargeListener bBuscarMC = new ChargeListener();
+		AdminListener bBuscarMC = new AdminListener();
 		IController gestionBuscarMC = new ChargeController();
 		gestionBuscarMC.setView(this);
 		bBuscarMC.associate(btnBuscarModificarCargo, gestionBuscarMC);
@@ -1071,7 +1070,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		btnGuardarModificarCargo.setBounds(620, 522, 190, 58);
 		panelModificarCargo.add(btnGuardarModificarCargo);
 
-		ChargeListener bGuardarMC = new ChargeListener();
+		AdminListener bGuardarMC = new AdminListener();
 		IController gestionGuardarMC = new ChargeController();
 		gestionGuardarMC.setView(this);
 		bGuardarMC.associate(btnGuardarModificarCargo, gestionGuardarMC);
@@ -1121,7 +1120,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		btnGuardarAltaCargo.setBounds(408, 441, 190, 58);
 		panelAltaCargo.add(btnGuardarAltaCargo);
 
-		ChargeListener bGuardarAC = new ChargeListener();
+		AdminListener bGuardarAC = new AdminListener();
 		IController gestionGuardarAC = new ChargeController();
 		gestionGuardarAC.setView(this);
 		bGuardarAC.associate(btnGuardarAltaCargo, gestionGuardarAC);

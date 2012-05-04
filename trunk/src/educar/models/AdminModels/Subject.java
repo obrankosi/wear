@@ -1,4 +1,4 @@
-package educar.models;
+package educar.models.AdminModels;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,7 +67,7 @@ public class Subject {
 
 
 	/*
-	 * busca en la BD una materia por su código (es único)
+	 * busca en la BD una materia por su cï¿½digo (es ï¿½nico)
 	 */
 	private static Subject getSubjectByCode(String tableName)
 			throws SubjectNotFound {
@@ -94,7 +94,7 @@ public class Subject {
 
 
 	/*
-	 * borra una materia por su código, retorna true ssi el borrado fue exitoso 
+	 * borra una materia por su cï¿½digo, retorna true ssi el borrado fue exitoso 
 	 * si la materia no existe, retorna false
 	 */
 	public boolean deleteSubject() {
@@ -109,7 +109,11 @@ public class Subject {
 			return true;
 		} catch (SubjectNotFound error) {
 			return false;
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
 		}
+		return false;
 	}
 
 	// ////////
