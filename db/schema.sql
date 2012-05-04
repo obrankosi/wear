@@ -27,14 +27,14 @@ USE educar_dev;
 
 DROP TABLE IF EXISTS `educar_dev`.`Actividad`;
 CREATE TABLE  `educar_dev`.`Actividad` (
-  `cod_actividad` int(11) NOT NULL,
+  `cod_actividad` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion_act` varchar(50) DEFAULT NULL,
   `cod_materia` int(11) NOT NULL,
   PRIMARY KEY (`cod_actividad`),
   UNIQUE KEY `cod_actividad` (`cod_actividad`),
   KEY `codMateria` (`cod_materia`),
   CONSTRAINT `codMateria` FOREIGN KEY (`cod_materia`) REFERENCES `Materia` (`cod_materia`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Actividad`
@@ -42,6 +42,7 @@ CREATE TABLE  `educar_dev`.`Actividad` (
 
 /*!40000 ALTER TABLE `Actividad` DISABLE KEYS */;
 LOCK TABLES `Actividad` WRITE;
+INSERT INTO `educar_dev`.`Actividad` VALUES  (1,'practica 1',1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Actividad` ENABLE KEYS */;
 
@@ -70,15 +71,7 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
 
 /*!40000 ALTER TABLE `Alumnos` DISABLE KEYS */;
 LOCK TABLES `Alumnos` WRITE;
-INSERT INTO `educar_dev`.`Alumnos` VALUES  (101,'DEPETRIS','EDU','2012-12-12','45445','DINKELDIEN',3),
- (666,'edu','edu','1212-12-12','5454','edu',7),
- (1110,'i','jk','1212-12-12','333','j',19),
- (1111,'a','a','1212-12-12','111','a',18),
- (2266,'z','z','1212-12-12','12','z',11),
- (2326,'j','d','1212-12-12','44','j',10),
- (9143,'ed','ed','1212-12-12','433','ed',20),
- (22222,'zzzzzz','zzzzzz','1212-12-12','12','zzzzz',2),
- (3336109,'depetris','eduardo','1212-12-12','4652120','calle 1 240',5),
+INSERT INTO `educar_dev`.`Alumnos` VALUES  (3336109,'depetris','eduardo','1212-12-12','4652120','calle 1 240',5),
  (34885245,'coria','gaston','1990-05-05','15467809','calle 1 240',4);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
@@ -137,7 +130,7 @@ CREATE TABLE  `educar_dev`.`Cargo` (
   `descripcion_cargo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cod_cargo`),
   UNIQUE KEY `cod_cargo` (`cod_cargo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Cargo`
@@ -145,6 +138,8 @@ CREATE TABLE  `educar_dev`.`Cargo` (
 
 /*!40000 ALTER TABLE `Cargo` DISABLE KEYS */;
 LOCK TABLES `Cargo` WRITE;
+INSERT INTO `educar_dev`.`Cargo` VALUES  (1,'auxiliar'),
+ (2,'responsable');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Cargo` ENABLE KEYS */;
 
@@ -169,6 +164,7 @@ CREATE TABLE  `educar_dev`.`Dicta` (
 
 /*!40000 ALTER TABLE `Dicta` DISABLE KEYS */;
 LOCK TABLES `Dicta` WRITE;
+INSERT INTO `educar_dev`.`Dicta` VALUES  (33361078,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Dicta` ENABLE KEYS */;
 
@@ -195,25 +191,9 @@ CREATE TABLE  `educar_dev`.`Docente` (
 
 /*!40000 ALTER TABLE `Docente` DISABLE KEYS */;
 LOCK TABLES `Docente` WRITE;
-INSERT INTO `educar_dev`.`Docente` VALUES  (44,'a','a','1212-12-12',12,'a'),
- (55,'EDU','EDU','1212-12-12',2323,'EDU'),
- (555,'lolo','lolo','1212-12-12',7676,'lolo'),
- (1014,'xxx','xxx','2000-12-12',0,'xxx'),
- (1140,'xxx','xxx','2000-12-12',101,'xxx'),
- (1234,'v','v','1223-12-12',1234,'v'),
- (3411,'ss','ss','2012-12-12',567,'ss'),
- (4000,'xxx','eduoooo','2000-12-12',101,'xxx'),
- (4444,'xxx','xxx','2000-12-12',0,'xxx'),
- (4445,'xxx','xxx','2000-12-12',34,'xxx'),
- (5757,'zzzzzz','zzzzzz','1212-12-12',12,'zzzzz'),
- (7777,'v','v','1223-12-12',1234,'v'),
- (8884,'xxx','xxx','2000-12-12',6578,'xxx'),
- (10140,'xxx','xxx','2000-12-12',101,'xxx'),
- (44444,'v','v','1223-12-12',1234,'v'),
- (65432,'laala','laala','2012-12-12',12,'laala'),
- (89563,'xxx','xxx','2000-12-12',45,'xxx'),
- (99777,'hhh','hhh','1212-12-12',77,'hhh'),
- (121212,'vcv','dcdfc','1212-12-12',34,'dfdf');
+INSERT INTO `educar_dev`.`Docente` VALUES  (25467843,'zareta','lucas','1978-12-12',343456,'moldes 54'),
+ (31334567,'gonzales','pedro','1912-12-12',77654,'san juan 134'),
+ (33361078,'jope','carlos','2000-12-12',4554677,'laprida 120');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Docente` ENABLE KEYS */;
 
@@ -279,8 +259,8 @@ CREATE TABLE  `educar_dev`.`Facultad` (
 
 /*!40000 ALTER TABLE `Facultad` DISABLE KEYS */;
 LOCK TABLES `Facultad` WRITE;
-INSERT INTO `educar_dev`.`Facultad` VALUES  (1,'matematica'),
- (2,'matematica');
+INSERT INTO `educar_dev`.`Facultad` VALUES  (1,'facultad Fisica'),
+ (2,'Fcultad Quimica');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Facultad` ENABLE KEYS */;
 
@@ -293,7 +273,7 @@ DROP TABLE IF EXISTS `educar_dev`.`Materia`;
 CREATE TABLE  `educar_dev`.`Materia` (
   `cod_materia` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_mat` varchar(50) NOT NULL,
-  `dni_docente` int(11) NOT NULL,
+  `dni_docente` int(11) DEFAULT NULL,
   `facultad` int(11) NOT NULL,
   PRIMARY KEY (`cod_materia`),
   UNIQUE KEY `cod_materia` (`cod_materia`),
@@ -309,7 +289,8 @@ CREATE TABLE  `educar_dev`.`Materia` (
 
 /*!40000 ALTER TABLE `Materia` DISABLE KEYS */;
 LOCK TABLES `Materia` WRITE;
-INSERT INTO `educar_dev`.`Materia` VALUES  (3,'matematica',4000,1);
+INSERT INTO `educar_dev`.`Materia` VALUES  (1,'matematica',25467843,2),
+ (2,'fisica',33361078,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Materia` ENABLE KEYS */;
 
@@ -328,7 +309,7 @@ CREATE TABLE  `educar_dev`.`Resolucion` (
   PRIMARY KEY (`codigo_res`),
   KEY `dniDoncte` (`dni_docente`),
   CONSTRAINT `dniDoncte` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Resolucion`
@@ -336,6 +317,7 @@ CREATE TABLE  `educar_dev`.`Resolucion` (
 
 /*!40000 ALTER TABLE `Resolucion` DISABLE KEYS */;
 LOCK TABLES `Resolucion` WRITE;
+INSERT INTO `educar_dev`.`Resolucion` VALUES  (1,'01:02:03','2012-03-04',33361078,8);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Resolucion` ENABLE KEYS */;
 
@@ -363,6 +345,7 @@ CREATE TABLE  `educar_dev`.`TieneActividad` (
 
 /*!40000 ALTER TABLE `TieneActividad` DISABLE KEYS */;
 LOCK TABLES `TieneActividad` WRITE;
+INSERT INTO `educar_dev`.`TieneActividad` VALUES  (34885245,1,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `TieneActividad` ENABLE KEYS */;
 
@@ -378,11 +361,10 @@ CREATE TABLE  `educar_dev`.`TieneCargo` (
   `dni_docente` int(11) NOT NULL,
   `hs_dedicacion` int(11) NOT NULL,
   PRIMARY KEY (`cod_cargo`,`cod_facultad`,`dni_docente`),
-  KEY `fkCodFacultad` (`cod_facultad`),
-  KEY `fkDniDocente` (`dni_docente`),
-  CONSTRAINT `fkCodCargo` FOREIGN KEY (`cod_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE,
-  CONSTRAINT `fkCodFacultad` FOREIGN KEY (`cod_facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
-  CONSTRAINT `fkDniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
+  KEY `fkDniDTrabaja` (`dni_docente`),
+  KEY `fkCodFTrabaja` (`cod_facultad`),
+  CONSTRAINT `fkCodFTrabaja` FOREIGN KEY (`cod_facultad`) REFERENCES `Trabaja` (`codigo_fac`) ON UPDATE CASCADE,
+  CONSTRAINT `fkDniDTrabaja` FOREIGN KEY (`dni_docente`) REFERENCES `Trabaja` (`dni_doc`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -391,6 +373,7 @@ CREATE TABLE  `educar_dev`.`TieneCargo` (
 
 /*!40000 ALTER TABLE `TieneCargo` DISABLE KEYS */;
 LOCK TABLES `TieneCargo` WRITE;
+INSERT INTO `educar_dev`.`TieneCargo` VALUES  (1,1,33361078,32);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `TieneCargo` ENABLE KEYS */;
 
@@ -415,6 +398,7 @@ CREATE TABLE  `educar_dev`.`Trabaja` (
 
 /*!40000 ALTER TABLE `Trabaja` DISABLE KEYS */;
 LOCK TABLES `Trabaja` WRITE;
+INSERT INTO `educar_dev`.`Trabaja` VALUES  (1,33361078);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Trabaja` ENABLE KEYS */;
 
@@ -439,6 +423,8 @@ CREATE TABLE  `educar_dev`.`cursa` (
 
 /*!40000 ALTER TABLE `cursa` DISABLE KEYS */;
 LOCK TABLES `cursa` WRITE;
+INSERT INTO `educar_dev`.`cursa` VALUES  (34885245,1),
+ (3336109,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cursa` ENABLE KEYS */;
 
@@ -455,7 +441,7 @@ CREATE TABLE  `educar_dev`.`users` (
   `role` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`users`
@@ -463,39 +449,11 @@ CREATE TABLE  `educar_dev`.`users` (
 
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 LOCK TABLES `users` WRITE;
-INSERT INTO `educar_dev`.`users` VALUES  (5,'edu','33361090','admin'),
- (14,'root','root','root'),
- (15,'juan','loka','admin'),
- (16,'saul','1','admin'),
- (18,'eduardo','1','admin'),
- (19,'eduardoo','1','admin'),
- (20,'a','1','admin'),
- (21,'aa','1','admin'),
- (22,'q','1','admin'),
- (23,'as','1','admin'),
- (24,'qwe','1','admin'),
- (25,'asd','12','admin'),
- (26,'asmdñ','1','admin'),
- (27,'','','admin'),
- (28,'mdcdkc','4','admin'),
- (29,'askdjfñl','12','admin'),
- (30,'jua','carlos','admin'),
- (31,'31111','31111','Alumno'),
- (32,'575757','75757','Docente'),
- (36,'22222','2','Alumno'),
- (37,'101','101','Alumno'),
- (38,'55','55','Docente'),
- (39,'555','555','Docente'),
- (40,'34885245','85245','Alumno'),
- (41,'3336109','61090','Alumno'),
- (43,'666','666','Alumno'),
- (46,'2326','2326','Alumno'),
- (47,'2266','2266','Alumno'),
- (54,'1111','1111','Alumno'),
- (55,'1110','1110','Alumno'),
- (56,'9143','91','Alumno'),
- (59,'44','44','Docente'),
- (61,'antropologia1','1','admin');
+INSERT INTO `educar_dev`.`users` VALUES  (62,'3336109','36109','Alumno'),
+ (63,'34885245','85245','Alumno'),
+ (64,'33361078','61078','Docente'),
+ (65,'31334567','34567','Docente'),
+ (66,'25467843','67843','Docente');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

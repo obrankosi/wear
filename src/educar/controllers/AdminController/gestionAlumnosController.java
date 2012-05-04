@@ -7,7 +7,7 @@ import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
-import educar.models.Alumno;
+import educar.models.AdminModels.Alumno;
 
 public class gestionAlumnosController implements IController, defaultLanguaje {
     private administrador view;

@@ -1,4 +1,4 @@
-package educar.models;
+package educar.models.AdminModels;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -3,7 +3,7 @@ package educar.controllers.AdminController;
 import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.AdminViews.administrador;
-import educar.models.Subject;
+import educar.models.AdminModels.Subject;
 
 public class subjectManagementController implements IController {
 

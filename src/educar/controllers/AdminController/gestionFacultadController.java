@@ -1,13 +1,14 @@
 package educar.controllers.AdminController;
 
-import educar.controllers.IController;
-import educar.gui.IView;
-import educar.languaje.defaultLanguaje;
-import educar.gui.AdminViews.administrador;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import educar.models.Facultad;
-import educar.models.FacultadNotFound;
+
+import educar.controllers.IController;
+import educar.gui.IView;
+import educar.gui.AdminViews.administrador;
+import educar.languaje.defaultLanguaje;
+import educar.models.AdminModels.Facultad;
+import educar.models.AdminModels.FacultadNotFound;
 
 
 public class gestionFacultadController implements IController, defaultLanguaje {
