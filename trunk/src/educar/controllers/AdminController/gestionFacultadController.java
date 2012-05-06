@@ -27,13 +27,13 @@ public class gestionFacultadController implements IController, defaultLanguaje {
 	public void process(String model) {
 		// TODO Auto-generated method stub
 		if (model.compareTo(ADD) == 0) {
-			view.present("Apretaste ADD");
+			//view.present("Apretaste ADD");
 			addFacultad();
 			view.deleteViewFieldsAlta_F();
 			showFacultadInList();
 		}
 		if (model.compareTo(SEARCH) == 0) {
-			view.present("apretaste SEARCH");
+			//view.present("apretaste SEARCH");
 			try {
 				searchFacultadInDB();
 			} catch (FacultadNotFound e) {
@@ -43,6 +43,7 @@ public class gestionFacultadController implements IController, defaultLanguaje {
 			showFacultadInList();
 		}
 		if (model.compareTo(DELETE) == 0) {
+			//view.present("Apretaste DELETE");
 			try {
 				deleteFacultad();
 			} catch (FacultadNotFound e) {
@@ -52,11 +53,12 @@ public class gestionFacultadController implements IController, defaultLanguaje {
 			showFacultadInList();
 		}
 		if (model.compareTo(CLEAR) == 0) {
-			view.deleteViewFieldsAlta_F();
+			view.deleteViewFieldsMod_F();
 		}
 		if (model.compareTo(MODIFY) == 0) {
 			showFacultadInList();
 			modifyFacultad();
+			showFacultadInList();
 		}
 	}
 	
@@ -96,7 +98,7 @@ public class gestionFacultadController implements IController, defaultLanguaje {
 	private void modifyFacultad() {
 		if (fac != null) {
 			try {
-				Facultad.update(view.getNombreModificarFacultad());
+				Facultad.update(view.getNombreModificarFacultad(), view.getCodigoModificarFacultad());
 				view.present("Actualizacion con exito");
 			} catch (SQLException e) {
 				e.printStackTrace();
