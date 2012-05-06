@@ -35,12 +35,16 @@ public class Facultad {
 	}
 	
 	public boolean save() {
-		String[] col = {"descripcion_fac"};
+		String[] columns = {"descripcion_fac"};
+		return save("facultad", columns);
+	}
+	
+	private boolean save(String table, String[] columns) {
 		try {
 			Facultad.getFacultadByCod(this.getCodigo());
 			return false;
 		} catch (FacultadNotFound e) {
-			PreparedStatement stm = jpa.newRecord("educar_dev."+"facultad", col);
+			PreparedStatement stm = jpa.newRecord("educar_dev."+table, columns);
 			try {
 				stm.setString(1, descFac);
 			} catch (SQLException e1){
@@ -56,11 +60,9 @@ public class Facultad {
 		ResultSet rs = null;
 		Facultad fac = null;
 		rs = jpa.getByField("facultad", "cod_facultad", cod);
-		
 		try {
 			if (rs.next()) {
 				fac = new Facultad(rs.getString(1), rs.getString(2));
-			
 			} else {
 				throw new FacultadNotFound();
 			}
@@ -72,7 +74,7 @@ public class Facultad {
 	
 	public boolean destroy() {
 		try {
-			jpa.destroy("facultad", "codigo_fac",  this.getCodigo());
+			jpa.destroy("facultad", "cod_facultad",  this.getCodigo());
 			return true;
 		} catch (SQLException r) {
 			return false;
@@ -94,16 +96,16 @@ public class Facultad {
 //		}
 //	}
 	
-	public static void update(String desc) throws SQLException {
+	public static void update(String desc, String id) throws SQLException {
 		try {
-			jpa.update("facultad", "descripcion_fac", desc, "cod_facultad", "cod_facultad");
+			jpa.update("facultad", "descripcion_fac", desc, "cod_facultad", id);
 		} catch (Exception e) {
 			throw new SQLException();
 		}
 	}
 	
 	public static LinkedList<String> ListFacultad() throws SQLException {
-		rst = jpa.proyeccion("facultad", "cod_facultad");
+		rst = jpa.showAll("facultad");
 		LinkedList<String> result = new LinkedList<String>();
 		while (rst.next()) {
 			result.add(rst.getString(1)+ " " + rst.getString(2));

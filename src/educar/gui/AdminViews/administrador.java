@@ -695,7 +695,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		AdminListener bGuardarAF = new AdminListener(); // / MA=modificar alumno
 		IController gestionGuardarAF = new gestionFacultadController();
 		gestionGuardarAF.setView(this);
-		bGuardarAF.associate(btnGuardarModificarFacultad, gestionGuardarAF);
+		bGuardarAF.associate(btnGuardarAltaFacultad, gestionGuardarAF);
 
 		// //////////////////////////////////////////// panel MODIFICAR ALUMNO
 		// /////////////////////////////
@@ -2315,6 +2315,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	public void deleteViewFieldsAlta_F() {
 		this.setNombreAltaFacultad("");
+		System.out.println("limpiar");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
