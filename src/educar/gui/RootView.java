@@ -2,7 +2,6 @@ package educar.gui;
 
 import java.awt.Font;
 import java.awt.SystemColor;
-import java.awt.Window;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
