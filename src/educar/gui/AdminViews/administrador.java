@@ -107,7 +107,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     private JButton btnBuscarModificarMateria;
     private JButton btnGuardarModificarMateria;
     private JButton btnGuardarAltaMateria;
-    private List listaAltaMateria;
+    private List listaMateriaAltaMateria;
     private List listaMoificarFacultad;
     private JButton btnLimpiarModificarFacultad;
     private JButton btnBorrarModificarFacultad;
@@ -136,7 +136,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     private JButton btnBuscarModificarDocente;
     private JButton btnLimpiarAltaDocente;
     private JButton btnGuardarAltaDocente;
-    private List listaModificarMateria;
+    private List listaMateriaModificarMateria;
 
     private JPanel panelModificarDedicacionDocente;
     private JTextField txtFDniModificarDedicacionDocente;
@@ -178,6 +178,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     private List listaAsignacionDocente;
     private JPanel panel;
     private JLabel label;
+    private JTextField txtFFacultadAltaMateria;
+    private List listFacultadAltaMateria;
+    private JLabel lblListaDeFacultadMMateria;
+    private List listFacultadModificarMateria;
+    private JTextField textFFacultadModificarMateria;
 
     /**
      * Create the frame.
@@ -240,7 +245,6 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	bienvenido = new JTabbedPane(JTabbedPane.TOP);
 	bienvenido.setBounds(0, 0, 1151, 666);
-	bienvenido.setVisible(true);
 
 	menuAlumno = new JTabbedPane(JTabbedPane.TOP);
 	menuAlumno.setBounds(0, 0, 1151, 666);
@@ -261,7 +265,6 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	menuCargo = new JTabbedPane(JTabbedPane.TOP);
 	menuCargo.setBounds(0, 0, 1151, 666);
-	menuCargo.setVisible(false);
 
 	menuDedicacionDocente = new JTabbedPane(JTabbedPane.TOP);
 	menuDedicacionDocente.setBounds(0, 0, 1151, 666);
@@ -1151,8 +1154,14 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	JLabel label_34 = new JLabel("Inserte el Codigo de la Materia ");
 	label_34.setHorizontalAlignment(SwingConstants.CENTER);
 	label_34.setFont(new Font("Arial", Font.PLAIN, 20));
-	label_34.setBounds(229, 21, 419, 58);
+	label_34.setBounds(10, 21, 638, 58);
 	panelModificarMateria.add(label_34);
+	
+	JLabel lblListaDeFacultades = new JLabel("LISTA DE FACULTADES");
+	lblListaDeFacultades.setHorizontalAlignment(SwingConstants.CENTER);
+	lblListaDeFacultades.setFont(new Font("Arial", Font.BOLD, 20));
+	lblListaDeFacultades.setBounds(658, 0, 229, 58);
+	panelModificarMateria.add(lblListaDeFacultades);
 
 	JLabel label_35 = new JLabel("LISTA DE MATERIAS");
 	label_35.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1164,30 +1173,47 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	label_36.setHorizontalAlignment(SwingConstants.CENTER);
 	label_36.setFont(new Font("Arial", Font.BOLD, 20));
 	label_36.setBackground(Color.BLUE);
-	label_36.setBounds(0, 118, 229, 45);
+	label_36.setBounds(0, 118, 200, 45);
 	panelModificarMateria.add(label_36);
 
 	txtFCodigoModificarMateria = new JTextField();
 	txtFCodigoModificarMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	txtFCodigoModificarMateria.setColumns(10);
-	txtFCodigoModificarMateria.setBounds(229, 118, 305, 45);
+	txtFCodigoModificarMateria.setBounds(229, 118, 265, 45);
 	panelModificarMateria.add(txtFCodigoModificarMateria);
 
-	listaModificarMateria = new List();
-	listaModificarMateria.setBounds(916, 58, 229, 464);
-	panelModificarMateria.add(listaModificarMateria);
+	listaMateriaModificarMateria = new List();
+	listaMateriaModificarMateria.setBounds(916, 58, 229, 444);
+	panelModificarMateria.add(listaMateriaModificarMateria);
+	
+	listFacultadModificarMateria = new List();
+	listFacultadModificarMateria.setBounds(654, 58, 242, 444);
+	panelModificarMateria.add(listFacultadModificarMateria);
 
 	JLabel label_37 = new JLabel("NOMBRE MATERIA");
 	label_37.setHorizontalAlignment(SwingConstants.CENTER);
 	label_37.setFont(new Font("Arial", Font.BOLD, 20));
-	label_37.setBounds(0, 232, 229, 45);
+	label_37.setBounds(0, 232, 200, 45);
 	panelModificarMateria.add(label_37);
 
 	txtFNombreModificarMateria = new JTextField();
 	txtFNombreModificarMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	txtFNombreModificarMateria.setColumns(10);
-	txtFNombreModificarMateria.setBounds(229, 232, 305, 45);
+	txtFNombreModificarMateria.setBounds(229, 232, 265, 45);
 	panelModificarMateria.add(txtFNombreModificarMateria);
+	
+	JLabel lblCodigoFacultadModificarMAteria = new JLabel("CODIGO FACULTAD");
+	lblCodigoFacultadModificarMAteria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblCodigoFacultadModificarMAteria.setFont(new Font("Arial", Font.BOLD, 20));
+	lblCodigoFacultadModificarMAteria.setBounds(0, 323, 200, 45);
+	panelModificarMateria.add(lblCodigoFacultadModificarMAteria);
+	
+	textFFacultadModificarMateria = new JTextField();
+	textFFacultadModificarMateria.setEditable(false);
+	textFFacultadModificarMateria.setFont(new Font("Arial", Font.BOLD, 20));
+	textFFacultadModificarMateria.setColumns(10);
+	textFFacultadModificarMateria.setBounds(229, 323, 265, 45);
+	panelModificarMateria.add(textFFacultadModificarMateria);
 
 	btnLimpiarModificarMateria = new JButton(CLEAR);
 	btnLimpiarModificarMateria.setFont(new Font("Arial", Font.BOLD, 20));
@@ -1211,7 +1237,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	btnBuscarModificarMateria = new JButton(SEARCH);
 	btnBuscarModificarMateria.setFont(new Font("Arial", Font.BOLD, 20));
-	btnBuscarModificarMateria.setBounds(584, 116, 190, 47);
+	btnBuscarModificarMateria.setBounds(512, 116, 130, 47);
 	panelModificarMateria.add(btnBuscarModificarMateria);
 
 	AdminListener bBuscarMM = new AdminListener(); 
@@ -1243,12 +1269,18 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 					.getResource("/educar/gui/AdminViews/imagenIcon/materiapng.png")),
 			panelAltaMateria, null);
 
-	JLabel label_38 = new JLabel(
+	JLabel lblCartelPresentacionMMateria = new JLabel(
 		"Inserte el Nombre de la Materia  a Guardar");
-	label_38.setHorizontalAlignment(SwingConstants.CENTER);
-	label_38.setFont(new Font("Arial", Font.PLAIN, 20));
-	label_38.setBounds(269, 29, 419, 58);
-	panelAltaMateria.add(label_38);
+	lblCartelPresentacionMMateria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblCartelPresentacionMMateria.setFont(new Font("Arial", Font.PLAIN, 20));
+	lblCartelPresentacionMMateria.setBounds(10, 29, 652, 58);
+	panelAltaMateria.add(lblCartelPresentacionMMateria);
+	
+	lblListaDeFacultadMMateria = new JLabel("LISTA DE FACULTAD");
+	lblListaDeFacultadMMateria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblListaDeFacultadMMateria.setFont(new Font("Arial", Font.BOLD, 20));
+	lblListaDeFacultadMMateria.setBounds(668, 0, 229, 58);
+	panelAltaMateria.add(lblListaDeFacultadMMateria);
 
 	JLabel label_39 = new JLabel("LISTA DE MATERIAS");
 	label_39.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1256,20 +1288,37 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	label_39.setBounds(916, 0, 229, 58);
 	panelAltaMateria.add(label_39);
 
-	listaAltaMateria = new List();
-	listaAltaMateria.setBounds(916, 58, 229, 464);
-	panelAltaMateria.add(listaAltaMateria);
+	listaMateriaAltaMateria = new List();
+	listaMateriaAltaMateria.setBounds(916, 58, 229, 464);
+	panelAltaMateria.add(listaMateriaAltaMateria);
+	
+	listFacultadAltaMateria = new List();
+	listFacultadAltaMateria.setBounds(668, 58, 229, 464);
+	panelAltaMateria.add(listFacultadAltaMateria);
 
-	JLabel label_41 = new JLabel("NOMBRE MATERIA");
-	label_41.setHorizontalAlignment(SwingConstants.CENTER);
-	label_41.setFont(new Font("Arial", Font.BOLD, 20));
-	label_41.setBounds(104, 232, 229, 45);
-	panelAltaMateria.add(label_41);
+	JLabel lblNombreMateria = new JLabel("NOMBRE MATERIA");
+	lblNombreMateria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblNombreMateria.setFont(new Font("Arial", Font.BOLD, 20));
+	lblNombreMateria.setBounds(46, 232, 229, 45);
+	panelAltaMateria.add(lblNombreMateria);
+	
+	JLabel lblNombreFacutadMMateria = new JLabel("CODIGO FACULTAD");
+	lblNombreFacutadMMateria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblNombreFacutadMMateria.setFont(new Font("Arial", Font.BOLD, 20));
+	lblNombreFacutadMMateria.setBounds(46, 301, 229, 45);
+	panelAltaMateria.add(lblNombreFacutadMMateria);
+	
+	txtFFacultadAltaMateria = new JTextField();
+	txtFFacultadAltaMateria.setEditable(false);
+	txtFFacultadAltaMateria.setFont(new Font("Arial", Font.BOLD, 20));
+	txtFFacultadAltaMateria.setColumns(10);
+	txtFFacultadAltaMateria.setBounds(301, 301, 305, 45);
+	panelAltaMateria.add(txtFFacultadAltaMateria);
 
 	txtFNombreAltaMateria = new JTextField();
 	txtFNombreAltaMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	txtFNombreAltaMateria.setColumns(10);
-	txtFNombreAltaMateria.setBounds(343, 232, 305, 45);
+	txtFNombreAltaMateria.setBounds(301, 232, 305, 45);
 	panelAltaMateria.add(txtFNombreAltaMateria);
 
 	btnGuardarAltaMateria = new JButton(" GUARDAR");
@@ -2623,13 +2672,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     public void setListMateria_ABM(LinkedList<String> listaMateria) {
 	listaAsignacionMateria.removeAll();
 	listaAsignacionMateria2.removeAll();
-	listaAltaMateria.removeAll();
-	listaModificarMateria.removeAll();
+	listaMateriaAltaMateria.removeAll();
+	listaMateriaModificarMateria.removeAll();
 	for (int i = 0; i < listaMateria.size(); i++) {
 	    listaAsignacionMateria.add(listaMateria.get(i), i);
 	    listaAsignacionMateria2.add(listaMateria.get(i), i);
-	    listaModificarMateria.add(listaMateria.get(i), i);
-	    listaAltaMateria.add(listaMateria.get(i), i);
+	    listaMateriaModificarMateria.add(listaMateria.get(i), i);
+	    listaMateriaAltaMateria.add(listaMateria.get(i), i);
 	}
     }
 
