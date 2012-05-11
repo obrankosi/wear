@@ -31,6 +31,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import educar.controllers.IController;
+import educar.controllers.IListController;
 import educar.controllers.AdminController.AsignacionDocenteController;
 import educar.controllers.AdminController.ChargeController;
 import educar.controllers.AdminController.gestionAlumnosController;
@@ -38,6 +39,7 @@ import educar.controllers.AdminController.gestionDocenteController;
 import educar.controllers.AdminController.gestionFacultadController;
 import educar.controllers.AdminController.subjectManagementController;
 import educar.gui.IView;
+import educar.gui.Listener.AdminListListener;
 import educar.gui.Listener.AdminListener;
 import educar.languaje.defaultLanguaje;
 
@@ -1699,19 +1701,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelEncargadoAsignacionDocente.add(lblDniEncargadoAsignacionMateria);
 
 	listaAsignacionDocente2 = new List();
-	listaAsignacionDocente2.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		if (listaAsignacionDocente2.getSelectedItem() != null) {
-		    setDocenteAsignacionDocenteEncargado(FuncionesAuxiliares
-			    .nameString(listaAsignacionDocente2
-				    .getSelectedItem()));
-		    setDniAsignacionDocenteEncargado(FuncionesAuxiliares
-			    .idString(listaAsignacionDocente2.getSelectedItem()));
-
-		}
-	    }
-	});
-	listaAsignacionDocente2.setBounds(869, 81, 267, 514);
+	
+	AdminListListener listaAD2= new AdminListListener();
+	IListController listaADController2 = new AsignacionDocenteController();
+	((IController) listaADController2).setView(this);
+	listaAD2.associate(listaAsignacionDocente2, listaADController2);
+	
+        listaAsignacionDocente2.setBounds(869, 81, 267, 514);
 	panelEncargadoAsignacionDocente.add(listaAsignacionDocente2);
 
 	JLabel lblListaDocenteEncargadoAsignacionMateria = new JLabel("DOCENTE");
@@ -1852,6 +1848,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaAsignacionDocente.setBounds(869, 81, 267, 514);
 	panelDesignacionAsignacionDocente.add(listaAsignacionDocente);
 
+	AdminListListener listaAD1= new AdminListListener();
+	IListController listaADController1 = new AsignacionDocenteController();
+	((IController) listaADController1).setView(this);
+	listaAD1.associate(listaAsignacionDocente, listaADController1);
+	
 	JLabel lblListaDocenteDesignacionAsignacionDocente = new JLabel(
 		"DOCENTE");
 	lblListaDocenteDesignacionAsignacionDocente
@@ -2415,27 +2416,27 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     //|||||||||||||||BORRADO Y CHECKEADO DE CAMPOS||||||||||||||||// 
     
     public String getCodigoModificarCargo() {
-	return txtFCodigoModificarMateria.getText();
+	return txtFCodigoModificarCargo.getText();
     }
 
     public void setCodigoModificarCargo(String s) {
-	txtFCodigoModificarMateria.setText(s);
+	txtFCodigoModificarCargo.setText(s);
     }
 
     public String getNombreModificarCargo() {
-	return txtFNombreModificarMateria.getText();
+	return txtFNombreModificarCargo.getText();
     }
 
     public void setNombreModificarCargo(String s) {
-	txtFNombreModificarMateria.setText(s);
+	txtFNombreModificarCargo.setText(s);
     }
 
     public String getNombreAltaCargo() {
-	return txtFNombreAltaMateria.getText();
+	return txtFNombreAltaCargo.getText();
     }
 
     public void setNombreAltaCargo(String s) {
-	txtFNombreAltaMateria.setText(s);
+	txtFNombreAltaCargo.setText(s);
     }
 
     //||||||||||||||||GET & SET  ASIGNACION DOCENTE||||||||||||||||||||||||||||//

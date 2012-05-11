@@ -62,6 +62,17 @@ public class Docente {
 	return result;
     }
 
+    public static LinkedList<String> ListDocenteDni() throws SQLException {
+	rst = jpa.proyeccion(" Docente ",
+		" dni_docente ");
+	LinkedList<String> result = new LinkedList<String>();
+	while (rst.next()) {
+	    result.add(rst.getString(1) );
+	}
+	return result;
+    }
+
+    
     private String name;
     private String lastName;
     private String fN;
