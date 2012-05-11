@@ -45,6 +45,10 @@ import educar.languaje.defaultLanguaje;
 
 public class administrador extends JFrame implements IView, defaultLanguaje {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final JComponent manuAlumno = null;
     private JPanel administrador;
     private JPanel menuAccionesPanel;
@@ -1190,6 +1194,17 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listFacultadModificarMateria.setBounds(654, 58, 242, 444);
 	panelModificarMateria.add(listFacultadModificarMateria);
 
+	AdminListListener listaMM1= new AdminListListener();
+	IListController listaMMController1 = new AsignacionDocenteController();
+	((IController) listaMMController1).setView(this);
+	listaMM1.associate(listaMateriaModificarMateria, listaMMController1);
+	
+	AdminListListener listaFacultadM1= new AdminListListener();
+	IListController listaFacultadMController1 = new AsignacionDocenteController();
+	((IController) listaFacultadMController1).setView(this);
+	listaFacultadM1.associate(listFacultadModificarMateria, listaFacultadMController1);
+	
+	
 	JLabel label_37 = new JLabel("NOMBRE MATERIA");
 	label_37.setHorizontalAlignment(SwingConstants.CENTER);
 	label_37.setFont(new Font("Arial", Font.BOLD, 20));
@@ -1199,6 +1214,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreModificarMateria = new JTextField();
 	txtFNombreModificarMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	txtFNombreModificarMateria.setColumns(10);
+	
+	
 	txtFNombreModificarMateria.setBounds(229, 232, 265, 45);
 	panelModificarMateria.add(txtFNombreModificarMateria);
 	
@@ -1245,7 +1262,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionBuscarMM.setView(this);
 	bBuscarMM.associate(btnBuscarModificarMateria, gestionBuscarMM);
 
-	btnGuardarModificarMateria = new JButton(ADD);
+	btnGuardarModificarMateria = new JButton(MODIFY);
 	btnGuardarModificarMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarModificarMateria.setBounds(620, 522, 190, 58);
 	panelModificarMateria.add(btnGuardarModificarMateria);
@@ -1292,10 +1309,21 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaMateriaAltaMateria.setBounds(916, 58, 229, 464);
 	panelAltaMateria.add(listaMateriaAltaMateria);
 	
+	AdminListListener listaAM= new AdminListListener();
+	IListController listaAMController1 = new AsignacionDocenteController();
+	((IController) listaAMController1).setView(this);
+	listaAM.associate(listaMateriaAltaMateria, listaAMController1);
+	
+	
 	listFacultadAltaMateria = new List();
 	listFacultadAltaMateria.setBounds(668, 58, 229, 464);
 	panelAltaMateria.add(listFacultadAltaMateria);
 
+	AdminListListener listaFacultadM= new AdminListListener();
+	IListController listaFacultadMController2 = new AsignacionDocenteController();
+	((IController) listaFacultadMController2).setView(this);
+	listaFacultadM.associate(listFacultadAltaMateria, listaFacultadMController2);
+	
 	JLabel lblNombreMateria = new JLabel("NOMBRE MATERIA");
 	lblNombreMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreMateria.setFont(new Font("Arial", Font.BOLD, 20));
@@ -1315,13 +1343,14 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFFacultadAltaMateria.setBounds(301, 301, 305, 45);
 	panelAltaMateria.add(txtFFacultadAltaMateria);
 
+
 	txtFNombreAltaMateria = new JTextField();
 	txtFNombreAltaMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	txtFNombreAltaMateria.setColumns(10);
 	txtFNombreAltaMateria.setBounds(301, 232, 305, 45);
 	panelAltaMateria.add(txtFNombreAltaMateria);
 
-	btnGuardarAltaMateria = new JButton(" GUARDAR");
+	btnGuardarAltaMateria = new JButton(ADD);
 	btnGuardarAltaMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarAltaMateria.setBounds(408, 441, 190, 58);
 	panelAltaMateria.add(btnGuardarAltaMateria);
@@ -2458,6 +2487,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     public void setEmptyFields() {
 	this.setModifyNameTF_M("");
 	this.setModifyCodeTF_M("");
+	this.setAddNameTF_("");
     }
 
 
