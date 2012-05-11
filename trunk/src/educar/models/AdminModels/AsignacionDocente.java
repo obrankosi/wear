@@ -1,6 +1,5 @@
 package educar.models.AdminModels;
 
-
 public class AsignacionDocente {
 
     private Subject materia;
@@ -19,13 +18,12 @@ public class AsignacionDocente {
      * @throws SubjectNotFound
      */
     public boolean tieneDocenteAcargo(String codigoMateria)
-	    throws SubjectNotFound {
-	materia = Subject.getSubject(codigoMateria);
-	if (materia == null) {
-	    throw new SubjectNotFound();
-	} else
-	    return !(materia.getRTeacher().isEmpty());
+    /* throws SubjectNotFound */{
+	// materia = Subject.getSubject(codigoMateria);
+	// if (materia == null) {
+	// throw new SubjectNotFound();
+	// } else
+	return !(materia.getRTeacher().isEmpty());
     }
-    
 
 }
