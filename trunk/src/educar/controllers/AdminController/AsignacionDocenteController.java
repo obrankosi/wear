@@ -42,8 +42,8 @@ public class AsignacionDocenteController implements IController,
 	// ver si el dni es valido si no avisa
 	// ATENCION SIEMPRE DESPUES DE AGREGAR BORRAR TODOS LOS CAMPOS
 	if (!view.camposVaciosEncargadoMateria()) {// true ssi campos vacios
-	    Subject materia = Subject.getSubject(view
-		    .getMateriaAsignacionDocenteEncargado());// cod materia
+//	    Subject materia = Subject.getSubject(view
+//		    .getMateriaAsignacionDocenteEncargado());// cod materia
 	    /*
 	     * if (tiene docente a cargo){ avisarle que lo borre antes }else{
 	     * actualizar la materia }
