@@ -125,7 +125,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
     private void showStudentInList() {
 	try {
 	    studentsList = Alumno.ListAlumnos();
-	    view.setListAlumnos_ABM(studentsList);
+        view.setListAlumnos_ABM(studentsList);
 	} catch (SQLException e) {
 	    view.present("no entro por la lista de alumnos");
 	}
