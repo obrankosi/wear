@@ -164,7 +164,9 @@ CREATE TABLE  `educar_dev`.`Dicta` (
 
 /*!40000 ALTER TABLE `Dicta` DISABLE KEYS */;
 LOCK TABLES `Dicta` WRITE;
-INSERT INTO `educar_dev`.`Dicta` VALUES  (33361078,2);
+INSERT INTO `educar_dev`.`Dicta` VALUES  (25467843,1),
+ (33361078,1),
+ (33361078,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Dicta` ENABLE KEYS */;
 
@@ -282,7 +284,7 @@ CREATE TABLE  `educar_dev`.`Materia` (
   KEY `dniDocente` (`dni_docente`),
   CONSTRAINT `codFacultad` FOREIGN KEY (`facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
   CONSTRAINT `dniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Materia`
@@ -291,7 +293,9 @@ CREATE TABLE  `educar_dev`.`Materia` (
 /*!40000 ALTER TABLE `Materia` DISABLE KEYS */;
 LOCK TABLES `Materia` WRITE;
 INSERT INTO `educar_dev`.`Materia` VALUES  (1,'metafisica',25467843,2),
- (2,'fisica',33361078,1);
+ (2,'fisica',31334567,1),
+ (11,'Aleman',31334567,2),
+ (13,'prueva',25467843,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Materia` ENABLE KEYS */;
 
@@ -352,34 +356,6 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `educar_dev`.`TieneCargo`
---
-
-DROP TABLE IF EXISTS `educar_dev`.`TieneCargo`;
-CREATE TABLE  `educar_dev`.`TieneCargo` (
-  `cod_cargo` int(11) NOT NULL,
-  `cod_facultad` int(11) NOT NULL,
-  `dni_docente` int(11) NOT NULL,
-  `hs_dedicacion` int(11) NOT NULL,
-  PRIMARY KEY (`cod_cargo`,`cod_facultad`,`dni_docente`),
-  KEY `fkDniDTrabaja` (`dni_docente`),
-  KEY `fkCodFTrabaja` (`cod_facultad`),
-  CONSTRAINT `fkCodFTrabaja` FOREIGN KEY (`cod_facultad`) REFERENCES `Trabaja` (`codigo_fac`) ON UPDATE CASCADE,
-  CONSTRAINT `fkDniDTrabaja` FOREIGN KEY (`dni_docente`) REFERENCES `Trabaja` (`dni_doc`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `educar_dev`.`TieneCargo`
---
-
-/*!40000 ALTER TABLE `TieneCargo` DISABLE KEYS */;
-LOCK TABLES `TieneCargo` WRITE;
-INSERT INTO `educar_dev`.`TieneCargo` VALUES  (1,1,33361078,32);
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `TieneCargo` ENABLE KEYS */;
-
-
---
 -- Definition of table `educar_dev`.`Trabaja`
 --
 
@@ -387,10 +363,14 @@ DROP TABLE IF EXISTS `educar_dev`.`Trabaja`;
 CREATE TABLE  `educar_dev`.`Trabaja` (
   `codigo_fac` int(11) NOT NULL,
   `dni_doc` int(11) NOT NULL,
+  `codigo_cargo` int(11) NOT NULL,
+  `hs_dedicacion` int(11) NOT NULL,
   PRIMARY KEY (`codigo_fac`,`dni_doc`),
-  KEY `dniDoc` (`dni_doc`),
-  CONSTRAINT `codFac` FOREIGN KEY (`codigo_fac`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
-  CONSTRAINT `dniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
+  KEY `FKdniDoc` (`dni_doc`),
+  KEY `FKcodCargo` (`codigo_cargo`),
+  CONSTRAINT `FKcodFac` FOREIGN KEY (`codigo_fac`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
+  CONSTRAINT `FKdniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE,
+  CONSTRAINT `FKcodCargo` FOREIGN KEY (`codigo_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -399,7 +379,6 @@ CREATE TABLE  `educar_dev`.`Trabaja` (
 
 /*!40000 ALTER TABLE `Trabaja` DISABLE KEYS */;
 LOCK TABLES `Trabaja` WRITE;
-INSERT INTO `educar_dev`.`Trabaja` VALUES  (1,33361078);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Trabaja` ENABLE KEYS */;
 
