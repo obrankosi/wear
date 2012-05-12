@@ -8,7 +8,6 @@ import java.util.Hashtable;
 import educar.controllers.IListController;
 
 public class AdminListListener implements ActionListener {
-
     private Hashtable<List, IListController> componentControllerMap;
 
     public AdminListListener() {
@@ -22,13 +21,13 @@ public class AdminListListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent item) {
-	// TODO Auto-generated method stub
 	IListController controller = componentControllerMap.get(item
 		.getSource());// evento de donde nacio
 
 	if (null != controller) {
 	    controller.processItemList(item.getActionCommand());
 	}
-	
+
     }
+
 }

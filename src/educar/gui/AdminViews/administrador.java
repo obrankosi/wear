@@ -249,7 +249,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	bienvenido = new JTabbedPane(JTabbedPane.TOP);
 	bienvenido.setBounds(0, 0, 1151, 666);
-
+	bienvenido.setVisible(true);
+	
 	menuAlumno = new JTabbedPane(JTabbedPane.TOP);
 	menuAlumno.setBounds(0, 0, 1151, 666);
 	menuAlumno.setVisible(false);
@@ -1046,7 +1047,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaModificarCargo = new List();
 	listaModificarCargo.setBounds(916, 58, 229, 464);
 	panelModificarCargo.add(listaModificarCargo);
-	
+
 	AdminListListener listaMC1 = new AdminListListener();
 	IListController listaMCController1 = new ChargeController();
 	((IController) listaMCController1).setView(this);
@@ -1094,7 +1095,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionBuscarMC.setView(this);
 	bBuscarMC.associate(btnBuscarModificarCargo, gestionBuscarMC);
 
-	btnGuardarModificarCargo = new JButton(ADD);
+	btnGuardarModificarCargo = new JButton(MODIFY);
 	btnGuardarModificarCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarModificarCargo.setBounds(620, 522, 190, 58);
 	panelModificarCargo.add(btnGuardarModificarCargo);
@@ -1150,7 +1151,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreAltaCargo.setBounds(343, 232, 305, 45);
 	panelAltaCargo.add(txtFNombreAltaCargo);
 
-	btnGuardarAltaCargo = new JButton(" GUARDAR");
+	btnGuardarAltaCargo = new JButton(ADD);
 	btnGuardarAltaCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarAltaCargo.setBounds(408, 441, 190, 58);
 	panelAltaCargo.add(btnGuardarAltaCargo);
@@ -2098,6 +2099,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		menuFacultad.setVisible(false);
 		menuMateria.setVisible(false);
 		menuCargo.setVisible(true);
+		bienvenido.setVisible(false);
 		menuAsignacionDocente.setVisible(false);
 		menuDedicacionDocente.setVisible(false);
 
@@ -2115,6 +2117,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		menuFacultad.setVisible(false);
 		menuMateria.setVisible(false);
 		menuCargo.setVisible(false);
+		bienvenido.setVisible(false);
 		menuAsignacionDocente.setVisible(false);
 		menuDedicacionDocente.setVisible(true);
 
@@ -2132,6 +2135,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		menuFacultad.setVisible(false);
 		menuMateria.setVisible(false);
 		menuCargo.setVisible(false);
+		bienvenido.setVisible(false);
 		menuAsignacionDocente.setVisible(true);
 		menuDedicacionDocente.setVisible(false);
 
