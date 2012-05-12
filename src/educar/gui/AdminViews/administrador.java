@@ -250,7 +250,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	bienvenido = new JTabbedPane(JTabbedPane.TOP);
 	bienvenido.setBounds(0, 0, 1151, 666);
 	bienvenido.setVisible(true);
-	
+
 	menuAlumno = new JTabbedPane(JTabbedPane.TOP);
 	menuAlumno.setBounds(0, 0, 1151, 666);
 	menuAlumno.setVisible(false);
@@ -1767,6 +1767,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaAsignacionMateria.setBounds(591, 81, 267, 514);
 	panelEncargadoAsignacionDocente.add(listaAsignacionMateria);
 
+	AdminListListener listaAE = new AdminListListener();
+	IListController listControllerAE = new AsignacionDocenteController();
+	((IController) listControllerAE).setView(this);
+	listaAE.associate(listaAsignacionMateria, listControllerAE);
+
 	btnBorrarEncargadoAsignacionMateria = new JButton(DELETE);
 	btnBorrarEncargadoAsignacionMateria.setFont(new Font("Arial",
 		Font.BOLD, 20));
@@ -1796,14 +1801,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelEncargadoAsignacionDocente.add(lblDniEncargadoAsignacionMateria);
 
 	listaAsignacionDocente2 = new List();
+	listaAsignacionDocente2.setBounds(869, 81, 267, 514);
+	panelEncargadoAsignacionDocente.add(listaAsignacionDocente2);
 
 	AdminListListener listaAD2 = new AdminListListener();
 	IListController listaADController2 = new AsignacionDocenteController();
 	((IController) listaADController2).setView(this);
 	listaAD2.associate(listaAsignacionDocente2, listaADController2);
-
-	listaAsignacionDocente2.setBounds(869, 81, 267, 514);
-	panelEncargadoAsignacionDocente.add(listaAsignacionDocente2);
 
 	JLabel lblListaDocenteEncargadoAsignacionMateria = new JLabel("DOCENTE");
 	lblListaDocenteEncargadoAsignacionMateria
@@ -1897,31 +1901,55 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelDesignacionAsignacionDocente
 		.add(txtFDocenteDesignacionAsignacionDocente);
 
-	btnLimpiarDesignacionAsignacionDocente = new JButton("LIMPIAR");
+	btnLimpiarDesignacionAsignacionDocente = new JButton(CLEAR);
 	btnLimpiarDesignacionAsignacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
 	btnLimpiarDesignacionAsignacionDocente.setBounds(229, 450, 175, 58);
 	panelDesignacionAsignacionDocente
 		.add(btnLimpiarDesignacionAsignacionDocente);
 
-	btnGuardarDesignacionAsignacionDocente = new JButton("GUARDAR");
+	AdminListener bLimpiarDA = new AdminListener();
+	IController gestionLimpiarDA = new AsignacionDocenteController();
+	gestionLimpiarDA.setView(this);
+	bLimpiarDA.associate(btnLimpiarDesignacionAsignacionDocente,
+		gestionLimpiarDA);
+	
+	btnGuardarDesignacionAsignacionDocente = new JButton(ASIGNAR);
 	btnGuardarDesignacionAsignacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
 	btnGuardarDesignacionAsignacionDocente.setBounds(410, 450, 175, 58);
 	panelDesignacionAsignacionDocente
 		.add(btnGuardarDesignacionAsignacionDocente);
 
+	AdminListener bGuardarDA = new AdminListener();
+	IController gestionGuardarDA = new AsignacionDocenteController();
+	gestionGuardarDA.setView(this);
+	bGuardarDA.associate(btnGuardarDesignacionAsignacionDocente,
+		gestionGuardarDA);
+	
 	listaAsignacionMateria2 = new List();
 	listaAsignacionMateria2.setBounds(591, 81, 267, 514);
 	panelDesignacionAsignacionDocente.add(listaAsignacionMateria2);
 
-	btnBorrarDesignacionAsignacionDocente = new JButton("BORRAR");
+	AdminListListener listaAM1 = new AdminListListener();
+	IListController listControllerAM1 = new AsignacionDocenteController();
+	((IController) listControllerAM1).setView(this);
+	listaAM1.associate(listaAsignacionMateria2, listControllerAM1);
+
+	
+	btnBorrarDesignacionAsignacionDocente = new JButton(REMOVE);
 	btnBorrarDesignacionAsignacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
 	btnBorrarDesignacionAsignacionDocente.setBounds(38, 450, 175, 58);
 	panelDesignacionAsignacionDocente
 		.add(btnBorrarDesignacionAsignacionDocente);
 
+	AdminListener bBorrarDA = new AdminListener();
+	IController gestionBorrarDA = new AsignacionDocenteController();
+	gestionBorrarDA.setView(this);
+	bBorrarDA.associate(btnBorrarDesignacionAsignacionDocente,
+		gestionBorrarDA);
+	
 	txtFDniDesignacionAsignacionDocente = new JTextField();
 	txtFDniDesignacionAsignacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
@@ -2637,6 +2665,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	this.setMateriaAsignacionDocenteDesignacion("");
 	this.setDocenteAsignacionDocenteDesignacion("");
 	this.setDniAsignacionDocenteEncargado("");
+	this.setDniAsignacionDocenteDesignacion("");
     }
 
     // ||||||||||||||||GET & SET DEDICACION

@@ -43,4 +43,7 @@ public interface defaultLanguaje {
 
 	public static final String DELETE = "Borrar";
 	public static final String MODIFY = "Modificar";
+	public static final String REMOVE = "Remover";
+	public static final String ASIGNAR = "Asignar";
+	
 }

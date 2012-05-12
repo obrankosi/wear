@@ -33,6 +33,7 @@ public class JPA {
      * @throws SQLException
      */
     public void runUpdate(String sentence) throws SQLException {
+	System.out.println(sentence);
 	Statement stm = (Statement) DbConnection.getInstance()
 		.createStatement();
 	try {
@@ -136,6 +137,29 @@ public class JPA {
 
     }
 
+    /**
+     * @param tableName
+     * @param column
+     * @param columnId
+     * @param id
+     * @throws SQLException
+     *             ejemplo : " dni_docente = null " setea con null en la base de
+     *             datos
+     */
+    public void updateNull(String tableName, String column, String columnId,
+	    String id) throws SQLException {
+
+	String query = "UPDATE " + DbConnection.bd + "." + tableName;
+	query += " set " + column + " WHERE " + columnId + " = " + id + ";";
+	try {
+	    runUpdate(query);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+	}
+
+    }
+
     /*
      * arma el string de la sentencia en esta caso para una actualizacion, luego
      * llama a a runUpdate que la ejecuta con statement Lanza una exception por
@@ -185,6 +209,28 @@ public class JPA {
 	    throws SQLException {
 	String query = "DELETE from " + DbConnection.bd + "." + tableName;
 	query += " Where " + columnName + " = \"" + id + "\";";
+	try {
+	    runUpdate(query);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+	}
+    }
+
+    /**
+     * @param tableName
+     * @param column
+     * @param values
+     * @throws SQLException
+     */
+    public void destroy(String tableName, String[] column, String[] values)
+	    throws SQLException {
+	String deleteValues = column[0] + "= \"" + values[0] + "\"";
+	for (int i = 1; i < values.length; i++) {
+	    deleteValues += " && " + column[i] + " = \"" + values[i] + "\"";
+	}
+	String query = "DELETE from " + DbConnection.bd + "." + tableName;
+	query += " Where " + deleteValues + ";";
 	try {
 	    runUpdate(query);
 	} catch (Exception e) {
@@ -282,4 +328,24 @@ public class JPA {
 
 	return result;
     }
+
+    /**
+     * @param tableName
+     * @param fieldNames
+     * @param values
+     * @return
+     */
+    public ResultSet getByField(String tableName, String[] fieldNames,
+	    String[] values) {
+	String getValues = fieldNames[0] + "= \"" + values[0] + "\"";
+	for (int i = 1; i < values.length; i++) {
+	    getValues += " && " + fieldNames[i] + " = \"" + values[i] + "\"";
+	}
+	ResultSet result = null;
+	String query = "SELECT * from " + DbConnection.bd + "." + tableName
+		+ " WHERE " + getValues + ";";
+	result = runQuery(query);
+	return result;
+    }
+
 }
