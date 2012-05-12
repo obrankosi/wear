@@ -1,6 +1,5 @@
 package educar.controllers.AdminController;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
@@ -19,16 +18,84 @@ public class AsignacionDocenteController implements IController,
     private administrador view;
     private LinkedList<String> docentes;
     private LinkedList<String> materias;
-    private AsignacionDocente aDEncargado;
+    private static Subject materia;
 
     @Override
     public void process(String model) {
 	// asignar un docente cargo de una materia
 	if (model.compareTo(ADD) == 0) {
-	    asignacionDocente();
+	    asignacionDocenteEncargado();
 	}
 	if (model.compareTo(CLEAR) == 0) {
 	    view.setVacioAsignacionDocente();
+	}
+	if (model.compareTo(DELETE) == 0) {
+	    // MUY IMPORTANTE QUE EL BORRADO SEA DARLE NULL AL CAMPO DE LA BD
+	    borrarDocenteEncargado();
+	}
+	if (model.compareTo(ASIGNAR) == 0) {
+	    // MUY IMPORTANTE QUE EL BORRADO SEA DARLE NULL AL CAMPO DE LA BD
+	    asignarDocenteDictado();
+	}
+	if (model.compareTo(REMOVE) == 0) {
+	    // MUY IMPORTANTE QUE EL BORRADO SEA DARLE NULL AL CAMPO DE LA BD
+	    removerDocenteDictado();
+	}
+
+    }
+
+    private void removerDocenteDictado() {
+	if (!(view.camposVaciosDesignacionMateria())) {
+	    String materia = view.getMateriaAsignacionDocenteDesignacion();
+	    String docente = view.getDniAsignacionDocenteDesignacion();
+	    AsignacionDocente dicta = AsignacionDocente.getAsignacionDocente(
+		    docente,materia);
+	    if (dicta != null) {
+		dicta.delete();
+		view.present("Borrado exitoso");
+	    } else
+		view.present("El docente : " + docente
+			+ " No dicta esta materia ");
+	} else
+	    view.present("falta completar campos");
+	view.setVacioAsignacionDocente();
+    }
+
+    private void asignarDocenteDictado() {
+	if (!(view.camposVaciosDesignacionMateria())) {
+	    String materia = view.getMateriaAsignacionDocenteDesignacion();
+	    String docente = view.getDniAsignacionDocenteDesignacion();
+	    AsignacionDocente dicta = AsignacionDocente.getAsignacionDocente(
+		    docente, materia);
+	    if (dicta == null) {
+		dicta = new AsignacionDocente(materia, docente);
+		dicta.save();
+		view.present("Asignacion cargada");
+	    } else
+		view.present("El docente : " + docente
+			+ " Ya esta Asignado a esta materia ");
+	} else
+	    view.present("falta completar campos");
+	view.setVacioAsignacionDocente();
+    }
+
+    private void borrarDocenteEncargado() {
+	// ATENCION SIEMPRE DESPUES DE AGREGAR BORRAR TODOS LOS CAMPOS
+	if (!view.camposVaciosEncargadoMateria()) {// true ssi campos vacios
+	    if (materia.getRTeacher() != null) {
+		materia.setNullDocente();
+		try {
+		    materia.updateNullDni("dni_docente = null");
+		    view
+			    .present("el borrado del docente encargado fue exitoso");
+		} catch (SQLException e) {
+		    view
+			    .present("el borrado del docente encargado No se puedo realizar ");
+		}
+	    }
+	    view.setVacioAsignacionDocente();
+	} else {// si las 2 solapas de la view estan vacias
+	    view.present("no hay docente que borrar");
 	}
 
     }
@@ -38,30 +105,25 @@ public class AsignacionDocenteController implements IController,
 	this.view = (administrador) view;
     }
 
-    private void asignacionDocente() {
-	// ver si el dni es valido si no avisa
+    private void asignacionDocenteEncargado() {
 	// ATENCION SIEMPRE DESPUES DE AGREGAR BORRAR TODOS LOS CAMPOS
 	if (!view.camposVaciosEncargadoMateria()) {// true ssi campos vacios
-//	    Subject materia = Subject.getSubject(view
-//		    .getMateriaAsignacionDocenteEncargado());// cod materia
-	    /*
-	     * if (tiene docente a cargo){ avisarle que lo borre antes }else{
-	     * actualizar la materia }
-	     */
-	    // posibles formas de hacerlo
-	    // materia.setRTeacher(view.getDniAsignacionDocenteEncargado());//dni
-	    // profesor responsable
-	    // Subject.update(campos a actualizar);
+	    if (materia.getRTeacher() != null) {
+		view
+			.present("la materia ya tiene docente encargado, borrelo primero y luego podra asignarle uno nuevo");
+	    } else {
+		// materia que no tiene docente encargado
+		materia.setRTeacher(view.getDniAsignacionDocenteEncargado());
+		try {
+		    materia.update();
+		    view.present("Cargado Exitoso");
+		} catch (SQLException e) {
+		}
+	    }
+	    // IMPORTANTE PARA EL FUNCIONAMIENTO VACIAR LOS CAMPOS
 	    view.setVacioAsignacionDocente();
 	} else {
-	    if (!view.camposVaciosDesignacionMateria()) {
-		// crear el modelo para dicta
-
-		view.setVacioAsignacionDocente();
-	    } else {// si las 2 solapas de la view estan vacias
-		view.present("Faltan ingresar camapos ");
-	    }
-
+	    view.present("Faltan ingresar camapos ");
 	}
 
     }
@@ -75,24 +137,34 @@ public class AsignacionDocenteController implements IController,
 	}
 	/* si lo que traje pertenece a docente */
 	if (docentes.contains(FuncionesAuxiliares.idString(item))) {
-            /*panel Encargado materia*/
+	    /* panel Encargado materia */
 	    view.setDocenteAsignacionDocenteEncargado(FuncionesAuxiliares
 		    .nameString(item));
-
 	    view.setDniAsignacionDocenteEncargado(FuncionesAuxiliares
 		    .idString(item));
-	    
-	    /*panel Encargado materia*/
+
+	    /* panel designacion */
 	    view.setDocenteAsignacionDocenteDesignacion(FuncionesAuxiliares
 		    .nameString(item));
-
 	    view.setDniAsignacionDocenteDesignacion(FuncionesAuxiliares
 		    .idString(item));
-	    
-	}
-	/* aca el codigo si lo que preciono fue materia*/
-	else {
 
+	}
+	/* aca el codigo si lo que preciono fue materia */
+	else {
+	    materia = Subject.getSubject(FuncionesAuxiliares.idString(item));
+	    if (materia.getRTeacher() != null) {
+		view.present("Atencion la materia tiene docente encargado");
+		view.setDniAsignacionDocenteEncargado(materia.getRTeacher());
+		view.setDocenteAsignacionDocenteEncargado("");
+	    } else {
+		view.setDniAsignacionDocenteEncargado("");
+	    }
+
+	    view.setMateriaAsignacionDocenteEncargado(FuncionesAuxiliares
+		    .idString(item));
+	    view.setMateriaAsignacionDocenteDesignacion(FuncionesAuxiliares
+		    .idString(item));
 	}
     }
 }

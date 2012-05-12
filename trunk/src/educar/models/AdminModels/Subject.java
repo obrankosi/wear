@@ -16,6 +16,33 @@ public class Subject {
     private static JPA jpa = new JPA();
     private static ResultSet rst;
 
+    public void updateNullDni(String column) throws SQLException {
+	String columnKey = "cod_materia";
+	String primaryKey = this.getCode();
+	try {
+	    jpa.updateNull("Materia", column, columnKey, primaryKey);
+	} catch (SQLException e) {
+	    throw new SQLException();
+	}
+
+    }
+
+    public void update() throws SQLException {
+	String[] columns = { "nombre_mat", "dni_docente", "facultad" };
+	String[] values = { this.getName(), this.getRTeacher(),
+		this.getCodigoFacultad() };
+	String columnKey = "cod_materia";
+	String primaryKey = this.getCode();
+	try {
+	    jpa.update("Materia", columns, values, columnKey, primaryKey);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+
+	}
+
+    }
+
     public static void update(String[] values, String primaryKey)
 	    throws SQLException {
 	String[] columns = { "cod_materia", "nombre_mat", "dni_docente",
@@ -66,6 +93,7 @@ public class Subject {
     public Subject(String name, String codFacultad) {
 	this.subjectName = name;
 	this.facultad = codFacultad;
+	this.responsableTeacher = null;
     }
 
     /**
@@ -198,5 +226,9 @@ public class Subject {
 
     public String getCodigoFacultad() {
 	return facultad;
+    }
+
+    public void setNullDocente() {
+	this.responsableTeacher = null;
     }
 }

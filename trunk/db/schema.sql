@@ -63,7 +63,7 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
   PRIMARY KEY (`dni`) USING BTREE,
   UNIQUE KEY `dni_a` (`dni`),
   UNIQUE KEY `nro_alumno` (`nro_alumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Alumnos`
@@ -130,7 +130,7 @@ CREATE TABLE  `educar_dev`.`Cargo` (
   `descripcion_cargo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cod_cargo`),
   UNIQUE KEY `cod_cargo` (`cod_cargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Cargo`
@@ -138,8 +138,8 @@ CREATE TABLE  `educar_dev`.`Cargo` (
 
 /*!40000 ALTER TABLE `Cargo` DISABLE KEYS */;
 LOCK TABLES `Cargo` WRITE;
-INSERT INTO `educar_dev`.`Cargo` VALUES  (1,'auxiliar'),
- (2,'responsable');
+INSERT INTO `educar_dev`.`Cargo` VALUES  (3,'holaa'),
+ (4,'nuevoCargo');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Cargo` ENABLE KEYS */;
 
@@ -251,7 +251,7 @@ CREATE TABLE  `educar_dev`.`Facultad` (
   `descripcion_fac` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cod_facultad`),
   UNIQUE KEY `cod_facultad` (`cod_facultad`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Facultad`
@@ -259,8 +259,9 @@ CREATE TABLE  `educar_dev`.`Facultad` (
 
 /*!40000 ALTER TABLE `Facultad` DISABLE KEYS */;
 LOCK TABLES `Facultad` WRITE;
-INSERT INTO `educar_dev`.`Facultad` VALUES  (1,'facultad Fisica'),
- (2,'Fcultad Quimica');
+INSERT INTO `educar_dev`.`Facultad` VALUES  (1,'facultad Fisica Quimica'),
+ (2,'Facultad Quimica'),
+ (4,'NUEVA');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Facultad` ENABLE KEYS */;
 
@@ -281,7 +282,7 @@ CREATE TABLE  `educar_dev`.`Materia` (
   KEY `dniDocente` (`dni_docente`),
   CONSTRAINT `codFacultad` FOREIGN KEY (`facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
   CONSTRAINT `dniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Materia`
@@ -289,7 +290,7 @@ CREATE TABLE  `educar_dev`.`Materia` (
 
 /*!40000 ALTER TABLE `Materia` DISABLE KEYS */;
 LOCK TABLES `Materia` WRITE;
-INSERT INTO `educar_dev`.`Materia` VALUES  (1,'matematica',25467843,2),
+INSERT INTO `educar_dev`.`Materia` VALUES  (1,'metafisica',25467843,2),
  (2,'fisica',33361078,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Materia` ENABLE KEYS */;
@@ -441,7 +442,7 @@ CREATE TABLE  `educar_dev`.`users` (
   `role` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`users`
@@ -449,11 +450,14 @@ CREATE TABLE  `educar_dev`.`users` (
 
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 LOCK TABLES `users` WRITE;
-INSERT INTO `educar_dev`.`users` VALUES  (62,'3336109','36109','Alumno'),
+INSERT INTO `educar_dev`.`users` VALUES  (12,'root','1','root'),
+ (62,'3336109','36109','Alumno'),
  (63,'34885245','85245','Alumno'),
  (64,'33361078','61078','Docente'),
  (65,'31334567','34567','Docente'),
- (66,'25467843','67843','Docente');
+ (66,'25467843','67843','Docente'),
+ (67,'a','1','admin'),
+ (68,'b','1','admin');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
