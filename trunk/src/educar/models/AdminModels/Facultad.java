@@ -17,7 +17,11 @@ public class Facultad {
 		this.setDescripcion(descripcion);
 		this.setCodigo(codigo);
 	}
-		
+
+	public Facultad(String descripcion) {
+		this.setDescripcion(descripcion);
+	}
+	
 	public String getDescipcion() {
 		return this.descFac;
 	}
@@ -36,7 +40,7 @@ public class Facultad {
 	
 	public boolean save() {
 		String[] columns = {"descripcion_fac"};
-		return save("facultad", columns);
+		return save("Facultad", columns);
 	}
 	
 	private boolean save(String table, String[] columns) {
@@ -59,7 +63,7 @@ public class Facultad {
 	public static Facultad getFacultadByCod(String cod) throws FacultadNotFound {
 		ResultSet rs = null;
 		Facultad fac = null;
-		rs = jpa.getByField("facultad", "cod_facultad", cod);
+		rs = jpa.getByField("Facultad", "cod_facultad", cod);
 		try {
 			if (rs.next()) {
 				fac = new Facultad(rs.getString(1), rs.getString(2));
@@ -74,7 +78,7 @@ public class Facultad {
 	
 	public boolean destroy() {
 		try {
-			jpa.destroy("facultad", "cod_facultad",  this.getCodigo());
+			jpa.destroy("Facultad", "cod_facultad",  this.getCodigo());
 			return true;
 		} catch (SQLException r) {
 			return false;
@@ -98,14 +102,14 @@ public class Facultad {
 	
 	public static void update(String desc, String id) throws SQLException {
 		try {
-			jpa.update("facultad", "descripcion_fac", desc, "cod_facultad", id);
+			jpa.update("Facultad", "descripcion_fac", desc, "cod_facultad", id);
 		} catch (Exception e) {
 			throw new SQLException();
 		}
 	}
 	
 	public static LinkedList<String> ListFacultad() throws SQLException {
-		rst = jpa.showAll("facultad");
+		rst = jpa.showAll("Facultad");
 		LinkedList<String> result = new LinkedList<String>();
 		while (rst.next()) {
 			result.add(rst.getString(1)+ " " + rst.getString(2));

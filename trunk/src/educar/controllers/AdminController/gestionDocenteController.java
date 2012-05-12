@@ -116,7 +116,7 @@ public class gestionDocenteController implements IController, defaultLanguaje {
 		view.present("NO se puede actualizar");
 	    }
 	} else {
-	    view.present("el alumno no existe");
+	    view.present("el docente no existe");
 	}
 
     }

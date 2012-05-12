@@ -20,7 +20,7 @@ public class JPA {
 	    // tabla de la base de datos
 	} catch (Exception ex) {
 	    ex.printStackTrace();
-	    System.out.println("la consulta : "+ sentence + "fallo");
+	    System.out.println("la consulta : " + sentence + "fallo");
 	}
 	return res;
     }
@@ -123,8 +123,8 @@ public class JPA {
      */
     public void update(String tableName, String column, String value,
 	    String columnId, String id) throws SQLException {
-	String query = "UPDATE " + DbConnection.bd + "." + tableName;
 
+	String query = "UPDATE " + DbConnection.bd + "." + tableName;
 	query += " set " + column + "= \"" + value + "\" WHERE " + columnId
 		+ " = " + id + ";";
 	try {
