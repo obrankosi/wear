@@ -35,6 +35,7 @@ import educar.controllers.IListController;
 import educar.controllers.AdminController.AdminController;
 import educar.controllers.AdminController.AsignacionDocenteController;
 import educar.controllers.AdminController.ChargeController;
+import educar.controllers.AdminController.DedicacionDocenteController;
 import educar.controllers.AdminController.gestionAlumnosController;
 import educar.controllers.AdminController.gestionDocenteController;
 import educar.controllers.AdminController.gestionFacultadController;
@@ -320,6 +321,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaAltaDocente.setBounds(916, 58, 229, 464);
 	panelAltaDocente.add(listaAltaDocente);
 
+	AdminListListener listaDA1 = new AdminListListener();
+	IListController listaControllerDA1= new gestionDocenteController();
+	((IController) listaControllerDA1).setView(this);
+	listaDA1.associate(listaAltaDocente, listaControllerDA1);
+	
 	JLabel lblNombreAltaDocente = new JLabel("NOMBRE");
 	lblNombreAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -463,6 +469,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaModificarDocente = new List();
 	listaModificarDocente.setBounds(916, 58, 229, 464);
 	panelModificacionDocente.add(listaModificarDocente);
+
+	AdminListListener listaDM1 = new AdminListListener();
+	IListController listaControllerDM = new gestionDocenteController();
+	((IController) listaControllerDM).setView(this);
+	listaDM1.associate(listaModificarDocente, listaControllerDM);
 
 	JLabel lblNombreModificarDocente = new JLabel("NOMBRE");
 	lblNombreModificarDocente.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1482,24 +1493,41 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarDedicacionDocente
 		.add(txtFDedicacionModificarDedicacionDocente);
 
-	btnLimpiarModificacionDedicacionDocente = new JButton("LIMPIAR");
+	btnLimpiarModificacionDedicacionDocente = new JButton(CLEAR);
 	btnLimpiarModificacionDedicacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
 	btnLimpiarModificacionDedicacionDocente.setBounds(210, 526, 175, 51);
 	panelModificarDedicacionDocente
 		.add(btnLimpiarModificacionDedicacionDocente);
+	
+	AdminListener btnLimiarMD = new AdminListener();
+	IController bcontrollerLimpiarMD= new DedicacionDocenteController();
+	bcontrollerLimpiarMD.setView(this);
+	btnLimiarMD.associate(btnLimpiarModificacionDedicacionDocente, bcontrollerLimpiarMD);	
 
-	btnGuardarModificacionDedicacionDocente = new JButton("GUARDAR");
+
+	btnGuardarModificacionDedicacionDocente = new JButton(MODIFY);
 	btnGuardarModificacionDedicacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
 	btnGuardarModificacionDedicacionDocente.setBounds(395, 526, 175, 51);
 	panelModificarDedicacionDocente
 		.add(btnGuardarModificacionDedicacionDocente);
+	
+	AdminListener btnModificarMD = new AdminListener();
+	IController bcontrollerModificarMD= new DedicacionDocenteController();
+	bcontrollerModificarMD.setView(this);
+	btnModificarMD.associate(btnGuardarModificacionDedicacionDocente, bcontrollerModificarMD);	
 
 	listaModificarDedicacionDocente = new List();
 	listaModificarDedicacionDocente.setBounds(591, 54, 545, 531);
 	panelModificarDedicacionDocente.add(listaModificarDedicacionDocente);
 
+	AdminListListener listaMDD= new AdminListListener();
+	IListController listControllerMDD= new DedicacionDocenteController();
+	((IController) listControllerMDD).setView(this);
+	listaMDD.associate(listaModificarDedicacionDocente, listControllerMDD);	
+
+	
 	JLabel lblCarteListaModificarDedicacionDoncente = new JLabel(
 		"Lista de Docente con su Dedicacion");
 	lblCarteListaModificarDedicacionDoncente
@@ -1510,13 +1538,18 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarDedicacionDocente
 		.add(lblCarteListaModificarDedicacionDoncente);
 
-	btnBorrarModificacionDedicacionDocente = new JButton("BORRAR");
+	btnBorrarModificacionDedicacionDocente = new JButton(DELETE);
 	btnBorrarModificacionDedicacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
 	btnBorrarModificacionDedicacionDocente.setBounds(24, 526, 175, 51);
 	panelModificarDedicacionDocente
 		.add(btnBorrarModificacionDedicacionDocente);
-
+	
+	AdminListener btnBorrarMD = new AdminListener();
+	IController bcontrollerBorrarMD= new DedicacionDocenteController();
+	bcontrollerBorrarMD.setView(this);
+	btnBorrarMD.associate(btnBorrarModificacionDedicacionDocente, bcontrollerBorrarMD);	
+	
 	// ||||||||||||||||PANEL ALTA DEDICACION DOCENTE||||||||||||||||//
 	// |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||//
 
@@ -1571,6 +1604,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaCargoAltaDedicacionDocente.setBounds(965, 58, 171, 298);
 	panelAltaDedicacionDocente.add(listaCargoAltaDedicacionDocente);
 
+	//cargo no va enlazada
+	
 	JLabel lblFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
 	lblFacultadAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1617,32 +1652,57 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDedicacionAltaDedicacionDocente.setBounds(229, 426, 305, 45);
 	panelAltaDedicacionDocente.add(txtFDedicacionAltaDedicacionDocente);
 
-	btnLimpiarAltaDedicacionDocente = new JButton("LIMPIAR");
+	btnLimpiarAltaDedicacionDocente = new JButton(CLEAR);
 	btnLimpiarAltaDedicacionDocente
 		.setFont(new Font("Arial", Font.BOLD, 20));
 	btnLimpiarAltaDedicacionDocente.setBounds(89, 526, 175, 51);
 	panelAltaDedicacionDocente.add(btnLimpiarAltaDedicacionDocente);
 
-	btnGuardarAltaDedicacionDocente = new JButton("GUARDAR");
+	AdminListener btnLimpiarAD = new AdminListener();
+	IController bcontrollerLimpiarAD= new DedicacionDocenteController();
+	bcontrollerLimpiarAD.setView(this);
+	btnLimpiarAD.associate(btnLimpiarAltaDedicacionDocente, bcontrollerLimpiarAD);	
+
+	btnGuardarAltaDedicacionDocente = new JButton(ADD);
 	btnGuardarAltaDedicacionDocente
 		.setFont(new Font("Arial", Font.BOLD, 20));
 	btnGuardarAltaDedicacionDocente.setBounds(341, 526, 175, 51);
 	panelAltaDedicacionDocente.add(btnGuardarAltaDedicacionDocente);
 
+	AdminListener btnGuardarAD = new AdminListener();
+	IController bcontrollerGuardarAD= new DedicacionDocenteController();
+	bcontrollerGuardarAD.setView(this);
+	btnGuardarAD.associate(btnGuardarAltaDedicacionDocente, bcontrollerGuardarAD);	
+	
 	listaFacultadAltaDedicacionDocente = new List();
 	listaFacultadAltaDedicacionDocente.setBounds(779, 58, 171, 298);
 	panelAltaDedicacionDocente.add(listaFacultadAltaDedicacionDocente);
 
+	AdminListListener listaFAD= new AdminListListener();
+	IListController listControllerFAD= new DedicacionDocenteController();
+	((IController) listControllerFAD).setView(this);
+	listaFAD.associate(listaFacultadAltaDedicacionDocente, listControllerFAD);	
+	
 	listaDniAltaDedicacionDocente = new List();
 	listaDniAltaDedicacionDocente.setBounds(591, 58, 171, 298);
 	panelAltaDedicacionDocente.add(listaDniAltaDedicacionDocente);
 
+	AdminListListener listaDAD= new AdminListListener();
+	IListController listControllerDAD= new DedicacionDocenteController();
+	((IController) listControllerDAD).setView(this);
+	listaDAD.associate(listaDniAltaDedicacionDocente, listControllerDAD);	
+	
 	listaListaDocentesDedicacionAltaDedicacionDocente = new List();
 	listaListaDocentesDedicacionAltaDedicacionDocente.setBounds(591, 398,
 		545, 197);
 	panelAltaDedicacionDocente
 		.add(listaListaDocentesDedicacionAltaDedicacionDocente);
-
+	
+	AdminListListener listaDDAD= new AdminListListener();
+	IListController listControllerDDAD= new DedicacionDocenteController();
+	((IController) listControllerDDAD).setView(this);
+	listaDDAD.associate(listaListaDocentesDedicacionAltaDedicacionDocente, listControllerDDAD);	
+	
 	JLabel lblCartelFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
 	lblCartelFacultadAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2092,28 +2152,28 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	btnCargos.setBackground(UIManager.getColor("Button.shadow"));
 
 	AdminListener menuC = new AdminListener();
-	IController adminMenuCargo= new AdminController();
+	IController adminMenuCargo = new AdminController();
 	adminMenuCargo.setView(this);
 	menuC.associate(btnCargos, adminMenuCargo);
-	
+
 	JButton btnDedicacionDocente = new JButton(DEDICACIONDOCENTEPANEL);
 	btnDedicacionDocente.setFont(new Font("Arial", Font.BOLD, 13));
 	btnDedicacionDocente.setBackground(UIManager.getColor("Button.shadow"));
 
 	AdminListener menuDC = new AdminListener();
-	IController adminMenuDC= new AdminController();
+	IController adminMenuDC = new AdminController();
 	adminMenuDC.setView(this);
 	menuDC.associate(btnDedicacionDocente, adminMenuDC);
-	
+
 	JButton btnAsinacionDocente = new JButton(ASIGNACIONDOCENTEPANEL);
 	btnAsinacionDocente.setFont(new Font("Arial", Font.BOLD, 13));
 	btnAsinacionDocente.setBackground(UIManager.getColor("Button.shadow"));
 
 	AdminListener menuAC = new AdminListener();
-	IController adminMenuAC= new AdminController();
+	IController adminMenuAC = new AdminController();
 	adminMenuAC.setView(this);
 	menuAC.associate(btnAsinacionDocente, adminMenuAC);
-	
+
 	menuAdmin.setLayout(new GridLayout(0, 1, 0, 0));
 	menuAdmin.add(btnAlumnos);
 	menuAdmin.add(btnDocentes);

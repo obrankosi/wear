@@ -4,12 +4,13 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import educar.controllers.IController;
+import educar.controllers.IListController;
 import educar.gui.IView;
 import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Docente;
 
-public class gestionDocenteController implements IController, defaultLanguaje {
+public class gestionDocenteController implements IController, defaultLanguaje,IListController {
     private administrador view;
     private static Docente teacher = null;
     private static LinkedList<String> teachersList;
@@ -128,6 +129,11 @@ public class gestionDocenteController implements IController, defaultLanguaje {
 	} catch (SQLException e) {
 	    view.present("no entro por la lista de alumnos");
 	}
+    }
+
+    @Override
+    public void processItemList(String item) {
+	
     }
 
 }
