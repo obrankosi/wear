@@ -32,6 +32,7 @@ import javax.swing.border.SoftBevelBorder;
 
 import educar.controllers.IController;
 import educar.controllers.IListController;
+import educar.controllers.AdminController.AdminController;
 import educar.controllers.AdminController.AsignacionDocenteController;
 import educar.controllers.AdminController.ChargeController;
 import educar.controllers.AdminController.gestionAlumnosController;
@@ -1913,7 +1914,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionLimpiarDA.setView(this);
 	bLimpiarDA.associate(btnLimpiarDesignacionAsignacionDocente,
 		gestionLimpiarDA);
-	
+
 	btnGuardarDesignacionAsignacionDocente = new JButton(ASIGNAR);
 	btnGuardarDesignacionAsignacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
@@ -1926,7 +1927,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionGuardarDA.setView(this);
 	bGuardarDA.associate(btnGuardarDesignacionAsignacionDocente,
 		gestionGuardarDA);
-	
+
 	listaAsignacionMateria2 = new List();
 	listaAsignacionMateria2.setBounds(591, 81, 267, 514);
 	panelDesignacionAsignacionDocente.add(listaAsignacionMateria2);
@@ -1936,7 +1937,6 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listControllerAM1).setView(this);
 	listaAM1.associate(listaAsignacionMateria2, listControllerAM1);
 
-	
 	btnBorrarDesignacionAsignacionDocente = new JButton(REMOVE);
 	btnBorrarDesignacionAsignacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
@@ -1949,7 +1949,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	gestionBorrarDA.setView(this);
 	bBorrarDA.associate(btnBorrarDesignacionAsignacionDocente,
 		gestionBorrarDA);
-	
+
 	txtFDniDesignacionAsignacionDocente = new JTextField();
 	txtFDniDesignacionAsignacionDocente.setFont(new Font("Arial",
 		Font.BOLD, 20));
@@ -2043,7 +2043,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	// ADMINISTRADOR||||||||||||||||//
 	// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||//
 
-	JButton btnAlumnos = new JButton("ALUMNOS");
+	JButton btnAlumnos = new JButton(ALUMNOSPANEL);
 	btnAlumnos.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(
 		51, 51, 102), null, null, null));
 	btnAlumnos.setBackground(UIManager.getColor("Button.shadow"));
@@ -2054,122 +2054,66 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 			administrador.class
 				.getResource("/com/sun/java/swing/plaf/windows/icons/JavaCup32.png")));
 	btnAlumnos.setIcon(null);
-	btnAlumnos.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		menuAlumno.setVisible(true);
-		menuDocente.setVisible(false);
-		menuFacultad.setVisible(false);
-		menuMateria.setVisible(false);
-		menuCargo.setVisible(false);
-		bienvenido.setVisible(false);
-		menuAsignacionDocente.setVisible(false);
-		menuDedicacionDocente.setVisible(false);
-	    }
-	});
 
-	JButton btnDocentes = new JButton("DOCENTES");
+	AdminListener menuA = new AdminListener();
+	IController adminMenuAlumno = new AdminController();
+	adminMenuAlumno.setView(this);
+	menuA.associate(btnAlumnos, adminMenuAlumno);
+
+	JButton btnDocentes = new JButton(DOCENTESPANEL);
 	btnDocentes.setBackground(UIManager.getColor("Button.shadow"));
 	btnDocentes.setFont(new Font("Arial", Font.BOLD, 20));
-	btnDocentes.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		menuAlumno.setVisible(false);
-		menuDocente.setVisible(true);
-		menuFacultad.setVisible(false);
-		menuMateria.setVisible(false);
-		menuCargo.setVisible(false);
-		bienvenido.setVisible(false);
-		menuAsignacionDocente.setVisible(false);
-		menuDedicacionDocente.setVisible(false);
 
-	    }
-	});
-	JButton btnMateria = new JButton("  MATERIA");
+	AdminListener menuD = new AdminListener();
+	IController adminMenuDocente = new AdminController();
+	adminMenuDocente.setView(this);
+	menuD.associate(btnDocentes, adminMenuDocente);
+
+	JButton btnMateria = new JButton(MATERIAPANEL);
 	btnMateria.setBackground(UIManager.getColor("Button.shadow"));
 	btnMateria.setFont(new Font("Arial", Font.BOLD, 20));
-	btnMateria.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		menuAlumno.setVisible(false);
-		menuDocente.setVisible(false);
-		menuFacultad.setVisible(false);
-		menuMateria.setVisible(true);
-		menuCargo.setVisible(false);
-		bienvenido.setVisible(false);
-		menuAsignacionDocente.setVisible(false);
-		menuDedicacionDocente.setVisible(false);
 
-	    }
-	});
+	AdminListener menuM = new AdminListener();
+	IController adminMenuMateria = new AdminController();
+	adminMenuMateria.setView(this);
+	menuM.associate(btnMateria, adminMenuMateria);
 
-	JButton btnFacultad = new JButton("FACULTAD");
+	JButton btnFacultad = new JButton(FACULTADPANEL);
 	btnFacultad.setBackground(UIManager.getColor("Button.shadow"));
 	btnFacultad.setFont(new Font("Arial", Font.BOLD, 20));
-	btnFacultad.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		menuAlumno.setVisible(false);
-		menuDocente.setVisible(false);
-		menuFacultad.setVisible(true);
-		menuMateria.setVisible(false);
-		menuCargo.setVisible(false);
-		bienvenido.setVisible(false);
-		menuAsignacionDocente.setVisible(false);
-		menuDedicacionDocente.setVisible(false);
 
-	    }
-	});
+	AdminListener menuF = new AdminListener();
+	IController adminMenuFacultad = new AdminController();
+	adminMenuFacultad.setView(this);
+	menuF.associate(btnFacultad, adminMenuFacultad);
 
-	JButton btnCargos = new JButton("CARGOS");
+	JButton btnCargos = new JButton(CARGOSPANEL);
 	btnCargos.setFont(new Font("Arial", Font.BOLD, 20));
 	btnCargos.setBackground(UIManager.getColor("Button.shadow"));
-	btnCargos.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		menuAlumno.setVisible(false);
-		menuDocente.setVisible(false);
-		menuFacultad.setVisible(false);
-		menuMateria.setVisible(false);
-		menuCargo.setVisible(true);
-		bienvenido.setVisible(false);
-		menuAsignacionDocente.setVisible(false);
-		menuDedicacionDocente.setVisible(false);
 
-	    }
-	});
-
-	JButton btnDedicacionDocente = new JButton("DEDICACION \r\n DOCENTE");
+	AdminListener menuC = new AdminListener();
+	IController adminMenuCargo= new AdminController();
+	adminMenuCargo.setView(this);
+	menuC.associate(btnCargos, adminMenuCargo);
+	
+	JButton btnDedicacionDocente = new JButton(DEDICACIONDOCENTEPANEL);
 	btnDedicacionDocente.setFont(new Font("Arial", Font.BOLD, 13));
 	btnDedicacionDocente.setBackground(UIManager.getColor("Button.shadow"));
 
-	btnDedicacionDocente.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		menuAlumno.setVisible(false);
-		menuDocente.setVisible(false);
-		menuFacultad.setVisible(false);
-		menuMateria.setVisible(false);
-		menuCargo.setVisible(false);
-		bienvenido.setVisible(false);
-		menuAsignacionDocente.setVisible(false);
-		menuDedicacionDocente.setVisible(true);
-
-	    }
-	});
-
-	JButton btnAsinacionDocente = new JButton("ASIGNACION DOCENTE");
+	AdminListener menuDC = new AdminListener();
+	IController adminMenuDC= new AdminController();
+	adminMenuDC.setView(this);
+	menuDC.associate(btnDedicacionDocente, adminMenuDC);
+	
+	JButton btnAsinacionDocente = new JButton(ASIGNACIONDOCENTEPANEL);
 	btnAsinacionDocente.setFont(new Font("Arial", Font.BOLD, 13));
 	btnAsinacionDocente.setBackground(UIManager.getColor("Button.shadow"));
 
-	btnAsinacionDocente.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		menuAlumno.setVisible(false);
-		menuDocente.setVisible(false);
-		menuFacultad.setVisible(false);
-		menuMateria.setVisible(false);
-		menuCargo.setVisible(false);
-		bienvenido.setVisible(false);
-		menuAsignacionDocente.setVisible(true);
-		menuDedicacionDocente.setVisible(false);
-
-	    }
-	});
-
+	AdminListener menuAC = new AdminListener();
+	IController adminMenuAC= new AdminController();
+	adminMenuAC.setView(this);
+	menuAC.associate(btnAsinacionDocente, adminMenuAC);
+	
 	menuAdmin.setLayout(new GridLayout(0, 1, 0, 0));
 	menuAdmin.add(btnAlumnos);
 	menuAdmin.add(btnDocentes);
@@ -2825,4 +2769,88 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     public void close() {
 	this.dispose();
     }
+
+    public void menuAlumnos() {
+	menuAlumno.setVisible(true);
+	menuDocente.setVisible(false);
+	menuFacultad.setVisible(false);
+	menuMateria.setVisible(false);
+	menuCargo.setVisible(false);
+	bienvenido.setVisible(false);
+	menuAsignacionDocente.setVisible(false);
+	menuDedicacionDocente.setVisible(false);
+
+    }
+
+    public void menuDocentes() {
+	menuAlumno.setVisible(false);
+	menuDocente.setVisible(true);
+	menuFacultad.setVisible(false);
+	menuMateria.setVisible(false);
+	menuCargo.setVisible(false);
+	bienvenido.setVisible(false);
+	menuAsignacionDocente.setVisible(false);
+	menuDedicacionDocente.setVisible(false);
+
+    }
+
+    public void menuMateria() {
+	menuAlumno.setVisible(false);
+	menuDocente.setVisible(false);
+	menuFacultad.setVisible(false);
+	menuMateria.setVisible(true);
+	menuCargo.setVisible(false);
+	bienvenido.setVisible(false);
+	menuAsignacionDocente.setVisible(false);
+	menuDedicacionDocente.setVisible(false);
+
+    }
+
+    public void menuFacultad() {
+	menuAlumno.setVisible(false);
+	menuDocente.setVisible(false);
+	menuFacultad.setVisible(true);
+	menuMateria.setVisible(false);
+	menuCargo.setVisible(false);
+	bienvenido.setVisible(false);
+	menuAsignacionDocente.setVisible(false);
+	menuDedicacionDocente.setVisible(false);
+
+    }
+
+    public void menuCargos() {
+	menuAlumno.setVisible(false);
+	menuDocente.setVisible(false);
+	menuFacultad.setVisible(false);
+	menuMateria.setVisible(false);
+	menuCargo.setVisible(true);
+	bienvenido.setVisible(false);
+	menuAsignacionDocente.setVisible(false);
+	menuDedicacionDocente.setVisible(false);
+
+    }
+
+    public void menuDedicacionDocente() {
+	menuAlumno.setVisible(false);
+	menuDocente.setVisible(false);
+	menuFacultad.setVisible(false);
+	menuMateria.setVisible(false);
+	menuCargo.setVisible(false);
+	bienvenido.setVisible(false);
+	menuAsignacionDocente.setVisible(false);
+	menuDedicacionDocente.setVisible(true);
+    }
+
+    public void menuAsignacionDocente() {
+	menuAlumno.setVisible(false);
+	menuDocente.setVisible(false);
+	menuFacultad.setVisible(false);
+	menuMateria.setVisible(false);
+	menuCargo.setVisible(false);
+	bienvenido.setVisible(false);
+	menuAsignacionDocente.setVisible(true);
+	menuDedicacionDocente.setVisible(false);
+
+    }
+
 }

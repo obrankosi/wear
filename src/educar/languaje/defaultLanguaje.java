@@ -46,4 +46,13 @@ public interface defaultLanguaje {
 	public static final String REMOVE = "Remover";
 	public static final String ASIGNAR = "Asignar";
 	
+	public static final String ALUMNOSPANEL = "ALUMNOS";
+	public static final String DOCENTESPANEL = "DOCENTES";
+	public static final String MATERIAPANEL = "MATERIA";
+	public static final String FACULTADPANEL = "FACULTAD";
+	public static final String CARGOSPANEL = "CARGOS";
+	public static final String DEDICACIONDOCENTEPANEL = "DEDICACION \r\n DOCENTE";
+	public static final String ASIGNACIONDOCENTEPANEL = "ASIGNACION DOCENTE";
+	
 }
+
