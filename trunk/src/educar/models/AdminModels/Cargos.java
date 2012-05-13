@@ -93,6 +93,15 @@ public class Cargos {
 	}
 	return result;
     }
+    
+    public static LinkedList<String> listCargosCod() throws SQLException {
+	rst = jpa.proyeccion("Cargo", "cod_cargo");
+	LinkedList<String> result = new LinkedList<String>();
+	while (rst.next()) {
+	    result.add(rst.getString(1));
+	}
+	return result;
+    }
 
     // ------------------------------------------------------------------------------------
     private void setNombreCargo(String nombreCargo2) {

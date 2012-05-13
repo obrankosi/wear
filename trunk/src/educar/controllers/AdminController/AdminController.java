@@ -9,6 +9,7 @@ import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Alumno;
 import educar.models.AdminModels.Cargos;
+import educar.models.AdminModels.DedicacionDocente;
 import educar.models.AdminModels.Docente;
 import educar.models.AdminModels.Facultad;
 import educar.models.AdminModels.Subject;
@@ -22,7 +23,7 @@ public class AdminController implements IController, defaultLanguaje {
     private LinkedList<String> facultades;
     private static LinkedList<String> facList;
     private static LinkedList<String> cargosList;
-
+    private static LinkedList<String> docenteConCargo; 
     @Override
     public void process(String model) {
 
@@ -57,6 +58,7 @@ public class AdminController implements IController, defaultLanguaje {
 	    listaDocentes();
 	    listaFacultad();
 	    listaCargos();
+	    listaDocenteConCargos();
 	}
 	if (model.compareTo(ASIGNACIONDOCENTEPANEL) == 0) {
 	    view.menuAsignacionDocente();
@@ -120,6 +122,15 @@ public class AdminController implements IController, defaultLanguaje {
 	    view.present("no entro por la lista de los cargos");
 	}
 
+    }
+    
+    private void listaDocenteConCargos(){
+	try {
+	    docenteConCargo = DedicacionDocente.listDedicacion();
+	    view.setListDedicacionDocenteAlta(docenteConCargo);
+	} catch (SQLException e) {
+	    view.present("no entro por la lista de los cargos");
+	}
     }
 
 }

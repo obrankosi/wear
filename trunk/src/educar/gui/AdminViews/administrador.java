@@ -322,10 +322,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaDocente.add(listaAltaDocente);
 
 	AdminListListener listaDA1 = new AdminListListener();
-	IListController listaControllerDA1= new gestionDocenteController();
+	IListController listaControllerDA1 = new gestionDocenteController();
 	((IController) listaControllerDA1).setView(this);
 	listaDA1.associate(listaAltaDocente, listaControllerDA1);
-	
+
 	JLabel lblNombreAltaDocente = new JLabel("NOMBRE");
 	lblNombreAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -1499,12 +1499,12 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	btnLimpiarModificacionDedicacionDocente.setBounds(210, 526, 175, 51);
 	panelModificarDedicacionDocente
 		.add(btnLimpiarModificacionDedicacionDocente);
-	
-	AdminListener btnLimiarMD = new AdminListener();
-	IController bcontrollerLimpiarMD= new DedicacionDocenteController();
-	bcontrollerLimpiarMD.setView(this);
-	btnLimiarMD.associate(btnLimpiarModificacionDedicacionDocente, bcontrollerLimpiarMD);	
 
+	AdminListener btnLimiarMD = new AdminListener();
+	IController bcontrollerLimpiarMD = new DedicacionDocenteController();
+	bcontrollerLimpiarMD.setView(this);
+	btnLimiarMD.associate(btnLimpiarModificacionDedicacionDocente,
+		bcontrollerLimpiarMD);
 
 	btnGuardarModificacionDedicacionDocente = new JButton(MODIFY);
 	btnGuardarModificacionDedicacionDocente.setFont(new Font("Arial",
@@ -1512,22 +1512,22 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	btnGuardarModificacionDedicacionDocente.setBounds(395, 526, 175, 51);
 	panelModificarDedicacionDocente
 		.add(btnGuardarModificacionDedicacionDocente);
-	
+
 	AdminListener btnModificarMD = new AdminListener();
-	IController bcontrollerModificarMD= new DedicacionDocenteController();
+	IController bcontrollerModificarMD = new DedicacionDocenteController();
 	bcontrollerModificarMD.setView(this);
-	btnModificarMD.associate(btnGuardarModificacionDedicacionDocente, bcontrollerModificarMD);	
+	btnModificarMD.associate(btnGuardarModificacionDedicacionDocente,
+		bcontrollerModificarMD);
 
 	listaModificarDedicacionDocente = new List();
 	listaModificarDedicacionDocente.setBounds(591, 54, 545, 531);
 	panelModificarDedicacionDocente.add(listaModificarDedicacionDocente);
 
-	AdminListListener listaMDD= new AdminListListener();
-	IListController listControllerMDD= new DedicacionDocenteController();
+	AdminListListener listaMDD = new AdminListListener();
+	IListController listControllerMDD = new DedicacionDocenteController();
 	((IController) listControllerMDD).setView(this);
-	listaMDD.associate(listaModificarDedicacionDocente, listControllerMDD);	
+	listaMDD.associate(listaModificarDedicacionDocente, listControllerMDD);
 
-	
 	JLabel lblCarteListaModificarDedicacionDoncente = new JLabel(
 		"Lista de Docente con su Dedicacion");
 	lblCarteListaModificarDedicacionDoncente
@@ -1544,12 +1544,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	btnBorrarModificacionDedicacionDocente.setBounds(24, 526, 175, 51);
 	panelModificarDedicacionDocente
 		.add(btnBorrarModificacionDedicacionDocente);
-	
+
 	AdminListener btnBorrarMD = new AdminListener();
-	IController bcontrollerBorrarMD= new DedicacionDocenteController();
+	IController bcontrollerBorrarMD = new DedicacionDocenteController();
 	bcontrollerBorrarMD.setView(this);
-	btnBorrarMD.associate(btnBorrarModificacionDedicacionDocente, bcontrollerBorrarMD);	
-	
+	btnBorrarMD.associate(btnBorrarModificacionDedicacionDocente,
+		bcontrollerBorrarMD);
+
 	// ||||||||||||||||PANEL ALTA DEDICACION DOCENTE||||||||||||||||//
 	// |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||//
 
@@ -1604,8 +1605,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaCargoAltaDedicacionDocente.setBounds(965, 58, 171, 298);
 	panelAltaDedicacionDocente.add(listaCargoAltaDedicacionDocente);
 
-	//cargo no va enlazada
-	
+	// cargo no va enlazada
+
 	JLabel lblFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
 	lblFacultadAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1632,7 +1633,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFCargoAltaDedicacionDocente = new JTextField();
 	txtFCargoAltaDedicacionDocente
 		.setFont(new Font("Arial", Font.BOLD, 20));
-	txtFCargoAltaDedicacionDocente.setEditable(false);
+	txtFCargoAltaDedicacionDocente.setEditable(true);
 	txtFCargoAltaDedicacionDocente.setColumns(10);
 	txtFCargoAltaDedicacionDocente.setBounds(229, 311, 305, 45);
 	panelAltaDedicacionDocente.add(txtFCargoAltaDedicacionDocente);
@@ -1659,9 +1660,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaDedicacionDocente.add(btnLimpiarAltaDedicacionDocente);
 
 	AdminListener btnLimpiarAD = new AdminListener();
-	IController bcontrollerLimpiarAD= new DedicacionDocenteController();
+	IController bcontrollerLimpiarAD = new DedicacionDocenteController();
 	bcontrollerLimpiarAD.setView(this);
-	btnLimpiarAD.associate(btnLimpiarAltaDedicacionDocente, bcontrollerLimpiarAD);	
+	btnLimpiarAD.associate(btnLimpiarAltaDedicacionDocente,
+		bcontrollerLimpiarAD);
 
 	btnGuardarAltaDedicacionDocente = new JButton(ADD);
 	btnGuardarAltaDedicacionDocente
@@ -1670,39 +1672,42 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaDedicacionDocente.add(btnGuardarAltaDedicacionDocente);
 
 	AdminListener btnGuardarAD = new AdminListener();
-	IController bcontrollerGuardarAD= new DedicacionDocenteController();
+	IController bcontrollerGuardarAD = new DedicacionDocenteController();
 	bcontrollerGuardarAD.setView(this);
-	btnGuardarAD.associate(btnGuardarAltaDedicacionDocente, bcontrollerGuardarAD);	
-	
+	btnGuardarAD.associate(btnGuardarAltaDedicacionDocente,
+		bcontrollerGuardarAD);
+
 	listaFacultadAltaDedicacionDocente = new List();
 	listaFacultadAltaDedicacionDocente.setBounds(779, 58, 171, 298);
 	panelAltaDedicacionDocente.add(listaFacultadAltaDedicacionDocente);
 
-	AdminListListener listaFAD= new AdminListListener();
-	IListController listControllerFAD= new DedicacionDocenteController();
+	AdminListListener listaFAD = new AdminListListener();
+	IListController listControllerFAD = new DedicacionDocenteController();
 	((IController) listControllerFAD).setView(this);
-	listaFAD.associate(listaFacultadAltaDedicacionDocente, listControllerFAD);	
-	
+	listaFAD.associate(listaFacultadAltaDedicacionDocente,
+		listControllerFAD);
+
 	listaDniAltaDedicacionDocente = new List();
 	listaDniAltaDedicacionDocente.setBounds(591, 58, 171, 298);
 	panelAltaDedicacionDocente.add(listaDniAltaDedicacionDocente);
 
-	AdminListListener listaDAD= new AdminListListener();
-	IListController listControllerDAD= new DedicacionDocenteController();
+	AdminListListener listaDAD = new AdminListListener();
+	IListController listControllerDAD = new DedicacionDocenteController();
 	((IController) listControllerDAD).setView(this);
-	listaDAD.associate(listaDniAltaDedicacionDocente, listControllerDAD);	
-	
+	listaDAD.associate(listaDniAltaDedicacionDocente, listControllerDAD);
+
 	listaListaDocentesDedicacionAltaDedicacionDocente = new List();
 	listaListaDocentesDedicacionAltaDedicacionDocente.setBounds(591, 398,
 		545, 197);
 	panelAltaDedicacionDocente
 		.add(listaListaDocentesDedicacionAltaDedicacionDocente);
-	
-	AdminListListener listaDDAD= new AdminListListener();
-	IListController listControllerDDAD= new DedicacionDocenteController();
-	((IController) listControllerDDAD).setView(this);
-	listaDDAD.associate(listaListaDocentesDedicacionAltaDedicacionDocente, listControllerDDAD);	
-	
+
+//	AdminListListener listaDDAD = new AdminListListener();
+//	IListController listControllerDDAD = new DedicacionDocenteController();
+//	((IController) listControllerDDAD).setView(this);
+//	listaDDAD.associate(listaListaDocentesDedicacionAltaDedicacionDocente,
+//		listControllerDDAD);
+
 	JLabel lblCartelFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
 	lblCartelFacultadAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2693,22 +2698,6 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDedicacionModificarDedicacionDocente.setText(s);
     }
 
-    public String getDniModificarDedicacionDocente() {
-	return txtFDniModificarDedicacionDocente.getText();
-    }
-
-    public String getFacultadModificarDedicacionDocente() {
-	return txtFFacultadModificarDedicacionDocente.getText();
-    }
-
-    public String getCargoModificarDedicacionDocente() {
-	return txtFCargoModificarDedicacionDocente.getText();
-    }
-
-    public String getDedicacionModificarDedicacionDocente() {
-	return txtFDedicacionModificarDedicacionDocente.getText();
-    }
-
     public void setDniAltaDedicacionDocente(String s) {
 	txtFDniAltaDedicacionDocente.setText(s);
     }
@@ -2725,6 +2714,22 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDedicacionAltaDedicacionDocente.setText(s);
     }
 
+    public String getDniModificarDedicacionDocente() {
+	return txtFDniModificarDedicacionDocente.getText();
+    }
+
+    public String getFacultadModificarDedicacionDocente() {
+	return txtFFacultadModificarDedicacionDocente.getText();
+    }
+
+    public String getCargoModificarDedicacionDocente() {
+	return txtFCargoModificarDedicacionDocente.getText();
+    }
+
+    public String getDedicacionModificarDedicacionDocente() {
+	return txtFDedicacionModificarDedicacionDocente.getText();
+    }
+
     public String getDniAltaDedicacionDocente() {
 	return txtFDniAltaDedicacionDocente.getText();
     }
@@ -2739,6 +2744,31 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
     public String getDedicacionAltaDedicacionDocente() {
 	return txtFDedicacionAltaDedicacionDocente.getText();
+    }
+
+    public void setCamposVacioDD() {
+	this.setDedicacionAltaDedicacionDocente("");
+	this.setCargoAltaDedicacionDocente("");
+	this.setFacultadAltaDedicacionDocente("");
+	this.setDniAltaDedicacionDocente("");
+	this.setDedicacionModificarDedicacionDocente("");
+	this.setCargoModificarDedicacionDocente("");
+	this.setFacultadModificarDedicacionDocente("");
+	this.setDniModificarDedicacionDocente("");
+    }
+
+    public boolean algunCampoVacioAlta() {
+	return (getDniAltaDedicacionDocente().compareTo("") == 0
+		|| getFacultadAltaDedicacionDocente().compareTo("") == 0
+		|| getCargoAltaDedicacionDocente().compareTo("") == 0 || getDedicacionAltaDedicacionDocente()
+		.compareTo("") == 0);
+    }
+
+    public boolean algunCampoVacioModificacion() {
+	return (getDniModificarDedicacionDocente().compareTo("") == 0
+		|| getFacultadModificarDedicacionDocente().compareTo("") == 0
+		|| getDedicacionModificarDedicacionDocente().compareTo("") == 0 || getCargoModificarDedicacionDocente()
+		.compareTo("") == 0);
     }
 
     // ||||||||||||||||METODOS PARA TODAS LAS
@@ -2767,11 +2797,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaAsignacionDocente2.removeAll();
 	listaModificarDocente.removeAll();
 	listaAltaDocente.removeAll();
+	listaDniAltaDedicacionDocente.removeAll();
 	for (int i = 0; i < listaDocente.size(); i++) {
 	    listaAsignacionDocente2.add(listaDocente.get(i), i);
 	    listaAsignacionDocente.add(listaDocente.get(i), i);
 	    listaModificarDocente.add(listaDocente.get(i), i);
 	    listaAltaDocente.add(listaDocente.get(i), i);
+	    listaDniAltaDedicacionDocente.add(listaDocente.get(i), i);
 	}
     }
 
@@ -2783,20 +2815,27 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaMoificarFacultad.removeAll();
 	listFacultadModificarMateria.removeAll();
 	listFacultadAltaMateria.removeAll();
+	listaFacultadAltaDedicacionDocente.removeAll();
 	for (int i = 0; i < listaFacultad.size(); i++) {
 	    listaAltaFacultad.add(listaFacultad.get(i), i);
 	    listaMoificarFacultad.add(listaFacultad.get(i), i);
 	    listFacultadModificarMateria.add(listaFacultad.get(i), i);
 	    listFacultadAltaMateria.add(listaFacultad.get(i), i);
+	    listaFacultadAltaDedicacionDocente.add(listaFacultad.get(i), i);
 	}
     }
 
+    /**
+     * @param listaCargos
+     */
     public void setListModificarCargos(LinkedList<String> listaCargos) {
 	listaModificarCargo.removeAll();
 	listaAltaCargo.removeAll();
+	listaCargoAltaDedicacionDocente.removeAll();
 	for (int i = 0; i < listaCargos.size(); i++) {
 	    listaModificarCargo.add(listaCargos.get(i), i);
 	    listaAltaCargo.add(listaCargos.get(i), i);
+	    listaCargoAltaDedicacionDocente.add(listaCargos.get(i), i);
 	}
     }
 
@@ -2817,6 +2856,19 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	    listaMateriaAltaMateria.add(listaMateria.get(i), i);
 	}
     }
+    
+    
+    /**
+     * @param lista
+     */
+    public void setListDedicacionDocenteAlta(LinkedList<String> lista) {
+//	listaModificarDedicacionDocente
+	listaListaDocentesDedicacionAltaDedicacionDocente.removeAll();
+	for (int i = 0; i < lista.size(); i++) {
+	    listaListaDocentesDedicacionAltaDedicacionDocente.add(lista.get(i), i);
+	}
+    }
+
 
     // ||||||||||||||||||||||||||||||||||||||||||||//
     // ||||||||||||||||||||||||||||||||||||||||||||//
