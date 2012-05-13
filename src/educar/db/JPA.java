@@ -337,6 +337,7 @@ public class JPA {
      */
     public ResultSet getByField(String tableName, String[] fieldNames,
 	    String[] values) {
+
 	String getValues = fieldNames[0] + "= \"" + values[0] + "\"";
 	for (int i = 1; i < values.length; i++) {
 	    getValues += " && " + fieldNames[i] + " = \"" + values[i] + "\"";
