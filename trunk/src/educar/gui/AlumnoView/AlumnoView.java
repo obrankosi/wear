@@ -13,12 +13,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class AlumnoView extends JFrame {
+import educar.controllers.AlumnoControllers;
+import educar.controllers.IController;
+import educar.controllers.IListController;
+import educar.gui.IView;
+import educar.gui.Listener.AdminListListener;
+import educar.gui.Listener.AlumnoListener;
+import educar.languaje.defaultLanguaje;
+
+public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 
 	private JPanel contentPane;
 	private JPanel panelMenuAlumno;
@@ -28,7 +37,6 @@ public class AlumnoView extends JFrame {
 	private JTextField txtSolucionActividad;
 	private JTextField txtDescripcionActividad;
 	private JTextField txtNota;
-	private JButton btnSubir;
 	private JPanel panelIncripcionMateria;
 	private List listaMateriasInscripo;
 	private JButton btnIncribir;
@@ -94,7 +102,10 @@ public class AlumnoView extends JFrame {
 
 		JLabel lblFotoBiendenido = new JLabel("");
 		lblFotoBiendenido.setBackground(Color.WHITE);
-		lblFotoBiendenido.setIcon(new ImageIcon(AlumnoView.class.getResource("/educar/gui/AlumnoView/imagenIconAlumno/educar2012.jpg")));
+		lblFotoBiendenido
+				.setIcon(new ImageIcon(
+						AlumnoView.class
+								.getResource("/educar/gui/AlumnoView/imagenIconAlumno/educar2012.jpg")));
 		lblFotoBiendenido.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFotoBiendenido.setFont(new Font("Arial", Font.BOLD, 23));
 		lblFotoBiendenido.setBounds(0, 0, 1202, 680);
@@ -145,6 +156,12 @@ public class AlumnoView extends JFrame {
 		listaActividadesCargarMateria.setBounds(893, 77, 299, 592);
 		panelCarcarSolucion.add(listaActividadesCargarMateria);
 
+		AdminListListener listaActividades = new AdminListListener();
+		IListController listaActividadControllers = new AlumnoControllers();
+		((IController) listaActividadControllers).setView(this);
+		listaActividades.associate(listaActividadesCargarMateria,
+				listaActividadControllers);
+
 		txtSolucionActividad = new JTextField();
 		txtSolucionActividad.setFont(new Font("Arial", Font.BOLD, 20));
 		txtSolucionActividad.setBounds(380, 158, 377, 54);
@@ -165,10 +182,15 @@ public class AlumnoView extends JFrame {
 		txtNota.setBounds(380, 468, 377, 54);
 		panelCarcarSolucion.add(txtNota);
 
-		btnSubir = new JButton("SUBIR");
+		JButton btnSubir = new JButton(MODIFY);
 		btnSubir.setFont(new Font("Arial", Font.BOLD, 20));
 		btnSubir.setBounds(504, 585, 139, 54);
 		panelCarcarSolucion.add(btnSubir);
+
+		AlumnoListener bSubir = new AlumnoListener();
+		IController alumnoSolucion = new AlumnoControllers();
+		alumnoSolucion.setView(this);
+		bSubir.associate(btnSubir, alumnoSolucion);
 
 		// //////////////////////////////// PANEL INCRIPCION MATERIA
 		// //////////////////////////////////////////////////////
@@ -226,6 +248,12 @@ public class AlumnoView extends JFrame {
 		listaMateriasAInscribir.setBounds(656, 77, 265, 592);
 		panelIncripcionMateria.add(listaMateriasAInscribir);
 
+		AdminListListener listaMaterias = new AdminListListener();
+		IListController listaMateriasControllers = new AlumnoControllers();
+		((IController) listaMateriasControllers).setView(this);
+		listaMaterias.associate(listaMateriasAInscribir,
+				listaMateriasControllers);
+
 		txtCodigoMateria = new JTextField();
 		txtCodigoMateria.setEditable(false);
 		txtCodigoMateria.setFont(new Font("Arial", Font.BOLD, 20));
@@ -233,10 +261,16 @@ public class AlumnoView extends JFrame {
 		panelIncripcionMateria.add(txtCodigoMateria);
 		txtCodigoMateria.setColumns(10);
 
-		btnIncribir = new JButton("INCRIBIR");
+		btnIncribir = new JButton(ADD);
 		btnIncribir.setFont(new Font("Arial", Font.BOLD, 20));
 		btnIncribir.setBounds(378, 584, 139, 54);
 		panelIncripcionMateria.add(btnIncribir);
+
+		AlumnoListener bInscribir = new AlumnoListener();
+		IController alumnoInscribir = new AlumnoControllers();
+		alumnoInscribir.setView(this);
+		bInscribir.associate(btnIncribir, alumnoInscribir);
+
 	}
 
 	// ///////////////// get y set de CARGAR SOLUCION //////////
@@ -265,14 +299,39 @@ public class AlumnoView extends JFrame {
 		txtNota.setText(s);
 	}
 
+	public boolean camposVaciosCargarSolucion() {
+		return !(this.getSolucionActividad() == "")
+				&& !(getDescripcionActividad() == "") && !(getNota() == "");
+	}
+
+	public void setVacioCargarSolucion() {
+		this.setSolucionActividad("");
+		this.setDescripcionActividad("");
+		this.setNota("");
+	}
+
 	// ///////// get and set de INCRIPCION MATERIA /////////////
 
 	public String getCodigoMateria() {
 		return txtCodigoMateria.getText();
 	}
 
-	public void setCodigoMateria() {
-		txtCodigoMateria.getText();
+	public void setCodigoMateria(String s) {
+		txtCodigoMateria.setText(s);
 	}
 
+	public boolean camposVaciosIncripcionMateria() {
+		return !(this.getCodigoMateria() == "");
+
+	}
+
+	public void setVaciosIncripcionMateria() {
+		this.setCodigoMateria("");
+	}
+
+	@Override
+	public void present(String model) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, model);
+	}
 }
