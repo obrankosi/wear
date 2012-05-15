@@ -34,7 +34,7 @@ CREATE TABLE  `educar_dev`.`Actividad` (
   UNIQUE KEY `cod_actividad` (`cod_actividad`),
   KEY `codMateria` (`cod_materia`),
   CONSTRAINT `codMateria` FOREIGN KEY (`cod_materia`) REFERENCES `Materia` (`cod_materia`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Actividad`
@@ -42,10 +42,25 @@ CREATE TABLE  `educar_dev`.`Actividad` (
 
 /*!40000 ALTER TABLE `Actividad` DISABLE KEYS */;
 LOCK TABLES `Actividad` WRITE;
-INSERT INTO `educar_dev`.`Actividad` VALUES  (1,'practica 1',1);
+INSERT INTO `educar_dev`.`Actividad` VALUES  (1,'practica 1',1),
+ (3,'practica 1',1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Actividad` ENABLE KEYS */;
 
+
+--
+-- Definition of trigger `educar_dev`.`triggerBorrarActvidadAlumnos`
+--
+
+DROP TRIGGER /*!50030 IF EXISTS */ `educar_dev`.`triggerBorrarActvidadAlumnos`;
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `educar_dev`.`triggerBorrarActvidadAlumnos` BEFORE DELETE ON `Actividad` FOR EACH ROW BEGIN
+   DELETE FROM educar_dev.TieneActividad  WHERE educar_dev.TieneActividad.codigo_a = OLD.cod_actividad ;  
+END $$
+
+DELIMITER ;
 
 --
 -- Definition of table `educar_dev`.`Alumnos`
@@ -193,7 +208,8 @@ CREATE TABLE  `educar_dev`.`Docente` (
 
 /*!40000 ALTER TABLE `Docente` DISABLE KEYS */;
 LOCK TABLES `Docente` WRITE;
-INSERT INTO `educar_dev`.`Docente` VALUES  (25467843,'zareta','lucas','1978-12-12',343456,'moldes 54'),
+INSERT INTO `educar_dev`.`Docente` VALUES  (3337,'lala','lala','1567-12-12',4567,'lalala'),
+ (25467843,'zareta','lucas','1978-12-12',343456,'moldes 54'),
  (31334567,'gonzales','pedro','1912-12-12',77654,'san juan 134'),
  (33361078,'jope','carlos','2000-12-12',4554677,'laprida 120');
 UNLOCK TABLES;
@@ -284,7 +300,7 @@ CREATE TABLE  `educar_dev`.`Materia` (
   KEY `dniDocente` (`dni_docente`),
   CONSTRAINT `codFacultad` FOREIGN KEY (`facultad`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
   CONSTRAINT `dniDocente` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Materia`
@@ -292,10 +308,11 @@ CREATE TABLE  `educar_dev`.`Materia` (
 
 /*!40000 ALTER TABLE `Materia` DISABLE KEYS */;
 LOCK TABLES `Materia` WRITE;
-INSERT INTO `educar_dev`.`Materia` VALUES  (1,'metafisica',25467843,2),
- (2,'fisica',31334567,1),
- (11,'Aleman',31334567,2),
- (13,'prueva',25467843,1);
+INSERT INTO `educar_dev`.`Materia` VALUES  (1,'metafisica dofs',25467843,2),
+ (2,'fisica',31334567,2),
+ (11,'Aleman sin',31334567,2),
+ (13,'alquimica 3',25467843,1),
+ (14,'test',NULL,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Materia` ENABLE KEYS */;
 
@@ -313,15 +330,15 @@ CREATE TABLE  `educar_dev`.`Resolucion` (
   `cod_actividad` int(11) NOT NULL,
   `dni_alumno` int(11) NOT NULL,
   `res_actividad` text,
-  `nota` int(11) NOT NULL,
+  `nota` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`codigo_res`),
   KEY `FKdniDoncte` (`dni_docente`),
   KEY `FKcodActivdad` (`cod_actividad`),
   KEY `FKDniAlumno` (`dni_alumno`),
-  CONSTRAINT `FKcodActivdad` FOREIGN KEY (`cod_actividad`) REFERENCES `TieneActividad` (`codigo_a`) ON UPDATE CASCADE,
-  CONSTRAINT `FKDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `TieneActividad` (`dni_alumno`) ON UPDATE CASCADE,
+  CONSTRAINT `FKDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `TieneActividad` (`dni_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FKcodActivdad` FOREIGN KEY (`cod_actividad`) REFERENCES `TieneActividad` (`codigo_a`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKdniDoncte` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Resolucion`
@@ -426,7 +443,7 @@ CREATE TABLE  `educar_dev`.`users` (
   `role` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`users`
@@ -441,7 +458,8 @@ INSERT INTO `educar_dev`.`users` VALUES  (12,'root','1','root'),
  (65,'31334567','34567','Docente'),
  (66,'25467843','67843','Docente'),
  (67,'a','1','admin'),
- (68,'b','1','admin');
+ (68,'b','1','admin'),
+ (69,'3337','3337','Docente');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
