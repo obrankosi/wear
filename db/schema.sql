@@ -71,8 +71,8 @@ CREATE TABLE  `educar_dev`.`Alumnos` (
 
 /*!40000 ALTER TABLE `Alumnos` DISABLE KEYS */;
 LOCK TABLES `Alumnos` WRITE;
-INSERT INTO `educar_dev`.`Alumnos` VALUES  (3336109,'depetris','eduardo','1212-12-12','4652120','calle 1 240',5),
- (34885245,'coria','gaston','1990-05-05','15467809','calle 1 240',4);
+INSERT INTO `educar_dev`.`Alumnos` VALUES  (1,'coria','gaston','1990-05-05','15467809','calle 1 240',4),
+ (3336109,'depetris','eduardo','1212-12-12','4652120','calle 1 240',5);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Alumnos` ENABLE KEYS */;
 
@@ -312,14 +312,15 @@ CREATE TABLE  `educar_dev`.`Resolucion` (
   `dni_docente` int(11) NOT NULL,
   `cod_actividad` int(11) NOT NULL,
   `dni_alumno` int(11) NOT NULL,
+  `res_actividad` text,
   `nota` int(11) NOT NULL,
   PRIMARY KEY (`codigo_res`),
   KEY `FKdniDoncte` (`dni_docente`),
   KEY `FKcodActivdad` (`cod_actividad`),
   KEY `FKDniAlumno` (`dni_alumno`),
-  CONSTRAINT `FKdniDoncte` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE,
   CONSTRAINT `FKcodActivdad` FOREIGN KEY (`cod_actividad`) REFERENCES `TieneActividad` (`codigo_a`) ON UPDATE CASCADE,
-  CONSTRAINT `FKDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `TieneActividad` (`dni_alumno`) ON UPDATE CASCADE
+  CONSTRAINT `FKDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `TieneActividad` (`dni_alumno`) ON UPDATE CASCADE,
+  CONSTRAINT `FKdniDoncte` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -342,8 +343,8 @@ CREATE TABLE  `educar_dev`.`TieneActividad` (
   `codigo_a` int(11) NOT NULL,
   PRIMARY KEY (`dni_alumno`,`codigo_a`),
   KEY `cfCodActividad` (`codigo_a`),
-  CONSTRAINT `cfDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `Alumnos` (`dni`) ON UPDATE CASCADE,
-  CONSTRAINT `cfCodActividad` FOREIGN KEY (`codigo_a`) REFERENCES `Actividad` (`cod_actividad`) ON UPDATE CASCADE
+  CONSTRAINT `cfCodActividad` FOREIGN KEY (`codigo_a`) REFERENCES `Actividad` (`cod_actividad`) ON UPDATE CASCADE,
+  CONSTRAINT `cfDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `Alumnos` (`dni`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -369,9 +370,9 @@ CREATE TABLE  `educar_dev`.`Trabaja` (
   PRIMARY KEY (`codigo_fac`,`dni_doc`),
   KEY `FKdniDoc` (`dni_doc`),
   KEY `FKcodCargo` (`codigo_cargo`),
+  CONSTRAINT `FKcodCargo` FOREIGN KEY (`codigo_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE,
   CONSTRAINT `FKcodFac` FOREIGN KEY (`codigo_fac`) REFERENCES `Facultad` (`cod_facultad`) ON UPDATE CASCADE,
-  CONSTRAINT `FKdniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE,
-  CONSTRAINT `FKcodCargo` FOREIGN KEY (`codigo_cargo`) REFERENCES `Cargo` (`cod_cargo`) ON UPDATE CASCADE
+  CONSTRAINT `FKdniDoc` FOREIGN KEY (`dni_doc`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -380,6 +381,9 @@ CREATE TABLE  `educar_dev`.`Trabaja` (
 
 /*!40000 ALTER TABLE `Trabaja` DISABLE KEYS */;
 LOCK TABLES `Trabaja` WRITE;
+INSERT INTO `educar_dev`.`Trabaja` VALUES  (1,33361078,3,44),
+ (2,25467843,3,55),
+ (2,33361078,4,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Trabaja` ENABLE KEYS */;
 
@@ -404,7 +408,7 @@ CREATE TABLE  `educar_dev`.`cursa` (
 
 /*!40000 ALTER TABLE `cursa` DISABLE KEYS */;
 LOCK TABLES `cursa` WRITE;
-INSERT INTO `educar_dev`.`cursa` VALUES  (34885245,1),
+INSERT INTO `educar_dev`.`cursa` VALUES  (1,1),
  (3336109,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cursa` ENABLE KEYS */;
@@ -432,7 +436,7 @@ CREATE TABLE  `educar_dev`.`users` (
 LOCK TABLES `users` WRITE;
 INSERT INTO `educar_dev`.`users` VALUES  (12,'root','1','root'),
  (62,'3336109','36109','Alumno'),
- (63,'34885245','85245','Alumno'),
+ (63,'1','85245','Alumno'),
  (64,'33361078','61078','Docente'),
  (65,'31334567','34567','Docente'),
  (66,'25467843','67843','Docente'),
