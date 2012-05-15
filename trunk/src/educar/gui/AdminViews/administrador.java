@@ -7,8 +7,6 @@ import java.awt.GridLayout;
 import java.awt.List;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 import javax.swing.GroupLayout;
@@ -41,6 +39,7 @@ import educar.controllers.AdminController.HsDedicacionDocenteListController;
 import educar.controllers.AdminController.gestionAlumnosController;
 import educar.controllers.AdminController.gestionDocenteController;
 import educar.controllers.AdminController.gestionFacultadController;
+import educar.controllers.AdminController.listaMateriaModificarController;
 import educar.controllers.AdminController.subjectManagementController;
 import educar.gui.IView;
 import educar.gui.Listener.AdminListListener;
@@ -789,14 +788,14 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	bBuscarMA.associate(btnBuscarModificarAlumno, gestionBuscarMA);
 
 	listaModificarAlumno = new List();
-	listaModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
-	listaModificarAlumno.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		if (listaModificarAlumno.getSelectedItem() != null) {
-		    setTfDni_modif_A(listaModificarAlumno.getSelectedItem());
-		}
-	    }
-	});
+
+	AdminListListener listaAlumnoM = new AdminListListener();
+	IListController listaAlumnoMController1 = new gestionAlumnosController();
+	((IController) listaAlumnoMController1).setView(this);
+	listaAlumnoM.associate(listaModificarAlumno,
+		listaAlumnoMController1);
+
+	
 	panelModificarAlumno.add(listaModificarAlumno);
 	listaModificarAlumno.setBounds(916, 58, 229, 464);
 
@@ -1224,12 +1223,12 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaMateriaModificarMateria.setBounds(916, 58, 229, 444);
 	panelModificarMateria.add(listaMateriaModificarMateria);
 
-	/*
-	 * AdminListListener listaMM1 = new AdminListListener(); IListController
-	 * listaMMController1 = new subjectManagementController();
-	 * ((IController) listaMMController1).setView(this);
-	 * listaMM1.associate(listaMateriaModificarMateria, listaMMController1);
-	 */
+	
+	  AdminListListener listaMM1 = new AdminListListener(); IListController
+	  listaMMController1 = new listaMateriaModificarController();
+	  ((IController) listaMMController1).setView(this);
+	  listaMM1.associate(listaMateriaModificarMateria, listaMMController1);
+	 
 
 	listFacultadModificarMateria = new List();
 	listFacultadModificarMateria.setBounds(654, 58, 242, 444);
@@ -2512,10 +2511,6 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	this.setNombreAltaFacultad("");
 	System.out.println("limpiar");
     }
-
-    /*
-     * public void deleteViewFieldsAlta_F() { this.setNombreAltaFacultad(""); }
-     */
 
     // ||||||||||||||||GET & SET MATERIA||||||||||||||||||||||||||//
     // |||||||||||||||BORRADO Y CHECKEADO DE CAMPOS||||||||||||||||//

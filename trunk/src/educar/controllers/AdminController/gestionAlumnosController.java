@@ -4,12 +4,15 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import educar.controllers.IController;
+import educar.controllers.IListController;
 import educar.gui.IView;
+import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Alumno;
 
-public class gestionAlumnosController implements IController, defaultLanguaje {
+public class gestionAlumnosController implements IController, defaultLanguaje, IListController {
+
     private administrador view;
     private static Alumno student = null;
     private static LinkedList<String> studentsList;
@@ -68,6 +71,8 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	    if (student.destroy()) {
 		view.present("borrado del alumno exitoso");
 		view.deleteViewFieldsMod_A();
+	    }else{
+		view.present("el alumno no se puede borrar, ya que esta cursando materias");
 	    }
 
 	}
@@ -138,6 +143,12 @@ public class gestionAlumnosController implements IController, defaultLanguaje {
 	view.setTfDni_modif_A(student.getDni());
 	view.setTfFechaNac_modif_A(student.getfN());
 	view.setTfTelefono_modif_A(student.getTel());
+    }
+
+    @Override
+    public void processItemList(String item) {
+	view.setTfDni_modif_A(FuncionesAuxiliares.idString(item));
+	searchAStudentInDbase();
     }
 
 }
