@@ -64,10 +64,6 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
     private void deletStudent() {//
 	searchAStudentInDbase();
 	if (!(view.getDniMod_A().compareTo("") == 0)) {// si no tengo un
-	    // documento
-	    // en
-	    // pantalla es porque no pudo
-	    // encontrar el alumno
 	    if (student.destroy()) {
 		view.present("borrado del alumno exitoso");
 		view.deleteViewFieldsMod_A();
