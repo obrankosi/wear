@@ -82,7 +82,7 @@ public class subjectManagementController implements IController,
 	    view.present("La materia a borrar no existe");
     }
 
-    private void searchSubject() {
+    public void searchSubject() {
 	materia = Subject.getSubject(view.getModifyCodeTF_M());
 	if (materia != null) {
 	    view.setModifyNameTF_M(materia.getName());

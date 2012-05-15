@@ -84,4 +84,17 @@ public class FuncionesAuxiliares {
 	return hs;
     }
 
+    public static String nombreMateria(String txt) {
+	int index = txt.indexOf(" ") + 1;// ma paro en los :
+	String subS = txt.substring(index);// borro todo lo anterior
+	index = subS.length() - 1;
+	subS = (subS.substring(0, index)).trim();
+	return subS;
+    }
+
+    public static String facultadMateria(String txt) {
+	String subS = (txt.substring( txt.length()-1,txt.length())).trim();
+	return subS;
+    }
+
 }
