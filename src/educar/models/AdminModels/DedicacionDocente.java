@@ -1,6 +1,5 @@
 package educar.models.AdminModels;
 
-import java.io.ObjectInputStream.GetField;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,8 +45,8 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
     }
 
     public static boolean containtDedicacionCargo(DedicacionDocente arg1) {
-	String[] column = { "codigo_fac","codigo_cargo" };
-	String[] values = {arg1.getCodFacultad(), arg1.getCodCargo() };
+	String[] column = { "codigo_fac", "codigo_cargo" };
+	String[] values = { arg1.getCodFacultad(), arg1.getCodCargo() };
 	JPA jpa = new JPA();
 	rst = jpa.getByField("Trabaja", column, values);
 	try {
@@ -70,10 +69,10 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 	PreparedStatement stm = jpa.newRecord("educar_dev." + "Trabaja",
 		columns);
 	try {
-	    stm.setString(1, this.getCodFacultad());
-	    stm.setString(2, this.getDniDocente());
-	    stm.setString(3, this.getCodCargo());
-	    stm.setString(4, this.getHsDedicacion());
+	    stm.setString(1, this.getCodFacultad().trim());
+	    stm.setString(2, this.getDniDocente().trim());
+	    stm.setString(3, this.getCodCargo().trim());
+	    stm.setString(4, this.getHsDedicacion().trim());
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    return false;
@@ -83,7 +82,26 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 
     }
 
-    // no la use todavia
+    public boolean delete() {
+	return destroy("Trabaja");
+    }
+
+    public boolean update() {
+	String[] columns = { "hs_dedicacion" };
+	String[] values = { this.getHsDedicacion() };
+	String[] columsId = { "codigo_fac", "dni_doc" };
+	String[] valuesId = { this.getCodFacultad(), this.getDniDocente() };
+	JPA jpa = new JPA();
+	try {
+	    jpa.update("Trabaja", columns, values, columsId, valuesId);
+	    return true;
+	} catch (SQLException e) {
+	    return false;
+	}
+
+    }
+
+    // no la use todavia y no la voy a usar
     public static LinkedList<DedicacionDocente> getListDedicacion()
 	    throws SQLException {
 	LinkedList<DedicacionDocente> result = new LinkedList<DedicacionDocente>();
@@ -108,9 +126,9 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 	    String dniD = rst.getString(2);
 	    String codC = rst.getString(3);
 	    String hsD = rst.getString(4);
-	    result.add("docente: " + dniD + " | " + "cargo nro : " + codC
-		    + " | " + " facultad nro : " + codFac + " | "
-		    + " cantidad horas: " + hsD);
+	    result.add(("docente: " + dniD + " | " + "cargo nro: " + codC
+		    + " | " + " facultad nro: " + codFac + " | "
+		    + " cantidad horas: " + hsD).trim());
 	}
 	return result;
 
@@ -124,6 +142,18 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 	    return 0;
 	} else
 	    return 1;
+    }
+
+    private boolean destroy(String tableName) {
+	try {
+	    String[] column = { "codigo_fac", "dni_doc" };
+	    String[] values = { this.getCodFacultad(), this.getDniDocente() };
+	    JPA jpa = new JPA();
+	    jpa.destroy(tableName, column, values);
+	    return true;
+	} catch (SQLException e) {
+	    return false;
+	}
     }
 
     public String getDniDocente() {
@@ -157,30 +187,5 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
     public void setCodFacultad(String codFacultad) {
 	this.codFacultad = codFacultad;
     }
-
-    // public static boolean containtDedicacionDocente(DedicacionDocente arg1) {
-    // ResultSet rs = null;
-    // String[] column = { "codigo_fac", "dni_doc" };
-    // String[] values = { arg1.getCodFacultad(), arg1.getDniDocente() };
-    // rs = jpa.getByField("Trabaja", column, values);
-    // try {
-    // if (rs.next()) {
-    // // String codFac = rst.getString(1);
-    // // String dniD = rst.getString(2);
-    // // String codC = rst.getString(3);
-    // // String hsD = rst.getString(4);
-    // // DedicacionDocente u = new DedicacionDocente(codFac, dniD,
-    // // codC,
-    // // hsD);
-    // return true;
-    // } else {
-    // return false;
-    // }
-    // } catch (SQLException e) {
-    // // la consulta dio error
-    // return false;
-    // }
-    //
-    // }
 
 }

@@ -31,10 +31,12 @@ public class DedicacionDocenteController implements IController,
 	    view.setCamposVacioDD();
 	}
 	if (model.compareTo(MODIFY) == 0) {
-
+	    actualizarDedicacion();
+	    listaDocenteCargoconDedicacion();
 	}
 	if (model.compareTo(DELETE) == 0) {
-
+	    borrarDedicacionDocente();
+	    listaDocenteCargoconDedicacion();
 	}
 	if (model.compareTo(CLEAR) == 0) {
 	    view.setCamposVacioDD();
@@ -45,6 +47,46 @@ public class DedicacionDocenteController implements IController,
 	}
     }
 
+    private void borrarDedicacionDocente() {
+	if (!view.algunCampoVacioModificacion()) {
+
+	    String dniDocente = view.getDniModificarDedicacionDocente();
+	    String codCargo = view.getCargoModificarDedicacionDocente();
+	    String hsDedicacion = view
+		    .getDedicacionModificarDedicacionDocente();
+	    String codFacultad = view.getFacultadModificarDedicacionDocente();
+	    newArg = new DedicacionDocente(codFacultad, dniDocente, codCargo,
+		    hsDedicacion);
+	    if (newArg.delete()) {
+		view.present("Borrado exitoso");
+	    }
+	} else {
+	    view.present("faltan ingresar campos");
+	}
+
+    }
+
+    private void actualizarDedicacion() {
+	if (!view.algunCampoVacioModificacion()) {
+	    // genero la nueva actividad para actualizar
+	    String dniDocente = view.getDniModificarDedicacionDocente();
+	    String codCargo = view.getCargoModificarDedicacionDocente();
+	    String hsDedicacion = view
+		    .getDedicacionModificarDedicacionDocente();
+	    String codFacultad = view.getFacultadModificarDedicacionDocente();
+	    newArg = new DedicacionDocente(codFacultad, dniDocente, codCargo,
+		    hsDedicacion);
+	    if (newArg.update()) {
+		view.present("Actualizacion correcta");
+	    } else {
+		view.present("no se actualizaron los datos");
+	    }
+
+	} else {
+	    view.present("faltan ingresar campos");
+	}
+    }
+
     private void addDedicacionDocente() {
 	// si hay algun campo vacio avisa
 	try {
@@ -52,26 +94,21 @@ public class DedicacionDocenteController implements IController,
 	} catch (SQLException e) {
 	}
 	if (!view.algunCampoVacioAlta()) {
-	    if (!cargos.contains(view.getCargoAltaDedicacionDocente())) {
-		view.present("el cargo ingresado no existe");
-	    } else {
-		// si no existe el cargo guardar
-		String dniDocente = view.getDniAltaDedicacionDocente();
-		String codCargo = view.getCargoAltaDedicacionDocente();
-		String hsDedicacion = view.getDedicacionAltaDedicacionDocente();
-		String codFacultad = view.getFacultadAltaDedicacionDocente();
-		newArg = new DedicacionDocente(codFacultad, dniDocente,
-			codCargo, hsDedicacion);
-		if (DedicacionDocente.containtDedicacionDocente(newArg)) {
-		    view.present("el docente ya posee cargo");
-		} else {// ver si esta bien
-		    if (DedicacionDocente.containtDedicacionCargo(newArg)) {
-			view.present("el cargo ya esta ocupado");
-		    } else {
-			// **** guardar ****
-			if (newArg.save()) {
-			    view.present("guardado exitoso");
-			}
+	    String dniDocente = view.getDniAltaDedicacionDocente();
+	    String codCargo = view.getCargoAltaDedicacionDocente();
+	    String hsDedicacion = view.getDedicacionAltaDedicacionDocente();
+	    String codFacultad = view.getFacultadAltaDedicacionDocente();
+	    newArg = new DedicacionDocente(codFacultad, dniDocente, codCargo,
+		    hsDedicacion);
+	    if (DedicacionDocente.containtDedicacionDocente(newArg)) {
+		view.present("el docente ya posee cargo");
+	    } else {// ver si esta bien
+		if (DedicacionDocente.containtDedicacionCargo(newArg)) {
+		    view.present("el cargo ya esta ocupado");
+		} else {
+		    // **** guardar ****
+		    if (newArg.save()) {
+			view.present("guardado exitoso");
 		    }
 		}
 
@@ -103,7 +140,6 @@ public class DedicacionDocenteController implements IController,
 	try {
 	    docentes = Docente.ListDocenteDni();
 	    facultades = Facultad.ListFacultadCod();
-	    cargos = Cargos.listCargosCod();
 	} catch (SQLException e) {
 	}
 	String id = FuncionesAuxiliares.idString(item);
