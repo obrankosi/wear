@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import educar.controllers.IController;
 import educar.controllers.IListController;
 import educar.gui.IView;
+import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Docente;
@@ -133,7 +134,8 @@ public class gestionDocenteController implements IController, defaultLanguaje,IL
 
     @Override
     public void processItemList(String item) {
-	
+	view.setDniModif_D(FuncionesAuxiliares.idString(item));
+	searchTeacherInDbase();
     }
 
 }
