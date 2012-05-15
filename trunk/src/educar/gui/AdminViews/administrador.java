@@ -34,8 +34,10 @@ import educar.controllers.IController;
 import educar.controllers.IListController;
 import educar.controllers.AdminController.AdminController;
 import educar.controllers.AdminController.AsignacionDocenteController;
+import educar.controllers.AdminController.CargoListaDedicacionDocenteController;
 import educar.controllers.AdminController.ChargeController;
 import educar.controllers.AdminController.DedicacionDocenteController;
+import educar.controllers.AdminController.HsDedicacionDocenteListController;
 import educar.controllers.AdminController.gestionAlumnosController;
 import educar.controllers.AdminController.gestionDocenteController;
 import educar.controllers.AdminController.gestionFacultadController;
@@ -1524,7 +1526,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarDedicacionDocente.add(listaModificarDedicacionDocente);
 
 	AdminListListener listaMDD = new AdminListListener();
-	IListController listControllerMDD = new DedicacionDocenteController();
+	IListController listControllerMDD = new HsDedicacionDocenteListController();
 	((IController) listControllerMDD).setView(this);
 	listaMDD.associate(listaModificarDedicacionDocente, listControllerMDD);
 
@@ -1605,7 +1607,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaCargoAltaDedicacionDocente.setBounds(965, 58, 171, 298);
 	panelAltaDedicacionDocente.add(listaCargoAltaDedicacionDocente);
 
-	// cargo no va enlazada
+	AdminListListener listaCAD = new AdminListListener();
+	IListController listControllerCAD = new CargoListaDedicacionDocenteController();
+	((IController) listControllerCAD).setView(this);
+	listaCAD.associate(listaCargoAltaDedicacionDocente, listControllerCAD);
 
 	JLabel lblFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
 	lblFacultadAltaDedicacionDocente
@@ -1633,7 +1638,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFCargoAltaDedicacionDocente = new JTextField();
 	txtFCargoAltaDedicacionDocente
 		.setFont(new Font("Arial", Font.BOLD, 20));
-	txtFCargoAltaDedicacionDocente.setEditable(true);
+	txtFCargoAltaDedicacionDocente.setEditable(false);
 	txtFCargoAltaDedicacionDocente.setColumns(10);
 	txtFCargoAltaDedicacionDocente.setBounds(229, 311, 305, 45);
 	panelAltaDedicacionDocente.add(txtFCargoAltaDedicacionDocente);
@@ -1702,11 +1707,12 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaDedicacionDocente
 		.add(listaListaDocentesDedicacionAltaDedicacionDocente);
 
-//	AdminListListener listaDDAD = new AdminListListener();
-//	IListController listControllerDDAD = new DedicacionDocenteController();
-//	((IController) listControllerDDAD).setView(this);
-//	listaDDAD.associate(listaListaDocentesDedicacionAltaDedicacionDocente,
-//		listControllerDDAD);
+	// AdminListListener listaDDAD = new AdminListListener();
+	// IListController listControllerDDAD = new
+	// DedicacionDocenteController();
+	// ((IController) listControllerDDAD).setView(this);
+	// listaDDAD.associate(listaListaDocentesDedicacionAltaDedicacionDocente,
+	// listControllerDDAD);
 
 	JLabel lblCartelFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
 	lblCartelFacultadAltaDedicacionDocente
@@ -2856,19 +2862,19 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	    listaMateriaAltaMateria.add(listaMateria.get(i), i);
 	}
     }
-    
-    
+
     /**
      * @param lista
      */
     public void setListDedicacionDocenteAlta(LinkedList<String> lista) {
-//	listaModificarDedicacionDocente
+	listaModificarDedicacionDocente.removeAll();
 	listaListaDocentesDedicacionAltaDedicacionDocente.removeAll();
 	for (int i = 0; i < lista.size(); i++) {
-	    listaListaDocentesDedicacionAltaDedicacionDocente.add(lista.get(i), i);
+	    listaListaDocentesDedicacionAltaDedicacionDocente.add(lista.get(i),
+		    i);
+	    listaModificarDedicacionDocente.add(lista.get(i), i);
 	}
     }
-
 
     // ||||||||||||||||||||||||||||||||||||||||||||//
     // ||||||||||||||||||||||||||||||||||||||||||||//

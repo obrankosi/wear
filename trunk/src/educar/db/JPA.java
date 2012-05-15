@@ -175,13 +175,29 @@ public class JPA {
      */
     public void update(String tableName, String[] column, String[] values,
 	    String columnId, String id) throws SQLException {
-	String updateValues = column[0] + "= \"" + values[0] + "\"";
-	for (int i = 1; i < values.length; i++) {
-	    updateValues += "," + column[i] + " = \"" + values[i] + "\"";
-	}
+	// String updateValues = column[0] + "= \"" + values[0] + "\"";
+	// for (int i = 1; i < values.length; i++) {
+	// updateValues += "," + column[i] + " = \"" + values[i] + "\"";
+	// }
+	String updateValues = Join(column, values);
 	String query = "UPDATE " + DbConnection.bd + "." + tableName;
 	query += " set " + updateValues + " WHERE " + columnId + " = " + id
 		+ ";";
+	try {
+	    runUpdate(query);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+	}
+
+    }
+
+    public void update(String tableName, String[] column, String[] values,
+	    String[] columnId, String[] id) throws SQLException {
+	String updateValues = Join(column, values);
+	String keyValues = Join(columnId, id);
+	String query = "UPDATE " + DbConnection.bd + "." + tableName;
+	query += " set " + updateValues + " WHERE " + keyValues + ";";
 	try {
 	    runUpdate(query);
 	} catch (Exception e) {
@@ -225,10 +241,13 @@ public class JPA {
      */
     public void destroy(String tableName, String[] column, String[] values)
 	    throws SQLException {
-	String deleteValues = column[0] + "= \"" + values[0] + "\"";
-	for (int i = 1; i < values.length; i++) {
-	    deleteValues += " && " + column[i] + " = \"" + values[i] + "\"";
-	}
+	// String deleteValues = column[0] + "= \"" + values[0] + "\"";
+	// for (int i = 1; i < values.length; i++) {
+	// deleteValues += " && " + column[i] + " = \"" + values[i] + "\"";
+	// }
+	//		
+	String deleteValues = Join(column, values);
+
 	String query = "DELETE from " + DbConnection.bd + "." + tableName;
 	query += " Where " + deleteValues + ";";
 	try {
@@ -337,16 +356,24 @@ public class JPA {
      */
     public ResultSet getByField(String tableName, String[] fieldNames,
 	    String[] values) {
-
-	String getValues = fieldNames[0] + "= \"" + values[0] + "\"";
-	for (int i = 1; i < values.length; i++) {
-	    getValues += " && " + fieldNames[i] + " = \"" + values[i] + "\"";
-	}
+	// String getValues = fieldNames[0] + "= \"" + values[0] + "\"";
+	// for (int i = 1; i < values.length; i++) {
+	// getValues += " && " + fieldNames[i] + " = \"" + values[i] + "\"";
+	// }
+	String getValues = Join(fieldNames, values);
 	ResultSet result = null;
 	String query = "SELECT * from " + DbConnection.bd + "." + tableName
 		+ " WHERE " + getValues + ";";
 	result = runQuery(query);
 	return result;
+    }
+
+    public String Join(String[] a, String[] b) {
+	String getValues = a[0] + "= \"" + b[0] + "\"";
+	for (int i = 1; i < b.length; i++) {
+	    getValues += " && " + a[i] + " = \"" + b[i] + "\"";
+	}
+	return getValues;
     }
 
 }
