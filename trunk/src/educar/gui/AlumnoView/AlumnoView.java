@@ -8,6 +8,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,7 +24,7 @@ import educar.controllers.AlumnoControllers;
 import educar.controllers.IController;
 import educar.controllers.IListController;
 import educar.gui.IView;
-import educar.gui.Listener.AdminListListener;
+import educar.gui.Listener.AlumnoListListener;
 import educar.gui.Listener.AlumnoListener;
 import educar.languaje.defaultLanguaje;
 
@@ -156,7 +157,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		listaActividadesCargarMateria.setBounds(893, 77, 299, 592);
 		panelCarcarSolucion.add(listaActividadesCargarMateria);
 
-		AdminListListener listaActividades = new AdminListListener();
+		AlumnoListListener listaActividades = new AlumnoListListener();
 		IListController listaActividadControllers = new AlumnoControllers();
 		((IController) listaActividadControllers).setView(this);
 		listaActividades.associate(listaActividadesCargarMateria,
@@ -248,7 +249,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		listaMateriasAInscribir.setBounds(656, 77, 265, 592);
 		panelIncripcionMateria.add(listaMateriasAInscribir);
 
-		AdminListListener listaMaterias = new AdminListListener();
+		AlumnoListListener listaMaterias = new AlumnoListListener();
 		IListController listaMateriasControllers = new AlumnoControllers();
 		((IController) listaMateriasControllers).setView(this);
 		listaMaterias.associate(listaMateriasAInscribir,
@@ -279,7 +280,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		return txtSolucionActividad.getText();
 	}
 
-	public String getDescripcionActividad() {
+	public String getDescripcionActividad() { // aca seria el get para bajar un archivo 
 		return txtDescripcionActividad.getText();
 	}
 
@@ -310,6 +311,14 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		this.setNota("");
 	}
 
+	public void setListaMaterias(LinkedList<String> listaMaterias) {
+		listaMateriasAInscribir.removeAll();
+		for (int i = 0; i < listaMaterias.size(); i++) {
+		    listaMateriasAInscribir.add(listaMaterias.get(i), i);
+	
+		}
+	    }
+
 	// ///////// get and set de INCRIPCION MATERIA /////////////
 
 	public String getCodigoMateria() {
@@ -321,13 +330,21 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	}
 
 	public boolean camposVaciosIncripcionMateria() {
-		return !(this.getCodigoMateria() == "");
+		return (this.getCodigoMateria().compareTo("") == 0);
 
 	}
 
 	public void setVaciosIncripcionMateria() {
 		this.setCodigoMateria("");
 	}
+
+	public void setListaMateriasInscripto(LinkedList<String> listaMateriasIncripto) {
+		listaMateriasInscripo.removeAll();
+		for (int i = 0; i < listaMateriasIncripto.size(); i++) {
+		    listaMateriasInscripo.add(listaMateriasIncripto.get(i), i);
+	
+		}
+	    }
 
 	@Override
 	public void present(String model) {
