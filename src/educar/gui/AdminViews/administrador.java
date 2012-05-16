@@ -794,10 +794,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	AdminListListener listaAlumnoM = new AdminListListener();
 	IListController listaAlumnoMController1 = new gestionAlumnosController();
 	((IController) listaAlumnoMController1).setView(this);
-	listaAlumnoM.associate(listaModificarAlumno,
-		listaAlumnoMController1);
+	listaAlumnoM.associate(listaModificarAlumno, listaAlumnoMController1);
 
-	
 	panelModificarAlumno.add(listaModificarAlumno);
 	listaModificarAlumno.setBounds(916, 58, 229, 464);
 
@@ -1225,12 +1223,10 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaMateriaModificarMateria.setBounds(916, 58, 229, 444);
 	panelModificarMateria.add(listaMateriaModificarMateria);
 
-	
-	  AdminListListener listaMM1 = new AdminListListener(); IListController
-	  listaMMController1 = new listaMateriaModificarController();
-	  ((IController) listaMMController1).setView(this);
-	  listaMM1.associate(listaMateriaModificarMateria, listaMMController1);
-	 
+	AdminListListener listaMM1 = new AdminListListener();
+	IListController listaMMController1 = new listaMateriaModificarController();
+	((IController) listaMMController1).setView(this);
+	listaMM1.associate(listaMateriaModificarMateria, listaMMController1);
 
 	listFacultadModificarMateria = new List();
 	listFacultadModificarMateria.setBounds(654, 58, 242, 444);
@@ -2075,11 +2071,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		.setBounds(90, 229, 75, 14);
 	panelDesignacionAsignacionDocente
 		.add(lblCartelAAsignarDesignacionAsignacionDocente);
-	
+
 	listaDocenteLigadosMateria = new List();
 	listaDocenteLigadosMateria.setBounds(591, 350, 545, 235);
 	panelDesignacionAsignacionDocente.add(listaDocenteLigadosMateria);
-	
+
 	lblDocenteLigadoMateria = new JLabel("Docentes Ligados  a Materias");
 	lblDocenteLigadoMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDocenteLigadoMateria.setFont(new Font("Arial", Font.BOLD, 18));
@@ -2880,6 +2876,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	    listaListaDocentesDedicacionAltaDedicacionDocente.add(lista.get(i),
 		    i);
 	    listaModificarDedicacionDocente.add(lista.get(i), i);
+	}
+    }
+
+    public void setListDocentesLigadosMateria(LinkedList<String> lista) {
+	listaDocenteLigadosMateria.removeAll();
+	for (int i = 0; i < lista.size(); i++) {
+	    listaDocenteLigadosMateria.add(lista.get(i), i);
 	}
     }
 

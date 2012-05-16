@@ -51,8 +51,6 @@ public class subjectManagementController implements IController,
 	    showSubjectInList();
 	}
 
-	// hacer que borre todos los espacios en blanco!!
-
     }
 
     private void addSubject() {
@@ -119,7 +117,6 @@ public class subjectManagementController implements IController,
 		view.present("NO se puede actualizar");
 	    }
 	} else {
-	    // view.present("La materia no existe ");
 	}
     }
 
