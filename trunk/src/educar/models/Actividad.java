@@ -142,4 +142,28 @@ public class Actividad {
 	return result;
     }
 
+    /**
+     * @param codActividad
+     * @return Codigo de la materia que posee esta actividad
+     * @throws ActividadNotFound si no existe 
+     */
+    public static String getCodMateriaActividad(String codActividad)
+	    throws ActividadNotFound {
+	ResultSet rs = null;
+	String codMateria = new String();
+	Actividad act = null;
+	JPA jpa = new JPA();
+	rs = jpa.getByField("Actividad", "cod_actividad", codActividad);
+	try {
+	    if (rs.next()) {
+		codMateria = rs.getString(3);
+	    } else {
+		throw new ActividadNotFound();
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return codMateria;
+    }
+
 }
