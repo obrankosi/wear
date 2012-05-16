@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import educar.db.JPA;
+import educar.models.AdminModels.Subject;
 
 /**
  * @author Elian
@@ -17,131 +18,160 @@ import educar.db.JPA;
  */
 public class Actividad {
 
-    private static JPA jpa = new JPA();
-    private static String codigoActividad;
-    private String descripcionActividad;
-    private String codigoMateria;
+	private static JPA jpa = new JPA();
+	private static String codigoActividad;
+	private String descripcionActividad;
+	private String codigoMateria;
+	private static Subject materia;
 
-    /**
-     * @param codigoActividad
-     * @param descripcionActividad
-     * @param codMateria
-     */
-    public Actividad(String codigoActividad, String descripcionActividad,
-	    String codMateria) {
-	this.setCodigoActividad(codigoActividad);
-	this.setDescripcionActividad(descripcionActividad);
-	this.setCodigoMateria(codMateria);
-    }
-
-    // utilizo este constructor para almacenar en la base de datos. Como el
-    // codigo
-    // de la materia es auto-incremental, no debo pasarselo a la hora de hacer
-    // el save
-
-    /**
-     * @param descripcionActiv
-     * @param codMateria
-     */
-    public Actividad(String descripcionActiv, String codMateria) {
-	this.setDescripcionActividad(descripcionActiv);
-	this.setCodigoMateria(codMateria);
-    }
-
-    private void setCodigoMateria(String codigo) {
-	this.codigoMateria = codigo;
-    }
-
-    private void setDescripcionActividad(String descripcionActividad) {
-	this.descripcionActividad = descripcionActividad;
-    }
-
-    private void setCodigoActividad(String codigoAtividad) {
-	this.codigoActividad = codigoAtividad;
-    }
-
-    private String getCodigoMateria() {
-	return codigoMateria;
-    }
-
-    private String getDescripcionActividad() {
-	return descripcionActividad;
-    }
-
-    public String getCodigoActividad() {
-	return codigoActividad;
-    }
-
-    // guarda una materia. Si la materia ya existia, retorna false
-    // Si la materia no existia, la guarda en la BD y retorna true
-    public boolean save() {
-	try {
-	    String[] columnas = { "descripcion_act", "cod_materia" };
-	    PreparedStatement stm = jpa.newRecord("educar_dev." + "Actividad",
-		    columnas);
-
-	    stm.setString(1, descripcionActividad);
-	    stm.setString(2, codigoMateria);
-	    jpa.create(stm);
-	    return true;
-	} catch (SQLException e) {
-	    return false;// TODO Auto-generated catch block
+	/**
+	 * @param codigoActividad
+	 * @param descripcionActividad
+	 * @param codMateria
+	 */
+	public Actividad(String codigoActividad, String descripcionActividad,
+			String codMateria) {
+		this.setCodigoActividad(codigoActividad);
+		this.setDescripcionActividad(descripcionActividad);
+		this.setCodigoMateria(codMateria);
 	}
-    }
 
-    /**
-     * @param codActividad
-     * @return {@link Actividad}
-     * @throws ActividadNotFound
-     *             si no existe la actividad
-     */
-    public static Actividad getActividad(String codActividad)
-	    throws ActividadNotFound {
+	// utilizo este constructor para almacenar en la base de datos. Como el
+	// codigo
+	// de la materia es auto-incremental, no debo pasarselo a la hora de hacer
+	// el save
 
-	ResultSet rs = null;
-	Actividad act = null;
-	rs = jpa.getByField("Actividad", "cod_actividad", codActividad);
-	try {
-	    if (rs.next()) {
-		String codigoActividad = rs.getString(1);
-		String descripcion = rs.getString(2);
-		String codMateria = rs.getString(3);
-		act = new Actividad(codigoActividad, descripcion, codMateria);
-	    } else {
-		throw new ActividadNotFound();
-	    }
-	} catch (SQLException e) {
-	    e.printStackTrace();
+	/**
+	 * @param descripcionActiv
+	 * @param codMateria
+	 */
+	public Actividad(String descripcionActiv, String codMateria) {
+		this.setDescripcionActividad(descripcionActiv);
+		this.setCodigoMateria(codMateria);
 	}
-	return act;
-    }
 
-    public boolean deleteActividad() {
-	try {
-	    jpa
-		    .destroy("Actividad", "cod_actividad", this
-			    .getCodigoActividad());
-	    return true;
-	} catch (SQLException e) {
-	    return false;
+	private void setCodigoMateria(String codigo) {
+		this.codigoMateria = codigo;
 	}
-    }
 
-    // /////////// VER.. MODIFICAR TODO -----
-    /*
-     * retorna una lista de strings donde cada string tiene el codigo de la
-     * actividad
-     */
-    public static LinkedList<String> subjectCodesList() throws SQLException {
-	ResultSet rst;
-	rst = jpa.proyeccion("Actividad", "cod_materia");
-	LinkedList<String> result = new LinkedList<String>();
-	while (rst.next()) {
-	    result.add(rst.getString(1));
+	private void setDescripcionActividad(String descripcionActividad) {
+		this.descripcionActividad = descripcionActividad;
 	}
-	return result;
-    }
 
+	private void setCodigoActividad(String codigoAtividad) {
+		this.codigoActividad = codigoAtividad;
+	}
+
+	private String getCodigoMateria() {
+		return codigoMateria;
+	}
+
+	private String getDescripcionActividad() {
+		return descripcionActividad;
+	}
+
+	public String getCodigoActividad() {
+		return codigoActividad;
+	}
+
+	// guarda una materia. Si la materia ya existia, retorna false
+	// Si la materia no existia, la guarda en la BD y retorna true
+	public boolean save() {
+		try {
+			String[] columnas = { "descripcion_act", "cod_materia" };
+			PreparedStatement stm = jpa.newRecord("educar_dev." + "Actividad",
+					columnas);
+
+			stm.setString(1, descripcionActividad);
+			stm.setString(2, codigoMateria);
+			jpa.create(stm);
+			return true;
+		} catch (SQLException e) {
+			return false;// TODO Auto-generated catch block
+		}
+	}
+
+	/**
+	 * @param codActividad
+	 * @return {@link Actividad}
+	 * @throws ActividadNotFound
+	 *             si no existe la actividad
+	 */
+	public static Actividad getActividad(String codActividad)
+			throws ActividadNotFound {
+
+		ResultSet rs = null;
+		Actividad act = null;
+		rs = jpa.getByField("Actividad", "cod_actividad", codActividad);
+		try {
+			if (rs.next()) {
+				String codigoActividad = rs.getString(1);
+				String descripcion = rs.getString(2);
+				String codMateria = rs.getString(3);
+				act = new Actividad(codigoActividad, descripcion, codMateria);
+			} else {
+				throw new ActividadNotFound();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return act;
+	}
+
+	public boolean deleteActividad() {
+		try {
+			jpa.destroy("Actividad", "cod_actividad", this.getCodigoActividad());
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	// /////////// VER.. MODIFICAR TODO -----
+	/*
+	 * retorna una lista de strings donde cada string tiene el codigo de la
+	 * actividad
+	 */
+	// public static LinkedList<String> subjectCodesList() throws SQLException {
+	// ResultSet rst;
+	// rst = jpa.proyeccion("Actividad", "cod_materia");
+	// LinkedList<String> result = new LinkedList<String>();
+	// while (rst.next()) {
+	// result.add(rst.getString(1));
+	// }
+	// return result;
+	// }
+
+
+	public static LinkedList<String> getActividadesDocente(
+			LinkedList<String> codMaterias) {
+		LinkedList<String> result = new LinkedList<String>();
+		// JPA jpa = new JPA();
+		ResultSet rs = null;
+		int i = 0;
+		rs = jpa.proyeccion("Actividad", "cod_actividad", "cod_materia",
+				codMaterias.get(i));
+		materia = Subject.getSubject(codMaterias.get(i));
+		String mostrar;
+		try {
+			String codigoActividad;
+			while (rs.next()) {
+				codigoActividad = rs.getString(1);
+				mostrar = "Codigo Actividad: " + codigoActividad.trim()
+						+ " | Materia: " + materia.getName() + " | Facultad: "
+						+ materia.getCodigoFacultad();
+				result.add(mostrar);
+
+			}
+		} catch (SQLException e) {
+			System.out.println("Error en la consulta en la base de datos");
+			return null;
+		}
+		return result;
+
+	}
+
+	
     /**
      * @param codActividad
      * @return Codigo de la materia que posee esta actividad

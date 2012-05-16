@@ -42,7 +42,7 @@ public class DocenteController implements IController, defaultLanguaje,
 	@Override
 	public void processItemList(String item) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -50,4 +50,7 @@ public class DocenteController implements IController, defaultLanguaje,
 		this.view = (DocenteView) view;
 	}
 
+	
+	
+	
 }
