@@ -16,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -36,7 +38,6 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	private JPanel panelCarcarSolucion;
 	private List listaActividadesCargarMateria;
 	private JTextField txtSolucionActividad;
-	private JTextField txtDescripcionActividad;
 	private JTextField txtNota;
 	private JPanel panelIncripcionMateria;
 	private List listaMateriasInscripo;
@@ -45,6 +46,8 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	private List listaMateriasAInscribir;
 	private JButton btnIncripcionMateria;
 	private JPanel panelBienvenido;
+	private JTextArea textArea;
+	private JTextArea textArea2;
 
 	/**
 	 * Create the frame.
@@ -124,21 +127,21 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		panelCarcarSolucion.setVisible(false);
 
 		JLabel lblSolucionActividad = new JLabel("Solucion Actividad");
-		lblSolucionActividad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSolucionActividad.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSolucionActividad.setFont(new Font("Arial", Font.BOLD, 23));
-		lblSolucionActividad.setBounds(58, 158, 265, 54);
+		lblSolucionActividad.setBounds(22, 120, 276, 28);
 		panelCarcarSolucion.add(lblSolucionActividad);
 
 		JLabel lblDescripicionActividad = new JLabel("Descripicion Actividad");
-		lblDescripicionActividad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDescripicionActividad.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDescripicionActividad.setFont(new Font("Arial", Font.BOLD, 23));
-		lblDescripicionActividad.setBounds(58, 313, 265, 54);
+		lblDescripicionActividad.setBounds(22, 351, 276, 28);
 		panelCarcarSolucion.add(lblDescripicionActividad);
 
 		JLabel lblNotaActividad = new JLabel("Nota ");
 		lblNotaActividad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNotaActividad.setFont(new Font("Arial", Font.BOLD, 23));
-		lblNotaActividad.setBounds(58, 468, 265, 54);
+		lblNotaActividad.setBounds(58, 598, 265, 59);
 		panelCarcarSolucion.add(lblNotaActividad);
 		JLabel lblCartelCargarMateria = new JLabel(
 				"SELECCI\u00D3NE LA ACTIVIDAD Y INGRESE LA SOLUCI\u00D3N A SUBIR ");
@@ -163,36 +166,38 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		listaActividades.associate(listaActividadesCargarMateria,
 				listaActividadControllers);
 
-		txtSolucionActividad = new JTextField();
-		txtSolucionActividad.setFont(new Font("Arial", Font.BOLD, 20));
-		txtSolucionActividad.setBounds(380, 158, 377, 54);
-		panelCarcarSolucion.add(txtSolucionActividad);
-		txtSolucionActividad.setColumns(10);
-
-		txtDescripcionActividad = new JTextField();
-		txtDescripcionActividad.setEditable(false);
-		txtDescripcionActividad.setFont(new Font("Arial", Font.BOLD, 20));
-		txtDescripcionActividad.setColumns(10);
-		txtDescripcionActividad.setBounds(380, 313, 377, 54);
-		panelCarcarSolucion.add(txtDescripcionActividad);
-
 		txtNota = new JTextField();
 		txtNota.setEditable(false);
 		txtNota.setFont(new Font("Arial", Font.BOLD, 20));
 		txtNota.setColumns(10);
-		txtNota.setBounds(380, 468, 377, 54);
+		txtNota.setBounds(333, 598, 90, 59);
 		panelCarcarSolucion.add(txtNota);
 
 		JButton btnSubir = new JButton(MODIFY);
 		btnSubir.setFont(new Font("Arial", Font.BOLD, 20));
-		btnSubir.setBounds(504, 585, 139, 54);
+		btnSubir.setBounds(555, 598, 244, 59);
 		panelCarcarSolucion.add(btnSubir);
 
 		AlumnoListener bSubir = new AlumnoListener();
 		IController alumnoSolucion = new AlumnoControllers();
 		alumnoSolucion.setView(this);
 		bSubir.associate(btnSubir, alumnoSolucion);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(22, 114, 621, 224);
+		JScrollPane scroll = new JScrollPane(textArea);
+		scroll.setBounds(22, 144, 799, 201);
+		panelCarcarSolucion.add(scroll);
 
+		textArea2 = new JTextArea();
+		textArea2.setText("aca va ir un texto que usted no va poder modificar");
+		textArea2.setEditable(false);
+		textArea.setBounds(22, 114, 621, 224);
+		JScrollPane scroll2 = new JScrollPane(textArea2);
+		scroll2.setBounds(22, 381, 799, 201);
+		panelCarcarSolucion.add(scroll2);
+
+		
 		// //////////////////////////////// PANEL INCRIPCION MATERIA
 		// //////////////////////////////////////////////////////
 		panelIncripcionMateria = new JPanel();
@@ -277,11 +282,11 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	// ///////////////// get y set de CARGAR SOLUCION //////////
 
 	public String getSolucionActividad() {
-		return txtSolucionActividad.getText();
+		return textArea.getText();
 	}
 
 	public String getDescripcionActividad() { // aca seria el get para bajar un archivo 
-		return txtDescripcionActividad.getText();
+		return textArea2.getText();
 	}
 
 	public String getNota() {
@@ -289,11 +294,11 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	}
 
 	public void setSolucionActividad(String s) {
-		txtSolucionActividad.setText(s);
+		textArea.setText(s);
 	}
 
 	public void setDescripcionActividad(String s) {
-		txtDescripcionActividad.setText(s);
+		textArea2.setText(s);
 	}
 
 	public void setNota(String s) {
@@ -311,14 +316,15 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		this.setNota("");
 	}
 
-	public void setListaMaterias(LinkedList<String> listaMaterias) {
-		listaMateriasAInscribir.removeAll();
-		for (int i = 0; i < listaMaterias.size(); i++) {
-		    listaMateriasAInscribir.add(listaMaterias.get(i), i);
+	public void setListaActividad(LinkedList<String> listaActividad) {
+		listaActividadesCargarMateria.removeAll();
+		for (int i = 0; i < listaActividad.size(); i++) {
+		    listaActividadesCargarMateria.add(listaActividad.get(i), i);
 	
 		}
 	    }
 
+	
 	// ///////// get and set de INCRIPCION MATERIA /////////////
 
 	public String getCodigoMateria() {
@@ -338,6 +344,14 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		this.setCodigoMateria("");
 	}
 
+	public void setListaMaterias(LinkedList<String> listaMaterias) {
+		listaMateriasAInscribir.removeAll();
+		for (int i = 0; i < listaMaterias.size(); i++) {
+		    listaMateriasAInscribir.add(listaMaterias.get(i), i);
+	
+		}
+	    }
+
 	public void setListaMateriasInscripto(LinkedList<String> listaMateriasIncripto) {
 		listaMateriasInscripo.removeAll();
 		for (int i = 0; i < listaMateriasIncripto.size(); i++) {
@@ -345,6 +359,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	
 		}
 	    }
+
 
 	@Override
 	public void present(String model) {

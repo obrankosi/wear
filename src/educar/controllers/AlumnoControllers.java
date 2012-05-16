@@ -10,6 +10,7 @@ import educar.languaje.defaultLanguaje;
 import educar.models.Actividad;
 import educar.models.Cursa;
 import educar.models.Session;
+import educar.models.TieneActividad;
 import educar.models.User;
 import educar.models.userNotFound;
 import educar.models.AdminModels.Subject;
@@ -27,9 +28,9 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	public void process(String model) {
 		// TODO Auto-generated method stub
 		if (model.compareTo(MODIFY) == 0) {
-			saveActividadInDBase();
+			//saveActividadInDBase();
 			showActividadInList();
-			view.setVacioCargarSolucion(); // limpia los campo
+	//		view.setVacioCargarSolucion(); // limpia los campo
 		}
 		if (model.compareTo(ADD) == 0) {
 			saveMateriasInDBase();
@@ -104,11 +105,13 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 		}// pueede inscribir
 	}
 
-	private void showActividadInList() {// / mostrar las actividades que tiene
-										// un alumno dado
-		// TODO Auto-generated method stub
+	private void showActividadInList() {// / mostrar las actividades que tieneun alumno dado
+		actividadList = TieneActividad.listaActividadesAlumnos(getCodigoAlumno());
+		view.setListaActividad(actividadList);
 
 	}
+
+	
 
 	/* (non-Javadoc)
 	 * @see educar.controllers.IController#setView(educar.gui.IView)

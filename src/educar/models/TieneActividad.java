@@ -54,7 +54,8 @@ public class TieneActividad {
 	rst = jpa.proyeccion("TieneActividad","codigo_a", "dni_alumno", dniAlumno);
 	try {
 	    while (rst.next()) {
-	        String codA = rst.getString(1);
+	     System.out.println(rst.getString(1));
+	    	String codA = rst.getString(1);
 	        result.add((codA).trim());
 	    }
 	} catch (SQLException e) {

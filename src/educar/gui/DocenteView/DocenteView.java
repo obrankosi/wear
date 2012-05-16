@@ -15,7 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -36,10 +38,8 @@ public class DocenteView extends JFrame implements IView {
 	private JPanel panelAddActividadDocente;
 	private JPanel panelDeleteActividadDocente;
 	private List listaMateriaActividadDocente;
-	private JTextField txtDescripcionAddActividad;
 	private JTextField txtCodigoMAteriaAddActividad;
 	private JButton btnGuardarAddActividad;
-	private JTextField txtDescripcionDeleteActividad;
 	private JTextField txtCodigoMAteriaDeleteActividad;
 	private List listaActividadDocente;
 	private JButton btnBorrarDeleteActividad;
@@ -47,9 +47,11 @@ public class DocenteView extends JFrame implements IView {
 	private List listaResolucionCorregir;
 	private JTextField txtDniCorregir;
 	private JTextField txtCodigoActividadCorregir;
-	private JTextField txtResolucionCorregir;
 	private JTextField txtNotaCorregir;
 	private JButton btnSubirCorregir;
+	private JTextArea textAreaAddActividad;
+	private JTextArea textAreaDeleteActividad;
+	private JTextArea textAreaCorregir;
 
 	private static final long serialVersionUID = 1L;
 	
@@ -154,10 +156,9 @@ public class DocenteView extends JFrame implements IView {
 		panelAddActividadDocente.add(lblListaMaterias);
 
 		JLabel lblDescripcionAddActividad = new JLabel("DESCRIPCION ACTIVIDAD");
-		lblDescripcionAddActividad
-				.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDescripcionAddActividad.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDescripcionAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
-		lblDescripcionAddActividad.setBounds(61, 192, 276, 49);
+		lblDescripcionAddActividad.setBounds(22, 114, 315, 42);
 		panelAddActividadDocente.add(lblDescripcionAddActividad);
 
 		JLabel lblCodigoMAteriaAddActividad = new JLabel("CODIGO MATERIA");
@@ -174,12 +175,7 @@ public class DocenteView extends JFrame implements IView {
 		lblCartelAddActividad.setBounds(0, 11, 886, 92);
 		panelAddActividadDocente.add(lblCartelAddActividad);
 
-		txtDescripcionAddActividad = new JTextField();
-		txtDescripcionAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
-		txtDescripcionAddActividad.setBounds(384, 187, 365, 54);
-		panelAddActividadDocente.add(txtDescripcionAddActividad);
-		txtDescripcionAddActividad.setColumns(10);
-
+		
 		txtCodigoMAteriaAddActividad = new JTextField();
 		txtCodigoMAteriaAddActividad.setEditable(false);
 		txtCodigoMAteriaAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
@@ -201,9 +197,15 @@ public class DocenteView extends JFrame implements IView {
 		subirActividad.setView(this);
 		bSubirA.associate(btnGuardarAddActividad, subirActividad);
 
-		
+		textAreaAddActividad = new JTextArea();
+		textAreaAddActividad.setBounds(22, 114, 621, 224);
+		JScrollPane scroll = new JScrollPane(textAreaAddActividad);
+		scroll.setBounds(22, 144, 799, 222);
+		panelAddActividadDocente.add(scroll);
+
 
 		// --------------------panel DELETE actividad ---------
+
 		panelDeleteActividadDocente = new JPanel();
 		panelDeleteActividadDocente.setBackground(SystemColor.inactiveCaption);
 		tabbedPane
@@ -222,10 +224,8 @@ public class DocenteView extends JFrame implements IView {
 
 		JLabel lblDescripcionDeleteActividad = new JLabel(
 				"DESCRIPCION ACTIVIDAD");
-		lblDescripcionDeleteActividad
-				.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDescripcionDeleteActividad.setFont(new Font("Arial", Font.BOLD, 20));
-		lblDescripcionDeleteActividad.setBounds(61, 192, 276, 49);
+		lblDescripcionDeleteActividad.setBounds(22, 114, 315, 42);
 		panelDeleteActividadDocente.add(lblDescripcionDeleteActividad);
 
 		JLabel lblCodigoMAteriaDeleteActividad = new JLabel("CODIGO MATERIA");
@@ -243,13 +243,7 @@ public class DocenteView extends JFrame implements IView {
 		lblCartelDeleteActividad.setBounds(0, 11, 886, 92);
 		panelDeleteActividadDocente.add(lblCartelDeleteActividad);
 
-		txtDescripcionDeleteActividad = new JTextField();
-		txtDescripcionDeleteActividad.setEditable(false);
-		txtDescripcionDeleteActividad.setFont(new Font("Arial", Font.BOLD, 20));
-		txtDescripcionDeleteActividad.setBounds(384, 187, 365, 54);
-		panelDeleteActividadDocente.add(txtDescripcionDeleteActividad);
-		txtDescripcionDeleteActividad.setColumns(10);
-
+		
 		txtCodigoMAteriaDeleteActividad = new JTextField();
 		txtCodigoMAteriaDeleteActividad.setEditable(false);
 		txtCodigoMAteriaDeleteActividad
@@ -273,6 +267,15 @@ public class DocenteView extends JFrame implements IView {
 		bBorrarA.associate(btnBorrarDeleteActividad, borrarActividad);
 
 
+		textAreaDeleteActividad = new JTextArea();
+		textAreaDeleteActividad.setText("esta actividad no se puede modificar solo borrar desde su codigo");
+		textAreaDeleteActividad.setEditable(false);
+		textAreaDeleteActividad.setBounds(22, 114, 621, 224);
+		JScrollPane scroll2 = new JScrollPane(textAreaDeleteActividad);
+		scroll2.setBounds(22, 144, 799, 222);
+		panelDeleteActividadDocente.add(scroll2);
+
+
 		// ////////////////// PANEL CORREGIR //////////////////
 
 		panelCorregirDocente = new JPanel();
@@ -284,28 +287,28 @@ public class DocenteView extends JFrame implements IView {
 		panelCorregirDocente.setVisible(false);
 
 		JLabel lblDniCorregir = new JLabel("D.N.I Alumno");
-		lblDniCorregir.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDniCorregir.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDniCorregir.setFont(new Font("Arial", Font.BOLD, 23));
-		lblDniCorregir.setBounds(58, 158, 265, 54);
+		lblDniCorregir.setBounds(120, 158, 250, 54);
 		panelCorregirDocente.add(lblDniCorregir);
 
 		JLabel lblCodigoActividadCorregir = new JLabel("CODIGO ACTIVIDAD");
 		lblCodigoActividadCorregir
-				.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCodigoActividadCorregir.setFont(new Font("Arial", Font.BOLD, 23));
-		lblCodigoActividadCorregir.setBounds(58, 269, 265, 54);
+				.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCodigoActividadCorregir.setFont(new Font("Arial", Font.BOLD, 20));
+		lblCodigoActividadCorregir.setBounds(120, 223, 250, 54);
 		panelCorregirDocente.add(lblCodigoActividadCorregir);
 
 		JLabel lblResolucionCorregir = new JLabel("RESOLUCION");
-		lblResolucionCorregir.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResolucionCorregir.setFont(new Font("Arial", Font.BOLD, 23));
-		lblResolucionCorregir.setBounds(58, 379, 265, 54);
+		lblResolucionCorregir.setHorizontalAlignment(SwingConstants.LEFT);
+		lblResolucionCorregir.setFont(new Font("Arial", Font.BOLD, 17));
+		lblResolucionCorregir.setBounds(22, 269, 265, 39);
 		panelCorregirDocente.add(lblResolucionCorregir);
 
 		JLabel lblNotaCorregir = new JLabel("NOTA");
 		lblNotaCorregir.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNotaCorregir.setFont(new Font("Arial", Font.BOLD, 23));
-		lblNotaCorregir.setBounds(58, 489, 265, 54);
+		lblNotaCorregir.setBounds(58, 585, 233, 54);
 		panelCorregirDocente.add(lblNotaCorregir);
 
 		JLabel lblCartelCorregir = new JLabel(
@@ -338,20 +341,13 @@ public class DocenteView extends JFrame implements IView {
 		txtCodigoActividadCorregir.setEditable(false);
 		txtCodigoActividadCorregir.setFont(new Font("Arial", Font.BOLD, 20));
 		txtCodigoActividadCorregir.setColumns(10);
-		txtCodigoActividadCorregir.setBounds(380, 269, 377, 54);
+		txtCodigoActividadCorregir.setBounds(380, 219, 377, 54);
 		panelCorregirDocente.add(txtCodigoActividadCorregir);
-
-		txtResolucionCorregir = new JTextField();
-		txtResolucionCorregir.setEditable(false);
-		txtResolucionCorregir.setFont(new Font("Arial", Font.BOLD, 20));
-		txtResolucionCorregir.setColumns(10);
-		txtResolucionCorregir.setBounds(380, 380, 377, 54);
-		panelCorregirDocente.add(txtResolucionCorregir);
 
 		txtNotaCorregir = new JTextField();
 		txtNotaCorregir.setFont(new Font("Arial", Font.BOLD, 20));
 		txtNotaCorregir.setColumns(10);
-		txtNotaCorregir.setBounds(380, 490, 377, 54);
+		txtNotaCorregir.setBounds(301, 585, 96, 54);
 		panelCorregirDocente.add(txtNotaCorregir);
 
 		btnSubirCorregir = new JButton("SUBIR");
@@ -359,16 +355,22 @@ public class DocenteView extends JFrame implements IView {
 		btnSubirCorregir.setBounds(504, 585, 139, 54);
 		panelCorregirDocente.add(btnSubirCorregir);
 
+		textAreaCorregir = new JTextArea();
+		textAreaCorregir.setBounds(22, 114, 621, 224);
+		JScrollPane scroll3 = new JScrollPane(textAreaCorregir);
+		scroll3.setBounds(22, 304, 799, 268);
+		panelCorregirDocente.add(scroll3);
+
 	}
 
 	//// metodos get y set de ACTIVIDAD 
 
 	public String getDescripcionAddActividad() {
-		return txtDescripcionAddActividad.getText();
+		return textAreaAddActividad.getText();
 	}
 
 	public void setDescripcionAddActividad(String s) {
-		txtDescripcionAddActividad.setText(s);
+	textAreaAddActividad.setText(s);
 	}
 
 	public String getCodigoMateriaAddActividad() {
@@ -380,11 +382,11 @@ public class DocenteView extends JFrame implements IView {
 	}
 
 	public String getDescripcionDeleteActividad() {
-		return txtDescripcionDeleteActividad.getText();
+		return textAreaDeleteActividad.getText();
 	}
 
 	public void setDEscripcionDeleteActividad(String s) {
-		txtDescripcionDeleteActividad.setText(s);
+		textAreaDeleteActividad.setText(s);
 	}
 
 	public String getCodigoMateriaDeleteActividad() {
@@ -422,11 +424,11 @@ public class DocenteView extends JFrame implements IView {
 	}
 
 	public String getResolucionCorregir() {
-		return txtResolucionCorregir.getText();
+		return textAreaCorregir.getText();
 	}
 
 	public void setResolucionCorregir(String s) {
-		txtResolucionCorregir.setText(s);
+		textAreaCorregir.setText(s);
 	}
 
 	public String getNotaCorregir() {
@@ -454,6 +456,7 @@ public class DocenteView extends JFrame implements IView {
 
 	public boolean hasCodeDeleteActividad() {
 		return !(this.getCodigoMateriaDeleteActividad().compareTo("") == 0) || (this.getCodigoMateriaDeleteActividad() == null);
+
 	}
 
 	
