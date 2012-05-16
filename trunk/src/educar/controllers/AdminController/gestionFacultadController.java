@@ -21,21 +21,17 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 
     @Override
     public void setView(IView view) {
-	// TODO Auto-generated method stub
 	this.view = (administrador) view;
     }
 
     @Override
     public void process(String model) {
-	// TODO Auto-generated method stub
 	if (model.compareTo(ADD) == 0) {
-	    // view.present("Apretaste ADD");
 	    addFacultad();
 	    view.deleteViewFieldsAlta_F();
 	    showFacultadInList();
 	}
 	if (model.compareTo(SEARCH) == 0) {
-	    // view.present("apretaste SEARCH");
 	    try {
 		searchFacultadInDB();
 	    } catch (FacultadNotFound e) {
@@ -44,7 +40,6 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	    showFacultadInList();
 	}
 	if (model.compareTo(DELETE) == 0) {
-	    // view.present("Apretaste DELETE");
 	    try {
 		deleteFacultad();
 	    } catch (FacultadNotFound e) {

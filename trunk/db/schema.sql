@@ -28,7 +28,7 @@ USE educar_dev;
 DROP TABLE IF EXISTS `educar_dev`.`Actividad`;
 CREATE TABLE  `educar_dev`.`Actividad` (
   `cod_actividad` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion_act` varchar(50) DEFAULT NULL,
+  `descripcion_act` text,
   `cod_materia` int(11) NOT NULL,
   PRIMARY KEY (`cod_actividad`),
   UNIQUE KEY `cod_actividad` (`cod_actividad`),
@@ -335,10 +335,10 @@ CREATE TABLE  `educar_dev`.`Resolucion` (
   KEY `FKdniDoncte` (`dni_docente`),
   KEY `FKcodActivdad` (`cod_actividad`),
   KEY `FKDniAlumno` (`dni_alumno`),
-  CONSTRAINT `FKDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `TieneActividad` (`dni_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKcodActivdad` FOREIGN KEY (`cod_actividad`) REFERENCES `TieneActividad` (`codigo_a`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FKDniAlumno` FOREIGN KEY (`dni_alumno`) REFERENCES `TieneActividad` (`dni_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FKdniDoncte` FOREIGN KEY (`dni_docente`) REFERENCES `Docente` (`dni_docente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `educar_dev`.`Resolucion`
@@ -426,7 +426,9 @@ CREATE TABLE  `educar_dev`.`cursa` (
 /*!40000 ALTER TABLE `cursa` DISABLE KEYS */;
 LOCK TABLES `cursa` WRITE;
 INSERT INTO `educar_dev`.`cursa` VALUES  (1,1),
- (3336109,2);
+ (3336109,1),
+ (3336109,2),
+ (3336109,13);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cursa` ENABLE KEYS */;
 

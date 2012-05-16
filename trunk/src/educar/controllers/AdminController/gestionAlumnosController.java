@@ -11,7 +11,8 @@ import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Alumno;
 
-public class gestionAlumnosController implements IController, defaultLanguaje, IListController {
+public class gestionAlumnosController implements IController, defaultLanguaje,
+	IListController {
 
     private administrador view;
     private static Alumno student = null;
@@ -19,7 +20,6 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
 
     @Override
     public void process(String model) {
-	// TODO agregar alumno
 	if (model.compareTo(ADD) == 0) {
 	    AddStudent();
 	    view.deleteViewFieldsAlta_A();
@@ -44,7 +44,6 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
     }
 
     private void searchAStudentInDbase() {
-	// TODO Auto-generated method stub
 	student = Alumno.getAlumno(view.getDniMod_A());
 	if (student != null) {
 	    view.setTfNombre_modif_A(student.getName());
@@ -60,15 +59,15 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
 
     }
 
-    // se supones que tiene un alumno lo borro student tiene un alumno
     private void deletStudent() {//
 	searchAStudentInDbase();
-	if (!(view.getDniMod_A().compareTo("") == 0)) {// si no tengo un
+	if (!(view.getDniMod_A().compareTo("") == 0)) {
 	    if (student.destroy()) {
 		view.present("borrado del alumno exitoso");
 		view.deleteViewFieldsMod_A();
-	    }else{
-		view.present("el alumno no se puede borrar, ya que esta cursando materias");
+	    } else {
+		view
+			.present("el alumno no se puede borrar, ya que esta cursando materias");
 	    }
 
 	}
@@ -77,13 +76,11 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
 
     @Override
     public void setView(IView view) {
-	// TODO Auto-generated method stub
 	this.view = (administrador) view;
     }
 
     private void AddStudent() {
-	// TODO ("3563", "xxx", "xxx","2000-12-12","xxx","xxx") falta
-	if (view.fieldsIsOkAlta_A()) {// si no ingreso algun campo no permite
+	if (view.fieldsIsOkAlta_A()) {
 	    // guardad
 	    Alumno alumno = new Alumno(view.getDniAlta_A(), view
 		    .getNameAlta_A(), view.getLastnameAlta_A(), view
@@ -94,17 +91,13 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
 			.present("alumno agregado correctamente. Se creo el Usuario para el alumno ");
 
 	    } else {
-		// datos ingresados no son validos hacer una funcion que avise
-		// que
-		// campo esta mal!
 		view.present("verifique los datos ingresados sean validos");
 	    }
 	} else
 	    view.present("faltan completar campos");
     }
 
-    private void modifyStudent() {// ponerle la edad !!!!
-//	student = Alumno.getAlumno(view.getDniMod_A()); si pongo esto no puedo modifcar el dni
+    private void modifyStudent() {
 	if (student != null) {
 	    String[] values = { view.getDniMod_A(), view.getLastnameMod_A(),
 		    view.getNameMod_A(), view.getFechaNacMod_A(),
@@ -114,7 +107,6 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
 		Alumno.update(values, student.getDni());
 		view.present("acutalizacion realizada");
 	    } catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		view.present("NO se pude actualizar");
 	    }
@@ -126,7 +118,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
     private void showStudentInList() {
 	try {
 	    studentsList = Alumno.ListAlumnos();
-        view.setListAlumnos_ABM(studentsList);
+	    view.setListAlumnos_ABM(studentsList);
 	} catch (SQLException e) {
 	    view.present("no entro por la lista de alumnos");
 	}
@@ -146,5 +138,4 @@ public class gestionAlumnosController implements IController, defaultLanguaje, I
 	view.setTfDni_modif_A(FuncionesAuxiliares.idString(item));
 	searchAStudentInDbase();
     }
-
 }

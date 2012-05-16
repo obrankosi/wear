@@ -102,7 +102,7 @@ public class DedicacionDocenteController implements IController,
 		    hsDedicacion);
 	    if (DedicacionDocente.containtDedicacionDocente(newArg)) {
 		view.present("el docente ya posee cargo");
-	    } else {// ver si esta bien
+	    } else {
 		if (DedicacionDocente.containtDedicacionCargo(newArg)) {
 		    view.present("el cargo ya esta ocupado");
 		} else {
@@ -111,7 +111,6 @@ public class DedicacionDocenteController implements IController,
 			view.present("guardado exitoso");
 		    }
 		}
-
 	    }
 
 	} else {
@@ -134,7 +133,6 @@ public class DedicacionDocenteController implements IController,
 	this.view = (administrador) view;
     }
 
-    // siempre
     @Override
     public void processItemList(String item) {
 	try {

@@ -19,10 +19,10 @@ public class AsignacionDocenteController implements IController,
     private LinkedList<String> docentes;
     private LinkedList<String> materias;
     private static Subject materia;
+    private static LinkedList<String> docentesLigados;
 
     @Override
     public void process(String model) {
-	// asignar un docente cargo de una materia
 	if (model.compareTo(ADD) == 0) {
 	    asignacionDocenteEncargado();
 	}
@@ -34,11 +34,10 @@ public class AsignacionDocenteController implements IController,
 	    borrarDocenteEncargado();
 	}
 	if (model.compareTo(ASIGNAR) == 0) {
-	    // MUY IMPORTANTE QUE EL BORRADO SEA DARLE NULL AL CAMPO DE LA BD
 	    asignarDocenteDictado();
+
 	}
 	if (model.compareTo(REMOVE) == 0) {
-	    // MUY IMPORTANTE QUE EL BORRADO SEA DARLE NULL AL CAMPO DE LA BD
 	    removerDocenteDictado();
 	}
 
@@ -49,7 +48,7 @@ public class AsignacionDocenteController implements IController,
 	    String materia = view.getMateriaAsignacionDocenteDesignacion();
 	    String docente = view.getDniAsignacionDocenteDesignacion();
 	    AsignacionDocente dicta = AsignacionDocente.getAsignacionDocente(
-		    docente,materia);
+		    docente, materia);
 	    if (dicta != null) {
 		dicta.delete();
 		view.present("Borrado exitoso");
@@ -94,7 +93,7 @@ public class AsignacionDocenteController implements IController,
 		}
 	    }
 	    view.setVacioAsignacionDocente();
-	} else {// si las 2 solapas de la view estan vacias
+	} else {
 	    view.present("no hay docente que borrar");
 	}
 
@@ -125,7 +124,21 @@ public class AsignacionDocenteController implements IController,
 	} else {
 	    view.present("Faltan ingresar camapos ");
 	}
+    }
 
+    private void listaDocenteLigados(String codMateria) {
+	docentesLigados = AsignacionDocente.getDocentesAsignados(codMateria);
+	LinkedList<String> result = new LinkedList<String>();
+	String newArgs = new String();
+	Docente newDocente;
+	for (int i = 0; i < docentesLigados.size(); i++) {
+	    newDocente = Docente.getDocente(docentes.get(i));
+	    newArgs = ("dni: " + docentes.get(i) + " | " + "nombre : "
+		    + newDocente.getName() + " | " + " apellido: " + newDocente
+		    .getLastName());
+	    result.add(newArgs);
+	}
+	view.setListDocentesLigadosMateria(result);
     }
 
     @Override
@@ -153,6 +166,7 @@ public class AsignacionDocenteController implements IController,
 	/* aca el codigo si lo que preciono fue materia */
 	else {
 	    materia = Subject.getSubject(FuncionesAuxiliares.idString(item));
+	    listaDocenteLigados(FuncionesAuxiliares.idString(item));
 	    if (materia.getRTeacher() != null) {
 		view.present("Atencion la materia tiene docente encargado");
 		view.setDniAsignacionDocenteEncargado(materia.getRTeacher());

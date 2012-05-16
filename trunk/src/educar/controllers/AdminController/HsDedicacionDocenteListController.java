@@ -24,7 +24,6 @@ public class HsDedicacionDocenteListController implements IListController,
 
     @Override
     public void process(String model) {
-	// TODO Auto-generated method stub
 
     }
 
