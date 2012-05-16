@@ -45,7 +45,7 @@ public class TieneActividad {
 
     /**
      * @param dniAlumno
-     * @return LinkedList<String> numero de actividades
+     * @return {@link LinkedList} numero de actividades
      *  
      */
     public static LinkedList<String> listaActividadesAlumnos(String dniAlumno) {

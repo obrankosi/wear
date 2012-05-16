@@ -15,7 +15,46 @@ public class Subject {
     private String facultad;
     private static JPA jpa = new JPA();
     private static ResultSet rst;
+    
+    /**
+     * @param code
+     * @param name
+     * @param responsable
+     * @param facultad
+     */
+    public Subject(String code, String name, String responsable, String facultad) {
+	this.subjectCode = code;
+	this.subjectName = name;
+	this.responsableTeacher = responsable;
+	this.facultad = facultad;
+    }
 
+    /**
+     * @param code
+     * @param name
+     * @param responsable
+     */
+    public Subject(String code, String name, String responsable) {
+	this.subjectCode = code;
+	this.subjectName = name;
+	this.responsableTeacher = responsable;
+    }
+
+    /**
+     * @param name
+     * @param codFacultad
+     */
+    public Subject(String name, String codFacultad) {
+	this.subjectName = name;
+	this.facultad = codFacultad;
+	this.responsableTeacher = null;
+    }
+
+    /**
+     * setea con null el campo en la bd
+     * @param column
+     * @throws SQLException
+     */
     public void updateNullDni(String column) throws SQLException {
 	String columnKey = "cod_materia";
 	String primaryKey = this.getCode();
@@ -27,6 +66,9 @@ public class Subject {
 
     }
 
+    /**
+     * @throws SQLException
+     */
     public void update() throws SQLException {
 	String[] columns = { "nombre_mat", "dni_docente", "facultad" };
 	String[] values = { this.getName(), this.getRTeacher(),
@@ -43,6 +85,11 @@ public class Subject {
 
     }
 
+    /**
+     * @param values arreglo de valores
+     * @param primaryKey
+     * @throws SQLException
+     */
     public static void update(String[] values, String primaryKey)
 	    throws SQLException {
 	String[] columns = { "cod_materia", "nombre_mat", "dni_docente",
@@ -50,7 +97,6 @@ public class Subject {
 	try {
 	    jpa.update("Materia", columns, values, columns[0], primaryKey);
 	} catch (Exception e) {
-	    // TODO: handle exception
 	    throw new SQLException();
 
 	}
@@ -62,7 +108,7 @@ public class Subject {
      * @param values
      * @param primaryKey
      * @throws SQLException
-     *             IMPORTANTE: columna : valor , columna2 : valor2 tine que
+     *             NOTA: columna : valor , columna2 : valor2 tiene que
      *             concidir
      */
     public static void update(String[] columns, String[] values,
@@ -76,26 +122,7 @@ public class Subject {
 	}
 
     }
-
-    public Subject(String code, String name, String responsable, String facultad) {
-	this.subjectCode = code;
-	this.subjectName = name;
-	this.responsableTeacher = responsable;
-	this.facultad = facultad;
-    }
-
-    public Subject(String code, String name, String responsable) {
-	this.subjectCode = code;
-	this.subjectName = name;
-	this.responsableTeacher = responsable;
-    }
-
-    public Subject(String name, String codFacultad) {
-	this.subjectName = name;
-	this.facultad = codFacultad;
-	this.responsableTeacher = null;
-    }
-
+   
     /**
      * @param tableName
      * @return true ssi inserto correctamente la materia
@@ -128,9 +155,10 @@ public class Subject {
 	}
     }
 
-    /*
-     * retorna una lista de string donde cada string es: DNI,NOMBRE,APELLIDO
-     * para poder mostrarlo en una lista
+    
+    /**
+     * @return {@link LinkedList}
+     * @throws SQLException
      */
     public static LinkedList<String> subjectCodesList() throws SQLException {
 	rst = jpa.proyeccion(" Materia ", "cod_materia ");
@@ -141,9 +169,24 @@ public class Subject {
 	return result;
     }
 
-    /*
-     * busca en la BD una materia por su codigo (es unico)
+    /**
+     * @return lista Materias {...cod_materia,nombre,cod_facultad...}
+     * @throws SQLException
      */
+    public static LinkedList<String> subjectList() throws SQLException {
+	rst = jpa.proyeccion("Materia", "cod_materia,nombre_mat,facultad");
+	LinkedList<String> result = new LinkedList<String>();
+	while (rst.next()) {
+	    result.add(rst.getString(1) + " " + rst.getString(2) + " "
+		    + rst.getString(3));
+	}
+	return result;
+    }
+
+    public boolean delete() {
+	return this.destroy("Materia");
+    }
+
     private static Subject getSubjectByCode(String codMateria)
 	    throws SubjectNotFound {
 
@@ -164,18 +207,6 @@ public class Subject {
 	return u;
     }
 
-    /*
-     * borra una materia por su codigo, retorna true ssi el borrado fue exitoso
-     * si la materia no existe, retorna false
-     */
-    public boolean delete() {
-	return this.destroy("Materia");
-    }
-
-    /*
-     * borra una Materia entera por cod_mat, Return True ssi el borrado fues
-     * exitoso supongo que la materia a borrar existe
-     */
     private boolean destroy(String tableName) {
 	try {
 	    jpa.destroy(tableName, "cod_materia", this.getCode());
@@ -208,20 +239,6 @@ public class Subject {
 
     public String getRTeacher() {
 	return this.responsableTeacher;
-    }
-
-    /**
-     * @return lista Materias {...cod_materia,nombre,cod_facultad...}
-     * @throws SQLException
-     */
-    public static LinkedList<String> subjectList() throws SQLException {
-	rst = jpa.proyeccion("Materia", "cod_materia,nombre_mat,facultad");
-	LinkedList<String> result = new LinkedList<String>();
-	while (rst.next()) {
-	    result.add(rst.getString(1) + " " + rst.getString(2) + " "
-		    + rst.getString(3));
-	}
-	return result;
     }
 
     public String getCodigoFacultad() {

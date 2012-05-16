@@ -25,19 +25,91 @@ public class Cargos {
 
     }
 
+    /**
+     * @param nombreCargo
+     */
     public Cargos(String nombreCargo) {
 	this.setNombreCargo(nombreCargo);
 
     }
 
+    /**
+     * @param codCargo
+     * @return cargo
+     */
     public static Cargos getCargo(String cod) {
 	try {
 	    return getCodigo(cod, "Cargo");
 	} catch (CargosNotFound e) {
-	    // TODO Auto-generated catch block
 	    return null;
 	}
 
+    }
+
+    /**
+     * @return true ssi guardado exitoso
+     */
+    public boolean save() {
+	String[] columns = { "cod_cargo", "descripcion_cargo" };
+	try {
+	    return save("Cargo", columns);
+	} catch (CargosNotFound e) {
+	    return false;
+	}
+    }
+
+    /**
+     * @return {@link LinkedList} cargos
+     * @throws SQLException
+     */
+    public static LinkedList<String> listaCargos() throws SQLException {
+	rst = jpa.proyeccion("Cargo", "cod_cargo,descripcion_cargo");
+	LinkedList<String> result = new LinkedList<String>();
+	while (rst.next()) {
+	    result.add(rst.getString(1) + " " + rst.getString(2) + " ");
+	}
+	return result;
+    }
+
+    /**
+     * @return {@link LinkedList} codigo de cargo
+     * @throws SQLException
+     */
+    public static LinkedList<String> listCargosCod() throws SQLException {
+	rst = jpa.proyeccion("Cargo", "cod_cargo");
+	LinkedList<String> result = new LinkedList<String>();
+	while (rst.next()) {
+	    result.add(rst.getString(1));
+	}
+	return result;
+    }
+
+    /**
+     * @return true ssi borrado exitoso
+     */
+    public boolean destroy() {
+	try {
+	    jpa.destroy("Cargo", "cod_cargo", this.getCodigoCargo());
+	    return true;
+	} catch (SQLException e) {
+	    return false;
+	}
+
+    }
+
+    /**
+     * @param values arreglo de valores
+     * @param codigoCargo2
+     * @throws SQLException
+     */
+    public void update(String[] values, String codigoCargo2)
+	    throws SQLException {
+	String[] columns = { "descripcion_cargo" };
+	try {
+	    jpa.update("Cargo", columns, values, "cod_cargo", codigoCargo2);
+	} catch (Exception e) {
+	    throw new SQLException();
+	}
     }
 
     private static Cargos getCodigo(String cod, String tableName)
@@ -59,15 +131,6 @@ public class Cargos {
 	return cargo;
     }
 
-    public boolean save() {
-	String[] columns = { "cod_cargo", "descripcion_cargo" };
-	try {
-	    return save("Cargo", columns);
-	} catch (CargosNotFound e) {
-	    return false;// TODO Auto-generated catch block
-	}
-    }
-
     private boolean save(String tableName, String[] columns)
 	    throws CargosNotFound {
 	try {
@@ -85,25 +148,6 @@ public class Cargos {
 	}
     }
 
-    public static LinkedList<String> listaCargos() throws SQLException {
-	rst = jpa.proyeccion("Cargo", "cod_cargo,descripcion_cargo");
-	LinkedList<String> result = new LinkedList<String>();
-	while (rst.next()) {
-	    result.add(rst.getString(1) + " " + rst.getString(2) + " ");
-	}
-	return result;
-    }
-    
-    public static LinkedList<String> listCargosCod() throws SQLException {
-	rst = jpa.proyeccion("Cargo", "cod_cargo");
-	LinkedList<String> result = new LinkedList<String>();
-	while (rst.next()) {
-	    result.add(rst.getString(1));
-	}
-	return result;
-    }
-
-    // ------------------------------------------------------------------------------------
     private void setNombreCargo(String nombreCargo2) {
 	this.nombreCargo = nombreCargo2;
 
@@ -122,27 +166,4 @@ public class Cargos {
 	return this.codigoCargo;
     }
 
-    public void update(String[] values, String codigoCargo2)
-	    throws SQLException {
-	String[] columns = { "descripcion_cargo" };
-	try {
-	    jpa.update("Cargo", columns, values, "cod_cargo", codigoCargo2);
-	} catch (Exception e) {
-	    // TODO: handle exception
-	    throw new SQLException();
-
-	}
-    }
-
-    public boolean destroy() {
-	// TODO Auto-generated method stub
-	try {
-	    jpa.destroy("Cargo", "cod_cargo", this.getCodigoCargo());
-	    return true;
-	} catch (SQLException e) {
-	    // TODO Auto-generated catch block
-	    return false;
-	}
-
-    }
 }
