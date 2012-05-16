@@ -3,6 +3,7 @@ package educar.models.AdminModels;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import educar.db.JPA;
 
@@ -13,19 +14,22 @@ public class AsignacionDocente {
 
     private String codMateria;
     private String dniDocente;
-
+    
+    private static ResultSet rst;
     private static JPA jpa = new JPA();
 
     /**
      * @param materia
      * @param docente
      */
-
     public AsignacionDocente(String materia, String docente) {
 	this.codMateria = materia;
 	this.dniDocente = docente;
     }
 
+    /**
+     * @return true ssi borrado exitoso
+     */
     public boolean save() {
 	String[] columns = { "dni_doc", "cod_mat" };
 	PreparedStatement stm = jpa.newRecord("educar_dev." + "Dicta", columns);
@@ -40,8 +44,47 @@ public class AsignacionDocente {
 	return true;
     }
 
+    /**
+     * @return  true ssi borrado exitoso
+     */
     public boolean delete() {
 	return destroy("Dicta");
+    }
+
+    /**
+     * @param codMateria
+     * @return {@link LinkedList} codigos docentes asignados sin el responsable
+     */
+    public static  LinkedList<String>  getDocentesAsignados (String codMateria){
+	LinkedList<String> result = new LinkedList<String>();
+	JPA jpa = new JPA();
+	rst = jpa.proyeccion("Dicta","dni_doc", "cod_mat",codMateria);
+	try {
+	    while (rst.next()) {
+	        String dniD = rst.getString(1);
+	        result.add((dniD).trim());
+	    }
+	} catch (SQLException e) {
+	    System.out.println("erro en la consulta en la base de datos");
+	    return null;
+	}
+	return result;
+
+    }
+    
+    /**
+     * @param dniDocente
+     * @param codMateria
+     * @return {@link AsignacionDocente}
+     */
+    public static AsignacionDocente getAsignacionDocente(String dniDocente,
+	    String codMateria) {
+	try {
+	    return getAsignacionDocenteByCode(dniDocente, codMateria);
+	} catch (AsignacionDocenteNotFound e) {
+	    return null;
+	}
+
     }
 
     private boolean destroy(String tableName) {
@@ -54,17 +97,7 @@ public class AsignacionDocente {
 	    return false;
 	}
     }
-
-    public static AsignacionDocente getAsignacionDocente(String dniDocente,
-	    String codMateria) {
-	try {
-	    return getAsignacionDocenteByCode(dniDocente, codMateria);
-	} catch (AsignacionDocenteNotFound e) {
-	    return null;
-	}
-
-    }
-
+    
     private static AsignacionDocente getAsignacionDocenteByCode(
 	    String dniDocente2, String codMateria2)
 	    throws AsignacionDocenteNotFound {

@@ -20,11 +20,10 @@ public class Alumno {
     public Alumno(String dni, String name, String lastName, String fN,
 	    String dir, String tel) {
 	Person(dni, name, lastName, fN, dir, tel);
-	// TODO Auto-generated constructor stub
     }
 
     /**
-     * @return
+     * @retur true ssi guardado exitoso
      */
     public boolean save() {
 	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
@@ -33,7 +32,7 @@ public class Alumno {
     }
 
     /**
-     * @return
+     * @return  true ssi borrado exitoso
      */
     public boolean destroy() {
 	return destroy("Alumnos");
@@ -41,15 +40,15 @@ public class Alumno {
 
     /**
      * @param dni
-     * @return
+     * @return Alumno
      */
     public static Alumno getAlumno(String dni) {
 	return getPerson(dni, "Alumnos");
     }
 
-    /*
-     * retorna una lista de string donde cada string es: DNI,NOMBRE,APELLIDO
-     * para poder mostrarlo en una lista
+    /**
+     * @return {@link LinkedList} donde cada string es: DNI,NOMBRE,APELLIDO
+     * @throws SQLException
      */
     public static LinkedList<String> ListAlumnos() throws SQLException {
 	rst = jpa.proyeccion(" Alumnos ", " dni,nombre_a , apellido_a");
@@ -61,6 +60,24 @@ public class Alumno {
 	return result;
     }
 
+    /**
+     * @param values
+     * @param primaryKey
+     * @throws SQLException 
+     */
+    public static void update(String[] values, String primaryKey)
+	    throws SQLException {
+	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
+		"telefono_a", "direccion_a" };
+	try {
+	    jpa.update("Alumnos", columns, values, columns[0], primaryKey);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    throw new SQLException();
+	}
+
+    }
+
     private String name;
     private String lastName;
     private String fN;
@@ -69,8 +86,6 @@ public class Alumno {
     private String dir;
     private static JPA jpa = new JPA();
     private static ResultSet rst;
-
-    // private Hashtable<String, String> alumnos;
 
     private void Person(String dni, String lastName, String name, String fN,
 	    String tel, String dir) {
@@ -82,13 +97,10 @@ public class Alumno {
 	this.dir = dir;
     }
 
-    /*
-     * Guarda una persona dar como parametro la tabla donde se guarda (docente ,
-     * alumno) Return True ssi el borrado fues exitoso
-     */
+    
     private boolean save(String tableName, String[] nameColumns) {
 	try {
-	    Alumno.getPersonByDni(this.dni, tableName);//si no lo encuntra tira una ex de personnotfound
+	    Alumno.getPersonByDni(this.dni, tableName);
 	    return false;
 	} catch (PersonNotFound e1) {
 	    String[] columns = nameColumns;
@@ -115,7 +127,6 @@ public class Alumno {
     /*
      * dni a buscar, nombre de la tabla, nombre de la columna
      */
-
     private static Alumno getPersonByDni(String dni2, String tableName)
 	    throws PersonNotFound {
 	// TODO Auto-generated method stub
@@ -138,24 +149,15 @@ public class Alumno {
 	return u;
     }
 
-    /*
-     * borra una persona entera por dni ,Return True ssi el borrado fues exitoso
-     */
     private boolean destroy(String tableName) {
 	try {
 	    jpa.destroy(tableName, "dni", this.getDni());
 	    return true;
 	} catch (SQLException e) {
-	    // TODO esta exception es poruqe al borrar no pudo debido a que
-	    // tiene restricciones
 	    return false;
 	}
 
     }
-
-    /*
-     * Return una persona buscada por dni null en el caso que no exista;
-     */
 
     private static Alumno getPerson(String dni, String tableName) {
 	Alumno person = null;
@@ -163,35 +165,12 @@ public class Alumno {
 	    person = Alumno.getPersonByDni(dni, tableName);
 	    return person;
 	} catch (PersonNotFound e) {
-	    // TODO Auto-generated catch block
 	    return person;
 	}
     }
 
-    // excption por si no puede hacer el update en la base de datos
-    /**
-     * @param values
-     * @param primaryKey
-     * @throws SQLException
-     */
-    public static void update(String[] values, String primaryKey)
-	    throws SQLException {// numero de
-	// alumno es
-	// auto
-	// incremetal
-	String[] columns = { "dni", "apellido_a", "nombre_a", "fechaNac_a",
-		"telefono_a", "direccion_a" };
-	try {
-	    jpa.update("Alumnos", columns, values, columns[0], primaryKey);
-	} catch (Exception e) {
-	    // TODO: handle exception
-	    throw new SQLException();
-	}
-
-    }
 
     public String getDni() {
-	// TODO Auto-generated method stub
 	return dni;
     }
 

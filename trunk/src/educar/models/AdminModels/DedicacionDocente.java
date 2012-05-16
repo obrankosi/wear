@@ -7,6 +7,10 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author edu
+ *
+ */
 public class DedicacionDocente implements Comparable<DedicacionDocente> {
 
     private String dniDocente;
@@ -18,6 +22,12 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
     private static ResultSet rst;
     private DedicacionDocente elem;
 
+    /**
+     * @param codFacultad
+     * @param dniDocente
+     * @param codCargo
+     * @param hsDedicacion
+     */
     public DedicacionDocente(String codFacultad, String dniDocente,
 	    String codCargo, String hsDedicacion) {
 	this.dniDocente = dniDocente;
@@ -26,6 +36,10 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 	this.codFacultad = codFacultad;
     }
 
+    /**
+     * @param arg1
+     * @return true ssi arg1 esta contenido en la BD
+     */
     public static boolean containtDedicacionDocente(DedicacionDocente arg1) {
 	String[] column = { "codigo_fac", "dni_doc" };
 	String[] values = { arg1.getCodFacultad(), arg1.getDniDocente() };
@@ -44,6 +58,10 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 
     }
 
+    /**
+     * @param arg1
+     * @return true ssi arg1 esta contenido en la BD
+     */
     public static boolean containtDedicacionCargo(DedicacionDocente arg1) {
 	String[] column = { "codigo_fac", "codigo_cargo" };
 	String[] values = { arg1.getCodFacultad(), arg1.getCodCargo() };
@@ -56,12 +74,14 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 		return false;
 	    }
 	} catch (SQLException e) {
-	    // la consulta dio error
 	    return false;
 	}
 
     }
 
+    /**
+     * @return true ssi el guardado es exitoso
+     */
     public boolean save() {
 	String[] columns = { "codigo_fac", "dni_doc", "codigo_cargo",
 		"hs_dedicacion" };
@@ -82,10 +102,16 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 
     }
 
+    /**
+     * @return true ssi borrado exitoso
+     */
     public boolean delete() {
 	return destroy("Trabaja");
     }
 
+    /**
+     * @return true ssi actulizacion exitosa
+     */
     public boolean update() {
 	String[] columns = { "hs_dedicacion" };
 	String[] values = { this.getHsDedicacion() };
@@ -101,22 +127,11 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
 
     }
 
-    // no la use todavia y no la voy a usar
-    public static LinkedList<DedicacionDocente> getListDedicacion()
-	    throws SQLException {
-	LinkedList<DedicacionDocente> result = new LinkedList<DedicacionDocente>();
-	JPA jpa = new JPA();
-	rst = jpa.showAll("Trabaja");
-	while (rst.next()) {
-	    String codFac = rst.getString(1);
-	    String dniD = rst.getString(2);
-	    String codC = rst.getString(3);
-	    String hsD = rst.getString(4);
-	    result.add(new DedicacionDocente(codFac, dniD, codC, hsD));
-	}
-	return result;
-    }
 
+    /**
+     * @return {@link LinkedList} lista de dedicaciones
+     * @throws SQLException
+     */
     public static LinkedList<String> listDedicacion() throws SQLException {
 	LinkedList<String> result = new LinkedList<String>();
 	JPA jpa = new JPA();
