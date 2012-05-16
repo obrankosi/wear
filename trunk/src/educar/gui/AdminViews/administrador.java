@@ -190,6 +190,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     private JLabel lblListaDeFacultadMMateria;
     private List listFacultadModificarMateria;
     private JTextField textFFacultadModificarMateria;
+    private List listaDocenteLigadosMateria;
+    private JLabel lblDocenteLigadoMateria;
 
     /**
      * Create the frame.
@@ -1999,7 +2001,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		gestionGuardarDA);
 
 	listaAsignacionMateria2 = new List();
-	listaAsignacionMateria2.setBounds(591, 81, 267, 514);
+	listaAsignacionMateria2.setBounds(591, 81, 267, 235);
 	panelDesignacionAsignacionDocente.add(listaAsignacionMateria2);
 
 	AdminListListener listaAM1 = new AdminListListener();
@@ -2038,7 +2040,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		.add(lblDniDesignacionAsignacionDocente);
 
 	listaAsignacionDocente = new List();
-	listaAsignacionDocente.setBounds(869, 81, 267, 514);
+	listaAsignacionDocente.setBounds(869, 81, 267, 235);
 	panelDesignacionAsignacionDocente.add(listaAsignacionDocente);
 
 	AdminListListener listaAD1 = new AdminListListener();
@@ -2073,6 +2075,16 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		.setBounds(90, 229, 75, 14);
 	panelDesignacionAsignacionDocente
 		.add(lblCartelAAsignarDesignacionAsignacionDocente);
+	
+	listaDocenteLigadosMateria = new List();
+	listaDocenteLigadosMateria.setBounds(591, 350, 545, 235);
+	panelDesignacionAsignacionDocente.add(listaDocenteLigadosMateria);
+	
+	lblDocenteLigadoMateria = new JLabel("Docentes Ligados  a Materias");
+	lblDocenteLigadoMateria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblDocenteLigadoMateria.setFont(new Font("Arial", Font.BOLD, 18));
+	lblDocenteLigadoMateria.setBounds(595, 308, 541, 45);
+	panelDesignacionAsignacionDocente.add(lblDocenteLigadoMateria);
 
 	// ||||||||||||||||PANEL GENERAL|||||||||||||||||||||//
 	// ||||||||||||||||||||||||||||||||||||||||||||||||||//
