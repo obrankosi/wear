@@ -8,6 +8,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +25,9 @@ import javax.swing.border.EmptyBorder;
 
 import educar.controllers.DocenteController;
 import educar.controllers.IController;
+import educar.controllers.IListController;
 import educar.gui.IView;
+import educar.gui.Listener.DocenteListListener;
 import educar.gui.Listener.DocenteListener;
 
 public class DocenteView extends JFrame implements IView {
@@ -54,8 +57,7 @@ public class DocenteView extends JFrame implements IView {
 	private JTextArea textAreaCorregir;
 
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	/**
 	 * Create the frame.
 	 */
@@ -175,7 +177,6 @@ public class DocenteView extends JFrame implements IView {
 		lblCartelAddActividad.setBounds(0, 11, 886, 92);
 		panelAddActividadDocente.add(lblCartelAddActividad);
 
-		
 		txtCodigoMAteriaAddActividad = new JTextField();
 		txtCodigoMAteriaAddActividad.setEditable(false);
 		txtCodigoMAteriaAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
@@ -187,22 +188,28 @@ public class DocenteView extends JFrame implements IView {
 		listaMateriaActividadDocente.setBounds(896, 77, 265, 515);
 		panelAddActividadDocente.add(listaMateriaActividadDocente);
 
+		DocenteListListener lMateriasA = new DocenteListListener();
+		IListController listaMaterias = new DocenteController();
+		((DocenteController) listaMaterias).setView(this);
+		lMateriasA.associate(listaMateriaActividadDocente, listaMaterias);
+		
+		
 		btnGuardarAddActividad = new JButton("SUBIR");
 		btnGuardarAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
 		btnGuardarAddActividad.setBounds(378, 515, 183, 64);
 		panelAddActividadDocente.add(btnGuardarAddActividad);
-		
-		DocenteListener bSubirA= new DocenteListener();
+
+		DocenteListener bSubirA = new DocenteListener();
 		IController subirActividad = new DocenteController();
 		subirActividad.setView(this);
 		bSubirA.associate(btnGuardarAddActividad, subirActividad);
 
+		
 		textAreaAddActividad = new JTextArea();
 		textAreaAddActividad.setBounds(22, 114, 621, 224);
 		JScrollPane scroll = new JScrollPane(textAreaAddActividad);
 		scroll.setBounds(22, 144, 799, 222);
 		panelAddActividadDocente.add(scroll);
-
 
 		// --------------------panel DELETE actividad ---------
 
@@ -243,7 +250,6 @@ public class DocenteView extends JFrame implements IView {
 		lblCartelDeleteActividad.setBounds(0, 11, 886, 92);
 		panelDeleteActividadDocente.add(lblCartelDeleteActividad);
 
-		
 		txtCodigoMAteriaDeleteActividad = new JTextField();
 		txtCodigoMAteriaDeleteActividad.setEditable(false);
 		txtCodigoMAteriaDeleteActividad
@@ -255,26 +261,30 @@ public class DocenteView extends JFrame implements IView {
 		listaActividadDocente = new List();
 		listaActividadDocente.setBounds(896, 77, 265, 515);
 		panelDeleteActividadDocente.add(listaActividadDocente);
+			
+		DocenteListListener lBorrarA = new DocenteListListener();
+		IListController listaActividades = new DocenteController();
+		((DocenteController) listaActividades).setView(this);
+		lBorrarA.associate(listaActividadDocente, listaActividades);
 
+		
 		btnBorrarDeleteActividad = new JButton("BORRAR");
 		btnBorrarDeleteActividad.setFont(new Font("Arial", Font.BOLD, 20));
 		btnBorrarDeleteActividad.setBounds(378, 517, 183, 63);
 		panelDeleteActividadDocente.add(btnBorrarDeleteActividad);
-		
-		DocenteListener bBorrarA= new DocenteListener();
+
+		DocenteListener bBorrarA = new DocenteListener();
 		IController borrarActividad = new DocenteController();
 		borrarActividad.setView(this);
 		bBorrarA.associate(btnBorrarDeleteActividad, borrarActividad);
 
-
+		
 		textAreaDeleteActividad = new JTextArea();
-		textAreaDeleteActividad.setText("esta actividad no se puede modificar solo borrar desde su codigo");
 		textAreaDeleteActividad.setEditable(false);
 		textAreaDeleteActividad.setBounds(22, 114, 621, 224);
 		JScrollPane scroll2 = new JScrollPane(textAreaDeleteActividad);
 		scroll2.setBounds(22, 144, 799, 222);
 		panelDeleteActividadDocente.add(scroll2);
-
 
 		// ////////////////// PANEL CORREGIR //////////////////
 
@@ -293,8 +303,7 @@ public class DocenteView extends JFrame implements IView {
 		panelCorregirDocente.add(lblDniCorregir);
 
 		JLabel lblCodigoActividadCorregir = new JLabel("CODIGO ACTIVIDAD");
-		lblCodigoActividadCorregir
-				.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCodigoActividadCorregir.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodigoActividadCorregir.setFont(new Font("Arial", Font.BOLD, 20));
 		lblCodigoActividadCorregir.setBounds(120, 223, 250, 54);
 		panelCorregirDocente.add(lblCodigoActividadCorregir);
@@ -363,14 +372,14 @@ public class DocenteView extends JFrame implements IView {
 
 	}
 
-	//// metodos get y set de ACTIVIDAD 
+	// // metodos get y set de ACTIVIDAD
 
 	public String getDescripcionAddActividad() {
 		return textAreaAddActividad.getText();
 	}
 
 	public void setDescripcionAddActividad(String s) {
-	textAreaAddActividad.setText(s);
+		textAreaAddActividad.setText(s);
 	}
 
 	public String getCodigoMateriaAddActividad() {
@@ -400,12 +409,44 @@ public class DocenteView extends JFrame implements IView {
 	public boolean hasDescriptionAddActividad() {
 		return !(this.getDescripcionAddActividad().compareTo("") == 0);
 	}
-	
+
 	public boolean hasCodeAddActividad() {
 		return !(this.getCodigoMateriaAddActividad().compareTo("") == 0);
 	}
-	
-	//// metodos get y set de CORREGIR
+
+	@Override
+	public void present(String model) {
+		JOptionPane.showMessageDialog(null, model);
+
+	}
+
+	public void limpiarCamposActividad() {
+		setDescripcionAddActividad("");
+		setCodigoMateriaAddActividad("");
+	}
+
+	public boolean hasDescriptionDeleteActividad() {
+		return !(this.getDescripcionDeleteActividad().compareTo("") == 0)
+				|| (this.getDescripcionDeleteActividad() == null);
+	}
+
+	public boolean hasCodeDeleteActividad() {
+		return !(this.getCodigoMateriaDeleteActividad().compareTo("") == 0)
+				|| (this.getCodigoMateriaDeleteActividad() == null);
+
+	}
+
+	/**
+	 * @param listaMaterias
+	 */
+	public void setListMostrarMaterias(LinkedList<String> listaMaterias) {
+		listaMateriaActividadDocente.removeAll();
+		for (int i = 0; i < listaMaterias.size(); i++) {
+			listaMateriaActividadDocente.add(listaMaterias.get(i), i);
+			}
+	}
+
+	// // metodos get y set de CORREGIR
 
 	public String getDniCorregir() {
 		return txtDniCorregir.getText();
@@ -439,25 +480,4 @@ public class DocenteView extends JFrame implements IView {
 		txtNotaCorregir.setText(s);
 	}
 
-	@Override
-	public void present(String model) {
-	JOptionPane.showMessageDialog(null, model);
-	
-    }
-
-    public void limpiarCamposActividad() {
-    	setDescripcionAddActividad("");
-    	setCodigoMateriaAddActividad("");
-    }
-
-	public boolean hasDescriptionDeleteActividad() {
-		return !(this.getDescripcionDeleteActividad().compareTo("") == 0) || (this.getDescripcionDeleteActividad() == null); 
-	}
-
-	public boolean hasCodeDeleteActividad() {
-		return !(this.getCodigoMateriaDeleteActividad().compareTo("") == 0) || (this.getCodigoMateriaDeleteActividad() == null);
-
-	}
-
-	
 }
