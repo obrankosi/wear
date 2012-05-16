@@ -13,13 +13,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class DocenteView extends JFrame {
+import educar.controllers.DocenteController;
+import educar.controllers.IController;
+import educar.gui.IView;
+import educar.gui.Listener.DocenteListener;
+
+public class DocenteView extends JFrame implements IView {
 
 	private JPanel contentPane;
 	private JPanel panelMenuDocente;
@@ -45,8 +51,14 @@ public class DocenteView extends JFrame {
 	private JTextField txtNotaCorregir;
 	private JButton btnSubirCorregir;
 
+	private static final long serialVersionUID = 1L;
+	
+	
 	/**
 	 * Create the frame.
+	 */
+	/**
+	 * 
 	 */
 	public DocenteView() {
 		setVisible(true);
@@ -100,10 +112,13 @@ public class DocenteView extends JFrame {
 		contentPane.add(panelBienvenido);
 		panelBienvenido.setLayout(null);
 		panelBienvenido.setVisible(true);
-		
+
 		JLabel lblFotoBiendenido = new JLabel("");
 		lblFotoBiendenido.setBackground(Color.WHITE);
-		lblFotoBiendenido.setIcon(new ImageIcon(DocenteView.class.getResource("/educar/gui/DocenteView/imagenIconDocente/educar2012.jpg")));
+		lblFotoBiendenido
+				.setIcon(new ImageIcon(
+						DocenteView.class
+								.getResource("/educar/gui/DocenteView/imagenIconDocente/educar2012.jpg")));
 		lblFotoBiendenido.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFotoBiendenido.setFont(new Font("Arial", Font.BOLD, 23));
 		lblFotoBiendenido.setBounds(0, 0, 1202, 680);
@@ -121,11 +136,15 @@ public class DocenteView extends JFrame {
 		tabbedPane.setBounds(0, 0, 1202, 680);
 		panelActividadDocente.add(tabbedPane);
 		panelActividadDocente.setVisible(false);
-		// ------------------------panel ADD actividdad -------------
+		// ------------------------panel ADD actividad -------------
 		panelAddActividadDocente = new JPanel();
 		panelAddActividadDocente.setBackground(SystemColor.activeCaption);
-		tabbedPane.addTab("SUBIR ACTIVIDAD", new ImageIcon(DocenteView.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")), panelAddActividadDocente,
-				null);
+		tabbedPane
+				.addTab("SUBIR ACTIVIDAD",
+						new ImageIcon(
+								DocenteView.class
+										.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
+						panelAddActividadDocente, null);
 		panelAddActividadDocente.setLayout(null);
 
 		JLabel lblListaMaterias = new JLabel("LISTA DE MATERIA");
@@ -149,7 +168,7 @@ public class DocenteView extends JFrame {
 		panelAddActividadDocente.add(lblCodigoMAteriaAddActividad);
 
 		JLabel lblCartelAddActividad = new JLabel(
-				"SELECCI\u00D3NE LA MATERIA Y INGRESE LA ACTIVIDAD A SUBIR ");
+				"SELECCIONE LA MATERIA E INGRESE LA ACTIVIDAD A CARGAR");
 		lblCartelAddActividad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCartelAddActividad.setFont(new Font("Arial", Font.BOLD, 26));
 		lblCartelAddActividad.setBounds(0, 11, 886, 92);
@@ -176,12 +195,23 @@ public class DocenteView extends JFrame {
 		btnGuardarAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
 		btnGuardarAddActividad.setBounds(378, 515, 183, 64);
 		panelAddActividadDocente.add(btnGuardarAddActividad);
+		
+		DocenteListener bSubirA= new DocenteListener();
+		IController subirActividad = new DocenteController();
+		subirActividad.setView(this);
+		bSubirA.associate(btnGuardarAddActividad, subirActividad);
 
-		// --------------------panel DELETE atividad ---------
+		
+
+		// --------------------panel DELETE actividad ---------
 		panelDeleteActividadDocente = new JPanel();
 		panelDeleteActividadDocente.setBackground(SystemColor.inactiveCaption);
-		tabbedPane.addTab("BORRAR ACTIVIDAD", new ImageIcon(DocenteView.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
-				panelDeleteActividadDocente, null);
+		tabbedPane
+				.addTab("BORRAR ACTIVIDAD",
+						new ImageIcon(
+								DocenteView.class
+										.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
+						panelDeleteActividadDocente, null);
 		panelDeleteActividadDocente.setLayout(null);
 
 		JLabel lblListaActividades = new JLabel("LISTA DE ACTIVIDADES");
@@ -207,7 +237,7 @@ public class DocenteView extends JFrame {
 		panelDeleteActividadDocente.add(lblCodigoMAteriaDeleteActividad);
 
 		JLabel lblCartelDeleteActividad = new JLabel(
-				"SELECCI\u00D3NE LA MATERIA Y  LA ACTIVIDAD A ELIMINAR ");
+				"SELECCIONE LA ACTIVIDAD A ELIMINAR ");
 		lblCartelDeleteActividad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCartelDeleteActividad.setFont(new Font("Arial", Font.BOLD, 26));
 		lblCartelDeleteActividad.setBounds(0, 11, 886, 92);
@@ -236,6 +266,12 @@ public class DocenteView extends JFrame {
 		btnBorrarDeleteActividad.setFont(new Font("Arial", Font.BOLD, 20));
 		btnBorrarDeleteActividad.setBounds(378, 517, 183, 63);
 		panelDeleteActividadDocente.add(btnBorrarDeleteActividad);
+		
+		DocenteListener bBorrarA= new DocenteListener();
+		IController borrarActividad = new DocenteController();
+		borrarActividad.setView(this);
+		bBorrarA.associate(btnBorrarDeleteActividad, borrarActividad);
+
 
 		// ////////////////// PANEL CORREGIR //////////////////
 
@@ -273,7 +309,7 @@ public class DocenteView extends JFrame {
 		panelCorregirDocente.add(lblNotaCorregir);
 
 		JLabel lblCartelCorregir = new JLabel(
-				"SELECCI\u00D3NE LA RESOLUCIÓN Y INGRESE LA NOTA A SUBIR ");
+				"SELECCIONE LA RESOLUCIÓN E INGRESE LA NOTA A CARGAR");
 		lblCartelCorregir.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCartelCorregir.setFont(new Font("Arial", Font.BOLD, 24));
 		lblCartelCorregir.setBounds(0, 11, 887, 92);
@@ -325,7 +361,7 @@ public class DocenteView extends JFrame {
 
 	}
 
-	// //// get y set de SUBIR Actividad ///////////////////
+	//// metodos get y set de ACTIVIDAD 
 
 	public String getDescripcionAddActividad() {
 		return txtDescripcionAddActividad.getText();
@@ -359,37 +395,66 @@ public class DocenteView extends JFrame {
 		txtCodigoMAteriaDeleteActividad.setText(s);
 	}
 
-	// // get y set de CORREGIR ACTIVIDAD
+	public boolean hasDescriptionAddActividad() {
+		return !(this.getDescripcionAddActividad().compareTo("") == 0);
+	}
+	
+	public boolean hasCodeAddActividad() {
+		return !(this.getCodigoMateriaAddActividad().compareTo("") == 0);
+	}
+	
+	//// metodos get y set de CORREGIR
 
 	public String getDniCorregir() {
 		return txtDniCorregir.getText();
-	}
-
-	public String getCodigoActividadCorregir() {
-		return txtCodigoActividadCorregir.getText();
-	}
-
-	public String getResolucionCorregir() {
-		return txtResolucionCorregir.getText();
-	}
-
-	public String getNotaCorregir() {
-		return txtNotaCorregir.getText();
 	}
 
 	public void setDniCorregir(String s) {
 		txtDniCorregir.setText(s);
 	}
 
+	public String getCodigoActividadCorregir() {
+		return txtCodigoActividadCorregir.getText();
+	}
+
 	public void setCodigoActividadCorregir(String s) {
 		txtCodigoActividadCorregir.setText(s);
+	}
+
+	public String getResolucionCorregir() {
+		return txtResolucionCorregir.getText();
 	}
 
 	public void setResolucionCorregir(String s) {
 		txtResolucionCorregir.setText(s);
 	}
 
+	public String getNotaCorregir() {
+		return txtNotaCorregir.getText();
+	}
+
 	public void setNotaCorregir(String s) {
 		txtNotaCorregir.setText(s);
 	}
+
+	@Override
+	public void present(String model) {
+	JOptionPane.showMessageDialog(null, model);
+	
+    }
+
+    public void limpiarCamposActividad() {
+    	setDescripcionAddActividad("");
+    	setCodigoMateriaAddActividad("");
+    }
+
+	public boolean hasDescriptionDeleteActividad() {
+		return !(this.getDescripcionDeleteActividad().compareTo("") == 0) || (this.getDescripcionDeleteActividad() == null); 
+	}
+
+	public boolean hasCodeDeleteActividad() {
+		return !(this.getCodigoMateriaDeleteActividad().compareTo("") == 0) || (this.getCodigoMateriaDeleteActividad() == null);
+	}
+
+	
 }
