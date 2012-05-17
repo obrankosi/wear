@@ -3,9 +3,12 @@ package educar.models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import educar.db.JPA;
+import educar.models.AdminModels.Facultad;
+import educar.models.AdminModels.FacultadNotFound;
 import educar.models.AdminModels.Subject;
 
 /**
@@ -23,6 +26,7 @@ public class Actividad {
 	private String descripcionActividad;
 	private String codigoMateria;
 	private static Subject materia;
+	private static Facultad facultad;
 
 	/**
 	 * @param codigoActividad
@@ -127,73 +131,105 @@ public class Actividad {
 		}
 	}
 
-	// /////////// VER.. MODIFICAR TODO -----
-	/*
-	 * retorna una lista de strings donde cada string tiene el codigo de la
-	 * actividad
+
+	// dada una lista de strings con codigos de materias validos, devuelve todas las actividades que tienen las materias
+	// de la forma:  codigoActividad,Materia,Codigo,Facultad  , donde Facultad es la facultad a la que pertenece la materia
+	/**
+	 * @param codMaterias validos
+	 * @return codigoActividad, Materia, Codigo, Facultad
 	 */
-	// public static LinkedList<String> subjectCodesList() throws SQLException {
-	// ResultSet rst;
-	// rst = jpa.proyeccion("Actividad", "cod_materia");
-	// LinkedList<String> result = new LinkedList<String>();
-	// while (rst.next()) {
-	// result.add(rst.getString(1));
-	// }
-	// return result;
-	// }
-
-
 	public static LinkedList<String> getActividadesDocente(
 			LinkedList<String> codMaterias) {
-		LinkedList<String> result = new LinkedList<String>();
-		// JPA jpa = new JPA();
-		ResultSet rs = null;
-		int i = 0;
-		rs = jpa.proyeccion("Actividad", "cod_actividad", "cod_materia",
-				codMaterias.get(i));
-		materia = Subject.getSubject(codMaterias.get(i));
-		String mostrar;
-		try {
-			String codigoActividad;
-			while (rs.next()) {
-				codigoActividad = rs.getString(1);
-				mostrar = "Codigo Actividad: " + codigoActividad.trim()
-						+ " | Materia: " + materia.getName() + " | Facultad: "
-						+ materia.getCodigoFacultad();
-				result.add(mostrar);
 
+		if (codMaterias.size() > 0) {
+			LinkedList<String> result = new LinkedList<String>();
+			// JPA jpa = new JPA();
+			ResultSet rs = null;
+			String mostrar;
+
+			for (int i = 0; i < codMaterias.size(); i++) {
+				rs = jpa.proyeccion("Actividad", "cod_actividad",
+						"cod_materia", codMaterias.get(i));
+				materia = Subject.getSubject(codMaterias.get(i));
+
+				try {
+					facultad = Facultad.getFacultadByCod(materia
+							.getCodigoFacultad());
+					mostrar = " | Materia: " + materia.getName()
+							+ " - Codigo: " + materia.getCode()
+							+ " | Facultad: " + facultad.getDescipcion();
+					while (rs.next()) {
+						result.add("Codigo Actividad: " + rs.getString(i)
+								+ mostrar);
+
+					}
+				} catch (FacultadNotFound e) {
+					return null;
+				} catch (SQLException e) {
+					System.out
+							.println("Error en la consulta en la base de datos");
+					return null;
+				}
 			}
-		} catch (SQLException e) {
-			System.out.println("Error en la consulta en la base de datos");
+			return result;
+		} else
 			return null;
-		}
-		return result;
 
 	}
 
 	
-    /**
-     * @param codActividad
-     * @return Codigo de la materia que posee esta actividad
-     * @throws ActividadNotFound si no existe 
-     */
-    public static String getCodMateriaActividad(String codActividad)
-	    throws ActividadNotFound {
-	ResultSet rs = null;
-	String codMateria = new String();
-	Actividad act = null;
-	JPA jpa = new JPA();
-	rs = jpa.getByField("Actividad", "cod_actividad", codActividad);
-	try {
-	    if (rs.next()) {
-		codMateria = rs.getString(3);
-	    } else {
-		throw new ActividadNotFound();
-	    }
-	} catch (SQLException e) {
-	    e.printStackTrace();
+	// dada una lista de strings con codigos de materias validos, retorna las materias con su nombreMateria, codigoMateria y facultad
+	/**
+	 * @param codMaterias validos
+	 * @return nombreMateria, codigoMateria y facultad
+	 */
+	public LinkedList<String> getMateriasDocente(LinkedList<String> codMaterias) {
+		if (codMaterias.size() > 0) {
+			try {
+				LinkedList<String> result = new LinkedList<String>();
+				String mostrar;
+				for (int i = 0; i < codMaterias.size(); i++) {
+					materia = Subject.getSubject(codMaterias.get(i));
+					facultad = Facultad.getFacultadByCod(materia
+							.getCodigoFacultad());
+					mostrar = "Materia: " + materia.getName() + " - Codigo: "
+							+ materia.getCode() + " | Facultad: "
+							+ facultad.getDescipcion();
+					result.add(mostrar);
+				}
+				return result;
+			} catch (FacultadNotFound e) {
+				return null;
+			}
+		} else
+			return null;
 	}
-	return codMateria;
-    }
+
+	
+	
+	/**
+	 * @param codActividad
+	 * @return Codigo de la materia que posee esta actividad
+	 * @throws ActividadNotFound
+	 *             si no existe
+	 */
+	public static String getCodMateriaActividad(String codActividad)
+			throws ActividadNotFound {
+		ResultSet rs = null;
+		String codMateria = new String();
+		Actividad act = null;
+		JPA jpa = new JPA();
+		rs = jpa.getByField("Actividad", "cod_actividad", codActividad);
+		try {
+			if (rs.next()) {
+				codMateria = rs.getString(3);
+			} else {
+				throw new ActividadNotFound();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codMateria;
+	}
 
 }

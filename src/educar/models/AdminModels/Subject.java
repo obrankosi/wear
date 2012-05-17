@@ -221,7 +221,7 @@ public class Subject {
 	this.subjectCode = code;
     }
 
-    public static String getCode() {
+    public String getCode() {
 	return subjectCode;
     }
 
