@@ -11,8 +11,13 @@ import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Docente;
 
+/**
+ * @author grupo wear
+ *controlador de los docente como administrador
+ */
 public class gestionDocenteController implements IController, defaultLanguaje,
 	IListController {
+    
     private administrador view;
     private static Docente teacher = null;
     private static LinkedList<String> teachersList;
@@ -41,6 +46,9 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 
     }
 
+    /**
+     *busca en docente 
+     */
     private void searchTeacherInDbase() {
 	teacher = Docente.getDocente(view.getDniModif_D());
 	if (teacher != null) {
@@ -57,6 +65,9 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 
     }
 
+    /**
+     *borra docente 
+     */
     private void deletTeacher() {//
 	searchTeacherInDbase();
 	if (!(view.getDniModif_D().compareTo("") == 0)) {
@@ -68,11 +79,10 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	}
     }
 
-    @Override
-    public void setView(IView view) {
-	this.view = (administrador) view;
-    }
 
+    /**
+     *guarda docete 
+     */
     private void AddTeacher() {
 	if (view.fieldsIsOkAlta_D()) {// si no ingreso algun campo no permite
 	    // guardad
@@ -83,7 +93,6 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	    if (docente.save()) {
 		view
 			.present("docente agregado correctamente. Se creo el Usuario para docente");
-
 	    } else {
 		view.present("verifique los datos ingresados sean validos");
 	    }
@@ -91,6 +100,9 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	    view.present("faltan completar campos");
     }
 
+    /**
+     *Modifica docente 
+     */
     private void modifyTeacher() {
 	if (teacher != null) {
 	    String[] values = { view.getDniModif_D(),
@@ -106,7 +118,6 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	} else {
 	    view.present("el docente no existe");
 	}
-
     }
 
     private void showTeacherInList() {
@@ -124,4 +135,9 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	searchTeacherInDbase();
     }
 
+    @Override
+    public void setView(IView view) {
+	this.view = (administrador) view;
+    }
+    
 }

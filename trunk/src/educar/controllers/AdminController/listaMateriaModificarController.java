@@ -6,6 +6,10 @@ import educar.gui.IView;
 import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.AdminViews.administrador;
 
+/**
+ * @author grupo wear
+ * controlador de la lista de  materias en Materias a modificar
+ */
 public class listaMateriaModificarController implements IListController,
 	IController {
 

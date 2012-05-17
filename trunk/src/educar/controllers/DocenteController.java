@@ -17,6 +17,9 @@ import educar.models.User;
 import educar.models.userNotFound;
 import educar.models.AdminModels.Subject;
 
+/**
+ * @author grupo wear Controlador de docente
+ */
 public class DocenteController implements IController, defaultLanguaje,
 	IListController {
 
@@ -35,51 +38,6 @@ public class DocenteController implements IController, defaultLanguaje,
 
     }
 
-    private void borrarActividad() {
-	if (!view.algunCampoVacioBorrarA()) {
-	    String codActivdad = view.getCodigoMateriaDeleteActividad();
-	    Actividad act = null;
-	    try {
-		act = Actividad.getActividad(codActivdad);
-	    } catch (ActividadNotFound e) {
-	    }
-	    if (act.deleteActividad()) {
-		view.present("borrado Exitoso");
-	    }
-	} else {
-	    view.present("No hay actividad que borrar, seleccion una");
-	}
-	view.limpiarCamposActividad();
-
-    }
-
-    private void subirActividad() {
-	if (!view.algunCampoVacioSubirA()) {
-	    String descripcionActiv = view.getDescripcionAddActividad();
-	    String codMateria = view.getCodigoMateriaAddActividad();
-	    String codActividad;
-	    Actividad act = new Actividad(descripcionActiv, codMateria);
-	    if (act.save()) {
-		TieneActividad actividadAlumno;
-		String dniAlumno;
-		LinkedList<String> alumnos = Cursa
-			.alumnosCursanMateria(codMateria);
-		System.out.println(alumnos.size());
-		for (int i = 0; i < alumnos.size(); i++) {
-		    dniAlumno = alumnos.get(i);
-		    codActividad = Actividad.codigoUltimaIngresada();
-		    actividadAlumno = new TieneActividad(dniAlumno,
-			    codActividad);
-		    actividadAlumno.save();
-		}
-		view.present("se agrego la actividad");
-	    }
-	} else {
-	    view.present("faltan ingresar campos");
-	}
-	view.limpiarCamposActividad();
-    }
-
     @Override
     public void processItemList(String item) {
 	String codMateria = FuncionesAuxiliares.getDni(item);
@@ -91,6 +49,43 @@ public class DocenteController implements IController, defaultLanguaje,
 	this.view = (DocenteView) view;
     }
 
+    /**
+     * @return {@link LinkedList} {@link String} las materias de un docente
+     */
+    public static LinkedList<String> misMaterias() {
+	String dniDocente = getDniDocenteSession();
+	Subject materia;
+	String newArg;
+	LinkedList<String> materiasDicta;
+	LinkedList<Subject> materiasEncargado = Subject
+		.getSubjectsByDniE(dniDocente);
+	try {
+	    materiasDicta = DictaMateria.getMateriasDictaByCod(dniDocente);
+	} catch (DictaMateriaNotFound e) {
+	    materiasDicta = null;
+	}
+	if (materiasDicta != null) {
+	    for (int i = 0; i < materiasDicta.size(); i++) {
+		materia = Subject.getSubject(materiasDicta.get(i));
+		if (!materiasEncargado.contains(materia)) {
+		    materiasEncargado.add(materia);
+		}// todas mis materias
+	    }
+	}
+	materiasDicta.clear();
+	for (int i = 0; i < materiasEncargado.size(); i++) {
+	    materia = materiasEncargado.get(i);
+	    newArg = ("nro materia: " + materia.getCode() + " | " + "materia: "
+		    + materia.getName() + " | " + "facultad: " + materia
+		    .getCodigoFacultad());
+	    materiasDicta.add(newArg);
+	}
+	return materiasDicta;
+    }
+
+    /**
+     * @return {@link LinkedList} {@link String} con las actividades del docente
+     */
     public static LinkedList<String> misActividades() {
 	String dniDocente = getDniDocenteSession();
 	Subject materia;
@@ -133,9 +128,58 @@ public class DocenteController implements IController, defaultLanguaje,
 		materiasDicta.add(newArg);
 	    }
 	}
-
 	return materiasDicta;
+    }
 
+    /**
+     * Borrar una actividad
+     */
+    private void borrarActividad() {
+	if (!view.algunCampoVacioBorrarA()) {
+	    String codActivdad = view.getCodigoMateriaDeleteActividad();
+	    Actividad act = null;
+	    try {
+		act = Actividad.getActividad(codActivdad);
+	    } catch (ActividadNotFound e) {
+	    }
+	    if (act.deleteActividad()) {
+		view.present("borrado Exitoso");
+	    }
+	} else {
+	    view.present("No hay actividad que borrar, seleccion una");
+	}
+	view.limpiarCamposActividad();
+
+    }
+
+    /**
+     * Sube una actividad
+     */
+    private void subirActividad() {
+	if (!view.algunCampoVacioSubirA()) {
+	    String descripcionActiv = view.getDescripcionAddActividad();
+	    String codMateria = view.getCodigoMateriaAddActividad();
+	    String codActividad;
+	    Actividad act = new Actividad(descripcionActiv, codMateria);
+	    if (act.save()) {
+		TieneActividad actividadAlumno;
+		String dniAlumno;
+		LinkedList<String> alumnos = Cursa
+			.alumnosCursanMateria(codMateria);
+		System.out.println(alumnos.size());
+		for (int i = 0; i < alumnos.size(); i++) {
+		    dniAlumno = alumnos.get(i);
+		    codActividad = Actividad.codigoUltimaIngresada();
+		    actividadAlumno = new TieneActividad(dniAlumno,
+			    codActividad);
+		    actividadAlumno.save();
+		}
+		view.present("se agrego la actividad");
+	    }
+	} else {
+	    view.present("faltan ingresar campos");
+	}
+	view.limpiarCamposActividad();
     }
 
     private static String getInfoMateria(LinkedList<Subject> materias,
@@ -152,42 +196,12 @@ public class DocenteController implements IController, defaultLanguaje,
 		encontre = true;
 	    }
 	}
-
 	return res;
     }
 
-    public static LinkedList<String> misMaterias() {
-	String dniDocente = getDniDocenteSession();
-	Subject materia;
-	String newArg;
-	LinkedList<String> materiasDicta;
-
-	LinkedList<Subject> materiasEncargado = Subject
-		.getSubjectsByDniE(dniDocente);
-	try {
-	    materiasDicta = DictaMateria.getMateriasDictaByCod(dniDocente);
-	} catch (DictaMateriaNotFound e) {
-	    materiasDicta = null;
-	}
-	if (materiasDicta != null) {
-	    for (int i = 0; i < materiasDicta.size(); i++) {
-		materia = Subject.getSubject(materiasDicta.get(i));
-		if (!materiasEncargado.contains(materia)) {
-		    materiasEncargado.add(materia);
-		}// todas mis materias
-	    }
-	}
-	materiasDicta.clear();
-	for (int i = 0; i < materiasEncargado.size(); i++) {
-	    materia = materiasEncargado.get(i);
-	    newArg = ("nro materia: " + materia.getCode() + " | " + "materia: "
-		    + materia.getName() + " | " + "facultad: " + materia
-		    .getCodigoFacultad());
-	    materiasDicta.add(newArg);
-	}
-	return materiasDicta;
-    }
-
+    /**
+     * @return {@link String} dni docente que esta en sesion
+     */
     private static String getDniDocenteSession() {
 	try {
 	    return User.getUserByUsername(

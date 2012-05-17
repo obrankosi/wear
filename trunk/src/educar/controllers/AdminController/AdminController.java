@@ -14,9 +14,15 @@ import educar.models.AdminModels.Docente;
 import educar.models.AdminModels.Facultad;
 import educar.models.AdminModels.Subject;
 
+/**
+ * @author grupo wear
+ * Controlador de Gui administrador
+ * botones y listas 
+ *
+ */
 public class AdminController implements IController, defaultLanguaje {
+   
     private administrador view;
-    private gestionAlumnosController alumnos;
     private static LinkedList<String> studentsList;
     private static LinkedList<String> teachersList;
     private LinkedList<String> subjects;
@@ -24,6 +30,8 @@ public class AdminController implements IController, defaultLanguaje {
     private static LinkedList<String> facList;
     private static LinkedList<String> cargosList;
     private static LinkedList<String> docenteConCargo; 
+   
+    
     @Override
     public void process(String model) {
 

@@ -5,10 +5,11 @@ import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.DocenteView.DocenteView;
 import educar.models.Actividad;
 import educar.models.ActividadNotFound;
-import educar.models.Resolucion;
-import educar.models.ResolucionNotFound;
-import educar.models.AdminModels.Alumno;
 
+/**
+ * @author grupo wear
+ *Controlador de Lista de Actvidades en la gui de
+ */
 public class DocenteListaActividadesBorrar implements IController,
 	IListController {
 

@@ -12,6 +12,10 @@ import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Facultad;
 import educar.models.AdminModels.FacultadNotFound;
 
+/**
+ * @author grupo wear
+ *controlador de las facultades como administrador
+ */
 public class gestionFacultadController implements IController, defaultLanguaje,
 	IListController {
 
@@ -59,6 +63,10 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	}
     }
 
+    /**
+     * busca en la base de datos
+     * @throws FacultadNotFound si no existe
+     */
     private void searchFacultadInDB() throws FacultadNotFound {
 	if (view.getCodigoModificarFacultad().compareTo("") == 0) {
 	    view.present("ingrese codigo");
@@ -73,6 +81,9 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	}
     }
 
+    /**
+     * @throws FacultadNotFound si no existe
+     */
     private void deleteFacultad() throws FacultadNotFound {
 	searchFacultadInDB();
 	if (!(view.getCodigoModificarFacultad().compareTo("") == 0)) {
@@ -83,6 +94,9 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	}
     }
 
+    /**
+     * agrega facultad
+     */
     private void addFacultad() {
 	if (view.fieldsIsOkAlta_F()) {
 	    Facultad f = new Facultad(view.getNombreAltaFacultad().trim());
@@ -96,6 +110,9 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	}
     }
 
+    /**
+     * modifica facultad
+     */
     private void modifyFacultad() {
 	if (fac != null) {
 	    try {

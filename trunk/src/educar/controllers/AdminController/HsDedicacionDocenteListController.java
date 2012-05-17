@@ -6,8 +6,13 @@ import educar.gui.IView;
 import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.AdminViews.administrador;
 
+/**
+ * @author grupo wear
+ *controlador de las hs de dedicacion de los docente 
+ */
 public class HsDedicacionDocenteListController implements IListController,
 	IController {
+    
     private administrador view;
 
     @Override

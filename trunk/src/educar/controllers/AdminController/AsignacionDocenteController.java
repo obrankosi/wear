@@ -13,11 +13,15 @@ import educar.models.AdminModels.AsignacionDocente;
 import educar.models.AdminModels.Docente;
 import educar.models.AdminModels.Subject;
 
+/**
+ * @author grupo wear
+ *controlador sobre las asignaciones de docentes a las materias 
+ */
 public class AsignacionDocenteController implements IController,
 	defaultLanguaje, IListController {
+
     private administrador view;
     private LinkedList<String> docentes;
-    private LinkedList<String> materias;
     private static Subject materia;
     private static LinkedList<String> docentesLigados;
 
@@ -43,6 +47,9 @@ public class AsignacionDocenteController implements IController,
 
     }
 
+    /**
+     * borra un docente que dicta una materia, distinto a encargado
+     */
     private void removerDocenteDictado() {
 	if (!(view.camposVaciosDesignacionMateria())) {
 	    String materia = view.getMateriaAsignacionDocenteDesignacion();
@@ -60,6 +67,9 @@ public class AsignacionDocenteController implements IController,
 	view.setVacioAsignacionDocente();
     }
 
+    /**
+     * Asigna liga un docente al dictado a una materia
+     */
     private void asignarDocenteDictado() {
 	if (!(view.camposVaciosDesignacionMateria())) {
 	    String materia = view.getMateriaAsignacionDocenteDesignacion();
@@ -78,6 +88,9 @@ public class AsignacionDocenteController implements IController,
 	view.setVacioAsignacionDocente();
     }
 
+    /**
+     * Borra un docente encargado
+     */
     private void borrarDocenteEncargado() {
 	// ATENCION SIEMPRE DESPUES DE AGREGAR BORRAR TODOS LOS CAMPOS
 	if (!view.camposVaciosEncargadoMateria()) {// true ssi campos vacios
@@ -99,11 +112,9 @@ public class AsignacionDocenteController implements IController,
 
     }
 
-    @Override
-    public void setView(IView view) {
-	this.view = (administrador) view;
-    }
-
+    /**
+     *Asigna un docente como encargado 
+     */
     private void asignacionDocenteEncargado() {
 	// ATENCION SIEMPRE DESPUES DE AGREGAR BORRAR TODOS LOS CAMPOS
 	if (!view.camposVaciosEncargadoMateria()) {// true ssi campos vacios
@@ -181,4 +192,10 @@ public class AsignacionDocenteController implements IController,
 		    .idString(item));
 	}
     }
+
+    @Override
+    public void setView(IView view) {
+	this.view = (administrador) view;
+    }
+
 }
