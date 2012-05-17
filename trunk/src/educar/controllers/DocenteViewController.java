@@ -14,10 +14,11 @@ public class DocenteViewController implements IController, defaultLanguaje {
     public void process(String model) {
 	if (model.compareTo(ACTIVIDADOCENTEPANEL) == 0) {
 	    view.panelActividad();
+	    view.setListMAteriaD(DocenteController.misMaterias());
 	}
 	if (model.compareTo(CORREGIRDOCENTEPANEL) == 0) {
 	    view.panelCorregir();
-	    view.setListCorregirM(DocenteCorregirController.ActividadesLigadasmaterias());
+	    view.setListActividadD((DocenteController.misActividades()));
 	}
     }
 

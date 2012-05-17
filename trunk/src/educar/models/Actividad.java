@@ -35,11 +35,7 @@ public class Actividad {
 	this.setCodigoMateria(codMateria);
     }
 
-    // utilizo este constructor para almacenar en la base de datos. Como el
-    // codigo
-    // de la materia es auto-incremental, no debo pasarselo a la hora de hacer
-    // el save
-
+  
     /**
      * @param descripcionActiv
      * @param codMateria
@@ -73,8 +69,9 @@ public class Actividad {
 	return codigoActividad;
     }
 
-    // guarda una materia. Si la materia ya existia, retorna false
-    // Si la materia no existia, la guarda en la BD y retorna true
+    /**
+     * @return true ssi guardado exitoso
+     */
     public boolean save() {
 	try {
 	    String[] columnas = { "descripcion_act", "cod_materia" };
