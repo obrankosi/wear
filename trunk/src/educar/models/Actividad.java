@@ -250,5 +250,20 @@ public class Actividad {
 	}
 	return codMateria;
     }
+    
+    public static String codigoUltimaIngresada() {
+	String codigo = new String();
+	JPA jpa = new JPA();
+	ResultSet rst = jpa.showUltimoCod("Actividad", "cod_actividad");
+	try {
+	    if (rst.next()) {
+		codigo = rst.getString(1);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	return codigo;
+    }
+
 
 }

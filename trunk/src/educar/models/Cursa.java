@@ -11,81 +11,96 @@ import educar.models.AdminModels.Subject;
 
 public class Cursa {
 
-	private static JPA jpa = new JPA();
-	private String dniAlumno;
-	private String codMateria;
+    private static JPA jpa = new JPA();
+    private String dniAlumno;
+    private String codMateria;
 
-	public Cursa(String dniAlumno, String codMateria) {
-		this.setDniAlumno(dniAlumno);
-		this.setCodMateria(codMateria);
+    public Cursa(String dniAlumno, String codMateria) {
+	this.setDniAlumno(dniAlumno);
+	this.setCodMateria(codMateria);
+    }
+
+    public boolean save() { // guardar la materia que cursa un alumno
+	String[] columns = { "dni_a", "cod_mat" };
+	try {
+	    return save("cursa", columns);
+	} catch (CargosNotFound e) {
+	    return false;// TODO Auto-generated catch block
 	}
+    }
 
-	public boolean save() { // guardar la materia que cursa un alumno
-		String[] columns = { "dni_a", "cod_mat" };
-		try {
-			return save("cursa", columns);
-		} catch (CargosNotFound e) {
-			return false;// TODO Auto-generated catch block
+    private boolean save(String tableName, String[] columns)
+	    throws CargosNotFound {
+	try {
+	    String[] column = columns;
+	    PreparedStatement stm = jpa.newRecord("educar_dev." + tableName,
+		    column);
+	    stm.setString(1, dniAlumno);
+	    stm.setString(2, codMateria);
+	    jpa.create(stm);
+	    return true;
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    return false;
+	}
+    }
+
+    public boolean pertenece() {
+	String[] fieldNames = { "dni_a", "cod_mat" };
+	String[] values = { dniAlumno, codMateria };
+	ResultSet res = jpa.getByField("cursa", fieldNames, values);
+	try {
+	    if (res.next()) {
+		if ((res.getString(1).compareTo(dniAlumno) == 0)
+			&& (res.getString(2).compareTo(codMateria) == 0)) {
+		    return true;
 		}
+	    }
+	} catch (SQLException e) {
+	    return false;
 	}
+	return false;
+    }
 
-	private boolean save(String tableName, String[] columns)
-			throws CargosNotFound {
-		try {
-			String[] column = columns;
-			PreparedStatement stm = jpa.newRecord("educar_dev." + tableName,
-					column);
-			stm.setString(1, dniAlumno);
-			stm.setString(2, codMateria);
-			jpa.create(stm);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+    private void setCodMateria(String codMateria) {
+	this.codMateria = codMateria;
+    }
 
-	public boolean pertenece() { 
-		String[] fieldNames = { "dni_a", "cod_mat" };
-		String[] values = { dniAlumno, codMateria };
-		ResultSet res = jpa.getByField("cursa", fieldNames, values);
-		try {
-			if (res.next()) {
-				if ((res.getString(1).compareTo(dniAlumno) == 0)
-						&& (res.getString(2).compareTo(codMateria) == 0)) {
-					return true;
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			return false;
-		}
-		return false;
-	}
+    private void setDniAlumno(String dniAlumno) {
+	this.dniAlumno = dniAlumno;
+    }
 
-	private void setCodMateria(String codMateria) {
-		// TODO Auto-generated method stub
-		this.codMateria = codMateria;
+    public static LinkedList<String> cursaList(String id) throws SQLException {
+	ResultSet rst = jpa.proyeccion("cursa", "dni_a,cod_mat", "dni_a", id);
+	LinkedList<String> result = new LinkedList<String>();
+	while (rst.next()) {
+	    result.add(rst.getString(2) + "  |   "
+		    + Subject.getSubject(rst.getString(2)).getName());
 	}
+	return result;
+    }
 
-	private void setDniAlumno(String dniAlumno) {
-		// TODO Auto-generated method stub
-		this.dniAlumno = dniAlumno;
+    /**
+     * @param codMateria
+     * @return {@link LinkedList} alumnos que cursan la materia
+     * @throws SQLException
+     *             si
+     */
+    public static LinkedList<String> alumnosCursanMateria(String codMateria) {
+	ResultSet rst = jpa.proyeccion("cursa", "dni_a", "cod_mat", codMateria);
+	LinkedList<String> result = new LinkedList<String>();
+	try {
+	    while (rst.next()) {
+		result.add(rst.getString(1));
+	    }
+	} catch (SQLException e) {
+	    result = null;
 	}
+	return result;
+    }
 
-	public static LinkedList<String> cursaList(String id) throws SQLException {
-		ResultSet rst = jpa.proyeccion("cursa", "dni_a,cod_mat", "dni_a", id);
-		LinkedList<String> result = new LinkedList<String>();
-		while (rst.next()) {
-			result.add(rst.getString(2) + "  |   "
-					+ Subject.getSubject(rst.getString(2)).getName());
-		}
-		return result;
-	}
-
-	public String getDniAlumno() {
-		// TODO Auto-generated method stub
-		return dniAlumno;
-	}
+    public String getDniAlumno() {
+	return dniAlumno;
+    }
 
 }
