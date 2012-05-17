@@ -1,28 +1,34 @@
 package educar.controllers;
 
+import java.util.Date;
+
 import educar.gui.IView;
 import educar.gui.AlumnoView.AlumnoView;
 import educar.languaje.defaultLanguaje;
 
 public class AlumnosViewController implements IController, defaultLanguaje {
 
-    private AlumnoView view;
+	private AlumnoView view;
 
-    @Override
-    public void process(String model) {
-	if (model.compareTo(CARGARSOLUCIONALUMNOPANEL) == 0) {
-	     view.panelCargarSolucion();
-	     //ACA LLENA LA LISTA DEL PANEL SOLUCION
+	@SuppressWarnings("deprecation")
+	@Override
+	public void process(String model) {
+		if (model.compareTo(CARGARSOLUCIONALUMNOPANEL) == 0) {
+			view.panelCargarSolucion();
+			AlumnoControllers.showActividadInList();
+			Date d=new Date(); 
+			System.out.println(Integer.toString(d.getDay())); 
+		}
+		if (model.compareTo(INSCRIBIRMALUMNOPANEL) == 0) {
+			view.panelInscripcionMateria();
+			AlumnoControllers.showMateriasInscriptoInList();
+			AlumnoControllers.showMateriasAinscribirInList();
+		}
 	}
-	if (model.compareTo(INSCRIBIRMALUMNOPANEL) == 0) {
-	     view.panelInscripcionMateria();
-	     //ACA LLENA LA LISTA DEL PANEL SOLUCION
-	}
-    }
 
-    @Override
-    public void setView(IView view) {
-	this.view = (AlumnoView) view;
-    }
+	@Override
+	public void setView(IView view) {
+		this.view = (AlumnoView) view;
+	}
 
 }

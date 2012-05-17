@@ -50,7 +50,7 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     private JPanel panelCorregirDocente;
     private List litaCorregirMateria;
     private JTextField txtDniCorregir;
-    private JTextField txtCodigoActividadCorregir;
+    private JTextField textNombreAlumno;
     private JTextField txtNotaCorregir;
     private JButton btnSubirCorregir;
     private JTextArea textAreaAddActividad;
@@ -60,6 +60,8 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     private static final long serialVersionUID = 1L;
     private List listaResolucionCorregir;
     private JLabel label;
+	private JTextArea textAreaActividadCorregir;
+	private JLabel lblActividad;
 
     /**
      * Create the frame.
@@ -293,42 +295,45 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	panelCorregirDocente.setLayout(null);
 	panelCorregirDocente.setVisible(false);
 
-	JLabel lblDniCorregir = new JLabel("D.N.I Alumno");
+	JLabel lblDniCorregir = new JLabel("D.N.I");
 	lblDniCorregir.setHorizontalAlignment(SwingConstants.RIGHT);
 	lblDniCorregir.setFont(new Font("Arial", Font.BOLD, 23));
-	lblDniCorregir.setBounds(120, 158, 250, 54);
+	lblDniCorregir.setBounds(0, 585, 51, 54);
 	panelCorregirDocente.add(lblDniCorregir);
 
-	JLabel lblCodigoActividadCorregir = new JLabel("CODIGO ACTIVIDAD");
-	lblCodigoActividadCorregir.setHorizontalAlignment(SwingConstants.RIGHT);
-	lblCodigoActividadCorregir.setFont(new Font("Arial", Font.BOLD, 20));
-	lblCodigoActividadCorregir.setBounds(120, 223, 250, 54);
-	panelCorregirDocente.add(lblCodigoActividadCorregir);
+	JLabel lblNombreAlumno = new JLabel("NOMBRE");
+	lblNombreAlumno.setHorizontalAlignment(SwingConstants.RIGHT);
+	lblNombreAlumno.setFont(new Font("Arial", Font.BOLD, 20));
+	lblNombreAlumno.setBounds(250, 585, 88, 54);
+	panelCorregirDocente.add(lblNombreAlumno);
 
 	JLabel lblResolucionCorregir = new JLabel("RESOLUCION");
 	lblResolucionCorregir.setHorizontalAlignment(SwingConstants.LEFT);
 	lblResolucionCorregir.setFont(new Font("Arial", Font.BOLD, 17));
-	lblResolucionCorregir.setBounds(22, 269, 265, 39);
+	lblResolucionCorregir.setBounds(22, 308, 265, 37);
 	panelCorregirDocente.add(lblResolucionCorregir);
 
 	JLabel lblNotaCorregir = new JLabel("NOTA");
 	lblNotaCorregir.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNotaCorregir.setFont(new Font("Arial", Font.BOLD, 23));
-	lblNotaCorregir.setBounds(58, 585, 233, 54);
+	lblNotaCorregir.setBounds(537, 585, 69, 54);
 	panelCorregirDocente.add(lblNotaCorregir);
 
 	JLabel lblCartelCorregir = new JLabel(
 		"SELECCIONE LA RESOLUCION E INGRESE LA NOTA A CARGAR");
 	lblCartelCorregir.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelCorregir.setFont(new Font("Arial", Font.BOLD, 24));
-	lblCartelCorregir.setBounds(0, 11, 887, 92);
+	lblCartelCorregir.setBounds(0, 0, 887, 57);
 	panelCorregirDocente.add(lblCartelCorregir);
 
-	JLabel lblListaCorregirMateria = new JLabel("LISTA DE MATERIA");
-	lblListaCorregirMateria.setHorizontalAlignment(SwingConstants.CENTER);
-	lblListaCorregirMateria.setFont(new Font("Arial", Font.BOLD, 23));
-	lblListaCorregirMateria.setBounds(897, 17, 295, 54);
-	panelCorregirDocente.add(lblListaCorregirMateria);
+
+	JLabel lblListaMisActividades = new JLabel(
+		"MIS ACTIVIDADES");
+	lblListaMisActividades
+		.setHorizontalAlignment(SwingConstants.CENTER);
+	lblListaMisActividades.setFont(new Font("Arial", Font.BOLD, 23));
+	lblListaMisActividades.setBounds(897, 17, 295, 54);
+	panelCorregirDocente.add(lblListaMisActividades);
 
 	litaCorregirMateria = new List();
 	litaCorregirMateria.setBounds(893, 77, 299, 268);
@@ -342,26 +347,26 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	txtDniCorregir = new JTextField();
 	txtDniCorregir.setEditable(false);
 	txtDniCorregir.setFont(new Font("Arial", Font.BOLD, 20));
-	txtDniCorregir.setBounds(380, 158, 377, 54);
+	txtDniCorregir.setBounds(61, 585, 179, 54);
 	panelCorregirDocente.add(txtDniCorregir);
 	txtDniCorregir.setColumns(10);
 
-	txtCodigoActividadCorregir = new JTextField();
-	txtCodigoActividadCorregir.setEditable(false);
-	txtCodigoActividadCorregir.setFont(new Font("Arial", Font.BOLD, 20));
-	txtCodigoActividadCorregir.setColumns(10);
-	txtCodigoActividadCorregir.setBounds(380, 219, 377, 54);
-	panelCorregirDocente.add(txtCodigoActividadCorregir);
+	textNombreAlumno = new JTextField();
+	textNombreAlumno.setEditable(false);
+	textNombreAlumno.setFont(new Font("Arial", Font.BOLD, 20));
+	textNombreAlumno.setColumns(10);
+	textNombreAlumno.setBounds(348, 585, 179, 54);
+	panelCorregirDocente.add(textNombreAlumno);
 
 	txtNotaCorregir = new JTextField();
 	txtNotaCorregir.setFont(new Font("Arial", Font.BOLD, 20));
 	txtNotaCorregir.setColumns(10);
-	txtNotaCorregir.setBounds(301, 585, 96, 54);
+	txtNotaCorregir.setBounds(616, 585, 72, 54);
 	panelCorregirDocente.add(txtNotaCorregir);
 
 	btnSubirCorregir = new JButton(UPLOAD);
 	btnSubirCorregir.setFont(new Font("Arial", Font.BOLD, 20));
-	btnSubirCorregir.setBounds(504, 585, 139, 54);
+	btnSubirCorregir.setBounds(708, 585, 179, 54);
 	panelCorregirDocente.add(btnSubirCorregir);
 
 	DocenteListener btnSubirC = new DocenteListener();
@@ -372,9 +377,15 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	textAreaCorregir = new JTextArea();
 	textAreaCorregir.setBounds(22, 114, 621, 224);
 	JScrollPane scroll3 = new JScrollPane(textAreaCorregir);
-	scroll3.setBounds(22, 304, 799, 268);
+	scroll3.setBounds(22, 334, 799, 238);
 	panelCorregirDocente.add(scroll3);
 
+	textAreaActividadCorregir = new JTextArea();
+	textAreaActividadCorregir.setBounds(22, 114, 621, 224);
+	JScrollPane scroll4 = new JScrollPane(textAreaActividadCorregir);
+	scroll4.setBounds(22, 77, 799, 220);
+	panelCorregirDocente.add(scroll4);
+	
 	listaResolucionCorregir = new List();
 	listaResolucionCorregir.setBounds(897, 402, 295, 268);
 	panelCorregirDocente.add(listaResolucionCorregir);
@@ -389,6 +400,12 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	label.setFont(new Font("Arial", Font.BOLD, 23));
 	label.setBounds(897, 334, 295, 92);
 	panelCorregirDocente.add(label);
+	
+	lblActividad = new JLabel("ACTIVIDAD");
+	lblActividad.setHorizontalAlignment(SwingConstants.LEFT);
+	lblActividad.setFont(new Font("Arial", Font.BOLD, 17));
+	lblActividad.setBounds(22, 44, 265, 37);
+	panelCorregirDocente.add(lblActividad);
 
     }
 
@@ -477,11 +494,11 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     }
 
     public String getCodigoActividadCorregir() {
-	return txtCodigoActividadCorregir.getText();
+	return textNombreAlumno.getText();
     }
 
     public void setCodigoActividadCorregir(String s) {
-	txtCodigoActividadCorregir.setText(s);
+	textNombreAlumno.setText(s);
     }
 
     public String getResolucionCorregir() {
