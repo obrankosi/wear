@@ -45,6 +45,16 @@ public class FuncionesAuxiliares {
 	return cargo;
     }
 
+    public static String getCodActividad(String act){
+	int index;
+	int index2;
+	String subS = null;
+	index2 = act.indexOf("|");
+	index = act.indexOf(":")+1;
+	subS = (act.substring(index,index2)).trim();
+	return subS;
+    }
+    
     public static String getfacultad(String txt) {
 	int index;
 	int indez2 = 0;

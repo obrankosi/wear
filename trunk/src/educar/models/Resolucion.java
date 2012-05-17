@@ -3,6 +3,7 @@ package educar.models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import educar.db.JPA;
 
@@ -30,20 +31,20 @@ public class Resolucion {
     public Resolucion(String hrEnvio, String fecha, String dniDocente,
 	    String codActividad, String dniAlumno, String resActividad,
 	    String nota) {
-    
-    	this.hrEnvio = hrEnvio;
-    	this.fecha = fecha;
-    	this.dniDocente = dniDocente;
-    	this.codActividad = codActividad;
-    	this.dniAlumno = dniAlumno;
-    	this.resolucion = resActividad;
-    	this.nota = nota;
+
+	this.hrEnvio = hrEnvio;
+	this.fecha = fecha;
+	this.dniDocente = dniDocente;
+	this.codActividad = codActividad;
+	this.dniAlumno = dniAlumno;
+	this.resolucion = resActividad;
+	this.nota = nota;
     }
-  
-    public Resolucion(){
-    	
+
+    public Resolucion() {
+
     };
-    
+
     /**
      * @param codResolucion
      * @param hrEnvio
@@ -57,9 +58,9 @@ public class Resolucion {
     public Resolucion(String codResolucion, String hrEnvio, String fecha,
 	    String dniDocente, String codActividad, String dniAlumno,
 	    String resActividad, String nota) {
-	
-    this.codResolucion = codResolucion;
-    this.hrEnvio = hrEnvio;
+
+	this.codResolucion = codResolucion;
+	this.hrEnvio = hrEnvio;
 	this.fecha = fecha;
 	this.dniDocente = dniDocente;
 	this.codActividad = codActividad;
@@ -78,7 +79,7 @@ public class Resolucion {
 	PreparedStatement stm = jpa.newRecord("educar_dev." + "Resolucion",
 		columns);
 	try {
-		
+
 	    stm.setString(1, this.getHrEnvio().trim());
 	    stm.setString(2, this.getFecha().trim());
 	    stm.setString(3, this.getDniDocente().trim());
@@ -86,7 +87,7 @@ public class Resolucion {
 	    stm.setString(5, this.getDniAlumno().trim());
 	    stm.setString(6, this.getResolucion().trim());
 	    stm.setString(7, this.getNota().trim());
-	    
+
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
@@ -114,10 +115,12 @@ public class Resolucion {
 
     /**
      * @param codigoResolucion
-     * @return {@link Resolucion} si encontro en la base de datos 
-     * @throws ResolucionNotFound no encotro la resolucion 
+     * @return {@link Resolucion} si encontro en la base de datos
+     * @throws ResolucionNotFound
+     *             no encotro la resolucion
      */
-    public static Resolucion getResolucionByCod(String codigoResolucion)throws ResolucionNotFound {
+    public static Resolucion getResolucionByCod(String codigoResolucion)
+	    throws ResolucionNotFound {
 	ResultSet rst = null;
 	Resolucion res = null;
 	rst = jpa.getByField("Resolucion", "codigo_res", codigoResolucion);
@@ -142,40 +145,70 @@ public class Resolucion {
 	return res;
     }
 
+    /**
+     * @param codAct
+     * @return {@link LinkedList} con todas las resoluciones de la actividad
+     *         null si no tiene
+     */
+    public static LinkedList<Resolucion> getResolucionesActividad(String codAct) {
+	LinkedList<Resolucion> result = new LinkedList<Resolucion>();
+	ResultSet rs = null;
+	Resolucion resolucion = null;
+	rs = jpa.getByField("Resolucion", "cod_actividad", codAct);
+	try {
+	    while (rs.next()) {
+		String codResolucion = rs.getString(1);
+		String hrEnvio = rs.getString(2);
+		String fecha = rs.getString(3);
+		String dniDocente = rs.getString(4);
+		String codActividad = rs.getString(5);
+		String dniAlumno = rs.getString(6);
+		String resActividad = rs.getString(7);
+		String nota = rs.getString(8);
+		resolucion = new Resolucion(codResolucion, hrEnvio, fecha,
+			dniDocente, codActividad, dniAlumno, resActividad, nota);
+		result.add(resolucion);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    result = null;
+	}
+	return result;
+    }
+
     public boolean pertenece() {
-		String[] fieldNames = { "dni_alumno", "cod_actividad" };
-		String[] values = { dniAlumno, codActividad };
-		ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
-		try {
-			if (res.next()) {
-				if ((res.getString(5).compareTo(dniAlumno) == 0)
-						&& (res.getString(6).compareTo(codActividad) == 0)) {
-					return true;
-				}
-			}
-		} catch (SQLException e) {
-			return false;
+	String[] fieldNames = { "dni_alumno", "cod_actividad" };
+	String[] values = { dniAlumno, codActividad };
+	ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
+	try {
+	    if (res.next()) {
+		if ((res.getString(5).compareTo(dniAlumno) == 0)
+			&& (res.getString(6).compareTo(codActividad) == 0)) {
+		    return true;
 		}
-		return false;
+	    }
+	} catch (SQLException e) {
+	    return false;
 	}
+	return false;
+    }
 
-    public String getNota(String dniAlumno,String codActividad) {
-		String[] fieldNames = { "dni_alumno", "cod_actividad" };
-		String[] values = { dniAlumno, codActividad };
-		ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
-		try {
-			if (res.next()) {
-				if ((res.getString(5).compareTo(dniAlumno) == 0)
-						&& (res.getString(6).compareTo(codActividad) == 0)) {
-					return res.getString(8);
-				}
-			}
-		} catch (SQLException e) {
-			return "0";
+    public String getNota(String dniAlumno, String codActividad) {
+	String[] fieldNames = { "dni_alumno", "cod_actividad" };
+	String[] values = { dniAlumno, codActividad };
+	ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
+	try {
+	    if (res.next()) {
+		if ((res.getString(5).compareTo(dniAlumno) == 0)
+			&& (res.getString(6).compareTo(codActividad) == 0)) {
+		    return res.getString(8);
 		}
-		return "0";
+	    }
+	} catch (SQLException e) {
+	    return "0";
 	}
-
+	return "0";
+    }
     public String getFecha(String dniAlumno,String codActividad) {
 		String[] fieldNames = { "dni_alumno", "cod_actividad" };
 		String[] values = { dniAlumno, codActividad };
@@ -194,7 +227,6 @@ public class Resolucion {
 	}
 
 
-    
     public void setNota(String nota) {
 	this.nota = nota;
     }

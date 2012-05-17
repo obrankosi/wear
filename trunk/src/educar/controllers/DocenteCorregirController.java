@@ -3,9 +3,11 @@ package educar.controllers;
 import java.util.LinkedList;
 
 import educar.gui.IView;
+import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.DocenteView.DocenteView;
 import educar.languaje.defaultLanguaje;
 import educar.models.Actividad;
+import educar.models.ActividadNotFound;
 import educar.models.DictaMateria;
 import educar.models.DictaMateriaNotFound;
 import educar.models.Resolucion;
@@ -20,6 +22,7 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 
     private DocenteView view;
     private static Resolucion resolucion;
+    private static String codResolucion;
 
     @Override
     public void process(String model) {
@@ -38,8 +41,8 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 
     private void cargarSolucion() {
 	if (!view.algunCampoVacioResolucion()) {
-	    String codResolucion = new String(); // aca va el da la view
-	    String notaResolucion = new String();// aca va el de la view
+	    String codResolucion = DocenteCorregirController.codResolucion;
+	    String notaResolucion = view.getNotaCorregir();
 	    try {
 		resolucion = Resolucion.getResolucionByCod(codResolucion);
 	    } catch (ResolucionNotFound e) {
@@ -68,7 +71,22 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 
     @Override
     public void processItemList(String item) {
-
+	view.setearVacioCorregir();
+	String codAct = FuncionesAuxiliares.getCodActividad(item);
+	Actividad act = null;
+	LinkedList<String> resoluicones;
+	try {
+	    act = Actividad.getActividad(codAct);
+	} catch (ActividadNotFound e) {
+	}
+	resoluicones = resolucionesActividad(codAct);
+	view.setTextAreaActividadCorregir(act.getDescripcionActividad());
+	if (!resoluicones.isEmpty()) {
+	    view.setListResoluciones(resoluicones);
+	} else {
+	    view.present("la actividad no tiene resoluciones cargadas");
+	    view.setListResoluciones(resoluicones);
+	}
     }
 
     private static String getDniDocenteSession() {
@@ -88,7 +106,7 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	LinkedList<Actividad> listActAux = new LinkedList<Actividad>();
 	Actividad act;
 	LinkedList<String> materiasDicta;
-	
+
 	LinkedList<Subject> materiasEncargado = Subject
 		.getSubjectsByDniE(dniDocente);
 	try {
@@ -107,10 +125,9 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 		materia = materiasEncargado.get(i);
 		// guarod todas las actividades de una materia VER aca
 		listActAux = Actividad.getActDocente(materia.getCode());
-		System.out.println("cod:"+materia.getCode()+" | " +" cant act: "+ listActAux.size());
-		if (listActAux != null) { 
-		     listAct.addAll(listActAux);
-		     listActAux.clear();
+		if (listActAux != null) {
+		    listAct.addAll(listActAux);
+		    listActAux.clear();
 		}
 	    }
 	    materiasDicta.clear();
@@ -123,6 +140,23 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	}
 
 	return materiasDicta;
+    }
+
+    private static LinkedList<String> resolucionesActividad(String codActividad) {
+	LinkedList<String> result = new LinkedList<String>();
+	LinkedList<Resolucion> resoluciones;
+	Resolucion resolucion;
+	String newString;
+	resoluciones = Resolucion.getResolucionesActividad(codActividad);
+	for (int i = 0; i < resoluciones.size(); i++) {
+	    resolucion = resoluciones.get(i);
+	    newString = ("Res_nro: " + resolucion.getCodigoResolucion() + " | "
+		    + "alumno: " + resolucion.getDniAlumno() + " | "
+		    + "hrEnvio: " + resolucion.getHrEnvio() + " | " + "fecha: " + resolucion
+		    .getFecha());
+	    result.add(newString);
+	}
+	return result;
     }
 
     private static String getInfoMateria(LinkedList<Subject> materias,
@@ -141,5 +175,9 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	}
 
 	return res;
+    }
+
+    public static void setCodResolucion(String codRes){
+	codResolucion = codRes;
     }
 }
