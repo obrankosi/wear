@@ -16,6 +16,7 @@ public class AlumnoListSolucionController implements IListController,
 		try {
 			view.setDescripcionActividad(Actividad.getActividad(view.getCodActividad()).getDescripcionActividad());
 		    view.setNota(AlumnoControllers.getNota(view.getCodActividad()));
+	        
 		} catch (ActividadNotFound e) {
 			// TODO Auto-generated catch block
 			view.present("NO HA SELECCIONADO UNA ACTIVIDAD");

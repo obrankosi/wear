@@ -89,7 +89,6 @@ public class Resolucion {
 	    
 	} catch (SQLException e) {
 	    e.printStackTrace();
-	    System.out.println( e.getSQLState());
 	}
 	jpa.create(stm);
 	return true;
@@ -169,6 +168,23 @@ public class Resolucion {
 				if ((res.getString(5).compareTo(dniAlumno) == 0)
 						&& (res.getString(6).compareTo(codActividad) == 0)) {
 					return res.getString(8);
+				}
+			}
+		} catch (SQLException e) {
+			return "0";
+		}
+		return "0";
+	}
+
+    public String getFecha(String dniAlumno,String codActividad) {
+		String[] fieldNames = { "dni_alumno", "cod_actividad" };
+		String[] values = { dniAlumno, codActividad };
+		ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
+		try {
+			if (res.next()) {
+				if ((res.getString(5).compareTo(dniAlumno) == 0)
+						&& (res.getString(6).compareTo(codActividad) == 0)) {
+					return res.getString(3)+" Hora: "+res.getString(2);
 				}
 			}
 		} catch (SQLException e) {

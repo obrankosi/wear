@@ -13,6 +13,7 @@ public class JPA {
      */
     public ResultSet runQuery(String sentence) {
 	ResultSet res = null;
+	
 	try {
 	    Statement sent = (Statement) DbConnection.getInstance()
 		    .createStatement();
@@ -33,7 +34,6 @@ public class JPA {
      * @throws SQLException
      */
     public void runUpdate(String sentence) throws SQLException {
-	System.out.println(sentence);
 	Statement stm = (Statement) DbConnection.getInstance()
 		.createStatement();
 	try {
@@ -93,6 +93,7 @@ public class JPA {
 	    System.err.println("ERROR createInsertStatement");
 	    ex.printStackTrace();
 	}
+	
 	return stmt;
     }
 
