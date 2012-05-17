@@ -551,9 +551,11 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     public void setListActividadD(LinkedList<String> actividades) {
 	listaActividadDocente .removeAll();
 	listaMateriaActividadDocente.removeAll();
+	litaCorregirMateria .removeAll();
 	for (int i = 0; i < actividades.size(); i++) {
 	    listaActividadDocente.add(actividades.get(i), i);
-	    listaMateriaActividadDocente.add(actividades.get(i), i); 
+	    listaMateriaActividadDocente.add(actividades.get(i), i);
+	    litaCorregirMateria.add(actividades.get(i), i);
 	}
     }
 
