@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.List;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -25,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import educar.controllers.DocenteController;
 import educar.controllers.DocenteCorregirController;
+import educar.controllers.DocenteViewController;
 import educar.controllers.IController;
 import educar.controllers.IListController;
 import educar.gui.IView;
@@ -87,29 +86,25 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	panelMenuDocente.setBounds(0, 0, 148, 680);
 	contentPane.add(panelMenuDocente);
 
-	btnActividadMenuDocente = new JButton("ACTIVIDAD");
+	btnActividadMenuDocente = new JButton(ACTIVIDADOCENTEPANEL);
 	btnActividadMenuDocente.setFont(new Font("Arial", Font.BOLD, 12));
 	btnActividadMenuDocente.setBounds(0, 0, 148, 340);
 	panelMenuDocente.add(btnActividadMenuDocente);
-	btnActividadMenuDocente.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		panelCorregirDocente.setVisible(false);
-		panelActividadDocente.setVisible(true);
-		panelBienvenido.setVisible(false);
-	    }
-	});
 
-	btnCorregirActividad = new JButton("CORREGIR");
+	DocenteListener btnPanelAct = new DocenteListener();
+	IController addActividad = new DocenteViewController();
+	addActividad.setView(this);
+	btnPanelAct.associate(btnActividadMenuDocente, addActividad);
+
+	btnCorregirActividad = new JButton(CORREGIRDOCENTEPANEL);
 	btnCorregirActividad.setFont(new Font("Arial", Font.BOLD, 11));
 	btnCorregirActividad.setBounds(0, 343, 148, 340);
 	panelMenuDocente.add(btnCorregirActividad);
-	btnCorregirActividad.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent arg0) {
-		panelCorregirDocente.setVisible(true);
-		panelActividadDocente.setVisible(false);
-		panelBienvenido.setVisible(false);
-	    }
-	});
+
+	DocenteListener btnPanelCor = new DocenteListener();
+	IController corregir = new DocenteViewController();
+	corregir.setView(this);
+	btnPanelCor.associate(btnCorregirActividad, corregir);
 
 	// ////// PANEL BIENVENIDO ////////////////////////////////////////
 
@@ -329,10 +324,8 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	lblCartelCorregir.setBounds(0, 11, 887, 92);
 	panelCorregirDocente.add(lblCartelCorregir);
 
-	JLabel lblListaCorregirMateria = new JLabel(
-		"LISTA DE MATERIA");
-	lblListaCorregirMateria
-		.setHorizontalAlignment(SwingConstants.CENTER);
+	JLabel lblListaCorregirMateria = new JLabel("LISTA DE MATERIA");
+	lblListaCorregirMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaCorregirMateria.setFont(new Font("Arial", Font.BOLD, 23));
 	lblListaCorregirMateria.setBounds(897, 17, 295, 54);
 	panelCorregirDocente.add(lblListaCorregirMateria);
@@ -341,7 +334,11 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	litaCorregirMateria.setBounds(893, 77, 299, 268);
 	panelCorregirDocente.add(litaCorregirMateria);
 
-	
+	DocenteListListener listaMC = new DocenteListListener();
+	IListController listaMController = new DocenteCorregirController();
+	((DocenteCorregirController) listaMController).setView(this);
+	listaMC.associate(litaCorregirMateria, listaMController);
+
 	txtDniCorregir = new JTextField();
 	txtDniCorregir.setEditable(false);
 	txtDniCorregir.setFont(new Font("Arial", Font.BOLD, 20));
@@ -377,16 +374,15 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	JScrollPane scroll3 = new JScrollPane(textAreaCorregir);
 	scroll3.setBounds(22, 304, 799, 268);
 	panelCorregirDocente.add(scroll3);
-	
+
 	listaResolucionCorregir = new List();
 	listaResolucionCorregir.setBounds(897, 402, 295, 268);
 	panelCorregirDocente.add(listaResolucionCorregir);
-	
-	DocenteListListener listaResolucionC = new DocenteListListener();
-	IListController listaResolucionCController = new DocenteCorregirController();
-	((DocenteController) listaResolucionCController).setView(this);
-	listaResolucionC.associate(listaResolucionCorregir,
-		listaResolucionCController);
+
+	// DocenteListListener listaCorregirA = new DocenteListListener();
+	// IListController listaCA= new DocenteController();
+	// ((DocenteController) listaCA).setView(this);
+	// listaCorregirA.associate(litaCorregirMateria , listaCA);
 
 	label = new JLabel("LISTA DE RESOLUCIONES");
 	label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -509,6 +505,38 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 		|| this.getCodigoActividadCorregir().compareTo("") == 0
 		|| this.getNotaCorregir().compareTo("") == 0 || this
 		.getResolucionCorregir().compareTo("") == 0);
+    }
+
+    // ||||||||||||metodos control listas view||||||||||||||
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+    
+    /**
+     * @param listaMaterias
+     */
+    public void setListCorregirM(LinkedList<String> listaMaterias) {
+	litaCorregirMateria.removeAll();
+	for (int i = 0; i < listaMaterias.size(); i++) {
+	    litaCorregirMateria.add(listaMaterias.get(i), i);
+	}
+    }
+    
+    
+    
+    
+    // ||||||||||||metodos control panel view||||||||||||||
+    // ||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+    public void panelActividad() {
+	panelCorregirDocente.setVisible(false);
+	panelActividadDocente.setVisible(true);
+	panelBienvenido.setVisible(false);
+    }
+
+    public void panelCorregir() {
+	panelCorregirDocente.setVisible(true);
+	panelActividadDocente.setVisible(false);
+	panelBienvenido.setVisible(false);
     }
 
 }
