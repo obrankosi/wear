@@ -1,11 +1,12 @@
 package educar.controllers;
 
-import educar.controllers.DocenteCorregirController;
-import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.DocenteView.DocenteView;
 import educar.languaje.defaultLanguaje;
 
+/**
+ * @author grupo wear Controlador de la gui de doncete
+ */
 public class DocenteViewController implements IController, defaultLanguaje {
 
     private DocenteView view;
@@ -27,6 +28,4 @@ public class DocenteViewController implements IController, defaultLanguaje {
 	this.view = (DocenteView) view;
     }
 
-    
-    
 }

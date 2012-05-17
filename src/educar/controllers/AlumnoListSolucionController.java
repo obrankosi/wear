@@ -5,6 +5,10 @@ import educar.gui.AlumnoView.AlumnoView;
 import educar.models.Actividad;
 import educar.models.ActividadNotFound;
 
+/**
+ * @author grupo wear 
+ *Controlador de las lista de actividades de un alumno
+ */
 public class AlumnoListSolucionController implements IListController,
 		IController {
 	private AlumnoView view;
@@ -17,7 +21,6 @@ public class AlumnoListSolucionController implements IListController,
 			view.setDescripcionActividad(Actividad.getActividad(view.getCodActividad()).getDescripcionActividad());
 		    view.setNota(AlumnoControllers.getNota(view.getCodActividad()));
 		} catch (ActividadNotFound e) {
-			// TODO Auto-generated catch block
 			view.present("NO HA SELECCIONADO UNA ACTIVIDAD");
 		}
 	}}

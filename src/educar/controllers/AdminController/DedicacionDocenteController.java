@@ -14,6 +14,9 @@ import educar.models.AdminModels.DedicacionDocente;
 import educar.models.AdminModels.Docente;
 import educar.models.AdminModels.Facultad;
 
+/**
+ * @author grupo wear controlador de la dedicacion del docente
+ */
 public class DedicacionDocenteController implements IController,
 	defaultLanguaje, IListController {
 
@@ -47,6 +50,9 @@ public class DedicacionDocenteController implements IController,
 	}
     }
 
+    /**
+     * borra la dedicacion del docente
+     */
     private void borrarDedicacionDocente() {
 	if (!view.algunCampoVacioModificacion()) {
 
@@ -66,6 +72,9 @@ public class DedicacionDocenteController implements IController,
 
     }
 
+    /**
+     * actualiza las horas de dedicacion
+     */
     private void actualizarDedicacion() {
 	if (!view.algunCampoVacioModificacion()) {
 	    // genero la nueva actividad para actualizar
@@ -87,6 +96,9 @@ public class DedicacionDocenteController implements IController,
 	}
     }
 
+    /**
+     * agrega una nueva dedicacion
+     */
     private void addDedicacionDocente() {
 	// si hay algun campo vacio avisa
 	try {
@@ -141,8 +153,6 @@ public class DedicacionDocenteController implements IController,
 	} catch (SQLException e) {
 	}
 	String id = FuncionesAuxiliares.idString(item);
-	String noId = FuncionesAuxiliares.nameString(item);
-
 	// lo que trajo pertenece a docente
 	if (docentes.contains(id)) {
 	    view.setDniAltaDedicacionDocente(id);

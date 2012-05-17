@@ -2575,8 +2575,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     }
 
     public boolean camposVaciosAltaMateria() {
-	return (getNombreAltaCargo().compareTo("") == 0 && getCodigoFacultadAltaMateria()
-		.compareTo("") == 0);
+	return (getNombreAltaCargo().compareTo("") == 0 || getCodigoFacultadAltaMateria()
+		.compareTo("") == 0 || getAddNameTF_M().compareTo("")==0);
     }
 
     // ||||||||||||||||GET & SET CARGO||||||||||||||||||||||||||||//

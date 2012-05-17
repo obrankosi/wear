@@ -17,6 +17,10 @@ import educar.models.User;
 import educar.models.userNotFound;
 import educar.models.AdminModels.Subject;
 
+/**
+ * @author grupo wear
+ *Controlador de la historia corregir como docente actividades
+ */
 public class DocenteCorregirController implements IController, defaultLanguaje,
 	IListController {
 
@@ -29,38 +33,7 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 
 	if (model.compareTo(UPLOAD) == 0) {
 	    cargarSolucion();
-	}
-	if (model.compareTo("") == 0) {
-
-	}
-	if (model.compareTo("") == 0) {
-
-	}
-
-    }
-
-    private void cargarSolucion() {
-	if (!view.algunCampoVacioResolucion()) {
-	    String codResolucion = DocenteCorregirController.codResolucion;
-	    String notaResolucion = view.getNotaCorregir();
-	    try {
-		resolucion = Resolucion.getResolucionByCod(codResolucion);
-	    } catch (ResolucionNotFound e) {
-		resolucion = null;
-	    }
-	    if (resolucion != null) {
-		// no se cargo la resolucion
-		if (resolucion.getResolucion().compareTo("") == 0) {
-		    view.present("El alumno todavia no cargo la solucion");
-		    // resolucion cargada
-		} else {
-		    resolucion.setNota(notaResolucion);
-		    resolucion.update();
-		    view.present("Se a cargado la nota");
-		}
-	    }
-	} else {
-	    view.present("faltan ingresar campos");
+	    view.setearVacioCorregir();
 	}
     }
 
@@ -89,15 +62,9 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	}
     }
 
-    private static String getDniDocenteSession() {
-	try {
-	    return User.getUserByUsername(
-		    Session.getCurrentUser().getUsername()).getUsername();
-	} catch (userNotFound e) {
-	    return null;
-	}
-    }
-
+    /**
+     * @return {@link LinkedList} {@link String} actividades ligadas materia
+     */
     public static LinkedList<String> ActividadesLigadasmaterias() {
 	String dniDocente = getDniDocenteSession();
 	Subject materia;
@@ -142,6 +109,55 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	return materiasDicta;
     }
 
+    /**
+     * @param codRes {@link String}
+     */
+    public static void setCodResolucion(String codRes){
+	codResolucion = codRes;
+    }
+    
+    /**
+     *Carga solucion 
+     */
+    private void cargarSolucion() {
+	if (!view.algunCampoVacioResolucion()) {
+	    String codResolucion = DocenteCorregirController.codResolucion;
+	    String notaResolucion = view.getNotaCorregir();
+	    try {
+		resolucion = Resolucion.getResolucionByCod(codResolucion);
+	    } catch (ResolucionNotFound e) {
+		resolucion = null;
+	    }
+	    if (resolucion != null) {
+		// no se cargo la resolucion
+		if (resolucion.getResolucion().compareTo("") == 0) {
+		    view.present("El alumno todavia no cargo la solucion");
+		    // resolucion cargada
+		} else {
+		    resolucion.setNota(notaResolucion);
+		    resolucion.update();
+		    view.present("Se a cargado la nota");
+		}
+	    }
+	} else {
+	    view.present("faltan ingresar campos");
+	}
+    }
+
+    private static String getDniDocenteSession() {
+	try {
+	    return User.getUserByUsername(
+		    Session.getCurrentUser().getUsername()).getUsername();
+	} catch (userNotFound e) {
+	    return null;
+	}
+    }
+
+    
+    /**
+     * @param codActividad
+     * @return resoluciones de una actividad
+     */
     private static LinkedList<String> resolucionesActividad(String codActividad) {
 	LinkedList<String> result = new LinkedList<String>();
 	LinkedList<Resolucion> resoluciones;
@@ -177,7 +193,4 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	return res;
     }
 
-    public static void setCodResolucion(String codRes){
-	codResolucion = codRes;
-    }
 }

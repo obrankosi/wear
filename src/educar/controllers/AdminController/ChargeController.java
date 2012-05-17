@@ -11,8 +11,13 @@ import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Cargos;
 
+/**
+ * @author grupo wear
+ *
+ */
 public class ChargeController implements IController, defaultLanguaje,
 	IListController {
+ 
     private static Cargos cargo;
     private static LinkedList<String> cargosList;
     private administrador rView;
@@ -48,6 +53,9 @@ public class ChargeController implements IController, defaultLanguaje,
 
     }
 
+    /**
+     * Borra un cargo de la base de datos 
+     */
     private void deleteChargeInDBase() {
 	searchChargeInDBase();
 	if (!(rView.getCodigoModificarCargo().compareTo("") == 0)) {
@@ -60,6 +68,9 @@ public class ChargeController implements IController, defaultLanguaje,
 	}
     }
 
+    /**
+     * modifica cargo de la base de datos
+     */
     private void modifyChargeInDBase() {
 	if (cargo != null) {
 	    String[] values = { rView.getNombreModificarCargo() };
@@ -75,6 +86,9 @@ public class ChargeController implements IController, defaultLanguaje,
 
     }
 
+    /**
+     * guarda cargo en la base de datos
+     */
     private void saveChargeInDBase() {
 	if (rView.fieldsIsOkAltaCargo()) {
 	    Cargos cargo = new Cargos(rView.getNombreAltaCargo());
@@ -89,6 +103,9 @@ public class ChargeController implements IController, defaultLanguaje,
 	}
     }
 
+    /**
+     * busca cargo
+     */
     private void searchChargeInDBase() {
 	cargo = Cargos.getCargo(rView.getCodigoModificarCargo());
 	if (cargo != null) {

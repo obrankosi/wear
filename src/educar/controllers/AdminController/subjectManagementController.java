@@ -12,13 +12,16 @@ import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Facultad;
 import educar.models.AdminModels.Subject;
 
+/**
+ * @author grupo wear
+ *controlador de la las materias como administrador
+ */
 public class subjectManagementController implements IController,
 	defaultLanguaje, IListController {
 
     private administrador view;
     private static Subject materia;
     private LinkedList<String> subjects;
-    private LinkedList<String> materias;
     private LinkedList<String> facultades;
 
     @Override
@@ -53,6 +56,9 @@ public class subjectManagementController implements IController,
 
     }
 
+    /**
+     * agrega materia 
+     */
     private void addSubject() {
 	// si no estan vacios
 	if (!view.camposVaciosAltaMateria()) {
@@ -66,6 +72,9 @@ public class subjectManagementController implements IController,
 	    view.present("faltan completar campos");
     }
 
+    /**
+     * borra materia
+     */
     private void deleteSubject() {
 	materia = Subject.getSubject(view.getModifyCodeTF_M());
 	if (materia != null) {
@@ -80,6 +89,9 @@ public class subjectManagementController implements IController,
 	    view.present("La materia a borrar no existe");
     }
 
+    /**
+     *busca materia 
+     */
     public void searchSubject() {
 	materia = Subject.getSubject(view.getModifyCodeTF_M());
 	if (materia != null) {
@@ -103,6 +115,9 @@ public class subjectManagementController implements IController,
 	}
     }
 
+    /**
+     * modifica materia 
+     */
     private void modifySubject() {
 	String[] values = { view.getModifyNameTF_M().trim(),
 		view.getCodigoFacultadModificarMateria().trim() };

@@ -10,42 +10,41 @@ import educar.models.Session;
 import educar.models.User;
 
 public class LoginController implements IController {
-	private LoginView view;
+    private LoginView view;
 
-	public void process(String model) {
-		if (null != view)
-			if (User.authenticate(((LoginView) view).getUsername(),
-					((LoginView) view).getPassword())) {
-				view.present("You are logged in as: "
-						+ Session.getCurrentUser().getUsername());
-				view.close();
-				openView(Session.getCurrentUser());
+    public void process(String model) {
+	if (null != view)
+	    if (User.authenticate(((LoginView) view).getUsername(),
+		    ((LoginView) view).getPassword())) {
+		view.present("You are logged in as: "
+			+ Session.getCurrentUser().getUsername());
+		view.close();
+		openView(Session.getCurrentUser());
 
-			} else {
-				view.present("Wrong username/password");
-			}
+	    } else {
+		view.present("Wrong username/password");
+	    }
+    }
+
+    private void openView(User currentUser) {
+	String role = Session.getCurrentUser().getRole();
+	if (role.equals("root")) {
+	    // view.close();
+	    new RootView();
 	}
-
-	private void openView(User currentUser) {
-		String role = Session.getCurrentUser().getRole();
-		// Segun el tipo de usario, es la View que abre
-		if (role.equals("root")) {
-			// view.close();
-			new RootView();
-		}
-		if (role.equals("admin")) {
-			new administrador();
-		}
-		if (role.equals("Docente")) {
-			new DocenteView();
-		}
-		if (role.equals("Alumno")) {
-			new AlumnoView();
-		}
+	if (role.equals("admin")) {
+	    new administrador();
 	}
-
-	@Override
-	public void setView(IView view) {
-		this.view = (LoginView) view;
+	if (role.equals("Docente")) {
+	    new DocenteView();
 	}
+	if (role.equals("Alumno")) {
+	    new AlumnoView();
+	}
+    }
+
+    @Override
+    public void setView(IView view) {
+	this.view = (LoginView) view;
+    }
 }

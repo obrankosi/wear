@@ -7,6 +7,10 @@ import educar.models.Resolucion;
 import educar.models.ResolucionNotFound;
 import educar.models.AdminModels.Alumno;
 
+/**
+ * @author grupo wear
+ *Controlador Lista de Resoluciones de Docente en la historia correccion 
+ */
 public class DocenteCorregirListResolucionesController implements IController,
 	IListController {
 

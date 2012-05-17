@@ -6,6 +6,10 @@ import educar.gui.IView;
 import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.AdminViews.administrador;
 
+/**
+ * @author grupo wear
+ * controlador de la lista de cargos de la historia Dedicacion Docente
+ */
 public class CargoListaDedicacionDocenteController implements IListController ,IController {
 
     private administrador view;

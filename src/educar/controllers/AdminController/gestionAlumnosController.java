@@ -11,6 +11,10 @@ import educar.gui.AdminViews.administrador;
 import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Alumno;
 
+/**
+ * @author grupo wear
+ *controlador de los alumnos como administrador
+ */
 public class gestionAlumnosController implements IController, defaultLanguaje,
 	IListController {
 
@@ -43,6 +47,9 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 
     }
 
+    /**
+     *Busca alumnos 
+     */
     private void searchAStudentInDbase() {
 	student = Alumno.getAlumno(view.getDniMod_A());
 	if (student != null) {
@@ -59,6 +66,9 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 
     }
 
+    /**
+     * Borrado de alumnos
+     */
     private void deletStudent() {//
 	searchAStudentInDbase();
 	if (!(view.getDniMod_A().compareTo("") == 0)) {
@@ -69,9 +79,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 		view
 			.present("el alumno no se puede borrar, ya que esta cursando materias");
 	    }
-
 	}
-
     }
 
     @Override
@@ -79,6 +87,9 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 	this.view = (administrador) view;
     }
 
+    /**
+     *Agrega alumnos 
+     */
     private void AddStudent() {
 	if (view.fieldsIsOkAlta_A()) {
 	    // guardad
@@ -97,12 +108,14 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 	    view.present("faltan completar campos");
     }
 
+    /**
+     *Modifica alumno 
+     */
     private void modifyStudent() {
 	if (student != null) {
 	    String[] values = { view.getDniMod_A(), view.getLastnameMod_A(),
 		    view.getNameMod_A(), view.getFechaNacMod_A(),
 		    view.getTelefonoMod_A(), view.getDireccionMod_A() };
-
 	    try {
 		Alumno.update(values, student.getDni());
 		view.present("acutalizacion realizada");
@@ -122,15 +135,6 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 	} catch (SQLException e) {
 	    view.present("no entro por la lista de alumnos");
 	}
-    }
-
-    private void setFieldModifyStudentView() {
-	view.setTfNombre_modif_A(student.getName());
-	view.setTfApellido_modif_A(student.getLastName());
-	view.setTfDireccion_modif_A(student.getDir());
-	view.setTfDni_modif_A(student.getDni());
-	view.setTfFechaNac_modif_A(student.getfN());
-	view.setTfTelefono_modif_A(student.getTel());
     }
 
     @Override
