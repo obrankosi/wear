@@ -25,6 +25,7 @@ import javax.swing.border.EmptyBorder;
 import educar.controllers.AlumnoControllers;
 import educar.controllers.AlumnoListController;
 import educar.controllers.AlumnoListSolucionController;
+import educar.controllers.AlumnosViewController;
 import educar.controllers.IController;
 import educar.controllers.IListController;
 import educar.gui.IView;
@@ -34,349 +35,364 @@ import educar.languaje.defaultLanguaje;
 
 public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 
-	private JPanel contentPane;
-	private JPanel panelMenuAlumno;
-	private JButton btnCargarSolucion;
-	private JPanel panelCarcarSolucion;
-	private List listaActividadesCargarMateria;
-	private JTextField txtNota;
-	private JPanel panelIncripcionMateria;
-	private List listaMateriasInscripo;
-	private JButton btnIncribir;
-	private JTextField txtCodigoMateria;
-	private List listaMateriasAInscribir;
-	private JButton btnIncripcionMateria;
-	private JPanel panelBienvenido;
-	private JTextArea textArea;
-	private JTextArea textArea2;
-	private String codActividad;
+    private JPanel contentPane;
+    private JPanel panelMenuAlumno;
+    private JButton btnCargarSolucion;
+    private JPanel panelCarcarSolucion;
+    private List listaActividadesCargarMateria;
+    private JTextField txtNota;
+    private JPanel panelIncripcionMateria;
+    private List listaMateriasInscripo;
+    private JButton btnIncribir;
+    private JTextField txtCodigoMateria;
+    private List listaMateriasAInscribir;
+    private JButton btnIncripcionMateria;
+    private JPanel panelBienvenido;
+    private JTextArea textArea;
+    private JTextArea textArea2;
+    private String codActividad;
 
-	/**
-	 * Create the frame.
-	 */
-	public AlumnoView() {
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds(0, 0, d.width, d.height - 50);// Tamaño de mi ventana
+    /**
+     * Create the frame.
+     */
+    public AlumnoView() {
+	setVisible(true);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+	setBounds(0, 0, d.width, d.height - 50);// Tamaï¿½o de mi ventana
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	contentPane = new JPanel();
+	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	setContentPane(contentPane);
+	contentPane.setLayout(null);
 
-		// ////////////// MENU ALUMNO // ////////////////////////////
+	// ////////////// MENU ALUMNO // ////////////////////////////
 
-		panelMenuAlumno = new JPanel();
-		panelMenuAlumno.setLayout(null);
-		panelMenuAlumno.setAutoscrolls(true);
-		panelMenuAlumno.setBounds(0, 0, 148, 680);
-		contentPane.add(panelMenuAlumno);
+	panelMenuAlumno = new JPanel();
+	panelMenuAlumno.setLayout(null);
+	panelMenuAlumno.setAutoscrolls(true);
+	panelMenuAlumno.setBounds(0, 0, 148, 680);
+	contentPane.add(panelMenuAlumno);
 
-		btnCargarSolucion = new JButton("CARGAR SOLUCI\u00D3N");
-		btnCargarSolucion.setFont(new Font("Arial", Font.BOLD, 12));
-		btnCargarSolucion.setBounds(0, 0, 148, 340);
-		panelMenuAlumno.add(btnCargarSolucion);
-		btnCargarSolucion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				panelCarcarSolucion.setVisible(true);
-				panelIncripcionMateria.setVisible(false);
-				panelBienvenido.setVisible(false);
-			}
-		});
+	btnCargarSolucion = new JButton(CARGARSOLUCIONALUMNOPANEL);
+	btnCargarSolucion.setFont(new Font("Arial", Font.BOLD, 12));
+	btnCargarSolucion.setBounds(0, 0, 148, 340);
+	panelMenuAlumno.add(btnCargarSolucion);
 
-		btnIncripcionMateria = new JButton("INCRIPCI\u00D3N MATERIA");
-		btnIncripcionMateria.setFont(new Font("Arial", Font.BOLD, 11));
-		btnIncripcionMateria.setBounds(0, 343, 148, 340);
-		panelMenuAlumno.add(btnIncripcionMateria);
-		btnIncripcionMateria.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				panelCarcarSolucion.setVisible(false);
-				panelIncripcionMateria.setVisible(true);
-				panelBienvenido.setVisible(false);
-			}
-		});
+	AlumnoListener btnPanelCargarS = new AlumnoListener();
+	IController addSolve = new AlumnosViewController();
+	addSolve.setView(this);
+	btnPanelCargarS.associate(btnCargarSolucion, addSolve);
 
-		// ////// PANEL BIENVENIDO ////////////////////////////////////////
-		panelBienvenido = new JPanel();
-		panelBienvenido.setBackground(Color.WHITE);
-		panelBienvenido.setForeground(SystemColor.desktop);
-		panelBienvenido.setBounds(148, 0, 1202, 680);
-		contentPane.add(panelBienvenido);
-		panelBienvenido.setLayout(null);
-		panelBienvenido.setVisible(true);
+	btnIncripcionMateria = new JButton(INSCRIBIRMALUMNOPANEL);
+	btnIncripcionMateria.setFont(new Font("Arial", Font.BOLD, 11));
+	btnIncripcionMateria.setBounds(0, 343, 148, 340);
+	panelMenuAlumno.add(btnIncripcionMateria);
 
-		JLabel lblFotoBiendenido = new JLabel("");
-		lblFotoBiendenido.setBackground(Color.WHITE);
-		lblFotoBiendenido
-				.setIcon(new ImageIcon(
-						AlumnoView.class
-								.getResource("/educar/gui/AlumnoView/imagenIconAlumno/educar2012.jpg")));
-		lblFotoBiendenido.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFotoBiendenido.setFont(new Font("Arial", Font.BOLD, 23));
-		lblFotoBiendenido.setBounds(0, 0, 1202, 680);
-		panelBienvenido.add(lblFotoBiendenido);
+	AlumnoListener InscribirM = new AlumnoListener();
+	IController InscribirMC = new AlumnosViewController();
+	InscribirMC.setView(this);
+	InscribirM.associate(btnIncripcionMateria, InscribirMC);
 
-		// ///////////////////////////// APANEL CARGAR SOLUCION DE ACTIVIDAD
-		// ///////////////////////
+	// ////// PANEL BIENVENIDO ////////////////////////////////////////
+	panelBienvenido = new JPanel();
+	panelBienvenido.setBackground(Color.WHITE);
+	panelBienvenido.setForeground(SystemColor.desktop);
+	panelBienvenido.setBounds(148, 0, 1202, 680);
+	contentPane.add(panelBienvenido);
+	panelBienvenido.setLayout(null);
+	panelBienvenido.setVisible(true);
 
-		panelCarcarSolucion = new JPanel();
-		panelCarcarSolucion.setBackground(SystemColor.activeCaption);
-		panelCarcarSolucion.setForeground(SystemColor.desktop);
-		panelCarcarSolucion.setBounds(148, 0, 1202, 680);
-		contentPane.add(panelCarcarSolucion);
-		panelCarcarSolucion.setLayout(null);
-		panelCarcarSolucion.setVisible(false);
+	JLabel lblFotoBiendenido = new JLabel("");
+	lblFotoBiendenido.setBackground(Color.WHITE);
+	lblFotoBiendenido
+		.setIcon(new ImageIcon(
+			AlumnoView.class
+				.getResource("/educar/gui/AlumnoView/imagenIconAlumno/educar2012.jpg")));
+	lblFotoBiendenido.setHorizontalAlignment(SwingConstants.CENTER);
+	lblFotoBiendenido.setFont(new Font("Arial", Font.BOLD, 23));
+	lblFotoBiendenido.setBounds(0, 0, 1202, 680);
+	panelBienvenido.add(lblFotoBiendenido);
 
-		JLabel lblSolucionActividad = new JLabel("Solucion Actividad");
-		lblSolucionActividad.setHorizontalAlignment(SwingConstants.LEFT);
-		lblSolucionActividad.setFont(new Font("Arial", Font.BOLD, 23));
-		lblSolucionActividad.setBounds(22, 120, 276, 28);
-		panelCarcarSolucion.add(lblSolucionActividad);
+	// ///////////////////////////// APANEL CARGAR SOLUCION DE ACTIVIDAD
+	// ///////////////////////
 
-		JLabel lblDescripicionActividad = new JLabel("Descripicion Actividad");
-		lblDescripicionActividad.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDescripicionActividad.setFont(new Font("Arial", Font.BOLD, 23));
-		lblDescripicionActividad.setBounds(22, 351, 276, 28);
-		panelCarcarSolucion.add(lblDescripicionActividad);
+	panelCarcarSolucion = new JPanel();
+	panelCarcarSolucion.setBackground(SystemColor.activeCaption);
+	panelCarcarSolucion.setForeground(SystemColor.desktop);
+	panelCarcarSolucion.setBounds(148, 0, 1202, 680);
+	contentPane.add(panelCarcarSolucion);
+	panelCarcarSolucion.setLayout(null);
+	panelCarcarSolucion.setVisible(false);
 
-		JLabel lblNotaActividad = new JLabel("Nota ");
-		lblNotaActividad.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNotaActividad.setFont(new Font("Arial", Font.BOLD, 23));
-		lblNotaActividad.setBounds(58, 598, 265, 59);
-		panelCarcarSolucion.add(lblNotaActividad);
-		JLabel lblCartelCargarMateria = new JLabel(
-				"SELECCI\u00D3NE LA ACTIVIDAD Y INGRESE LA SOLUCI\u00D3N A SUBIR ");
-		lblCartelCargarMateria.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCartelCargarMateria.setFont(new Font("Arial", Font.BOLD, 24));
-		lblCartelCargarMateria.setBounds(0, 11, 887, 92);
-		panelCarcarSolucion.add(lblCartelCargarMateria);
+	JLabel lblSolucionActividad = new JLabel("Solucion Actividad");
+	lblSolucionActividad.setHorizontalAlignment(SwingConstants.LEFT);
+	lblSolucionActividad.setFont(new Font("Arial", Font.BOLD, 23));
+	lblSolucionActividad.setBounds(22, 120, 276, 28);
+	panelCarcarSolucion.add(lblSolucionActividad);
 
-		JLabel lblListaDeActividades = new JLabel("LISTA DE ACTIVIDADES");
-		lblListaDeActividades.setHorizontalAlignment(SwingConstants.CENTER);
-		lblListaDeActividades.setFont(new Font("Arial", Font.BOLD, 23));
-		lblListaDeActividades.setBounds(897, 17, 295, 54);
-		panelCarcarSolucion.add(lblListaDeActividades);
+	JLabel lblDescripicionActividad = new JLabel("Descripicion Actividad");
+	lblDescripicionActividad.setHorizontalAlignment(SwingConstants.LEFT);
+	lblDescripicionActividad.setFont(new Font("Arial", Font.BOLD, 23));
+	lblDescripicionActividad.setBounds(22, 351, 276, 28);
+	panelCarcarSolucion.add(lblDescripicionActividad);
 
-		listaActividadesCargarMateria = new List();
-		listaActividadesCargarMateria.setBounds(893, 77, 299, 592);
-		panelCarcarSolucion.add(listaActividadesCargarMateria);
+	JLabel lblNotaActividad = new JLabel("Nota ");
+	lblNotaActividad.setHorizontalAlignment(SwingConstants.CENTER);
+	lblNotaActividad.setFont(new Font("Arial", Font.BOLD, 23));
+	lblNotaActividad.setBounds(58, 598, 265, 59);
+	panelCarcarSolucion.add(lblNotaActividad);
+	JLabel lblCartelCargarMateria = new JLabel(
+		"SELECCI\u00D3NE LA ACTIVIDAD Y INGRESE LA SOLUCI\u00D3N A SUBIR ");
+	lblCartelCargarMateria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblCartelCargarMateria.setFont(new Font("Arial", Font.BOLD, 24));
+	lblCartelCargarMateria.setBounds(0, 11, 887, 92);
+	panelCarcarSolucion.add(lblCartelCargarMateria);
 
-		AlumnoListListener listaActividades2 = new AlumnoListListener();
-		IListController listaActividadControllers2 = new AlumnoListSolucionController();
-		((IController) listaActividadControllers2).setView(this);
-		listaActividades2.associate(listaActividadesCargarMateria,
-				listaActividadControllers2);
+	JLabel lblListaDeActividades = new JLabel("LISTA DE ACTIVIDADES");
+	lblListaDeActividades.setHorizontalAlignment(SwingConstants.CENTER);
+	lblListaDeActividades.setFont(new Font("Arial", Font.BOLD, 23));
+	lblListaDeActividades.setBounds(897, 17, 295, 54);
+	panelCarcarSolucion.add(lblListaDeActividades);
 
-		txtNota = new JTextField();
-		txtNota.setEditable(false);
-		txtNota.setFont(new Font("Arial", Font.BOLD, 20));
-		txtNota.setColumns(10);
-		txtNota.setBounds(333, 598, 90, 59);
-		panelCarcarSolucion.add(txtNota);
+	listaActividadesCargarMateria = new List();
+	listaActividadesCargarMateria.setBounds(893, 77, 299, 592);
+	panelCarcarSolucion.add(listaActividadesCargarMateria);
 
-		JButton btnSubir = new JButton(SUBIR);
-		btnSubir.setFont(new Font("Arial", Font.BOLD, 20));
-		btnSubir.setBounds(555, 598, 244, 59);
-		panelCarcarSolucion.add(btnSubir);
+	AlumnoListListener listaActividades2 = new AlumnoListListener();
+	IListController listaActividadControllers2 = new AlumnoListSolucionController();
+	((IController) listaActividadControllers2).setView(this);
+	listaActividades2.associate(listaActividadesCargarMateria,
+		listaActividadControllers2);
 
-		AlumnoListener bSubir = new AlumnoListener();
-		IController alumnoSolucion = new AlumnoControllers();
-		alumnoSolucion.setView(this);
-		bSubir.associate(btnSubir, alumnoSolucion);
-		
-		textArea = new JTextArea();
-		textArea.setText("");
-		textArea.setBounds(22, 114, 621, 224);
-		JScrollPane scroll = new JScrollPane(textArea);
-		scroll.setBounds(22, 144, 799, 201);
-		panelCarcarSolucion.add(scroll);
+	txtNota = new JTextField();
+	txtNota.setEditable(false);
+	txtNota.setFont(new Font("Arial", Font.BOLD, 20));
+	txtNota.setColumns(10);
+	txtNota.setBounds(333, 598, 90, 59);
+	panelCarcarSolucion.add(txtNota);
 
-		textArea2 = new JTextArea();
-		textArea2.setText("");
-		textArea2.setEditable(false);
-		textArea2.setBounds(22, 114, 621, 224);
-		JScrollPane scroll2 = new JScrollPane(textArea2);
-		scroll2.setBounds(22, 381, 799, 201);
-		panelCarcarSolucion.add(scroll2);
+	JButton btnSubir = new JButton(SUBIR);
+	btnSubir.setFont(new Font("Arial", Font.BOLD, 20));
+	btnSubir.setBounds(555, 598, 244, 59);
+	panelCarcarSolucion.add(btnSubir);
 
-		
-		// //////////////////////////////// PANEL INCRIPCION MATERIA
-		// //////////////////////////////////////////////////////
-		panelIncripcionMateria = new JPanel();
-		panelIncripcionMateria.setBackground(SystemColor.inactiveCaption);
-		panelIncripcionMateria.setForeground(SystemColor.desktop);
-		panelIncripcionMateria.setBounds(148, 0, 1202, 680);
-		contentPane.add(panelIncripcionMateria);
-		panelIncripcionMateria.setLayout(null);
-		panelIncripcionMateria.setVisible(false);
+	AlumnoListener bSubir = new AlumnoListener();
+	IController alumnoSolucion = new AlumnoControllers();
+	alumnoSolucion.setView(this);
+	bSubir.associate(btnSubir, alumnoSolucion);
 
-		JLabel lblNombreMateria = new JLabel("Codigo Materia");
-		lblNombreMateria.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreMateria.setFont(new Font("Arial", Font.BOLD, 23));
-		lblNombreMateria.setBounds(0, 334, 265, 54);
-		panelIncripcionMateria.add(lblNombreMateria);
+	textArea = new JTextArea();
+	textArea.setText("");
+	textArea.setBounds(22, 114, 621, 224);
+	JScrollPane scroll = new JScrollPane(textArea);
+	scroll.setBounds(22, 144, 799, 201);
+	panelCarcarSolucion.add(scroll);
 
-		JLabel lblCartelIncribirmeMateria = new JLabel(
-				"SELECCI\u00D3NE LA MATERIA A INCRIBIRSE ");
-		lblCartelIncribirmeMateria
-				.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCartelIncribirmeMateria.setFont(new Font("Arial", Font.BOLD, 26));
-		lblCartelIncribirmeMateria.setBounds(0, 11, 650, 92);
-		panelIncripcionMateria.add(lblCartelIncribirmeMateria);
+	textArea2 = new JTextArea();
+	textArea2.setText("");
+	textArea2.setEditable(false);
+	textArea2.setBounds(22, 114, 621, 224);
+	JScrollPane scroll2 = new JScrollPane(textArea2);
+	scroll2.setBounds(22, 381, 799, 201);
+	panelCarcarSolucion.add(scroll2);
 
-		JLabel lblListaMaterias = new JLabel("LISTA DE MATERIA");
-		lblListaMaterias.setHorizontalAlignment(SwingConstants.CENTER);
-		lblListaMaterias.setFont(new Font("Arial", Font.BOLD, 23));
-		lblListaMaterias.setBounds(927, 17, 265, 42);
-		panelIncripcionMateria.add(lblListaMaterias);
+	// //////////////////////////////// PANEL INCRIPCION MATERIA
+	// //////////////////////////////////////////////////////
+	panelIncripcionMateria = new JPanel();
+	panelIncripcionMateria.setBackground(SystemColor.inactiveCaption);
+	panelIncripcionMateria.setForeground(SystemColor.desktop);
+	panelIncripcionMateria.setBounds(148, 0, 1202, 680);
+	contentPane.add(panelIncripcionMateria);
+	panelIncripcionMateria.setLayout(null);
+	panelIncripcionMateria.setVisible(false);
 
-		JLabel label = new JLabel("LISTA DE MATERIA");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Arial", Font.BOLD, 23));
-		label.setBounds(652, 17, 265, 42);
-		panelIncripcionMateria.add(label);
+	JLabel lblNombreMateria = new JLabel("Codigo Materia");
+	lblNombreMateria.setHorizontalAlignment(SwingConstants.CENTER);
+	lblNombreMateria.setFont(new Font("Arial", Font.BOLD, 23));
+	lblNombreMateria.setBounds(0, 334, 265, 54);
+	panelIncripcionMateria.add(lblNombreMateria);
 
-		JLabel lblaIncribirme = new JLabel("( A INCRIBIRME )");
-		lblaIncribirme.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
-		lblaIncribirme.setHorizontalAlignment(SwingConstants.CENTER);
-		lblaIncribirme.setBounds(660, 55, 257, 23);
-		panelIncripcionMateria.add(lblaIncribirme);
+	JLabel lblCartelIncribirmeMateria = new JLabel(
+		"SELECCI\u00D3NE LA MATERIA A INCRIBIRSE ");
+	lblCartelIncribirmeMateria
+		.setHorizontalAlignment(SwingConstants.CENTER);
+	lblCartelIncribirmeMateria.setFont(new Font("Arial", Font.BOLD, 26));
+	lblCartelIncribirmeMateria.setBounds(0, 11, 650, 92);
+	panelIncripcionMateria.add(lblCartelIncribirmeMateria);
 
-		JLabel lblIncripto = new JLabel("(  INCRIPTO  )");
-		lblIncripto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIncripto.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
-		lblIncripto.setBounds(935, 55, 257, 23);
-		panelIncripcionMateria.add(lblIncripto);
+	JLabel lblListaMaterias = new JLabel("LISTA DE MATERIA");
+	lblListaMaterias.setHorizontalAlignment(SwingConstants.CENTER);
+	lblListaMaterias.setFont(new Font("Arial", Font.BOLD, 23));
+	lblListaMaterias.setBounds(927, 17, 265, 42);
+	panelIncripcionMateria.add(lblListaMaterias);
 
-		listaMateriasInscripo = new List();
-		listaMateriasInscripo.setBounds(927, 77, 265, 592);
-		panelIncripcionMateria.add(listaMateriasInscripo);
+	JLabel label = new JLabel("LISTA DE MATERIA");
+	label.setHorizontalAlignment(SwingConstants.CENTER);
+	label.setFont(new Font("Arial", Font.BOLD, 23));
+	label.setBounds(652, 17, 265, 42);
+	panelIncripcionMateria.add(label);
 
-		listaMateriasAInscribir = new List();
-		listaMateriasAInscribir.setBounds(656, 77, 265, 592);
-		panelIncripcionMateria.add(listaMateriasAInscribir);
+	JLabel lblaIncribirme = new JLabel("( A INCRIBIRME )");
+	lblaIncribirme.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
+	lblaIncribirme.setHorizontalAlignment(SwingConstants.CENTER);
+	lblaIncribirme.setBounds(660, 55, 257, 23);
+	panelIncripcionMateria.add(lblaIncribirme);
 
-		AlumnoListListener listaMaterias = new AlumnoListListener();
-		IListController listaMateriasControllers = new AlumnoListController();
-		((IController) listaMateriasControllers).setView(this);
-		listaMaterias.associate(listaMateriasAInscribir,
-				listaMateriasControllers);
+	JLabel lblIncripto = new JLabel("(  INCRIPTO  )");
+	lblIncripto.setHorizontalAlignment(SwingConstants.CENTER);
+	lblIncripto.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
+	lblIncripto.setBounds(935, 55, 257, 23);
+	panelIncripcionMateria.add(lblIncripto);
 
-		txtCodigoMateria = new JTextField();
-		txtCodigoMateria.setEditable(false);
-		txtCodigoMateria.setFont(new Font("Arial", Font.BOLD, 20));
-		txtCodigoMateria.setBounds(249, 335, 365, 54);
-		panelIncripcionMateria.add(txtCodigoMateria);
-		txtCodigoMateria.setColumns(10);
+	listaMateriasInscripo = new List();
+	listaMateriasInscripo.setBounds(927, 77, 265, 592);
+	panelIncripcionMateria.add(listaMateriasInscripo);
 
-		btnIncribir = new JButton(ADD);
-		btnIncribir.setFont(new Font("Arial", Font.BOLD, 20));
-		btnIncribir.setBounds(378, 584, 139, 54);
-		panelIncripcionMateria.add(btnIncribir);
+	listaMateriasAInscribir = new List();
+	listaMateriasAInscribir.setBounds(656, 77, 265, 592);
+	panelIncripcionMateria.add(listaMateriasAInscribir);
 
-		AlumnoListener bInscribir = new AlumnoListener();
-		IController alumnoInscribir = new AlumnoControllers();
-		alumnoInscribir.setView(this);
-		bInscribir.associate(btnIncribir, alumnoInscribir);
+	AlumnoListListener listaMaterias = new AlumnoListListener();
+	IListController listaMateriasControllers = new AlumnoListController();
+	((IController) listaMateriasControllers).setView(this);
+	listaMaterias.associate(listaMateriasAInscribir,
+		listaMateriasControllers);
 
-	}
+	txtCodigoMateria = new JTextField();
+	txtCodigoMateria.setEditable(false);
+	txtCodigoMateria.setFont(new Font("Arial", Font.BOLD, 20));
+	txtCodigoMateria.setBounds(249, 335, 365, 54);
+	panelIncripcionMateria.add(txtCodigoMateria);
+	txtCodigoMateria.setColumns(10);
 
-	// ///////////////// get y set de CARGAR SOLUCION //////////
+	btnIncribir = new JButton(ADD);
+	btnIncribir.setFont(new Font("Arial", Font.BOLD, 20));
+	btnIncribir.setBounds(378, 584, 139, 54);
+	panelIncripcionMateria.add(btnIncribir);
 
-	public String getSolucionActividad() {
-		return this.textArea.getText();
-	}
+	AlumnoListener bInscribir = new AlumnoListener();
+	IController alumnoInscribir = new AlumnoControllers();
+	alumnoInscribir.setView(this);
+	bInscribir.associate(btnIncribir, alumnoInscribir);
 
-	public String getDescripcionActividad() { // aca seria el get para bajar un archivo 
-		return this.textArea2.getText();
-	}
+    }
 
-	public String getNota() {
-		return this.txtNota.getText();
-	}
+    // ///////////////// get y set de CARGAR SOLUCION //////////
 
-	public void setSolucionActividad(String s) {
-		this.textArea.setText(s);
-	}
+    public String getSolucionActividad() {
+	return this.textArea.getText();
+    }
 
-	public void setDescripcionActividad(String s) {
-		this.textArea2.setText(s);
-	}
+    public String getDescripcionActividad() { // aca seria el get para bajar un
+	// archivo
+	return this.textArea2.getText();
+    }
 
-	public void setNota(String s) {
-		this.txtNota.setText(s);
-	}
+    public String getNota() {
+	return this.txtNota.getText();
+    }
 
-	public boolean camposVaciosCargarSolucion() {
-		return (this.getSolucionActividad().compareTo("")==0)
-				&& (this.getDescripcionActividad().compareTo("")==0);//&& !(getNota() == "");
-	}
+    public void setSolucionActividad(String s) {
+	this.textArea.setText(s);
+    }
 
-	public void setVacioCargarSolucion() {
-		this.setSolucionActividad("");
-		this.setDescripcionActividad("");
-		this.setNota("");
-	}
+    public void setDescripcionActividad(String s) {
+	this.textArea2.setText(s);
+    }
 
-	public void setListaActividad(LinkedList<String> listaActividad) {
-		listaActividadesCargarMateria.removeAll();
-		for (int i = 0; i < listaActividad.size(); i++) {
-		    listaActividadesCargarMateria.add(listaActividad.get(i), i);
-	
-		}
-	    }
+    public void setNota(String s) {
+	this.txtNota.setText(s);
+    }
 
-	
-	// ///////// get and set de INCRIPCION MATERIA /////////////
+    public boolean camposVaciosCargarSolucion() {
+	return (this.getSolucionActividad().compareTo("") == 0)
+		&& (this.getDescripcionActividad().compareTo("") == 0);// &&
+	// !(getNota()
+	// ==
+	// "");
+    }
 
-	public String getCodigoMateria() {
-		return txtCodigoMateria.getText();
-	}
+    public void setVacioCargarSolucion() {
+	this.setSolucionActividad("");
+	this.setDescripcionActividad("");
+	this.setNota("");
+    }
 
-	public void setCodigoMateria(String s) {
-		txtCodigoMateria.setText(s);
-	}
-
-	public boolean camposVaciosIncripcionMateria() {
-		return (this.getCodigoMateria().compareTo("") == 0);
+    public void setListaActividad(LinkedList<String> listaActividad) {
+	listaActividadesCargarMateria.removeAll();
+	for (int i = 0; i < listaActividad.size(); i++) {
+	    listaActividadesCargarMateria.add(listaActividad.get(i), i);
 
 	}
+    }
 
-	public void setVaciosIncripcionMateria() {
-		this.setCodigoMateria("");
+    // ///////// get and set de INCRIPCION MATERIA /////////////
+
+    public String getCodigoMateria() {
+	return txtCodigoMateria.getText();
+    }
+
+    public void setCodigoMateria(String s) {
+	txtCodigoMateria.setText(s);
+    }
+
+    public boolean camposVaciosIncripcionMateria() {
+	return (this.getCodigoMateria().compareTo("") == 0);
+
+    }
+
+    public void setVaciosIncripcionMateria() {
+	this.setCodigoMateria("");
+    }
+
+    public void setListaMaterias(LinkedList<String> listaMaterias) {
+	listaMateriasAInscribir.removeAll();
+	for (int i = 0; i < listaMaterias.size(); i++) {
+	    listaMateriasAInscribir.add(listaMaterias.get(i), i);
+
 	}
+    }
 
-	public void setListaMaterias(LinkedList<String> listaMaterias) {
-		listaMateriasAInscribir.removeAll();
-		for (int i = 0; i < listaMaterias.size(); i++) {
-		    listaMateriasAInscribir.add(listaMaterias.get(i), i);
-	
-		}
-	    }
+    public void setListaMateriasInscripto(
+	    LinkedList<String> listaMateriasIncripto) {
+	listaMateriasInscripo.removeAll();
+	for (int i = 0; i < listaMateriasIncripto.size(); i++) {
+	    listaMateriasInscripo.add(listaMateriasIncripto.get(i), i);
 
-	public void setListaMateriasInscripto(LinkedList<String> listaMateriasIncripto) {
-		listaMateriasInscripo.removeAll();
-		for (int i = 0; i < listaMateriasIncripto.size(); i++) {
-		    listaMateriasInscripo.add(listaMateriasIncripto.get(i), i);
-	
-		}
-	    }
-
-
-	@Override
-	public void present(String model) {
-		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, model);
 	}
+    }
 
-	public void setCodActividad(String item) {
-		// TODO Auto-generated method stub
-		this.codActividad=item;
-	}
-	
-	public String getCodActividad() {
-		// TODO Auto-generated method stub
-	return	this.codActividad;
-	}
+    @Override
+    public void present(String model) {
+	// TODO Auto-generated method stub
+	JOptionPane.showMessageDialog(null, model);
+    }
+
+    public void setCodActividad(String item) {
+	// TODO Auto-generated method stub
+	this.codActividad = item;
+    }
+
+    public String getCodActividad() {
+	// TODO Auto-generated method stub
+	return this.codActividad;
+    }
+
+    // ||||||||||||||||||metodos cargar paneles|||||||||||||
+    // |||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+    public void panelCargarSolucion() {
+	panelCarcarSolucion.setVisible(true);
+	panelIncripcionMateria.setVisible(false);
+	panelBienvenido.setVisible(false);
+
+    }
+
+    public void panelInscripcionMateria() {
+	panelCarcarSolucion.setVisible(false);
+	panelIncripcionMateria.setVisible(true);
+	panelBienvenido.setVisible(false);
+    }
+
 }

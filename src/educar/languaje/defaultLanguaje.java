@@ -54,6 +54,13 @@ public interface defaultLanguaje {
 	public static final String CARGOSPANEL = "CARGOS";
 	public static final String DEDICACIONDOCENTEPANEL = "DEDICACION \r\n DOCENTE";
 	public static final String ASIGNACIONDOCENTEPANEL = "ASIGNACION DOCENTE";
+	
 	public static final String UPLOAD= "SUBIR";
+	
+	public static final String ACTIVIDADOCENTEPANEL= "ACTIVIDAD";
+	public static final String CORREGIRDOCENTEPANEL= "CORREGIR";
+	
+	public static final String CARGARSOLUCIONALUMNOPANEL= "CARGAR SOLUCI\u00D3N";
+	public static final String INSCRIBIRMALUMNOPANEL= "INCRIPCI\u00D3N MATERIA";
 }
 
