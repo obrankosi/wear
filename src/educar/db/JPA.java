@@ -13,7 +13,7 @@ public class JPA {
      */
     public ResultSet runQuery(String sentence) {
 	ResultSet res = null;
-	
+
 	try {
 	    Statement sent = (Statement) DbConnection.getInstance()
 		    .createStatement();
@@ -26,21 +26,19 @@ public class JPA {
 	return res;
     }
 
-    // exception agregada por las dudas que no se pueda realizar un DELET o
-    // UPDATE
-    // debido a las restricciones de la base de datos
+   
     /**
      * @param sentence
      * @throws SQLException
+     *             exception agregada por las dudas que no se pueda realizar un
+     *             DELET o UPDATE debido a las restricciones de la base de datos
      */
     public void runUpdate(String sentence) throws SQLException {
 	Statement stm = (Statement) DbConnection.getInstance()
 		.createStatement();
 	try {
 	    stm.executeUpdate(sentence);// para realizar delet,update en la bd
-	    // con cualquier tabla
 	} catch (Exception e) {
-	    // TODO: handle exception
 	    throw new SQLException();
 	}
 
@@ -159,12 +157,6 @@ public class JPA {
 	}
 
     }
-
-    /*
-     * arma el string de la sentencia en esta caso para una actualizacion, luego
-     * llama a a runUpdate que la ejecuta con statement Lanza una exception por
-     * si no pudo actualizar debio a una restriccion de la tabla
-     */
     /**
      * @param tableName
      * @param column
@@ -284,10 +276,7 @@ public class JPA {
 	return result;
     }
 
-    /*
-     * es la proyeccion de sql todos los elementos sin where columnName =
-     * columna1,columna2....columnaN
-     */
+    
     /**
      * @param tableName
      * @param columnName
@@ -301,10 +290,7 @@ public class JPA {
 	return result;
     }
 
-    /*
-     * es la proyeccion de sql con where, donde columnName =
-     * columna1,columna2....columnaN nameId = nombreDeLaColumna
-     */
+    
     /**
      * @param tableName
      * @param columnName
@@ -355,6 +341,12 @@ public class JPA {
 	return result;
     }
 
+    /**
+     * @param a
+     * @param b
+     * @return {@link String} con el merge de columnas y datos
+     * Para usar con Clausula WHERE
+     */
     public String JoinKey(String[] a, String[] b) {
 	String getValues = a[0] + "= \"" + b[0] + "\"";
 	for (int i = 1; i < b.length; i++) {
@@ -363,6 +355,12 @@ public class JPA {
 	return getValues;
     }
 
+    /**
+     * @param a
+     * @param b
+     * @return {@link String} con el merge de columnas y datos
+     * No es para usar en Clausulas WHERE
+     */
     public String Join(String[] a, String[] b) {
 	String deleteValues = a[0] + "= \"" + b[0] + "\"";
 	for (int i = 1; i < b.length; i++) {
@@ -372,15 +370,19 @@ public class JPA {
 
     }
 
-    public ResultSet showUltimoCod(String tableName,String nombreColumna) {
+    /**
+     * @param tableName
+     * @param nombreColumna
+     * @return {@link ResultSet} trea el ultimo insertado 
+     */
+    public ResultSet showUltimoCod(String tableName, String nombreColumna) {
 	ResultSet result = null;
-	String query = "SELECT MAX("+nombreColumna+")  from " + DbConnection.bd + "." + tableName
-		+ ";";
+	String query = "SELECT MAX(" + nombreColumna + ")  from "
+		+ DbConnection.bd + "." + tableName + ";";
 
 	result = runQuery(query);
 	System.out.println(query);
 	return result;
     }
 
-    
 }

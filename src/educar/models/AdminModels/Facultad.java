@@ -6,6 +6,11 @@ import java.sql.SQLException;
 import educar.db.JPA;
 import java.util.LinkedList;
 
+/**
+ * @author grupo wear
+ * Modelo {@link Facultad}
+ *
+ */
 public class Facultad {
 
     private static JPA jpa = new JPA();

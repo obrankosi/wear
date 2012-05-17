@@ -7,6 +7,11 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author grupo wear
+ * Modelo {@link Alumno}
+ *
+ */
 public class Alumno {
 
     /**

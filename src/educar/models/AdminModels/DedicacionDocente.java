@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import educar.db.JPA;
 
 /**
- * @author edu
- *
+ * @author grupo wear
+ *Modelo {@link DedicacionDocente}
  */
 public class DedicacionDocente implements Comparable<DedicacionDocente> {
 
@@ -17,10 +17,8 @@ public class DedicacionDocente implements Comparable<DedicacionDocente> {
     private String codCargo;
     private String hsDedicacion;
     private String codFacultad;
-    private JPA jpa;
 
     private static ResultSet rst;
-    private DedicacionDocente elem;
 
     /**
      * @param codFacultad
