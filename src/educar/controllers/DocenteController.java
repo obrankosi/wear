@@ -8,9 +8,11 @@ import educar.gui.DocenteView.DocenteView;
 import educar.languaje.defaultLanguaje;
 import educar.models.Actividad;
 import educar.models.ActividadNotFound;
+import educar.models.Cursa;
 import educar.models.DictaMateria;
 import educar.models.DictaMateriaNotFound;
 import educar.models.Session;
+import educar.models.TieneActividad;
 import educar.models.User;
 import educar.models.userNotFound;
 import educar.models.AdminModels.Subject;
@@ -55,8 +57,21 @@ public class DocenteController implements IController, defaultLanguaje,
 	if (!view.algunCampoVacioSubirA()) {
 	    String descripcionActiv = view.getDescripcionAddActividad();
 	    String codMateria = view.getCodigoMateriaAddActividad();
+	    String codActividad;
 	    Actividad act = new Actividad(descripcionActiv, codMateria);
 	    if (act.save()) {
+		TieneActividad actividadAlumno;
+		String dniAlumno;
+		LinkedList<String> alumnos = Cursa
+			.alumnosCursanMateria(codMateria);
+		System.out.println(alumnos.size());
+		for (int i = 0; i < alumnos.size(); i++) {
+		    dniAlumno = alumnos.get(i);
+		    codActividad = Actividad.codigoUltimaIngresada();
+		    actividadAlumno = new TieneActividad(dniAlumno,
+			    codActividad);
+		    actividadAlumno.save();
+		}
 		view.present("se agrego la actividad");
 	    }
 	} else {
@@ -85,6 +100,7 @@ public class DocenteController implements IController, defaultLanguaje,
 	Actividad act;
 	LinkedList<String> materiasDicta;
 
+	// materias que soy encargado
 	LinkedList<Subject> materiasEncargado = Subject
 		.getSubjectsByDniE(dniDocente);
 	try {
@@ -99,6 +115,7 @@ public class DocenteController implements IController, defaultLanguaje,
 		    materiasEncargado.add(materia);
 		}// todas mis materias
 	    }
+	    listAct.clear();
 	    for (int i = 0; i < materiasEncargado.size(); i++) {
 		materia = materiasEncargado.get(i);
 		// guarod todas las actividades de una materia VER aca

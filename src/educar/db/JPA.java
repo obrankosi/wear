@@ -93,7 +93,6 @@ public class JPA {
 	    System.err.println("ERROR createInsertStatement");
 	    ex.printStackTrace();
 	}
-	
 	return stmt;
     }
 
@@ -373,4 +372,15 @@ public class JPA {
 
     }
 
+    public ResultSet showUltimoCod(String tableName,String nombreColumna) {
+	ResultSet result = null;
+	String query = "SELECT MAX("+nombreColumna+")  from " + DbConnection.bd + "." + tableName
+		+ ";";
+
+	result = runQuery(query);
+	System.out.println(query);
+	return result;
+    }
+
+    
 }

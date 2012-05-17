@@ -46,16 +46,17 @@ public class TieneActividad {
     /**
      * @param dniAlumno
      * @return {@link LinkedList} numero de actividades
-     *  
+     * 
      */
     public static LinkedList<String> listaActividadesAlumnos(String dniAlumno) {
 	LinkedList<String> result = new LinkedList<String>();
 	JPA jpa = new JPA();
-	rst = jpa.proyeccion("TieneActividad","codigo_a", "dni_alumno", dniAlumno);
+	rst = jpa.proyeccion("TieneActividad", "codigo_a", "dni_alumno",
+		dniAlumno);
 	try {
 	    while (rst.next()) {
-	    	String codA = rst.getString(1);
-	        result.add((codA).trim());
+		String codA = rst.getString(1);
+		result.add((codA).trim());
 	    }
 	} catch (SQLException e) {
 	    System.out.println("erro en la consulta en la base de datos");
