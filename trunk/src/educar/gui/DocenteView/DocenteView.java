@@ -49,7 +49,7 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     private List listaActividadDocente;
     private JButton btnBorrarDeleteActividad;
     private JPanel panelCorregirDocente;
-    private List listaResolucionCorregir;
+    private List litaCorregirMateria;
     private JTextField txtDniCorregir;
     private JTextField txtCodigoActividadCorregir;
     private JTextField txtNotaCorregir;
@@ -59,6 +59,8 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     private JTextArea textAreaCorregir;
 
     private static final long serialVersionUID = 1L;
+    private List listaResolucionCorregir;
+    private JLabel label;
 
     /**
      * Create the frame.
@@ -321,30 +323,25 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	panelCorregirDocente.add(lblNotaCorregir);
 
 	JLabel lblCartelCorregir = new JLabel(
-		"SELECCIONE LA RESOLUCI�N E INGRESE LA NOTA A CARGAR");
+		"SELECCIONE LA RESOLUCION E INGRESE LA NOTA A CARGAR");
 	lblCartelCorregir.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelCorregir.setFont(new Font("Arial", Font.BOLD, 24));
 	lblCartelCorregir.setBounds(0, 11, 887, 92);
 	panelCorregirDocente.add(lblCartelCorregir);
 
-	JLabel lblListaResolucionesCorregir = new JLabel(
-		"LISTA DE RESOLUCIONES");
-	lblListaResolucionesCorregir
+	JLabel lblListaCorregirMateria = new JLabel(
+		"LISTA DE MATERIA");
+	lblListaCorregirMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
-	lblListaResolucionesCorregir.setFont(new Font("Arial", Font.BOLD, 23));
-	lblListaResolucionesCorregir.setBounds(897, 17, 295, 54);
-	panelCorregirDocente.add(lblListaResolucionesCorregir);
+	lblListaCorregirMateria.setFont(new Font("Arial", Font.BOLD, 23));
+	lblListaCorregirMateria.setBounds(897, 17, 295, 54);
+	panelCorregirDocente.add(lblListaCorregirMateria);
 
-	listaResolucionCorregir = new List();
-	listaResolucionCorregir.setBounds(893, 77, 299, 592);
-	panelCorregirDocente.add(listaResolucionCorregir);
+	litaCorregirMateria = new List();
+	litaCorregirMateria.setBounds(893, 77, 299, 268);
+	panelCorregirDocente.add(litaCorregirMateria);
 
-	DocenteListListener listaResolucionC = new DocenteListListener();
-	IListController listaResolucionCController = new DocenteCorregirController();
-	((DocenteController) listaResolucionCController).setView(this);
-	listaResolucionC.associate(listaResolucionCorregir,
-		listaResolucionCController);
-
+	
 	txtDniCorregir = new JTextField();
 	txtDniCorregir.setEditable(false);
 	txtDniCorregir.setFont(new Font("Arial", Font.BOLD, 20));
@@ -380,6 +377,22 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	JScrollPane scroll3 = new JScrollPane(textAreaCorregir);
 	scroll3.setBounds(22, 304, 799, 268);
 	panelCorregirDocente.add(scroll3);
+	
+	listaResolucionCorregir = new List();
+	listaResolucionCorregir.setBounds(897, 402, 295, 268);
+	panelCorregirDocente.add(listaResolucionCorregir);
+	
+	DocenteListListener listaResolucionC = new DocenteListListener();
+	IListController listaResolucionCController = new DocenteCorregirController();
+	((DocenteController) listaResolucionCController).setView(this);
+	listaResolucionC.associate(listaResolucionCorregir,
+		listaResolucionCController);
+
+	label = new JLabel("LISTA DE RESOLUCIONES");
+	label.setHorizontalAlignment(SwingConstants.CENTER);
+	label.setFont(new Font("Arial", Font.BOLD, 23));
+	label.setBounds(897, 334, 295, 92);
+	panelCorregirDocente.add(label);
 
     }
 
