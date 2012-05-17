@@ -1,5 +1,6 @@
 package educar.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import educar.gui.IView;
@@ -16,9 +17,13 @@ public class AlumnosViewController implements IController, defaultLanguaje {
 		if (model.compareTo(CARGARSOLUCIONALUMNOPANEL) == 0) {
 			view.panelCargarSolucion();
 			AlumnoControllers.showActividadInList();
-			Date d=new Date(); 
-			System.out.println(Integer.toString(d.getDay())); 
-		}
+			
+
+
+			
+
+			System.out.println();		}
+
 		if (model.compareTo(INSCRIBIRMALUMNOPANEL) == 0) {
 			view.panelInscripcionMateria();
 			AlumnoControllers.showMateriasInscriptoInList();

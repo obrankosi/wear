@@ -1,9 +1,9 @@
 package educar.controllers;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
-
-import javax.management.timer.TimerNotification;
 
 import educar.gui.IView;
 import educar.gui.AlumnoView.AlumnoView;
@@ -12,7 +12,6 @@ import educar.models.Actividad;
 import educar.models.ActividadNotFound;
 import educar.models.Cursa;
 import educar.models.Resolucion;
-import educar.models.ResolucionNotFound;
 import educar.models.Session;
 import educar.models.TieneActividad;
 import educar.models.User;
@@ -21,8 +20,6 @@ import educar.models.AdminModels.Subject;
 
 public class AlumnoControllers implements IController, defaultLanguaje,
 		IListController {
-	private static Actividad actividad;
-	private static Resolucion resolucion;
 	private static Cursa cursa;
 	private static LinkedList<String> actividadList;
 	private static LinkedList<String> materiasIncriptoList;
@@ -37,8 +34,8 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 		}
 		if (model.compareTo(ADD) == 0) {
 			saveMateriasInDBase();
-			
-						// // view.setVaciosIncripcionMateria();// limpia los campo
+
+			// // view.setVaciosIncripcionMateria();// limpia los campo
 		}
 
 	}
@@ -82,10 +79,14 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 											// datos
 		if (!(view.getSolucionActividad().compareTo("") == 0)) {
 			if (!(getDniDocente().compareTo("") == 0)) {
-				Resolucion res = new Resolucion("12:12:12", "1982-12-12",
-						getDniDocente(), view.getCodActividad(),
-						getCodigoAlumno(), view.getSolucionActividad(),
-						view.getNota());
+				Date fecha = new Date();
+				SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat formato2 = new SimpleDateFormat("H:mm:ss");
+
+				Resolucion res = new Resolucion(formato2.format(fecha),
+						formato.format(fecha), getDniDocente(),
+						view.getCodActividad(), getCodigoAlumno(),
+						view.getSolucionActividad(), view.getNota());
 				if (!res.pertenece()) {
 
 					if (res.save()) {
@@ -94,7 +95,10 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 						view.present("verifique los datos ingresados sean validos");
 					}
 				} else {
-					view.present("Usted ya subio una resolucion de esta Actividad");
+					Resolucion fecha1 = new Resolucion();
+					view.present("Usted ya subio una resolucion de esta Actividad el dia : "
+							+ fecha1.getFecha(getCodigoAlumno(),
+									view.getCodActividad()));
 				}
 			} else {
 				view.present("por favor selecciones una actividad");
@@ -124,7 +128,8 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 
 	}
 
-	public static void showMateriasAinscribirInList() { // mostrar la lista con las //
+	public static void showMateriasAinscribirInList() { // mostrar la lista con
+														// las //
 		try { // materias en la que se pueede inscribir
 			materiaAinscribirList = Subject.subjectList();
 			view.setListaMaterias(materiaAinscribirList);
@@ -136,7 +141,8 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 
 	}
 
-	public static void showMateriasInscriptoInList() { // mostra una lista con las
+	public static void showMateriasInscriptoInList() { // mostra una lista con
+														// las
 		try { // materias q esta incripto
 			materiasIncriptoList = Cursa.cursaList(getCodigoAlumno());
 			view.setListaMateriasInscripto(materiasIncriptoList);
@@ -146,8 +152,9 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 		}// pueede inscribir
 	}
 
-	public static void showActividadInList() {// / mostrar las actividades que tieneun
-										// alumno dado
+	public static void showActividadInList() {// / mostrar las actividades que
+												// tieneun
+		// alumno dado
 		actividadList = TieneActividad
 				.listaActividadesAlumnos(getCodigoAlumno());
 		view.setListaActividad(actividadList);
