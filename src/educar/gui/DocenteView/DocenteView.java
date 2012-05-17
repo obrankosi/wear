@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import educar.controllers.DocenteController;
 import educar.controllers.DocenteCorregirController;
+import educar.controllers.DocenteCorregirListResolucionesController;
 import educar.controllers.DocenteViewController;
 import educar.controllers.IController;
 import educar.controllers.IListController;
@@ -60,8 +61,8 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     private static final long serialVersionUID = 1L;
     private List listaResolucionCorregir;
     private JLabel label;
-	private JTextArea textAreaActividadCorregir;
-	private JLabel lblActividad;
+    private JTextArea textAreaActividadCorregir;
+    private JLabel lblActividad;
 
     /**
      * Create the frame.
@@ -326,11 +327,8 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	lblCartelCorregir.setBounds(0, 0, 887, 57);
 	panelCorregirDocente.add(lblCartelCorregir);
 
-
-	JLabel lblListaMisActividades = new JLabel(
-		"MIS ACTIVIDADES");
-	lblListaMisActividades
-		.setHorizontalAlignment(SwingConstants.CENTER);
+	JLabel lblListaMisActividades = new JLabel("MIS ACTIVIDADES");
+	lblListaMisActividades.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaMisActividades.setFont(new Font("Arial", Font.BOLD, 23));
 	lblListaMisActividades.setBounds(897, 17, 295, 54);
 	panelCorregirDocente.add(lblListaMisActividades);
@@ -353,7 +351,7 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 
 	textNombreAlumno = new JTextField();
 	textNombreAlumno.setEditable(false);
-	textNombreAlumno.setFont(new Font("Arial", Font.BOLD, 20));
+	textNombreAlumno.setFont(new Font("Arial", Font.BOLD, 14));
 	textNombreAlumno.setColumns(10);
 	textNombreAlumno.setBounds(348, 585, 179, 54);
 	panelCorregirDocente.add(textNombreAlumno);
@@ -382,25 +380,26 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 
 	textAreaActividadCorregir = new JTextArea();
 	textAreaActividadCorregir.setBounds(22, 114, 621, 224);
+	textAreaActividadCorregir.setEditable(false);
 	JScrollPane scroll4 = new JScrollPane(textAreaActividadCorregir);
 	scroll4.setBounds(22, 77, 799, 220);
 	panelCorregirDocente.add(scroll4);
-	
+
 	listaResolucionCorregir = new List();
 	listaResolucionCorregir.setBounds(897, 402, 295, 268);
 	panelCorregirDocente.add(listaResolucionCorregir);
 
-	// DocenteListListener listaCorregirA = new DocenteListListener();
-	// IListController listaCA= new DocenteController();
-	// ((DocenteController) listaCA).setView(this);
-	// listaCorregirA.associate(litaCorregirMateria , listaCA);
+	DocenteListListener listaCorregirResolucion = new DocenteListListener();
+	IListController listaRA = new DocenteCorregirListResolucionesController();
+	((DocenteCorregirListResolucionesController) listaRA).setView(this);
+	listaCorregirResolucion.associate(listaResolucionCorregir, listaRA);
 
 	label = new JLabel("LISTA DE RESOLUCIONES");
 	label.setHorizontalAlignment(SwingConstants.CENTER);
 	label.setFont(new Font("Arial", Font.BOLD, 23));
 	label.setBounds(897, 334, 295, 92);
 	panelCorregirDocente.add(label);
-	
+
 	lblActividad = new JLabel("ACTIVIDAD");
 	lblActividad.setHorizontalAlignment(SwingConstants.LEFT);
 	lblActividad.setFont(new Font("Arial", Font.BOLD, 17));
@@ -410,6 +409,22 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
     }
 
     // // metodos get y set de ACTIVIDAD
+
+    public String getTextAreaCorregir() {
+	return textAreaCorregir.getText();
+    }
+
+    public void setTextAreaCorregir(String textAreaCorregir) {
+	this.textAreaCorregir.setText(textAreaCorregir);
+    }
+
+    public String getTextAreaActividadCorregir() {
+	return textAreaActividadCorregir.getText();
+    }
+
+    public void setTextAreaActividadCorregir(String textAreaActividadCorregir) {
+	this.textAreaActividadCorregir.setText(textAreaActividadCorregir);
+    }
 
     public String getDescripcionAddActividad() {
 	return textAreaAddActividad.getText();
@@ -485,6 +500,10 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 
     // // metodos get y set de CORREGIR
 
+    public void setNombreAlumnoCorregir(String s) {
+	textNombreAlumno.setText(s);
+    }
+
     public String getDniCorregir() {
 	return txtDniCorregir.getText();
     }
@@ -495,10 +514,6 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 
     public String getCodigoActividadCorregir() {
 	return textNombreAlumno.getText();
-    }
-
-    public void setCodigoActividadCorregir(String s) {
-	textNombreAlumno.setText(s);
     }
 
     public String getResolucionCorregir() {
@@ -524,10 +539,17 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 		.getResolucionCorregir().compareTo("") == 0);
     }
 
+    public void setearVacioCorregir() {
+	this.setResolucionCorregir("");
+	this.setDniCorregir("");
+	this.setNombreAlumnoCorregir("");
+	this.setNotaCorregir("");
+	this.setTextAreaActividadCorregir("");
+    }
+
     // ||||||||||||metodos control listas view||||||||||||||
     // ||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-    
     /**
      * @param listaMaterias
      */
@@ -537,10 +559,17 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	    litaCorregirMateria.add(listaMaterias.get(i), i);
 	}
     }
-    
-    
-    
-    
+
+    /**
+     * @param resoluciones
+     */
+    public void setListResoluciones(LinkedList<String> resoluciones) {
+	listaResolucionCorregir.removeAll();
+	for (int i = 0; i < resoluciones.size(); i++) {
+	    listaResolucionCorregir.add(resoluciones.get(i), i);
+	}
+    }
+
     // ||||||||||||metodos control panel view||||||||||||||
     // ||||||||||||||||||||||||||||||||||||||||||||||||||||
 
