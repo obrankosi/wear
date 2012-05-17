@@ -27,7 +27,7 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	private static LinkedList<String> actividadList;
 	private static LinkedList<String> materiasIncriptoList;
 	private static LinkedList<String> materiaAinscribirList;
-	private AlumnoView view;
+	private static AlumnoView view;
 
 	@Override
 	public void process(String model) {
@@ -36,12 +36,9 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 			// view.setVacioCargarSolucion(); // limpia los campo
 		}
 		if (model.compareTo(ADD) == 0) {
-			showActividadInList();
-
 			saveMateriasInDBase();
-			showMateriasInscriptoInList();
-			showMateriasAinscribirInList();
-			// // view.setVaciosIncripcionMateria();// limpia los campo
+			
+						// // view.setVaciosIncripcionMateria();// limpia los campo
 		}
 
 	}
@@ -127,7 +124,7 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 
 	}
 
-	private void showMateriasAinscribirInList() { // mostrar la lista con las //
+	public static void showMateriasAinscribirInList() { // mostrar la lista con las //
 		try { // materias en la que se pueede inscribir
 			materiaAinscribirList = Subject.subjectList();
 			view.setListaMaterias(materiaAinscribirList);
@@ -139,7 +136,7 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 
 	}
 
-	private void showMateriasInscriptoInList() { // mostra una lista con las
+	public static void showMateriasInscriptoInList() { // mostra una lista con las
 		try { // materias q esta incripto
 			materiasIncriptoList = Cursa.cursaList(getCodigoAlumno());
 			view.setListaMateriasInscripto(materiasIncriptoList);
@@ -149,7 +146,7 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 		}// pueede inscribir
 	}
 
-	private void showActividadInList() {// / mostrar las actividades que tieneun
+	public static void showActividadInList() {// / mostrar las actividades que tieneun
 										// alumno dado
 		actividadList = TieneActividad
 				.listaActividadesAlumnos(getCodigoAlumno());
