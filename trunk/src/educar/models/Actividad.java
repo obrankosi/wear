@@ -54,23 +54,23 @@ public class Actividad {
 		this.setCodigoMateria(codMateria);
 	}
 
-	private void setCodigoMateria(String codigo) {
+	public void setCodigoMateria(String codigo) {
 		this.codigoMateria = codigo;
 	}
 
-	private void setDescripcionActividad(String descripcionActividad) {
+	public void setDescripcionActividad(String descripcionActividad) {
 		this.descripcionActividad = descripcionActividad;
 	}
 
-	private void setCodigoActividad(String codigoAtividad) {
+	public void setCodigoActividad(String codigoAtividad) {
 		this.codigoActividad = codigoAtividad;
 	}
 
-	private String getCodigoMateria() {
+	public String getCodigoMateria() {
 		return codigoMateria;
 	}
 
-	private String getDescripcionActividad() {
+	public String getDescripcionActividad() {
 		return descripcionActividad;
 	}
 
