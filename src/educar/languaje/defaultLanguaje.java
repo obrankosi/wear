@@ -53,6 +53,6 @@ public interface defaultLanguaje {
 	public static final String CARGOSPANEL = "CARGOS";
 	public static final String DEDICACIONDOCENTEPANEL = "DEDICACION \r\n DOCENTE";
 	public static final String ASIGNACIONDOCENTEPANEL = "ASIGNACION DOCENTE";
-	
+	public static final String UPLOAD= "SUBIR";
 }
 

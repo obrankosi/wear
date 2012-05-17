@@ -9,13 +9,13 @@ import educar.db.JPA;
 
 public class Subject {
 
-    private static String subjectCode;
+    private String subjectCode;
     private String subjectName;
     private String responsableTeacher;
     private String facultad;
     private static JPA jpa = new JPA();
     private static ResultSet rst;
-    
+
     /**
      * @param code
      * @param name
@@ -52,6 +52,7 @@ public class Subject {
 
     /**
      * setea con null el campo en la bd
+     * 
      * @param column
      * @throws SQLException
      */
@@ -86,7 +87,8 @@ public class Subject {
     }
 
     /**
-     * @param values arreglo de valores
+     * @param values
+     *            arreglo de valores
      * @param primaryKey
      * @throws SQLException
      */
@@ -108,8 +110,7 @@ public class Subject {
      * @param values
      * @param primaryKey
      * @throws SQLException
-     *             NOTA: columna : valor , columna2 : valor2 tiene que
-     *             concidir
+     *             NOTA: columna : valor , columna2 : valor2 tiene que concidir
      */
     public static void update(String[] columns, String[] values,
 	    String columnKey, String primaryKey) throws SQLException {
@@ -122,7 +123,7 @@ public class Subject {
 	}
 
     }
-   
+
     /**
      * @param tableName
      * @return true ssi inserto correctamente la materia
@@ -155,7 +156,6 @@ public class Subject {
 	}
     }
 
-    
     /**
      * @return {@link LinkedList}
      * @throws SQLException
