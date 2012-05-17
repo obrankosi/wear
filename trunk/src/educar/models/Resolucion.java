@@ -73,9 +73,9 @@ public class Resolucion {
 	    stm.setString(2, this.getFecha().trim());
 	    stm.setString(3, this.getDniDocente().trim());
 	    stm.setString(4, this.getCodActividad().trim());
-	    stm.setString(4, this.getDniAlumno().trim());
-	    stm.setString(4, this.getResolucion().trim());
-	    stm.setString(4, this.getNota().trim());
+	    stm.setString(5, this.getDniAlumno().trim());
+	    stm.setString(6, this.getResolucion().trim());
+	    stm.setString(7, this.getNota().trim());
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    return false;
