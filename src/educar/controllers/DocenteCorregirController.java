@@ -1,13 +1,18 @@
 package educar.controllers;
 
+import java.util.LinkedList;
+
 import educar.gui.IView;
 import educar.gui.DocenteView.DocenteView;
 import educar.languaje.defaultLanguaje;
+import educar.models.DictaMateria;
+import educar.models.DictaMateriaNotFound;
 import educar.models.Resolucion;
 import educar.models.ResolucionNotFound;
 import educar.models.Session;
 import educar.models.User;
 import educar.models.userNotFound;
+import educar.models.AdminModels.Subject;
 
 public class DocenteCorregirController implements IController, defaultLanguaje,
 	IListController {
@@ -23,7 +28,7 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	}
 	if (model.compareTo("") == 0) {
 
-		}
+	}
 	if (model.compareTo("") == 0) {
 
 	}
@@ -72,7 +77,37 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	} catch (userNotFound e) {
 	    return null;
 	}
-
     }
 
+    private LinkedList<String> materiasLigadas() {
+	String dniDocente = getDniDocenteSession();
+	Subject materia;
+	String newArg;
+	LinkedList<String> materiasDicta;
+	LinkedList<Subject> materiasEncargado = Subject
+		.getSubjectsByDniE(dniDocente);
+	try {
+	    materiasDicta = DictaMateria.getMateriasDictaByCod(dniDocente);
+	} catch (DictaMateriaNotFound e) {
+	    materiasDicta = null;
+	}
+	if (materiasDicta != null) {
+	    for (int i = 0; i < materiasDicta.size(); i++) {
+		materia = Subject.getSubject(materiasDicta.get(i));
+		if (!materiasEncargado.contains(materia)) {
+		    materiasEncargado.add(materia);
+		}
+	    }
+	    materiasDicta.clear();
+	    for (int i = 0; i < materiasEncargado.size(); i++) {
+		materia = materiasEncargado.get(i);
+		newArg = ("codigo: " + materia.getCode() + " | " + "nombre: "
+			+ materia.getName() + " | " + "facultad: " + materia
+			.getCodigoFacultad());
+		materiasDicta.add(newArg);
+	    }
+	}
+
+	return materiasDicta;
+    }
 }

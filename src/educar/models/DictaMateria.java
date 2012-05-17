@@ -7,6 +7,10 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author edu
+ * 
+ */
 public class DictaMateria {
 
     private String dniDocente;
@@ -40,16 +44,18 @@ public class DictaMateria {
     }
 
     /**
-     * @param dniAlumno
+     * @return {@link LinkedList} si encontro en la base de datos
+     * @throws DictaMateriaNotFound
+     */
+    /**
+     * @param dniDocente
      * @return {@link LinkedList} si encontro en la base de datos
      * @throws DictaMateriaNotFound
      */
     public static LinkedList<String> getMateriasDictaByCod(String dniDocente)
-	    throws ResolucionNotFound, DictaMateriaNotFound {
-
+	    throws DictaMateriaNotFound {
 	LinkedList<String> newList = new LinkedList<String>();
 	ResultSet rst = null;
-	Resolucion res = null;
 	JPA jpa = new JPA();
 	rst = jpa.getByField("Dicta", "dni_doc", dniDocente);
 	String codMateria = new String();
@@ -67,7 +73,7 @@ public class DictaMateria {
     /**
      * @param dniDocente
      * @param codMateria
-     * @return {@link DictaMateria} ssi existe en Bs 
+     * @return {@link DictaMateria} ssi existe en Bs
      * @throws DictaMateriaNotFound
      */
     public static DictaMateria getDictaMateriaByCod(String dniDocente,

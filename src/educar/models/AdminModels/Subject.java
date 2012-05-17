@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
-public class Subject {
+public class Subject implements Comparable<Subject> {
 
     private String subjectCode;
     private String subjectName;
@@ -187,6 +187,28 @@ public class Subject {
 	return this.destroy("Materia");
     }
 
+    /**
+     * @param dniEncargado
+     * @return {@link LinkedList} con las materias que el docente es encargado
+     */
+    public static LinkedList<Subject> getSubjectsByDniE(String dniEncargado) {
+	LinkedList<Subject> newList = new LinkedList<Subject>();
+	ResultSet rs = null;
+	Subject u = null;
+	rs = jpa.getByField("Materia", "dni_docente", dniEncargado);
+	try {
+	    while (rs.next()) {
+		u = new Subject(rs.getString(1), rs.getString(2), rs
+			.getString(3), rs.getString(4));
+		newList.add(u);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    newList = null;
+	}
+	return newList;
+    }
+
     private static Subject getSubjectByCode(String codMateria)
 	    throws SubjectNotFound {
 
@@ -247,5 +269,16 @@ public class Subject {
 
     public void setNullDocente() {
 	this.responsableTeacher = null;
+    }
+
+    @Override
+    public int compareTo(Subject o) {
+	if ((o.getCode().compareTo(this.getCode()) == 0)
+		&& (o.getCodigoFacultad().compareTo(this.getCodigoFacultad()) == 0)
+		&& (o.getName().compareTo(this.getName()) == 0)
+		&& (o.getRTeacher().compareTo(this.getRTeacher()) == 0)) {
+	    return 0;
+	} else
+	    return 1;
     }
 }
