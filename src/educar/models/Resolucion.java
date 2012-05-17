@@ -30,14 +30,20 @@ public class Resolucion {
     public Resolucion(String hrEnvio, String fecha, String dniDocente,
 	    String codActividad, String dniAlumno, String resActividad,
 	    String nota) {
-	this.setHrEnvio(hrEnvio);
-	this.setFecha(fecha);
-	this.setDniDocente(dniDocente);
-	this.setCodAtividad(codActividad);
-	this.setDniAlumno(dniAlumno);
-	this.setNota(nota);
+    
+    	this.hrEnvio = hrEnvio;
+    	this.fecha = fecha;
+    	this.dniDocente = dniDocente;
+    	this.codActividad = codActividad;
+    	this.dniAlumno = dniAlumno;
+    	this.resolucion = resActividad;
+    	this.nota = nota;
     }
-
+  
+    public Resolucion(){
+    	
+    };
+    
     /**
      * @param codResolucion
      * @param hrEnvio
@@ -51,12 +57,15 @@ public class Resolucion {
     public Resolucion(String codResolucion, String hrEnvio, String fecha,
 	    String dniDocente, String codActividad, String dniAlumno,
 	    String resActividad, String nota) {
-	this.setHrEnvio(hrEnvio);
-	this.setFecha(fecha);
-	this.setDniDocente(dniDocente);
-	this.setCodAtividad(codActividad);
-	this.setDniAlumno(dniAlumno);
-	this.setNota(nota);
+	
+    this.codResolucion = codResolucion;
+    this.hrEnvio = hrEnvio;
+	this.fecha = fecha;
+	this.dniDocente = dniDocente;
+	this.codActividad = codActividad;
+	this.dniAlumno = dniAlumno;
+	this.nota = nota;
+	this.resolucion = resActividad;
     }
 
     /**
@@ -69,6 +78,7 @@ public class Resolucion {
 	PreparedStatement stm = jpa.newRecord("educar_dev." + "Resolucion",
 		columns);
 	try {
+		
 	    stm.setString(1, this.getHrEnvio().trim());
 	    stm.setString(2, this.getFecha().trim());
 	    stm.setString(3, this.getDniDocente().trim());
@@ -76,9 +86,10 @@ public class Resolucion {
 	    stm.setString(5, this.getDniAlumno().trim());
 	    stm.setString(6, this.getResolucion().trim());
 	    stm.setString(7, this.getNota().trim());
+	    
 	} catch (SQLException e) {
 	    e.printStackTrace();
-	    return false;
+	    System.out.println( e.getSQLState());
 	}
 	jpa.create(stm);
 	return true;
@@ -132,6 +143,42 @@ public class Resolucion {
 	return res;
     }
 
+    public boolean pertenece() {
+		String[] fieldNames = { "dni_alumno", "cod_actividad" };
+		String[] values = { dniAlumno, codActividad };
+		ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
+		try {
+			if (res.next()) {
+				if ((res.getString(5).compareTo(dniAlumno) == 0)
+						&& (res.getString(6).compareTo(codActividad) == 0)) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+		return false;
+	}
+
+    public String getNota(String dniAlumno,String codActividad) {
+		String[] fieldNames = { "dni_alumno", "cod_actividad" };
+		String[] values = { dniAlumno, codActividad };
+		ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
+		try {
+			if (res.next()) {
+				if ((res.getString(5).compareTo(dniAlumno) == 0)
+						&& (res.getString(6).compareTo(codActividad) == 0)) {
+					return res.getString(8);
+				}
+			}
+		} catch (SQLException e) {
+			return "0";
+		}
+		return "0";
+	}
+
+
+    
     public void setNota(String nota) {
 	this.nota = nota;
     }

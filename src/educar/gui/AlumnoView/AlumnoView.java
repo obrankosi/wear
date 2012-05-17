@@ -23,6 +23,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import educar.controllers.AlumnoControllers;
+import educar.controllers.AlumnoListController;
+import educar.controllers.AlumnoListSolucionController;
 import educar.controllers.IController;
 import educar.controllers.IListController;
 import educar.gui.IView;
@@ -37,7 +39,6 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	private JButton btnCargarSolucion;
 	private JPanel panelCarcarSolucion;
 	private List listaActividadesCargarMateria;
-	private JTextField txtSolucionActividad;
 	private JTextField txtNota;
 	private JPanel panelIncripcionMateria;
 	private List listaMateriasInscripo;
@@ -48,6 +49,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	private JPanel panelBienvenido;
 	private JTextArea textArea;
 	private JTextArea textArea2;
+	private String codActividad;
 
 	/**
 	 * Create the frame.
@@ -160,11 +162,11 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		listaActividadesCargarMateria.setBounds(893, 77, 299, 592);
 		panelCarcarSolucion.add(listaActividadesCargarMateria);
 
-		AlumnoListListener listaActividades = new AlumnoListListener();
-		IListController listaActividadControllers = new AlumnoControllers();
-		((IController) listaActividadControllers).setView(this);
-		listaActividades.associate(listaActividadesCargarMateria,
-				listaActividadControllers);
+		AlumnoListListener listaActividades2 = new AlumnoListListener();
+		IListController listaActividadControllers2 = new AlumnoListSolucionController();
+		((IController) listaActividadControllers2).setView(this);
+		listaActividades2.associate(listaActividadesCargarMateria,
+				listaActividadControllers2);
 
 		txtNota = new JTextField();
 		txtNota.setEditable(false);
@@ -173,7 +175,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		txtNota.setBounds(333, 598, 90, 59);
 		panelCarcarSolucion.add(txtNota);
 
-		JButton btnSubir = new JButton(MODIFY);
+		JButton btnSubir = new JButton(SUBIR);
 		btnSubir.setFont(new Font("Arial", Font.BOLD, 20));
 		btnSubir.setBounds(555, 598, 244, 59);
 		panelCarcarSolucion.add(btnSubir);
@@ -184,15 +186,16 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		bSubir.associate(btnSubir, alumnoSolucion);
 		
 		textArea = new JTextArea();
+		textArea.setText("");
 		textArea.setBounds(22, 114, 621, 224);
 		JScrollPane scroll = new JScrollPane(textArea);
 		scroll.setBounds(22, 144, 799, 201);
 		panelCarcarSolucion.add(scroll);
 
 		textArea2 = new JTextArea();
-		textArea2.setText("aca va ir un texto que usted no va poder modificar");
+		textArea2.setText("");
 		textArea2.setEditable(false);
-		textArea.setBounds(22, 114, 621, 224);
+		textArea2.setBounds(22, 114, 621, 224);
 		JScrollPane scroll2 = new JScrollPane(textArea2);
 		scroll2.setBounds(22, 381, 799, 201);
 		panelCarcarSolucion.add(scroll2);
@@ -255,7 +258,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 		panelIncripcionMateria.add(listaMateriasAInscribir);
 
 		AlumnoListListener listaMaterias = new AlumnoListListener();
-		IListController listaMateriasControllers = new AlumnoControllers();
+		IListController listaMateriasControllers = new AlumnoListController();
 		((IController) listaMateriasControllers).setView(this);
 		listaMaterias.associate(listaMateriasAInscribir,
 				listaMateriasControllers);
@@ -282,32 +285,32 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	// ///////////////// get y set de CARGAR SOLUCION //////////
 
 	public String getSolucionActividad() {
-		return textArea.getText();
+		return this.textArea.getText();
 	}
 
 	public String getDescripcionActividad() { // aca seria el get para bajar un archivo 
-		return textArea2.getText();
+		return this.textArea2.getText();
 	}
 
 	public String getNota() {
-		return txtNota.getText();
+		return this.txtNota.getText();
 	}
 
 	public void setSolucionActividad(String s) {
-		textArea.setText(s);
+		this.textArea.setText(s);
 	}
 
 	public void setDescripcionActividad(String s) {
-		textArea2.setText(s);
+		this.textArea2.setText(s);
 	}
 
 	public void setNota(String s) {
-		txtNota.setText(s);
+		this.txtNota.setText(s);
 	}
 
 	public boolean camposVaciosCargarSolucion() {
-		return !(this.getSolucionActividad() == "")
-				&& !(getDescripcionActividad() == "") && !(getNota() == "");
+		return (this.getSolucionActividad().compareTo("")==0)
+				&& (this.getDescripcionActividad().compareTo("")==0);//&& !(getNota() == "");
 	}
 
 	public void setVacioCargarSolucion() {
@@ -365,5 +368,15 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	public void present(String model) {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(null, model);
+	}
+
+	public void setCodActividad(String item) {
+		// TODO Auto-generated method stub
+		this.codActividad=item;
+	}
+	
+	public String getCodActividad() {
+		// TODO Auto-generated method stub
+	return	this.codActividad;
 	}
 }

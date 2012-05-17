@@ -45,6 +45,7 @@ public interface defaultLanguaje {
 	public static final String MODIFY = "Modificar";
 	public static final String REMOVE = "Remover";
 	public static final String ASIGNAR = "Asignar";
+	public static final String SUBIR = "SUBIR";
 	
 	public static final String ALUMNOSPANEL = "ALUMNOS";
 	public static final String DOCENTESPANEL = "DOCENTES";
