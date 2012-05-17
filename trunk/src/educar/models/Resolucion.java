@@ -177,14 +177,15 @@ public class Resolucion {
     }
 
     public boolean pertenece() {
-	String[] fieldNames = { "dni_alumno", "cod_actividad" };
+    	 
+    	String[] fieldNames = { "dni_alumno", "cod_actividad" };
 	String[] values = { dniAlumno, codActividad };
-	ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
+	ResultSet res2 = jpa.getByField("Resolucion", fieldNames, values);
 	try {
-	    if (res.next()) {
-		if ((res.getString(5).compareTo(dniAlumno) == 0)
-			&& (res.getString(6).compareTo(codActividad) == 0)) {
-		    return true;
+	    if (res2.next()) {
+		if ((res2.getString(5).compareTo(this.getCodActividad()) == 0)
+			&& (res2.getString(6).compareTo(this.getDniAlumno()) == 0)) {
+			return true;
 		}
 	    }
 	} catch (SQLException e) {
@@ -199,8 +200,8 @@ public class Resolucion {
 	ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
 	try {
 	    if (res.next()) {
-		if ((res.getString(5).compareTo(dniAlumno) == 0)
-			&& (res.getString(6).compareTo(codActividad) == 0)) {
+		if ((res.getString(5).compareTo(codActividad) == 0)
+			&& (res.getString(6).compareTo(dniAlumno) == 0)) {
 		    return res.getString(8);
 		}
 	    }
@@ -215,8 +216,8 @@ public class Resolucion {
 		ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
 		try {
 			if (res.next()) {
-				if ((res.getString(5).compareTo(dniAlumno) == 0)
-						&& (res.getString(6).compareTo(codActividad) == 0)) {
+				if ((res.getString(5).compareTo(codActividad) == 0)
+						&& (res.getString(6).compareTo(dniAlumno) == 0)) {
 					return res.getString(3)+" Hora: "+res.getString(2);
 				}
 			}
