@@ -7,6 +7,9 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author grupo wear Modelo {@link Subject}
+ */
 public class Subject implements Comparable<Subject> {
 
     private String subjectCode;
@@ -209,6 +212,17 @@ public class Subject implements Comparable<Subject> {
 	return newList;
     }
 
+    @Override
+    public int compareTo(Subject o) {
+	if ((o.getCode().compareTo(this.getCode()) == 0)
+		&& (o.getCodigoFacultad().compareTo(this.getCodigoFacultad()) == 0)
+		&& (o.getName().compareTo(this.getName()) == 0)
+		&& (o.getRTeacher().compareTo(this.getRTeacher()) == 0)) {
+	    return 0;
+	} else
+	    return 1;
+    }
+    
     private static Subject getSubjectByCode(String codMateria)
 	    throws SubjectNotFound {
 
@@ -270,15 +284,5 @@ public class Subject implements Comparable<Subject> {
     public void setNullDocente() {
 	this.responsableTeacher = null;
     }
-
-    @Override
-    public int compareTo(Subject o) {
-	if ((o.getCode().compareTo(this.getCode()) == 0)
-		&& (o.getCodigoFacultad().compareTo(this.getCodigoFacultad()) == 0)
-		&& (o.getName().compareTo(this.getName()) == 0)
-		&& (o.getRTeacher().compareTo(this.getRTeacher()) == 0)) {
-	    return 0;
-	} else
-	    return 1;
-    }
+    
 }

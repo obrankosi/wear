@@ -7,14 +7,16 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author grupo wear
+ * Modelo {@link AsignacionDocente}
+ *
+ */
 public class AsignacionDocente {
-
-    private Subject materia;
-    private Docente docente;
 
     private String codMateria;
     private String dniDocente;
-    
+
     private static ResultSet rst;
     private static JPA jpa = new JPA();
 
@@ -45,7 +47,7 @@ public class AsignacionDocente {
     }
 
     /**
-     * @return  true ssi borrado exitoso
+     * @return true ssi borrado exitoso
      */
     public boolean delete() {
 	return destroy("Dicta");
@@ -55,14 +57,14 @@ public class AsignacionDocente {
      * @param codMateria
      * @return {@link LinkedList} codigos docentes asignados sin el responsable
      */
-    public static  LinkedList<String>  getDocentesAsignados (String codMateria){
+    public static LinkedList<String> getDocentesAsignados(String codMateria) {
 	LinkedList<String> result = new LinkedList<String>();
 	JPA jpa = new JPA();
-	rst = jpa.proyeccion("Dicta","dni_doc", "cod_mat",codMateria);
+	rst = jpa.proyeccion("Dicta", "dni_doc", "cod_mat", codMateria);
 	try {
 	    while (rst.next()) {
-	        String dniD = rst.getString(1);
-	        result.add((dniD).trim());
+		String dniD = rst.getString(1);
+		result.add((dniD).trim());
 	    }
 	} catch (SQLException e) {
 	    System.out.println("erro en la consulta en la base de datos");
@@ -71,7 +73,7 @@ public class AsignacionDocente {
 	return result;
 
     }
-    
+
     /**
      * @param dniDocente
      * @param codMateria
@@ -91,13 +93,13 @@ public class AsignacionDocente {
 	try {
 	    String[] column = { "dni_doc", "cod_mat" };
 	    String[] values = { this.getDniDocente(), this.getCodMateria() };
-	    jpa.destroy(tableName,column, values);
+	    jpa.destroy(tableName, column, values);
 	    return true;
 	} catch (SQLException e) {
 	    return false;
 	}
     }
-    
+
     private static AsignacionDocente getAsignacionDocenteByCode(
 	    String dniDocente2, String codMateria2)
 	    throws AsignacionDocenteNotFound {
@@ -108,7 +110,7 @@ public class AsignacionDocente {
 	rs = jpa.getByField("Dicta", column, values);
 	try {
 	    if (rs.next()) {
-		u = new AsignacionDocente( rs.getString(2),rs.getString(1));
+		u = new AsignacionDocente(rs.getString(2), rs.getString(1));
 	    } else {
 		throw new AsignacionDocenteNotFound();
 	    }

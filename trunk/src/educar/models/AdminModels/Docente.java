@@ -7,6 +7,11 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author grupo wear
+ * Modelo {@link Docente}
+ *
+ */
 public class Docente {
 
     /**
@@ -138,7 +143,6 @@ public class Docente {
 
     private static Docente getPersonByDni(String dni2, String tableName)
 	    throws PersonNotFound {
-	// TODO Auto-generated method stub
 	ResultSet rs = null;
 	Docente u = null;
 	rs = jpa.getByField(tableName, "dni_docente", dni2);
@@ -174,13 +178,11 @@ public class Docente {
 	    person = Docente.getPersonByDni(dni, tableName);
 	    return person;
 	} catch (PersonNotFound e) {
-	    // TODO Auto-generated catch block
 	    return person;
 	}
     }
 
     public String getDni() {
-	// TODO Auto-generated method stub
 	return dni;
     }
 

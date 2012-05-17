@@ -7,7 +7,13 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author grupo wear
+ * Modelo {@link Cargos}
+ *
+ */
 public class Cargos {
+ 
     private static JPA jpa = new JPA();
     private String codigoCargo;
     private String nombreCargo;
