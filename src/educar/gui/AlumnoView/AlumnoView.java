@@ -154,6 +154,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	panelCarcarSolucion.add(lblListaDeActividades);
 
 	listaActividadesCargarMateria = new List();
+	listaActividadesCargarMateria.setFont(new Font("Arial", Font.BOLD, 12));
 	listaActividadesCargarMateria.setBounds(893, 77, 299, 592);
 	panelCarcarSolucion.add(listaActividadesCargarMateria);
 
@@ -181,6 +182,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	bSubir.associate(btnSubir, alumnoSolucion);
 
 	textArea = new JTextArea();
+	textArea.setFont(new Font("Arial", Font.BOLD, 13));
 	textArea.setText("");
 	textArea.setBounds(22, 114, 621, 224);
 	JScrollPane scroll = new JScrollPane(textArea);
@@ -188,6 +190,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	panelCarcarSolucion.add(scroll);
 
 	textArea2 = new JTextArea();
+	textArea2.setFont(new Font("Arial", Font.BOLD, 13));
 	textArea2.setText("");
 	textArea2.setEditable(false);
 	textArea2.setBounds(22, 114, 621, 224);
@@ -244,10 +247,12 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	panelIncripcionMateria.add(lblIncripto);
 
 	listaMateriasInscripo = new List();
+	listaMateriasInscripo.setFont(new Font("Arial", Font.BOLD, 12));
 	listaMateriasInscripo.setBounds(927, 77, 265, 592);
 	panelIncripcionMateria.add(listaMateriasInscripo);
 
 	listaMateriasAInscribir = new List();
+	listaMateriasAInscribir.setFont(new Font("Arial", Font.BOLD, 12));
 	listaMateriasAInscribir.setBounds(656, 77, 265, 592);
 	panelIncripcionMateria.add(listaMateriasAInscribir);
 
