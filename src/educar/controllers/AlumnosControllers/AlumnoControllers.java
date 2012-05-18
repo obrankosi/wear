@@ -61,6 +61,13 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	return reso.getNota(getCodigoAlumno(), codActividad);
     }
 
+    
+    public static String getSolucion(String codActividad) {
+		Resolucion solucion = new Resolucion();
+		return solucion.getSolucion(getCodigoAlumno(), codActividad);
+	}
+
+    
     /**
      *materias a las que se puede inscribir un alumno
      */
@@ -88,11 +95,27 @@ public class AlumnoControllers implements IController, defaultLanguaje,
     /**
      * Activiadades del alumno
      */
-    public static void showActividadInList() {
-	actividadList = TieneActividad
-		.listaActividadesAlumnos(getCodigoAlumno());
-	view.setListaActividad(actividadList);
-    }
+    public static void showActividadInList() {// / mostrar las actividades que
+		LinkedList<String> actividadListAux = null; // tieneun// alumno dado
+		actividadListAux = TieneActividad.listaActividadesAlumnos(getCodigoAlumno());
+	      String materia = null;               
+		actividadList= new LinkedList<String>();
+		if (actividadListAux != null){
+			for (int i = 0; i < actividadListAux.size(); i++) {
+			try {
+				materia =Subject.getSubject(Actividad.getCodMateriaActividad(actividadListAux.get(i))).getName();
+			} catch (ActividadNotFound e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+			actividadList.add("Nro Actividad: "+actividadListAux.get(i)+" | "+"materia: "+materia);
+		
+		}
+		}
+		view.setListaActividad(actividadList);
+
+	}
+
 
     /**
      *inscribe alumno en una materia
@@ -180,4 +203,6 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	}
     }
 
+	
+	
 }

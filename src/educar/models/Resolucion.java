@@ -245,6 +245,29 @@ public class Resolucion {
 		return "0";
 	}
 
+    /**
+     * @param dniAlumno
+     * @param codActividad
+     * @return {@link String} Solucion de la actividad
+     */
+   
+    public String getSolucion(String dniAlumno, String codActividad) {
+    	String[] fieldNames = { "dni_alumno", "cod_actividad" };
+    	String[] values = { dniAlumno, codActividad };
+    	ResultSet res = jpa.getByField("Resolucion", fieldNames, values);
+    	try {
+    	    if (res.next()) {
+    		if ((res.getString(5).compareTo(codActividad) == 0)
+    			&& (res.getString(6).compareTo(dniAlumno) == 0)) {
+    		    return res.getString(7);
+    		}
+    	    }
+    	} catch (SQLException e) {
+    	    return "usted no ha subido solucion todavia para esta actividad";
+    	}
+    	return "usted no ha subido solucion todavia para esta actividad";
+        }
+   
 
     public void setNota(String nota) {
 	this.nota = nota;
