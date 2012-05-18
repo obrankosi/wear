@@ -108,10 +108,10 @@ public class FuncionesAuxiliares {
 	public static boolean correctDateFormat(String date) {
 		String fecha = date;
 		if (fecha.length() == 10) {
-			String año = (String) date.subSequence(0, 3);
+			String anio = (String) date.subSequence(0, 3);
 			String mes = (String) date.subSequence(5, 6);
 			String dia = (String) date.subSequence(8, 9);
-			return (hasAllNumbers(año) && hasAllNumbers(mes)
+			return (hasAllNumbers(anio) && hasAllNumbers(mes)
 					&& hasAllNumbers(dia) && (fecha.charAt(4) == '-') && (fecha
 						.charAt(7) == '-'));
 		} else {

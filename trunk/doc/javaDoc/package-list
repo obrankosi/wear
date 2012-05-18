@@ -1,0 +1,12 @@
+
+educar.controllers
+educar.controllers.AdminController
+educar.db
+educar.gui
+educar.gui.AdminViews
+educar.gui.AlumnoView
+educar.gui.DocenteView
+educar.gui.Listener
+educar.languaje
+educar.models
+educar.models.AdminModels
