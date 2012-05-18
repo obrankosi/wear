@@ -249,7 +249,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 			Short.MAX_VALUE)));
 
 	menuAccionesPanel = new JPanel();
-	menuAccionesPanel.setBackground(new Color(119, 136, 153));
+	menuAccionesPanel.setBackground(SystemColor.activeCaption);
 	menuAccionesScroll.setViewportView(menuAccionesPanel);
 
 	bienvenido = new JTabbedPane(JTabbedPane.TOP);
@@ -262,7 +262,6 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	menuDocente = new JTabbedPane(JTabbedPane.TOP);
 	menuDocente.setBounds(0, 0, 1151, 655);
-	menuDocente.setBackground(new Color(176, 196, 222));
 	menuDocente.setVisible(false);
 
 	menuMateria = new JTabbedPane(JTabbedPane.TOP);
@@ -294,12 +293,9 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	menuDocente
 		.addTab(
 			"                           ALTA DOCENTE                            ",
-			new ImageIcon(
-				administrador.class
-					.getResource("/educar/gui/AdminViews/imagenIcon/docentepng.png")),
+			new ImageIcon(administrador.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelAltaDocente, null);
 	menuDocente.setEnabledAt(0, true);
-	menuDocente.setBackgroundAt(0, SystemColor.windowBorder);
 
 	JLabel lblCartelAltaDocente = new JLabel(
 		"Inserte los Datos del Docente a dar de Alta");
@@ -322,6 +318,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaDocente.add(lblDniAltaDocente);
 
 	listaAltaDocente = new List();
+	listaAltaDocente.setFont(new Font("Arial", Font.BOLD, 12));
 	listaAltaDocente.setBounds(916, 58, 229, 464);
 	panelAltaDocente.add(listaAltaDocente);
 
@@ -423,16 +420,12 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificacionDocente.setLayout(null);
 	panelModificacionDocente.setBorder(new SoftBevelBorder(
 		BevelBorder.LOWERED, null, null, null, null));
-	panelModificacionDocente.setBackground(UIManager
-		.getColor("Button.focus"));
+	panelModificacionDocente.setBackground(SystemColor.inactiveCaption);
 	menuDocente
 		.addTab(
 			"                         MODIFICACION DOCENTE                            ",
-			new ImageIcon(
-				administrador.class
-					.getResource("/educar/gui/AdminViews/imagenIcon/docentepng.png")),
+			new ImageIcon(administrador.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelModificacionDocente, null);
-	menuDocente.setBackgroundAt(1, SystemColor.windowBorder);
 
 	JLabel lblCartelModificarDocente = new JLabel(
 		"Buscar Docente a Modificar");
@@ -471,6 +464,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	bBuscarMD.associate(btnBuscarModificarDocente, gestionBuscarMD);
 
 	listaModificarDocente = new List();
+	listaModificarDocente.setFont(new Font("Arial", Font.BOLD, 12));
 	listaModificarDocente.setBounds(916, 58, 229, 464);
 	panelModificacionDocente.add(listaModificarDocente);
 
@@ -748,9 +742,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	menuAlumno
 		.addTab(
 			"                           MODIFICAR ALUMNO                         ",
-			new ImageIcon(
-				administrador.class
-					.getResource("/educar/gui/AdminViews/imagenIcon/alumnopng.png")),
+			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1336865201_graduated.png")),
 			panelModificarAlumno, null);
 	menuAlumno.setBackgroundAt(0, SystemColor.menu);
 
@@ -791,6 +783,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	bBuscarMA.associate(btnBuscarModificarAlumno, gestionBuscarMA);
 
 	listaModificarAlumno = new List();
+	listaModificarAlumno.setFont(new Font("Arial", Font.BOLD, 12));
 
 	AdminListListener listaAlumnoM = new AdminListListener();
 	IListController listaAlumnoMController1 = new gestionAlumnosController();
@@ -899,13 +892,11 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	JPanel panelAltaAlumno = new JPanel();
 	panelAltaAlumno.setLayout(null);
-	panelAltaAlumno.setBackground(SystemColor.inactiveCaptionBorder);
+	panelAltaAlumno.setBackground(SystemColor.inactiveCaption);
 	menuAlumno
 		.addTab(
 			"                            ALTA ALUMNO                           ",
-			new ImageIcon(
-				administrador.class
-					.getResource("/educar/gui/AdminViews/imagenIcon/alumnopng.png")),
+			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1336865201_graduated.png")),
 			panelAltaAlumno, null);
 
 	JLabel lblCartelAltaAlumno = new JLabel(
@@ -935,6 +926,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaAlumno.add(txtFDniAltaAlumno);
 
 	listaAltaAlumno = new List();
+	listaAltaAlumno.setFont(new Font("Arial", Font.BOLD, 12));
 	listaAltaAlumno.setBounds(916, 58, 229, 464);
 	panelAltaAlumno.add(listaAltaAlumno);
 
@@ -1027,11 +1019,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	menuCargo
 		.addTab(
 			"                          MODIFICAR CARGO                          ",
-			new ImageIcon(
-				administrador.class
-					.getResource("/educar/gui/AdminViews/imagenIcon/cargospng.png")),
+			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1337380189_Briefcase_files.png")),
 			panelModificarCargo, null);
-	menuCargo.setBackgroundAt(0, SystemColor.windowBorder);
 
 	JLabel lblInserteElCodigo = new JLabel("Inserte el Codigo del Cargo");
 	lblInserteElCodigo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1059,6 +1048,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarCargo.add(txtFCodigoModificarCargo);
 
 	listaModificarCargo = new List();
+	listaModificarCargo.setFont(new Font("Arial", Font.BOLD, 12));
 	listaModificarCargo.setBounds(916, 58, 229, 464);
 	panelModificarCargo.add(listaModificarCargo);
 
@@ -1121,15 +1111,12 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	JPanel panelAltaCargo = new JPanel();
 	panelAltaCargo.setLayout(null);
-	panelAltaCargo.setBackground(SystemColor.inactiveCaptionBorder);
+	panelAltaCargo.setBackground(SystemColor.inactiveCaption);
 	menuCargo
 		.addTab(
 			"                        ALTA CARGO                        ",
-			new ImageIcon(
-				administrador.class
-					.getResource("/educar/gui/AdminViews/imagenIcon/cargospng.png")),
+			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1337380189_Briefcase_files.png")),
 			panelAltaCargo, null);
-	menuCargo.setBackgroundAt(1, SystemColor.windowBorder);
 
 	JLabel lblCartelAltaCargo = new JLabel(
 		"Inserte el Nombre del Cargo  a Guardar");
@@ -1145,6 +1132,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaCargo.add(lblListaAltaCargo);
 
 	listaAltaCargo = new List();
+	listaAltaCargo.setFont(new Font("Arial", Font.BOLD, 12));
 	listaAltaCargo.setBounds(916, 58, 229, 464);
 	panelAltaCargo.add(listaAltaCargo);
 
@@ -1184,9 +1172,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	menuMateria
 		.addTab(
 			"                             MODIFICAR MATERIA                          ",
-			new ImageIcon(
-				administrador.class
-					.getResource("/educar/gui/AdminViews/imagenIcon/materiapng.png")),
+			new ImageIcon(administrador.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelModificarMateria, null);
 
 	JLabel label_34 = new JLabel("Inserte el Codigo de la Materia ");
@@ -1221,6 +1207,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarMateria.add(txtFCodigoModificarMateria);
 
 	listaMateriaModificarMateria = new List();
+	listaMateriaModificarMateria.setFont(new Font("Arial", Font.BOLD, 12));
 	listaMateriaModificarMateria.setBounds(916, 58, 229, 444);
 	panelModificarMateria.add(listaMateriaModificarMateria);
 
@@ -1230,6 +1217,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaMM1.associate(listaMateriaModificarMateria, listaMMController1);
 
 	listFacultadModificarMateria = new List();
+	listFacultadModificarMateria.setFont(new Font("Arial", Font.BOLD, 12));
 	listFacultadModificarMateria.setBounds(654, 58, 242, 444);
 	panelModificarMateria.add(listFacultadModificarMateria);
 
@@ -1312,7 +1300,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	JPanel panelAltaMateria = new JPanel();
 	panelAltaMateria.setLayout(null);
-	panelAltaMateria.setBackground(SystemColor.inactiveCaptionBorder);
+	panelAltaMateria.setBackground(SystemColor.inactiveCaption);
 	menuMateria
 		.addTab(
 			"                      ALTA MATERIA                         ",
@@ -1344,10 +1332,12 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaMateria.add(label_39);
 
 	listaMateriaAltaMateria = new List();
+	listaMateriaAltaMateria.setFont(new Font("Arial", Font.BOLD, 12));
 	listaMateriaAltaMateria.setBounds(916, 58, 229, 464);
 	panelAltaMateria.add(listaMateriaAltaMateria);
 
 	listFacultadAltaMateria = new List();
+	listFacultadAltaMateria.setFont(new Font("Arial", Font.BOLD, 12));
 	listFacultadAltaMateria.setBounds(668, 58, 229, 464);
 	panelAltaMateria.add(listFacultadAltaMateria);
 
