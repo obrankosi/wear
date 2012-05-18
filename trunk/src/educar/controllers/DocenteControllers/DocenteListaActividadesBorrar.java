@@ -1,5 +1,7 @@
-package educar.controllers;
+package educar.controllers.DocenteControllers;
 
+import educar.controllers.IController;
+import educar.controllers.IListController;
 import educar.gui.IView;
 import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.DocenteView.DocenteView;

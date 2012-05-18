@@ -63,7 +63,7 @@ public class ChargeController implements IController, defaultLanguaje,
 		rView.present("borrado del Cargo exitoso");
 	    } else
 		rView
-			.present("No se puede borrar el Cargo verifique que exista");
+			.present("No se puede borrar el Cargo ,este esta ligado con un Docente");
 
 	}
     }
