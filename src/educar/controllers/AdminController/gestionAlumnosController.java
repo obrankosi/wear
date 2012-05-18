@@ -58,7 +58,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 	    view.setTfFechaNac_modif_A(student.getfN());
 	    view.setTfTelefono_modif_A(student.getTel());
 	} else {
-	    view.present("El dni del alumno no existe ");
+	    view.present(S22);
 	    view.deleteViewFieldsMod_A();
 	}
 
@@ -71,11 +71,11 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 	searchAStudentInDbase();
 	if (!(view.getDniMod_A().compareTo("") == 0)) {
 	    if (student.destroy()) {
-		view.present("borrado del alumno exitoso");
+		view.present(S23);
 		view.deleteViewFieldsMod_A();
 	    } else {
 		view
-			.present("el alumno no se puede borrar, ya que esta cursando materias");
+			.present(S24);
 	    }
 	}
     }
@@ -103,17 +103,17 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 				.getDireccionAlta_A());
 		if (alumno.save()) {
 		    view
-			    .present("alumno agregado correctamente. Se creo el Usuario para el alumno ");
+			    .present(S25);
 		    view.deleteViewFieldsAlta_A();
 		} else {
-		    view.present("verifique los datos ingresados sean validos");
+		    view.present(S26);
 		}
 	    } else {
 		view
-			.present("ingreso mal el campo Dni o Tele (NUMEROS) o Fecha (aaaa-mm-dd)");
+			.present(S27);
 	    }
 	} else
-	    view.present("faltan completar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
     }
 
     /**
@@ -133,17 +133,17 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 			view.getDireccionMod_A() };
 		try {
 		    Alumno.update(values, student.getDni());
-		    view.present("acutalizacion realizada");
+		    view.present(ACTUALIZACIONEXITOSO);
 		} catch (SQLException e) {
 		    e.printStackTrace();
-		    view.present("NO se pude actualizar");
+		    view.present(ACTUALIZACIONFALLIDA);
 		}
 	    } else {
 		view
-			.present("ingreso mal el campo Dni o Tele (NUMEROS) o Fecha (aaaa-mm-dd)");
+			.present(S27);
 	    }
 	} else {
-	    view.present("el alumno no existe");
+	    view.present(S28);
 	}
 
     }
@@ -153,7 +153,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
 	    studentsList = Alumno.ListAlumnos();
 	    view.setListAlumnos_ABM(studentsList);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de alumnos");
+	    view.present(ERROR);
 	}
     }
 

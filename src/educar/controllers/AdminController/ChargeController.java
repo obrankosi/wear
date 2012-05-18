@@ -60,10 +60,10 @@ public class ChargeController implements IController, defaultLanguaje,
 	searchChargeInDBase();
 	if (!(rView.getCodigoModificarCargo().compareTo("") == 0)) {
 	    if (cargo.destroy()) {
-		rView.present("borrado del Cargo exitoso");
+		rView.present(BORRADOEXITOSO);
 	    } else
 		rView
-			.present("No se puede borrar el Cargo ,este esta ligado con un Docente");
+			.present(S15);
 
 	}
     }
@@ -76,12 +76,12 @@ public class ChargeController implements IController, defaultLanguaje,
 	    String[] values = { rView.getNombreModificarCargo() };
 	    try {
 		cargo.update(values, cargo.getCodigoCargo());
-		rView.present("actualizacion realizada");
+		rView.present(ACTUALIZACIONEXITOSO);
 	    } catch (SQLException e) {
-		rView.present("NO se puede actualizar");
+		rView.present(ACTUALIZACIONFALLIDA);
 	    }
 	} else {
-	    rView.present("el cargo no existe");
+	    rView.present(S16);
 	}
 
     }
@@ -93,13 +93,13 @@ public class ChargeController implements IController, defaultLanguaje,
 	if (rView.fieldsIsOkAltaCargo()) {
 	    Cargos cargo = new Cargos(rView.getNombreAltaCargo());
 	    if (cargo.save()) {
-		rView.present("Cargo agregado correctamente");
+		rView.present(S17);
 
 	    } else {
-		rView.present("verifique los datos ingresados sean validos");
+		rView.present(S18);
 	    }
 	} else {
-	    rView.present("faltan completar campos");
+	    rView.present(FALTANCOMPLETARCAMPOS);
 	}
     }
 
@@ -112,7 +112,7 @@ public class ChargeController implements IController, defaultLanguaje,
 	    rView.setCodigoModificarCargo(cargo.getCodigoCargo());
 	    rView.setNombreModificarCargo(cargo.getNombreCargo());
 	} else {
-	    rView.present("El Cargo no Existe");
+	    rView.present(S19);
 	    rView.clearModificarCargo();
 	}
     }
@@ -122,7 +122,7 @@ public class ChargeController implements IController, defaultLanguaje,
 	    cargosList = Cargos.listaCargos();
 	    rView.setListModificarCargos(cargosList);
 	} catch (SQLException e) {
-	    rView.present("no entro por la lista de los cargos");
+	    rView.present(ERROR);
 	}
     }
 

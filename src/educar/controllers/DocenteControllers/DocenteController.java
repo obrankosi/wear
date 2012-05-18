@@ -77,9 +77,8 @@ public class DocenteController implements IController, defaultLanguaje,
 	materiasDicta.clear();
 	for (int i = 0; i < materiasEncargado.size(); i++) {
 	    materia = materiasEncargado.get(i);
-	    newArg = ("nro materia: " + materia.getCode() + " | " + "materia: "
-		    + materia.getName() + " | " + "facultad: " + materia
-		    .getCodigoFacultad());
+	    newArg = (S61 + materia.getCode() + S11 + S62 + materia.getName()
+		    + " | " + S63 + materia.getCodigoFacultad());
 	    materiasDicta.add(newArg);
 	}
 	return materiasDicta;
@@ -125,7 +124,7 @@ public class DocenteController implements IController, defaultLanguaje,
 	    materiasDicta.clear();
 	    for (int i = 0; i < listAct.size(); i++) {
 		act = listAct.get(i);
-		newArg = ("act_nro: " + act.getCodigoActividad() + " | " + getInfoMateria(
+		newArg = (S64 + act.getCodigoActividad() + S11 + getInfoMateria(
 			materiasEncargado, act.getCodigoMateria()));
 		materiasDicta.add(newArg);
 	    }
@@ -145,10 +144,10 @@ public class DocenteController implements IController, defaultLanguaje,
 	    } catch (ActividadNotFound e) {
 	    }
 	    if (act.deleteActividad()) {
-		view.present("borrado Exitoso");
+		view.present(BORRADOEXITOSO);
 	    }
 	} else {
-	    view.present("No hay actividad que borrar, seleccion una");
+	    view.present(S65);
 	}
 	view.limpiarCamposActividad();
 
@@ -176,10 +175,10 @@ public class DocenteController implements IController, defaultLanguaje,
 			    codActividad);
 		    actividadAlumno.save();
 		}
-		view.present("se agrego la actividad");
+		view.present(S66);
 	    }
 	} else {
-	    view.present("faltan ingresar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	}
 	view.limpiarCamposActividad();
     }
@@ -193,7 +192,7 @@ public class DocenteController implements IController, defaultLanguaje,
 	for (int i = 0; i < materias.size() && !encontre; i++) {
 	    materia = materias.get(i);
 	    if (materia.getCode().compareTo(codigoM) == 0) {
-		res = ("materia: " + materia.getName() + " | " + "facultad: " + materia
+		res = (S62 + materia.getName() + S11 + S63 + materia
 			.getCodigoFacultad());
 		encontre = true;
 	    }

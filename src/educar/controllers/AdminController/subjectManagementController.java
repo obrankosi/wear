@@ -65,11 +65,11 @@ public class subjectManagementController implements IController,
 	    materia = new Subject(view.getAddNameTF_M().trim(), view
 		    .getCodigoFacultadAltaMateria().trim());
 	    if (materia.save()) {
-		view.present("guardado exitoso");
+		view.present(CARGADOEXITOSO);
 	    } else
-		view.present("no se pudo guardar la materia");
+		view.present(S35);
 	} else
-	    view.present("faltan completar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
     }
 
     /**
@@ -79,14 +79,14 @@ public class subjectManagementController implements IController,
 	materia = Subject.getSubject(view.getModifyCodeTF_M());
 	if (materia != null) {
 	    if (materia.delete()) {
-		view.present("borrado de la materia exitosa");
+		view.present(S36);
 	    } else {
 		view
-			.present("No se puede borrar la materia, Ya que posee un Docente a cargo. elimine este cargo");
+			.present(S37);
 
 	    }
 	} else
-	    view.present("La materia a borrar no existe");
+	    view.present(S38);
     }
 
     /**
@@ -98,7 +98,7 @@ public class subjectManagementController implements IController,
 	    view.setModifyNameTF_M(materia.getName());
 	    view.setFacultadModificarMateria(materia.getCodigoFacultad());
 	} else {
-	    view.present("materia no encontrada");
+	    view.present(S39);
 	    view.setEmptyFields();
 	}
 
@@ -111,7 +111,7 @@ public class subjectManagementController implements IController,
 	    facultades = Facultad.ListFacultad();
 	    view.setListFacultad_ABM(facultades);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de materias");
+	    view.present(ERROR);
 	}
     }
 
@@ -127,9 +127,9 @@ public class subjectManagementController implements IController,
 	    try {
 		Subject.update(columns, values, "cod_materia", materia
 			.getCode());
-		view.present("actualizacion realizada");
+		view.present(ACTUALIZACIONEXITOSO);
 	    } catch (SQLException e) {
-		view.present("NO se puede actualizar");
+		view.present(ACTUALIZACIONFALLIDA);
 	    }
 	} else {
 	}

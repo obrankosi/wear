@@ -123,31 +123,30 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	panelCarcarSolucion.setLayout(null);
 	panelCarcarSolucion.setVisible(false);
 
-	JLabel lblSolucionActividad = new JLabel("Solucion Actividad");
+	JLabel lblSolucionActividad = new JLabel(S81);
 	lblSolucionActividad.setHorizontalAlignment(SwingConstants.LEFT);
 	lblSolucionActividad.setFont(new Font("Arial", Font.BOLD, 23));
 	lblSolucionActividad.setBounds(22, 120, 276, 28);
 	panelCarcarSolucion.add(lblSolucionActividad);
 
-	JLabel lblDescripicionActividad = new JLabel("Descripicion Actividad");
+	JLabel lblDescripicionActividad = new JLabel(S82);
 	lblDescripicionActividad.setHorizontalAlignment(SwingConstants.LEFT);
 	lblDescripicionActividad.setFont(new Font("Arial", Font.BOLD, 23));
 	lblDescripicionActividad.setBounds(22, 351, 276, 28);
 	panelCarcarSolucion.add(lblDescripicionActividad);
 
-	JLabel lblNotaActividad = new JLabel("Nota ");
+	JLabel lblNotaActividad = new JLabel(S83);
 	lblNotaActividad.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNotaActividad.setFont(new Font("Arial", Font.BOLD, 23));
 	lblNotaActividad.setBounds(58, 598, 265, 59);
 	panelCarcarSolucion.add(lblNotaActividad);
-	JLabel lblCartelCargarMateria = new JLabel(
-		"SELECCI\u00D3NE LA ACTIVIDAD Y INGRESE LA SOLUCI\u00D3N A SUBIR ");
+	JLabel lblCartelCargarMateria = new JLabel(S84);
 	lblCartelCargarMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelCargarMateria.setFont(new Font("Arial", Font.BOLD, 24));
 	lblCartelCargarMateria.setBounds(0, 11, 887, 92);
 	panelCarcarSolucion.add(lblCartelCargarMateria);
 
-	JLabel lblListaDeActividades = new JLabel("LISTA DE ACTIVIDADES");
+	JLabel lblListaDeActividades = new JLabel(S85);
 	lblListaDeActividades.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaDeActividades.setFont(new Font("Arial", Font.BOLD, 23));
 	lblListaDeActividades.setBounds(897, 17, 295, 54);
@@ -208,39 +207,38 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
 	panelIncripcionMateria.setLayout(null);
 	panelIncripcionMateria.setVisible(false);
 
-	JLabel lblNombreMateria = new JLabel("Codigo Materia");
+	JLabel lblNombreMateria = new JLabel(S86);
 	lblNombreMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreMateria.setFont(new Font("Arial", Font.BOLD, 23));
 	lblNombreMateria.setBounds(0, 334, 265, 54);
 	panelIncripcionMateria.add(lblNombreMateria);
 
-	JLabel lblCartelIncribirmeMateria = new JLabel(
-		"SELECCI\u00D3NE LA MATERIA A INCRIBIRSE ");
+	JLabel lblCartelIncribirmeMateria = new JLabel(S87);
 	lblCartelIncribirmeMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelIncribirmeMateria.setFont(new Font("Arial", Font.BOLD, 26));
 	lblCartelIncribirmeMateria.setBounds(0, 11, 650, 92);
 	panelIncripcionMateria.add(lblCartelIncribirmeMateria);
 
-	JLabel lblListaMaterias = new JLabel("LISTA DE MATERIA");
+	JLabel lblListaMaterias = new JLabel(S88);
 	lblListaMaterias.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaMaterias.setFont(new Font("Arial", Font.BOLD, 23));
 	lblListaMaterias.setBounds(927, 17, 265, 42);
 	panelIncripcionMateria.add(lblListaMaterias);
 
-	JLabel label = new JLabel("LISTA DE MATERIA");
+	JLabel label = new JLabel(S89);
 	label.setHorizontalAlignment(SwingConstants.CENTER);
 	label.setFont(new Font("Arial", Font.BOLD, 23));
 	label.setBounds(652, 17, 265, 42);
 	panelIncripcionMateria.add(label);
 
-	JLabel lblaIncribirme = new JLabel("( A INCRIBIRME )");
+	JLabel lblaIncribirme = new JLabel(S90);
 	lblaIncribirme.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 	lblaIncribirme.setHorizontalAlignment(SwingConstants.CENTER);
 	lblaIncribirme.setBounds(660, 55, 257, 23);
 	panelIncripcionMateria.add(lblaIncribirme);
 
-	JLabel lblIncripto = new JLabel("(  INCRIPTO  )");
+	JLabel lblIncripto = new JLabel(S100);
 	lblIncripto.setHorizontalAlignment(SwingConstants.CENTER);
 	lblIncripto.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 	lblIncripto.setBounds(935, 55, 257, 23);
@@ -311,9 +309,7 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
     public boolean camposVaciosCargarSolucion() {
 	return (this.getSolucionActividad().compareTo("") == 0)
 		&& (this.getDescripcionActividad().compareTo("") == 0);// &&
-	// !(getNota()
-	// ==
-	// "");
+
     }
 
     public void setVacioCargarSolucion() {

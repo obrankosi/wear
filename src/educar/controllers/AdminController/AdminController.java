@@ -86,7 +86,7 @@ public class AdminController implements IController, defaultLanguaje {
 	    studentsList = Alumno.ListAlumnos();
 	    view.setListAlumnos_ABM(studentsList);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de alumnos");
+	    view.present(ERROR);
 	}
 
     }
@@ -96,7 +96,7 @@ public class AdminController implements IController, defaultLanguaje {
 	    teachersList = Docente.ListDocente();
 	    view.setListDocente_ABM(teachersList);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de alumnos");
+	    view.present(ERROR);
 	}
 
     }
@@ -108,7 +108,7 @@ public class AdminController implements IController, defaultLanguaje {
 	    facultades = Facultad.ListFacultad();
 	    view.setListFacultad_ABM(facultades);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de materias");
+	    view.present(ERROR);
 	}
     }
 
@@ -118,7 +118,7 @@ public class AdminController implements IController, defaultLanguaje {
 	    view.setListFacultad_ABM(facList);
 	} catch (SQLException e) {
 	    e.printStackTrace();
-	    view.present("error al actualizar la lista de facultades");
+	    view.present(ERROR);
 	}
     }
 
@@ -127,7 +127,7 @@ public class AdminController implements IController, defaultLanguaje {
 	    cargosList = Cargos.listaCargos();
 	    view.setListModificarCargos(cargosList);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de los cargos");
+	    view.present(ERROR);
 	}
 
     }
@@ -137,7 +137,7 @@ public class AdminController implements IController, defaultLanguaje {
 	    docenteConCargo = DedicacionDocente.listDedicacion();
 	    view.setListDedicacionDocenteAlta(docenteConCargo);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de los cargos");
+	    view.present(ERROR);
 	}
     }
 

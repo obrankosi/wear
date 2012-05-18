@@ -5,6 +5,7 @@ import educar.controllers.IListController;
 import educar.gui.IView;
 import educar.gui.AdminViews.FuncionesAuxiliares;
 import educar.gui.DocenteView.DocenteView;
+import educar.languaje.defaultLanguaje;
 import educar.models.Resolucion;
 import educar.models.ResolucionNotFound;
 import educar.models.AdminModels.Alumno;
@@ -14,7 +15,7 @@ import educar.models.AdminModels.Alumno;
  *Controlador Lista de Resoluciones de Docente en la historia correccion 
  */
 public class DocenteCorregirListResolucionesController implements IController,
-	IListController {
+	IListController,defaultLanguaje {
 
     private DocenteView view;
 
@@ -53,7 +54,7 @@ public class DocenteCorregirListResolucionesController implements IController,
 	view.setNotaCorregir(nota);
 	DocenteCorregirController.setCodResolucion(codResolucion);
 	if(!(nota.compareTo("0")== 0)){
-	    view.present("Atencion el alumno ya posee una correccion");
+	    view.present(S74);
 	}
     }
 
