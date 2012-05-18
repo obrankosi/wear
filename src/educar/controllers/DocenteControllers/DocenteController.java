@@ -69,7 +69,7 @@ public class DocenteController implements IController, defaultLanguaje,
 	if (materiasDicta != null) {
 	    for (int i = 0; i < materiasDicta.size(); i++) {
 		materia = Subject.getSubject(materiasDicta.get(i));
-		if (!materiasEncargado.contains(materia)) {
+		if (!Subject.contenido(materiasEncargado, materia)) {
 		    materiasEncargado.add(materia);
 		}// todas mis materias
 	    }
@@ -108,7 +108,7 @@ public class DocenteController implements IController, defaultLanguaje,
 	if (materiasDicta != null) {
 	    for (int i = 0; i < materiasDicta.size(); i++) {
 		materia = Subject.getSubject(materiasDicta.get(i));
-		if (!materiasEncargado.contains(materia)) {
+		if (!Subject.contenido(materiasEncargado, materia)) {
 		    materiasEncargado.add(materia);
 		}// todas mis materias
 	    }

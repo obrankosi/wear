@@ -112,6 +112,7 @@ public class DedicacionDocenteController implements IController,
 	    String codFacultad = view.getFacultadAltaDedicacionDocente();
 	    newArg = new DedicacionDocente(codFacultad, dniDocente, codCargo,
 		    hsDedicacion);
+	    
 	    if (DedicacionDocente.containtDedicacionDocente(newArg)) {
 		view.present("el docente ya posee cargo");
 	    } else {

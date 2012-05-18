@@ -1,0 +1,84 @@
+Planteamiento
+
+El problema SAT se trata de un problema donde interesa saber si una expresión booleana con variables y sin cuantificadores tiene 
+asociada una asignación de valores para sus variables que hace que la expresión sea verdadera. Por ejemplo, una instancia de SAT 
+sería el saber si existen valores para x_1,\, x_2, \, x_3, \, x_4 tales que la expresión:
+
+    (x_1 \or \neg x_3 \or x_4) \and (\neg x_2 \or x_3 \or \neg x_4)
+
+
+es cierta. Por el contrario, el problema de si la expresion en cuestion adquiere valor falso para todas las combinaciones de sus 
+variables, se denomina UNSAT.2
+
+Complejidad
+
+El problema sigue perteneciendo a la clase de complejidad NP-completo aunque se restrinja el número de literales por cláusula a un 
+máximo de 3. En este caso se conoce como 3 SAT. Cuando el número máximo de literales por cláusula es dos, el problema tiene 
+complejidad polinómica y se conoce como problema 2 SAT.
+
+
+El Teorema de Cook demuestra que el problema de la satisfactibilidad booleana es NP-completo, y de hecho, este fue el primer 
+problema de decisión que se demostró ser NP-completos. Sin embargo, más allá de este teorema, algoritmos eficientes y resistentes al 
+cambio de tamaño del problema para SAT se han desarrollado desde la última década y han contribuido con poderosos avances en nuestra 
+capacidad para resolver el problema de satisfactibilidad automáticamente.
+
+3-Satisfactibilidad
+
+
+La 3-satisfactibilidad es un caso especial de -satisfactibilidad (-SAT), o simplemente satisfactibilidad (SAT), en la que cada cláusula contiene exactamente 3 literales. Fue uno de 21 problemas NP-completos de Karp.
+
+Partiendo de SAT (el caso general) se reduce a 3-SAT y SAT 3 -en 1 y se puede demostrar que son NP-completos, entonces podemos 
+usarlos para demostrar también otros problemas NP-completos. Esto se hace mostrando cómo una solución a otro problema podría ser 
+utilizado para resolver 3-SAT Un ejemplo de este tipo de reducción es el problema del Clique. Por lo general, es más fácil de 
+utilizar reducción de 3-SAT que cuando se está tratando de probar que algun otro problema es NP-completo. El SAT 3-puede ser más 
+limitado a la 3SAT Uno-en-tres, cuando lo que pedimos sea sólo una de las variables verdadera en cada cláusula, en vez de por lo 
+menos una. 3SAT Uno-en-tres sigue siendo NP-completo.
+
+Extensiones de SAT
+
+Una extensión significativa a la popularidad que ganó desde 2003 es el problema de las teorías satisfactibilidad módulo, que permite 
+enriquecer las fórmulas en la FNC con lineales, vectores, la restricción de que todas las variables sean distintas, y no interpretar 
+funciones, etc. Estas extensiones son típicamente NP-completas, pero resultan bastante eficaces para la resolución que son capaces 
+de hacer frente a muchos tipos de restricciones de género.
+
+
+El problema parece ser más difícil satisfactibilidad (PSPACE-completo) si permitimos que los cuantificadores para todos y existencial, que enlace las variables booleanas.
+
+Si se utiliza sólo cuantificadores Este sigue siendo el problema SAT Si permitimos que sólo los cuantificadores Se convierte en el 
+problema de la tautología: Co-NP-completo. Si dejamos que ellos, el problema se llama el problema de la fórmula booleana 
+cuantificados (QBF), que puede se ha demostrado PSPACE completa. Se cree ampliamente que los problemas son PSPACE completa-es son 
+más difíciles que cualquier problema en NP, aunque esto aún no ha sido demostrada. . El problema de la máxima satisfactibilidad, una 
+generalización de SAT, para pedir el número máximo de cláusulas que pueden ser satisfechas por ninguna asignación. Este problema 
+tiene aproximación de con algoritmos eficientes, sino que es NP-difícil de resolver con precisión. Peor aún, el problema es APX-
+completo, lo que significa que no hay ningún sistema de aproximación polinomial de tiempo a este problema a menos que P = NP.
+
+Algoritmos
+
+Hay diversas clases de algoritmos de alto rendimiento para la solución de los casos de SAT en la práctica: las variantes modernas de 
+el Algoritmo DPLL, como el algoritmo de paja y los algoritmos estocásticos de búsqueda local, como WalkSAT. Una resolución del tipo 
+SAT Algoritmo DPLL emplea un procedimiento sistemático de rastreo para buscar a explorar el espacio (del tamaño exponencial) los 
+valores de las variables que se ajusten. El procedimiento básico de este sistema de búsqueda fue innovador en dos artículos a 
+principios de los años 60 y es, hoy en día, normalmente se conoce como el algoritmo de Davis-Putnam-Loveland-Logemann Algoritmo DPLL.
+
+
+El solucionador SAT moderno (desarrollado en los últimos diez años), mejora el algoritmo de base para encontrar el tipo de Algoritmo 
+DPLL. eficiente con el análisis de conflictos, la cláusula de aprendizaje, no cronológico de rastreo (alias backjumping) y la 
+propagación de la unidad vieron dos literales (Dos vistos literales), brazo ajustable, y reinicios aleatorios. Es empíricamente 
+que tales añadidos a la búsqueda sistemática de base son esenciales para resolver el problema de casos SAT extensos que se 
+plantean en la automatización de diseño electrónico. Los solucionadores modernos SAT también están causando un impacto significativo 
+en los ámbitos de la verificación de software, la resolución de las limitaciones en la inteligencia artificial, y la investigación 
+operativa, entre otros. Algunos salocucionadores potente disponibles entan en el dominio público, y son muy fáciles de usar. En 
+particular, el MINISAT, que ganó la competencia de la SAT de 2005, sólo alrededor de 600 líneas de código.
+
+
+Algoritmos Genéticos y otros métodos estocásticos de búsqueda local para el uso general también se utilizan para resolver problemas 
+SAT, especialmente cuando no hay o sólo un conocimiento limitado de la estructura específica de los casos del problema a ser 
+resuelto. Ciertos tipos de grandes instancias aleatorias satisfactibles de SAT se puede resolver por la propagación de la vio 
+literales. En particular en el diseño y verificación de hardware, la lógica satisfactibilidad y otras propiedades de una fórmula 
+proposicional a veces se decidió sobre la base de una representación de la fórmula como un diagrama de decisión binario (BDD). La 
+satisfactibilidad proposicional tiene varias generalizaciones, incluyendo satisfactibilidad al problema de la fórmula booleana 
+cuantificados para la lógica clásica de primer y segundo orden (LCPO y LCSO, respectivamente), a los problemas de la satisfacción de 
+las limitaciones para la programación de enteros 0 -- 1, y el problema de la satisfactibilidad máximo. Muchos otros problemas de la 
+decisión, como los problemas de coloración de grafos, problemas de planificación y programación de problemas, puede ser codificado 
+en SAT
+

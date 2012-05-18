@@ -1,0 +1,110 @@
+SuperUsuario
+1- username: root password: root
+ _______________________________________
+|                                       |
+|  COMO ADMINISTRADOR                   |
+|_______________________________________|	
+
+Administrador
+1- username: gladis_admin password: 123
+
+Facultades
+1- Ciencias Exactas
+2- Ciencias Economicas
+3- Agronomia
+
+Cargos
+1- Director de facultad
+2- Secretario
+3- Consejero
+
+Materias
+1- analisis y diseños de sistemas
+2- algoritmos II
+3- derecho privado I
+4- chancho
+
+Docentes
+1- franco brusatti   (29453060)
+2- marcelo uba       (27345798)
+3- Paola Martellotto (26347598)
+4- Alberto Corol     (30347598)
+
+Docente Encargado Materia
+1- Paola Martellotto (26347598) | analisis y diseños de sistemas
+2- Alberto Corol (30347598)     | derecho privado I
+
+Docente Dicta Materia
+1- Paola Martellotto (26347598) | analisis y diseños de sistemas
+2- marcelo uba (27345798)       | analisis y diseños de sistemas
+3- franco brusatti (29453060)   | analisis y diseños de sistemas
+4- Alberto Corol (30347598)     | derecho privado I
+
+Dedicacion Docente
+1- Alberto Corol (30347598) |  Director de facultad | Ciencias Economicas | 12 hr
+2- marcelo uba (27345798)   |  Consejero            | Ciencias Exactas    | 30 hr
+
+Alumnos
+1- Eduardo Depetris (33361090)
+2- Saul Coria       (32328847)
+3- Elian Marchissio (35543985)
+
+
+ _______________________________________
+|                                       |
+|  COMO ALUMNO    Depetris (33361090)   |
+|_______________________________________|	
+
+Me inscribo en materias Tabla Cursa
+1- analisis y diseños de sistemas
+2- algoritmos II
+ 
+ _______________________________________
+|                                       |
+|  COMO ALUMNO    Coria (32328847)      |
+|_______________________________________|	
+
+Me inscribo en materias Tabla Cursa
+1- analisis y diseños de sistemas
+2- chancho
+
+ _______________________________________
+|                                       |
+|  COMO ALUMNO    Marchissio (35543985) |
+|_______________________________________|	
+
+Me inscribo en materias Tabla Cursa
+1- analisis y diseños de sistemas
+2- derecho privado I 
+
+
+ _______________________________________
+|                                       |
+|  COMO DOCENTE   Brusatti  (29453060)  |
+|_______________________________________|	
+
+Actividades
+1-codigo: 2 (puesto por la bd) | descripcion :  actividad taller  | materia: para analisis Y diseño de sistemas (facultad Ciencas Exactas)
+ 
+Tiene actividad (carga automatica)
+1- (33361090) | codigo actividad : 2
+2- (32328847) | codigo actividad : 2
+3- (35543985) | codigo actividad : 2
+	
+ _______________________________________
+|                                       |
+|  COMO ALUMNO    Depetris (33361090)   |
+|_______________________________________|	
+
+Subo una resolucion a la actividad 2 
+
+Resolucion
+1- codigo : 1 | hr envio : 11:10:15 | fecha Envio: 2012-05-18 | codio actividad : 2 | dni alumno : 33361090 ...
+
+ _______________________________________
+|                                       |
+|  COMO DOCENTE  Marcelo Uba (27345798) |
+|_______________________________________|	
+
+Resolucion
+1- codigo : 2 | hr envio : 11:43:04 | fecha Envio: 2012-05-18 | codio actividad : 2 | dni alumno : 33361090 | descripcion ... | nota : 10 
