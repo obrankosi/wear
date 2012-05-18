@@ -14,8 +14,8 @@ import educar.models.AdminModels.Docente;
 import educar.models.AdminModels.Subject;
 
 /**
- * @author grupo wear
- *controlador sobre las asignaciones de docentes a las materias 
+ * @author grupo wear controlador sobre las asignaciones de docentes a las
+ *         materias
  */
 public class AsignacionDocenteController implements IController,
 	defaultLanguaje, IListController {
@@ -113,9 +113,10 @@ public class AsignacionDocenteController implements IController,
     }
 
     /**
-     *Asigna un docente como encargado 
+     *Asigna un docente como encargado
      */
     private void asignacionDocenteEncargado() {
+	boolean asignoOk = false;
 	// ATENCION SIEMPRE DESPUES DE AGREGAR BORRAR TODOS LOS CAMPOS
 	if (!view.camposVaciosEncargadoMateria()) {// true ssi campos vacios
 	    if (materia.getRTeacher() != null) {
@@ -127,6 +128,7 @@ public class AsignacionDocenteController implements IController,
 		try {
 		    materia.update();
 		    view.present("Cargado Exitoso");
+		    asignoOk = true;
 		} catch (SQLException e) {
 		}
 	    }
@@ -134,6 +136,9 @@ public class AsignacionDocenteController implements IController,
 	    view.setVacioAsignacionDocente();
 	} else {
 	    view.present("Faltan ingresar camapos ");
+	}
+	if (asignoOk) {
+	    listaDocenteLigados(materia.getCode());
 	}
     }
 

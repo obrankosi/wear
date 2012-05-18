@@ -97,6 +97,7 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 		if (docente.save()) {
 		    view
 			    .present("docente agregado correctamente. Se creo el Usuario para docente");
+		    view.deleteViewFieldsMod_D();
 		} else {
 		    view.present("verifique los datos ingresados sean validos");
 		}
