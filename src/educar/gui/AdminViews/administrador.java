@@ -203,7 +203,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		.getImage(
 			administrador.class
 				.getResource("/educar/gui/AdminViews/imagenIcon/admin.png")));
-	setTitle("ADMINISTRADOR  ");
+	setTitle(S119);
 	setForeground(new Color(0, 0, 255));
 	setBackground(new Color(0, 0, 255));
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -292,25 +292,26 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaDocente.setBackground(SystemColor.activeCaption);
 	menuDocente
 		.addTab(
-			"                           ALTA DOCENTE                            ",
-			new ImageIcon(administrador.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
+			S120,
+			new ImageIcon(
+				administrador.class
+					.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelAltaDocente, null);
 	menuDocente.setEnabledAt(0, true);
 
-	JLabel lblCartelAltaDocente = new JLabel(
-		"Inserte los Datos del Docente a dar de Alta");
+	JLabel lblCartelAltaDocente = new JLabel(S121);
 	lblCartelAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelAltaDocente.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblCartelAltaDocente.setBounds(229, 21, 419, 58);
 	panelAltaDocente.add(lblCartelAltaDocente);
 
-	JLabel lblListaAltaDocente = new JLabel("LISTA DE DOCENTES");
+	JLabel lblListaAltaDocente = new JLabel(S122);
 	lblListaAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaAltaDocente.setBounds(916, 0, 229, 58);
 	panelAltaDocente.add(lblListaAltaDocente);
 
-	JLabel lblDniAltaDocente = new JLabel(" D.N.I ");
+	JLabel lblDniAltaDocente = new JLabel(S123);
 	lblDniAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDniAltaDocente.setBackground(Color.BLUE);
@@ -327,7 +328,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaControllerDA1).setView(this);
 	listaDA1.associate(listaAltaDocente, listaControllerDA1);
 
-	JLabel lblNombreAltaDocente = new JLabel("NOMBRE");
+	JLabel lblNombreAltaDocente = new JLabel(S124);
 	lblNombreAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreAltaDocente.setBounds(0, 174, 229, 45);
@@ -339,7 +340,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreAltaDocente.setBounds(229, 174, 305, 45);
 	panelAltaDocente.add(txtFNombreAltaDocente);
 
-	JLabel lblApellidoAltaDocente = new JLabel("APELLIDO");
+	JLabel lblApellidoAltaDocente = new JLabel(S125);
 	lblApellidoAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblApellidoAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblApellidoAltaDocente.setBounds(0, 232, 229, 45);
@@ -351,7 +352,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFApellidoAltaDocente.setBounds(229, 232, 305, 45);
 	panelAltaDocente.add(txtFApellidoAltaDocente);
 
-	JLabel lblDireccionAltaDocente = new JLabel("DIRECCI\u00D3N");
+	JLabel lblDireccionAltaDocente = new JLabel(S126);
 	lblDireccionAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDireccionAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDireccionAltaDocente.setBounds(0, 290, 229, 45);
@@ -363,7 +364,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDireccionAltaDocente.setBounds(229, 290, 305, 45);
 	panelAltaDocente.add(txtFDireccionAltaDocente);
 
-	JLabel lblFechaNacAltaDocente = new JLabel("FECHA NACIMIENTO");
+	JLabel lblFechaNacAltaDocente = new JLabel(S127);
 	lblFechaNacAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblFechaNacAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblFechaNacAltaDocente.setBounds(0, 348, 229, 45);
@@ -375,7 +376,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFFechaNacAltaDocente.setBounds(229, 348, 305, 45);
 	panelAltaDocente.add(txtFFechaNacAltaDocente);
 
-	JLabel lblTelefonoAltaDocente = new JLabel("TELEFONO");
+	JLabel lblTelefonoAltaDocente = new JLabel(S128);
 	lblTelefonoAltaDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblTelefonoAltaDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblTelefonoAltaDocente.setBounds(0, 406, 229, 45);
@@ -423,24 +424,25 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificacionDocente.setBackground(SystemColor.inactiveCaption);
 	menuDocente
 		.addTab(
-			"                         MODIFICACION DOCENTE                            ",
-			new ImageIcon(administrador.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
+			S129,
+			new ImageIcon(
+				administrador.class
+					.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelModificacionDocente, null);
 
-	JLabel lblCartelModificarDocente = new JLabel(
-		"Buscar Docente a Modificar");
+	JLabel lblCartelModificarDocente = new JLabel(S130);
 	lblCartelModificarDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelModificarDocente.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblCartelModificarDocente.setBounds(229, 0, 305, 58);
 	panelModificacionDocente.add(lblCartelModificarDocente);
 
-	JLabel lblListaModificarDocente = new JLabel("LISTA DE DOCENTES");
+	JLabel lblListaModificarDocente = new JLabel(S122);
 	lblListaModificarDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaModificarDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaModificarDocente.setBounds(916, 0, 229, 58);
 	panelModificacionDocente.add(lblListaModificarDocente);
 
-	JLabel lblDniModificarDocente = new JLabel(" D.N.I ");
+	JLabel lblDniModificarDocente = new JLabel(S123);
 	lblDniModificarDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniModificarDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDniModificarDocente.setBackground(Color.BLUE);
@@ -473,7 +475,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaControllerDM).setView(this);
 	listaDM1.associate(listaModificarDocente, listaControllerDM);
 
-	JLabel lblNombreModificarDocente = new JLabel("NOMBRE");
+	JLabel lblNombreModificarDocente = new JLabel(S124);
 	lblNombreModificarDocente.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreModificarDocente.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreModificarDocente.setBounds(0, 174, 229, 45);
@@ -485,7 +487,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreModificarDocente.setBounds(229, 174, 305, 45);
 	panelModificacionDocente.add(txtFNombreModificarDocente);
 
-	JLabel lblApellidoModificarDocente = new JLabel("APELLIDO");
+	JLabel lblApellidoModificarDocente = new JLabel(S125);
 	lblApellidoModificarDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblApellidoModificarDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -498,7 +500,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFApellidoModificaDocente.setBounds(229, 232, 305, 45);
 	panelModificacionDocente.add(txtFApellidoModificaDocente);
 
-	JLabel lblDireccionModificarDocente = new JLabel("DIRECCI\u00D3N");
+	JLabel lblDireccionModificarDocente = new JLabel(S126);
 	lblDireccionModificarDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDireccionModificarDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -511,7 +513,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDireccionModificaDocente.setBounds(229, 290, 305, 45);
 	panelModificacionDocente.add(txtFDireccionModificaDocente);
 
-	JLabel lblFechaNacModificarDocente = new JLabel("FECHA NACIMIENTO");
+	JLabel lblFechaNacModificarDocente = new JLabel(S127);
 	lblFechaNacModificarDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblFechaNacModificarDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -524,7 +526,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFFechaNacModificarDocente.setBounds(229, 348, 305, 45);
 	panelModificacionDocente.add(txtFFechaNacModificarDocente);
 
-	JLabel lblTelefonoModificarDocente = new JLabel("TELEFONO");
+	JLabel lblTelefonoModificarDocente = new JLabel(S128);
 	lblTelefonoModificarDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblTelefonoModificarDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -575,27 +577,26 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarFacultad.setBackground(SystemColor.activeCaption);
 	menuFacultad
 		.addTab(
-			"                      MODIFICAR FACULTAD                         ",
+			S131,
 			new ImageIcon(
 				administrador.class
 					.getResource("/educar/gui/AdminViews/imagenIcon/facultadespng.png")),
 			panelModificarFacultad, null);
 
-	JLabel lblCartelModificarFacultad = new JLabel(
-		"Inserte el Codigo de la Facultad ");
+	JLabel lblCartelModificarFacultad = new JLabel(S132);
 	lblCartelModificarFacultad
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelModificarFacultad.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblCartelModificarFacultad.setBounds(229, 21, 419, 58);
 	panelModificarFacultad.add(lblCartelModificarFacultad);
 
-	JLabel lblListaModificarFacultad = new JLabel("LISTA DE FACULTADES");
+	JLabel lblListaModificarFacultad = new JLabel(S133);
 	lblListaModificarFacultad.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaModificarFacultad.setBounds(916, 0, 229, 58);
 	panelModificarFacultad.add(lblListaModificarFacultad);
 
-	JLabel lblCodigoModificarFacultad = new JLabel("CODIGO");
+	JLabel lblCodigoModificarFacultad = new JLabel(S134);
 	lblCodigoModificarFacultad
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCodigoModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
@@ -618,7 +619,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaMFController1).setView(this);
 	listaMF1.associate(listaMoificarFacultad, listaMFController1);
 
-	JLabel lblNombreModificarFacultad = new JLabel("NOMBRE FACULTAD");
+	JLabel lblNombreModificarFacultad = new JLabel(S135);
 	lblNombreModificarFacultad
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreModificarFacultad.setFont(new Font("Arial", Font.BOLD, 20));
@@ -680,20 +681,19 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaFacultad.setBackground(SystemColor.inactiveCaptionBorder);
 	menuFacultad
 		.addTab(
-			"                          ALTA FACULTAD                            ",
+			S136,
 			new ImageIcon(
 				administrador.class
 					.getResource("/educar/gui/AdminViews/imagenIcon/facultadespng.png")),
 			panelAltaFacultad, null);
 
-	JLabel lblCartelAltaFacultad = new JLabel(
-		"Inserte el Nombre de la Facultad  a Guardar");
+	JLabel lblCartelAltaFacultad = new JLabel(S137);
 	lblCartelAltaFacultad.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelAltaFacultad.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblCartelAltaFacultad.setBounds(269, 29, 419, 58);
 	panelAltaFacultad.add(lblCartelAltaFacultad);
 
-	JLabel lblListaAltaFacultad = new JLabel("LISTA DE FACULTADES");
+	JLabel lblListaAltaFacultad = new JLabel(S138);
 	lblListaAltaFacultad.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaAltaFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaAltaFacultad.setBounds(916, 0, 229, 58);
@@ -708,7 +708,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaMFController2).setView(this);
 	listaMF2.associate(listaAltaFacultad, listaMFController2);
 
-	JLabel lblNombreAltaFacultad = new JLabel("NOMBRE FACULTAD");
+	JLabel lblNombreAltaFacultad = new JLabel(S139);
 	lblNombreAltaFacultad.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreAltaFacultad.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreAltaFacultad.setBounds(104, 232, 229, 45);
@@ -741,25 +741,27 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarAlumno.setBackground(SystemColor.activeCaption);
 	menuAlumno
 		.addTab(
-			"                           MODIFICAR ALUMNO                         ",
-			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1336865201_graduated.png")),
+			S140,
+			new ImageIcon(
+				administrador.class
+					.getResource("/educar/gui/AdminViews/imagenIcon/1336865201_graduated.png")),
 			panelModificarAlumno, null);
 	menuAlumno.setBackgroundAt(0, SystemColor.menu);
 
-	JLabel lblCartelBuscarAlumno = new JLabel("Buscar Alumno a Modificar");
+	JLabel lblCartelBuscarAlumno = new JLabel(S141);
 	lblCartelBuscarAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelBuscarAlumno.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblCartelBuscarAlumno.setBounds(229, 0, 305, 58);
 	panelModificarAlumno.add(lblCartelBuscarAlumno);
 
-	JLabel lblListaAlumnoModificarAlumno = new JLabel("LISTA DE ALUMNOS");
+	JLabel lblListaAlumnoModificarAlumno = new JLabel(S142);
 	lblListaAlumnoModificarAlumno
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaAlumnoModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaAlumnoModificarAlumno.setBounds(916, 0, 229, 58);
 	panelModificarAlumno.add(lblListaAlumnoModificarAlumno);
 
-	JLabel lblDniModificarAlumno = new JLabel(" DNI alumno");
+	JLabel lblDniModificarAlumno = new JLabel(S143);
 	lblDniModificarAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDniModificarAlumno.setBackground(Color.BLUE);
@@ -793,7 +795,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarAlumno.add(listaModificarAlumno);
 	listaModificarAlumno.setBounds(916, 58, 229, 464);
 
-	JLabel lblNombreModificarAlumno = new JLabel("NOMBRE");
+	JLabel lblNombreModificarAlumno = new JLabel(S124);
 	lblNombreModificarAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreModificarAlumno.setBounds(0, 174, 229, 45);
@@ -805,7 +807,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreModificarAlumno.setBounds(229, 174, 305, 45);
 	panelModificarAlumno.add(txtFNombreModificarAlumno);
 
-	JLabel lblApellidoModificarAlumno = new JLabel("APELLIDO");
+	JLabel lblApellidoModificarAlumno = new JLabel(S125);
 	lblApellidoModificarAlumno
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblApellidoModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
@@ -818,7 +820,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFApellidoModificarAlumno.setBounds(229, 232, 305, 45);
 	panelModificarAlumno.add(txtFApellidoModificarAlumno);
 
-	JLabel lblDireccionModificarAlumno = new JLabel("DIRECCI\u00D3N");
+	JLabel lblDireccionModificarAlumno = new JLabel(S126);
 	lblDireccionModificarAlumno
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDireccionModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
@@ -831,7 +833,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDireccionModificarAlumno.setBounds(229, 290, 305, 45);
 	panelModificarAlumno.add(txtFDireccionModificarAlumno);
 
-	JLabel lblFecharNacModificarAlumno = new JLabel("FECHA NACIMIENTO");
+	JLabel lblFecharNacModificarAlumno = new JLabel(S127);
 	lblFecharNacModificarAlumno
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblFecharNacModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
@@ -844,7 +846,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFFechaNacModificarAlumno.setBounds(229, 348, 305, 45);
 	panelModificarAlumno.add(txtFFechaNacModificarAlumno);
 
-	JLabel lblTelefonoModificarAlumno = new JLabel("TELEFONO");
+	JLabel lblTelefonoModificarAlumno = new JLabel(S128);
 	lblTelefonoModificarAlumno
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblTelefonoModificarAlumno.setFont(new Font("Arial", Font.BOLD, 20));
@@ -895,24 +897,25 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaAlumno.setBackground(SystemColor.inactiveCaption);
 	menuAlumno
 		.addTab(
-			"                            ALTA ALUMNO                           ",
-			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1336865201_graduated.png")),
+			S144,
+			new ImageIcon(
+				administrador.class
+					.getResource("/educar/gui/AdminViews/imagenIcon/1336865201_graduated.png")),
 			panelAltaAlumno, null);
 
-	JLabel lblCartelAltaAlumno = new JLabel(
-		"Inserte los Datos del Alumno a dar de Alta");
+	JLabel lblCartelAltaAlumno = new JLabel(S145);
 	lblCartelAltaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelAltaAlumno.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblCartelAltaAlumno.setBounds(229, 21, 419, 58);
 	panelAltaAlumno.add(lblCartelAltaAlumno);
 
-	JLabel lblCartelListaAltaALumno = new JLabel("LISTA DE ALUMNOS");
+	JLabel lblCartelListaAltaALumno = new JLabel(S146);
 	lblCartelListaAltaALumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelListaAltaALumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblCartelListaAltaALumno.setBounds(916, 0, 229, 58);
 	panelAltaAlumno.add(lblCartelListaAltaALumno);
 
-	JLabel lblDniAltaAlumno = new JLabel(" D.N.I ");
+	JLabel lblDniAltaAlumno = new JLabel(S123);
 	lblDniAltaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniAltaAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDniAltaAlumno.setBackground(Color.BLUE);
@@ -930,7 +933,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaAltaAlumno.setBounds(916, 58, 229, 464);
 	panelAltaAlumno.add(listaAltaAlumno);
 
-	JLabel lblNombreAltaAlumno = new JLabel("NOMBRE");
+	JLabel lblNombreAltaAlumno = new JLabel(S124);
 	lblNombreAltaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreAltaAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreAltaAlumno.setBounds(0, 174, 229, 45);
@@ -942,7 +945,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreAltaAlumno.setBounds(229, 174, 305, 45);
 	panelAltaAlumno.add(txtFNombreAltaAlumno);
 
-	JLabel lblApellidoAltaAlumno = new JLabel("APELLIDO");
+	JLabel lblApellidoAltaAlumno = new JLabel(S125);
 	lblApellidoAltaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblApellidoAltaAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblApellidoAltaAlumno.setBounds(0, 232, 229, 45);
@@ -954,7 +957,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFApellidoAltaAlumno.setBounds(229, 232, 305, 45);
 	panelAltaAlumno.add(txtFApellidoAltaAlumno);
 
-	JLabel lblDireccionAltaAlumno = new JLabel("DIRECCI\u00D3N");
+	JLabel lblDireccionAltaAlumno = new JLabel(S126);
 	lblDireccionAltaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDireccionAltaAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDireccionAltaAlumno.setBounds(0, 290, 229, 45);
@@ -966,7 +969,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDireccionAltaAlumno.setBounds(229, 290, 305, 45);
 	panelAltaAlumno.add(txtFDireccionAltaAlumno);
 
-	JLabel lblFechaNacAltaAlumno = new JLabel("FECHA NACIMIENTO");
+	JLabel lblFechaNacAltaAlumno = new JLabel(S127);
 	lblFechaNacAltaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblFechaNacAltaAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblFechaNacAltaAlumno.setBounds(0, 348, 229, 45);
@@ -978,7 +981,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFFechaNacAltaAlumno.setBounds(229, 348, 305, 45);
 	panelAltaAlumno.add(txtFFechaNacAltaAlumno);
 
-	JLabel lblTelefonoAltaAlumno = new JLabel("TELEFONO");
+	JLabel lblTelefonoAltaAlumno = new JLabel(S128);
 	lblTelefonoAltaAlumno.setHorizontalAlignment(SwingConstants.CENTER);
 	lblTelefonoAltaAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblTelefonoAltaAlumno.setBounds(0, 406, 229, 45);
@@ -1018,23 +1021,25 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarCargo.setBackground(SystemColor.activeCaption);
 	menuCargo
 		.addTab(
-			"                          MODIFICAR CARGO                          ",
-			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1337380189_Briefcase_files.png")),
+			S147,
+			new ImageIcon(
+				administrador.class
+					.getResource("/educar/gui/AdminViews/imagenIcon/1337380189_Briefcase_files.png")),
 			panelModificarCargo, null);
 
-	JLabel lblInserteElCodigo = new JLabel("Inserte el Codigo del Cargo");
+	JLabel lblInserteElCodigo = new JLabel(S148);
 	lblInserteElCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 	lblInserteElCodigo.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblInserteElCodigo.setBounds(229, 21, 419, 58);
 	panelModificarCargo.add(lblInserteElCodigo);
 
-	JLabel lblListaModificarCArgo = new JLabel("LISTA DE CARGOS");
+	JLabel lblListaModificarCArgo = new JLabel(S148);
 	lblListaModificarCArgo.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaModificarCArgo.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaModificarCArgo.setBounds(916, 0, 229, 58);
 	panelModificarCargo.add(lblListaModificarCArgo);
 
-	JLabel lblCodigoModificarCargo = new JLabel("CODIGO");
+	JLabel lblCodigoModificarCargo = new JLabel(S134);
 	lblCodigoModificarCargo.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCodigoModificarCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	lblCodigoModificarCargo.setBackground(Color.BLUE);
@@ -1057,7 +1062,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaMCController1).setView(this);
 	listaMC1.associate(listaModificarCargo, listaMCController1);
 
-	JLabel label_51 = new JLabel("NOMBRE CARGO");
+	JLabel label_51 = new JLabel(S150);
 	label_51.setHorizontalAlignment(SwingConstants.CENTER);
 	label_51.setFont(new Font("Arial", Font.BOLD, 20));
 	label_51.setBounds(0, 232, 229, 45);
@@ -1114,18 +1119,19 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaCargo.setBackground(SystemColor.inactiveCaption);
 	menuCargo
 		.addTab(
-			"                        ALTA CARGO                        ",
-			new ImageIcon(administrador.class.getResource("/educar/gui/AdminViews/imagenIcon/1337380189_Briefcase_files.png")),
+			S151,
+			new ImageIcon(
+				administrador.class
+					.getResource("/educar/gui/AdminViews/imagenIcon/1337380189_Briefcase_files.png")),
 			panelAltaCargo, null);
 
-	JLabel lblCartelAltaCargo = new JLabel(
-		"Inserte el Nombre del Cargo  a Guardar");
+	JLabel lblCartelAltaCargo = new JLabel(S152);
 	lblCartelAltaCargo.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelAltaCargo.setFont(new Font("Arial", Font.PLAIN, 20));
 	lblCartelAltaCargo.setBounds(269, 29, 419, 58);
 	panelAltaCargo.add(lblCartelAltaCargo);
 
-	JLabel lblListaAltaCargo = new JLabel("LISTA DE CARGOS");
+	JLabel lblListaAltaCargo = new JLabel(S149);
 	lblListaAltaCargo.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaAltaCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaAltaCargo.setBounds(916, 0, 229, 58);
@@ -1141,7 +1147,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaMCController2).setView(this);
 	listaMC2.associate(listaAltaCargo, listaMCController2);
 
-	JLabel lblNombreAltaCargo = new JLabel("NOMBRE CARGO");
+	JLabel lblNombreAltaCargo = new JLabel(S150);
 	lblNombreAltaCargo.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreAltaCargo.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreAltaCargo.setBounds(104, 232, 229, 45);
@@ -1171,29 +1177,31 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarMateria.setBackground(SystemColor.activeCaption);
 	menuMateria
 		.addTab(
-			"                             MODIFICAR MATERIA                          ",
-			new ImageIcon(administrador.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
+			S153,
+			new ImageIcon(
+				administrador.class
+					.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelModificarMateria, null);
 
-	JLabel label_34 = new JLabel("Inserte el Codigo de la Materia ");
+	JLabel label_34 = new JLabel(S154);
 	label_34.setHorizontalAlignment(SwingConstants.CENTER);
 	label_34.setFont(new Font("Arial", Font.PLAIN, 20));
 	label_34.setBounds(10, 21, 638, 58);
 	panelModificarMateria.add(label_34);
 
-	JLabel lblListaDeFacultades = new JLabel("LISTA DE FACULTADES");
+	JLabel lblListaDeFacultades = new JLabel(S138);
 	lblListaDeFacultades.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaDeFacultades.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaDeFacultades.setBounds(658, 0, 229, 58);
 	panelModificarMateria.add(lblListaDeFacultades);
 
-	JLabel label_35 = new JLabel("LISTA DE MATERIAS");
+	JLabel label_35 = new JLabel(S155);
 	label_35.setHorizontalAlignment(SwingConstants.CENTER);
 	label_35.setFont(new Font("Arial", Font.BOLD, 20));
 	label_35.setBounds(916, 0, 229, 58);
 	panelModificarMateria.add(label_35);
 
-	JLabel label_36 = new JLabel("CODIGO");
+	JLabel label_36 = new JLabel(S134);
 	label_36.setHorizontalAlignment(SwingConstants.CENTER);
 	label_36.setFont(new Font("Arial", Font.BOLD, 20));
 	label_36.setBackground(Color.BLUE);
@@ -1227,7 +1235,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaFacultadM1.associate(listFacultadModificarMateria,
 		listaFacultadMController1);
 
-	JLabel label_37 = new JLabel("NOMBRE MATERIA");
+	JLabel label_37 = new JLabel(S156);
 	label_37.setHorizontalAlignment(SwingConstants.CENTER);
 	label_37.setFont(new Font("Arial", Font.BOLD, 20));
 	label_37.setBounds(0, 232, 200, 45);
@@ -1240,7 +1248,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFNombreModificarMateria.setBounds(229, 232, 265, 45);
 	panelModificarMateria.add(txtFNombreModificarMateria);
 
-	JLabel lblCodigoFacultadModificarMAteria = new JLabel("CODIGO FACULTAD");
+	JLabel lblCodigoFacultadModificarMAteria = new JLabel(S157);
 	lblCodigoFacultadModificarMAteria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCodigoFacultadModificarMAteria.setFont(new Font("Arial", Font.BOLD,
@@ -1303,14 +1311,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaMateria.setBackground(SystemColor.inactiveCaption);
 	menuMateria
 		.addTab(
-			"                      ALTA MATERIA                         ",
+			S158,
 			new ImageIcon(
 				administrador.class
 					.getResource("/educar/gui/AdminViews/imagenIcon/materiapng.png")),
 			panelAltaMateria, null);
 
-	JLabel lblCartelPresentacionMMateria = new JLabel(
-		"Inserte el Nombre de la Materia  a Guardar");
+	JLabel lblCartelPresentacionMMateria = new JLabel(S159);
 	lblCartelPresentacionMMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelPresentacionMMateria
@@ -1318,14 +1325,14 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	lblCartelPresentacionMMateria.setBounds(10, 29, 652, 58);
 	panelAltaMateria.add(lblCartelPresentacionMMateria);
 
-	lblListaDeFacultadMMateria = new JLabel("LISTA DE FACULTAD");
+	lblListaDeFacultadMMateria = new JLabel(S138);
 	lblListaDeFacultadMMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaDeFacultadMMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	lblListaDeFacultadMMateria.setBounds(668, 0, 229, 58);
 	panelAltaMateria.add(lblListaDeFacultadMMateria);
 
-	JLabel label_39 = new JLabel("LISTA DE MATERIAS");
+	JLabel label_39 = new JLabel(S160);
 	label_39.setHorizontalAlignment(SwingConstants.CENTER);
 	label_39.setFont(new Font("Arial", Font.BOLD, 20));
 	label_39.setBounds(916, 0, 229, 58);
@@ -1347,13 +1354,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaFacultadM.associate(listFacultadAltaMateria,
 		listaFacultadMController2);
 
-	JLabel lblNombreMateria = new JLabel("NOMBRE MATERIA");
+	JLabel lblNombreMateria = new JLabel(S156);
 	lblNombreMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreMateria.setBounds(46, 232, 229, 45);
 	panelAltaMateria.add(lblNombreMateria);
 
-	JLabel lblNombreFacutadMMateria = new JLabel("CODIGO FACULTAD");
+	JLabel lblNombreFacutadMMateria = new JLabel(S157);
 	lblNombreFacutadMMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNombreFacutadMMateria.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreFacutadMMateria.setBounds(46, 301, 229, 45);
@@ -1396,14 +1403,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		.setBackground(SystemColor.activeCaption);
 	menuDedicacionDocente
 		.addTab(
-			"MODIFICAR DEDICACION DOCENTE",
+			S161,
 			new ImageIcon(
 				administrador.class
 					.getResource("/educar/gui/AdminViews/imagenIcon/dedicacion Docente.png")),
 			panelModificarDedicacionDocente, null);
 
-	JLabel lblCartelModificarDedicacionDoncente = new JLabel(
-		"Seleccione los Datos del Docente para Modificar su Dedicacion");
+	JLabel lblCartelModificarDedicacionDoncente = new JLabel(S162);
 	lblCartelModificarDedicacionDoncente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelModificarDedicacionDoncente.setFont(new Font("Arial",
@@ -1412,7 +1418,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarDedicacionDocente
 		.add(lblCartelModificarDedicacionDoncente);
 
-	JLabel lblDniModificarDedicacionDoncente = new JLabel("D.N.I ");
+	JLabel lblDniModificarDedicacionDoncente = new JLabel(S123);
 	lblDniModificarDedicacionDoncente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniModificarDedicacionDoncente.setFont(new Font("Arial", Font.BOLD,
@@ -1429,7 +1435,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDniModificarDedicacionDocente.setBounds(229, 81, 305, 45);
 	panelModificarDedicacionDocente.add(txtFDniModificarDedicacionDocente);
 
-	JLabel lblFacultadModificarDedicacionDoncente = new JLabel("FACULTAD");
+	JLabel lblFacultadModificarDedicacionDoncente = new JLabel(S136);
 	lblFacultadModificarDedicacionDoncente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblFacultadModificarDedicacionDoncente.setFont(new Font("Arial",
@@ -1447,7 +1453,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarDedicacionDocente
 		.add(txtFFacultadModificarDedicacionDocente);
 
-	JLabel lblCargoModificarDedicacionDoncente = new JLabel("CARGO");
+	JLabel lblCargoModificarDedicacionDoncente = new JLabel(S164);
 	lblCargoModificarDedicacionDoncente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCargoModificarDedicacionDoncente.setFont(new Font("Arial",
@@ -1465,8 +1471,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelModificarDedicacionDocente
 		.add(txtFCargoModificarDedicacionDocente);
 
-	JLabel lblDedicacionModificarDedicacionDoncente = new JLabel(
-		"DEDICACION(horas)");
+	JLabel lblDedicacionModificarDedicacionDoncente = new JLabel(S165);
 	lblDedicacionModificarDedicacionDoncente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDedicacionModificarDedicacionDoncente.setFont(new Font("Arial",
@@ -1518,8 +1523,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listControllerMDD).setView(this);
 	listaMDD.associate(listaModificarDedicacionDocente, listControllerMDD);
 
-	JLabel lblCarteListaModificarDedicacionDoncente = new JLabel(
-		"Lista de Docente con su Dedicacion");
+	JLabel lblCarteListaModificarDedicacionDoncente = new JLabel(S166);
 	lblCarteListaModificarDedicacionDoncente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCarteListaModificarDedicacionDoncente.setFont(new Font("Arial",
@@ -1553,14 +1557,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelAltaDedicacionDocente.setBackground(SystemColor.activeCaption);
 	menuDedicacionDocente
 		.addTab(
-			"ALTA DEDICACION DOCENTE",
+			S167,
 			new ImageIcon(
 				administrador.class
 					.getResource("/educar/gui/AdminViews/imagenIcon/dedicacion Docente.png")),
 			panelAltaDedicacionDocente, null);
 
-	JLabel lblCartelAltaDedicacionDocente = new JLabel(
-		"Seleccione los Datos del Docente a dar de Alta su Dedicacion");
+	JLabel lblCartelAltaDedicacionDocente = new JLabel(S168);
 	lblCartelAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelAltaDedicacionDocente
@@ -1568,7 +1571,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	lblCartelAltaDedicacionDocente.setBounds(10, 0, 560, 58);
 	panelAltaDedicacionDocente.add(lblCartelAltaDedicacionDocente);
 
-	JLabel lblCargolAltaDedicacionDocente = new JLabel("CARGO");
+	JLabel lblCargolAltaDedicacionDocente = new JLabel(S164);
 	lblCargolAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCargolAltaDedicacionDocente
@@ -1576,7 +1579,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	lblCargolAltaDedicacionDocente.setBounds(965, 0, 171, 58);
 	panelAltaDedicacionDocente.add(lblCargolAltaDedicacionDocente);
 
-	JLabel lblDniAltaDedicacionDocente = new JLabel("D.N.I ");
+	JLabel lblDniAltaDedicacionDocente = new JLabel(S123);
 	lblDniAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniAltaDedicacionDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -1600,7 +1603,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listControllerCAD).setView(this);
 	listaCAD.associate(listaCargoAltaDedicacionDocente, listControllerCAD);
 
-	JLabel lblFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
+	JLabel lblFacultadAltaDedicacionDocente = new JLabel(S163);
 	lblFacultadAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblFacultadAltaDedicacionDocente.setFont(new Font("Arial", Font.BOLD,
@@ -1616,7 +1619,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFFacultadAltaDedicacionDocente.setBounds(229, 194, 305, 45);
 	panelAltaDedicacionDocente.add(txtFFacultadAltaDedicacionDocente);
 
-	JLabel lblCargoAltaDedicacionDocente = new JLabel("CARGO");
+	JLabel lblCargoAltaDedicacionDocente = new JLabel(S164);
 	lblCargoAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCargoAltaDedicacionDocente.setFont(new Font("Arial", Font.BOLD, 20));
@@ -1631,7 +1634,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFCargoAltaDedicacionDocente.setBounds(229, 311, 305, 45);
 	panelAltaDedicacionDocente.add(txtFCargoAltaDedicacionDocente);
 
-	JLabel lblDedicacionAltaDedicacionDocente = new JLabel("DEDICACION");
+	JLabel lblDedicacionAltaDedicacionDocente = new JLabel(S169);
 	lblDedicacionAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDedicacionAltaDedicacionDocente.setFont(new Font("Arial", Font.BOLD,
@@ -1702,7 +1705,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	// listaDDAD.associate(listaListaDocentesDedicacionAltaDedicacionDocente,
 	// listControllerDDAD);
 
-	JLabel lblCartelFacultadAltaDedicacionDocente = new JLabel("FACULTAD");
+	JLabel lblCartelFacultadAltaDedicacionDocente = new JLabel(S163);
 	lblCartelFacultadAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelFacultadAltaDedicacionDocente.setFont(new Font("Arial",
@@ -1710,7 +1713,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	lblCartelFacultadAltaDedicacionDocente.setBounds(779, 0, 171, 58);
 	panelAltaDedicacionDocente.add(lblCartelFacultadAltaDedicacionDocente);
 
-	JLabel lblCartelDniAltaDedicacionDocente = new JLabel("DNI");
+	JLabel lblCartelDniAltaDedicacionDocente = new JLabel(S170);
 	lblCartelDniAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelDniAltaDedicacionDocente.setFont(new Font("Arial", Font.BOLD,
@@ -1718,8 +1721,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	lblCartelDniAltaDedicacionDocente.setBounds(591, 0, 171, 58);
 	panelAltaDedicacionDocente.add(lblCartelDniAltaDedicacionDocente);
 
-	JLabel lblCartelListaAltaDedicacionDocente = new JLabel(
-		"Lista de Docente con su Dedicacion");
+	JLabel lblCartelListaAltaDedicacionDocente = new JLabel(S166);
 	lblCartelListaAltaDedicacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelListaAltaDedicacionDocente.setFont(new Font("Arial",
@@ -1727,7 +1729,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	lblCartelListaAltaDedicacionDocente.setBounds(591, 362, 545, 38);
 	panelAltaDedicacionDocente.add(lblCartelListaAltaDedicacionDocente);
 
-	JLabel lblEnHorasAltaDedicacionDocente = new JLabel("(en horas)");
+	JLabel lblEnHorasAltaDedicacionDocente = new JLabel(S171);
 	lblEnHorasAltaDedicacionDocente.setBounds(89, 467, 81, 14);
 	panelAltaDedicacionDocente.add(lblEnHorasAltaDedicacionDocente);
 
@@ -1744,14 +1746,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		.setBackground(SystemColor.activeCaption);
 	menuAsignacionDocente
 		.addTab(
-			"ENCARGADO  MATERIA",
+			S172,
 			new ImageIcon(
 				administrador.class
 					.getResource("/educar/gui/AdminViews/imagenIcon/asignacion docente.png")),
 			panelEncargadoAsignacionDocente, null);
 
-	JLabel lblCartelPrincipalEncargadoAsigDocente = new JLabel(
-		"Seleccione la Materia y DocenteEncargado");
+	JLabel lblCartelPrincipalEncargadoAsigDocente = new JLabel(S173);
 	lblCartelPrincipalEncargadoAsigDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelPrincipalEncargadoAsigDocente.setFont(new Font("Arial",
@@ -1760,7 +1761,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelEncargadoAsignacionDocente
 		.add(lblCartelPrincipalEncargadoAsigDocente);
 
-	JLabel lblMateriaEncargadoAsignacionMateria = new JLabel("MATERIA");
+	JLabel lblMateriaEncargadoAsignacionMateria = new JLabel(S174);
 	lblMateriaEncargadoAsignacionMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblMateriaEncargadoAsignacionMateria.setFont(new Font("Arial",
@@ -1779,7 +1780,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelEncargadoAsignacionDocente
 		.add(txtFMateriaEncargadoAsignacionMateria);
 
-	JLabel lblDocenteEncargadoAsignacionMateria = new JLabel("DOCENTE");
+	JLabel lblDocenteEncargadoAsignacionMateria = new JLabel(S175);
 	lblDocenteEncargadoAsignacionMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDocenteEncargadoAsignacionMateria.setFont(new Font("Arial",
@@ -1852,7 +1853,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	txtFDniEncargadoAsignacionMateria.setBounds(229, 308, 305, 45);
 	panelEncargadoAsignacionDocente.add(txtFDniEncargadoAsignacionMateria);
 
-	JLabel lblDniEncargadoAsignacionMateria = new JLabel("D.N.I");
+	JLabel lblDniEncargadoAsignacionMateria = new JLabel(S123);
 	lblDniEncargadoAsignacionMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniEncargadoAsignacionMateria.setFont(new Font("Arial", Font.BOLD,
@@ -1869,7 +1870,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaADController2).setView(this);
 	listaAD2.associate(listaAsignacionDocente2, listaADController2);
 
-	JLabel lblListaDocenteEncargadoAsignacionMateria = new JLabel("DOCENTE");
+	JLabel lblListaDocenteEncargadoAsignacionMateria = new JLabel(S175);
 	lblListaDocenteEncargadoAsignacionMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaDocenteEncargadoAsignacionMateria.setFont(new Font("Arial",
@@ -1878,7 +1879,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelEncargadoAsignacionDocente
 		.add(lblListaDocenteEncargadoAsignacionMateria);
 
-	JLabel lblListaMateriaEncargadoAsignacionMateria = new JLabel("MATERIA");
+	JLabel lblListaMateriaEncargadoAsignacionMateria = new JLabel(S174);
 	lblListaMateriaEncargadoAsignacionMateria
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaMateriaEncargadoAsignacionMateria.setFont(new Font("Arial",
@@ -1888,8 +1889,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelEncargadoAsignacionDocente
 		.add(lblListaMateriaEncargadoAsignacionMateria);
 
-	JLabel lblCartelACargoEncargadoAsignacionMateria = new JLabel(
-		"(a cargo)");
+	JLabel lblCartelACargoEncargadoAsignacionMateria = new JLabel(S176);
 	lblCartelACargoEncargadoAsignacionMateria.setBounds(90, 229, 61, 14);
 	panelEncargadoAsignacionDocente
 		.add(lblCartelACargoEncargadoAsignacionMateria);
@@ -1908,14 +1908,13 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 		.setBackground(SystemColor.activeCaption);
 	menuAsignacionDocente
 		.addTab(
-			"DESIGNACION MATERIA",
+			S177,
 			new ImageIcon(
 				administrador.class
 					.getResource("/educar/gui/AdminViews/imagenIcon/asignacion docente.png")),
 			panelDesignacionAsignacionDocente, null);
 
-	JLabel lblCartelPrincDesignacionAsignacionDocente = new JLabel(
-		"Seleccione la Materia y Docente para asignarlo a una Materia  ");
+	JLabel lblCartelPrincDesignacionAsignacionDocente = new JLabel(S178);
 	lblCartelPrincDesignacionAsignacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelPrincDesignacionAsignacionDocente.setFont(new Font("Arial",
@@ -1924,7 +1923,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelDesignacionAsignacionDocente
 		.add(lblCartelPrincDesignacionAsignacionDocente);
 
-	JLabel lblMateriaDesignacionAsignacionDocente = new JLabel("MATERIA");
+	JLabel lblMateriaDesignacionAsignacionDocente = new JLabel(S174);
 	lblMateriaDesignacionAsignacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblMateriaDesignacionAsignacionDocente.setFont(new Font("Arial",
@@ -1943,7 +1942,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelDesignacionAsignacionDocente
 		.add(txtFMateriaDesignacionAsignacionDocente);
 
-	JLabel lblDocenteDesignacionAsignacionDocente = new JLabel("DOCENTE");
+	JLabel lblDocenteDesignacionAsignacionDocente = new JLabel(S175);
 	lblDocenteDesignacionAsignacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDocenteDesignacionAsignacionDocente.setFont(new Font("Arial",
@@ -2017,7 +2016,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelDesignacionAsignacionDocente
 		.add(txtFDniDesignacionAsignacionDocente);
 
-	JLabel lblDniDesignacionAsignacionDocente = new JLabel("D.N.I");
+	JLabel lblDniDesignacionAsignacionDocente = new JLabel(S123);
 	lblDniDesignacionAsignacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDniDesignacionAsignacionDocente.setFont(new Font("Arial", Font.BOLD,
@@ -2035,8 +2034,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	((IController) listaADController1).setView(this);
 	listaAD1.associate(listaAsignacionDocente, listaADController1);
 
-	JLabel lblListaDocenteDesignacionAsignacionDocente = new JLabel(
-		"DOCENTE");
+	JLabel lblListaDocenteDesignacionAsignacionDocente = new JLabel(S175);
 	lblListaDocenteDesignacionAsignacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaDocenteDesignacionAsignacionDocente.setFont(new Font("Arial",
@@ -2045,8 +2043,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelDesignacionAsignacionDocente
 		.add(lblListaDocenteDesignacionAsignacionDocente);
 
-	JLabel lblListaMateriaDesignacionAsignacionDocente = new JLabel(
-		"MATERIA");
+	JLabel lblListaMateriaDesignacionAsignacionDocente = new JLabel(S174);
 	lblListaMateriaDesignacionAsignacionDocente
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaMateriaDesignacionAsignacionDocente.setFont(new Font("Arial",
@@ -2056,8 +2053,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	panelDesignacionAsignacionDocente
 		.add(lblListaMateriaDesignacionAsignacionDocente);
 
-	JLabel lblCartelAAsignarDesignacionAsignacionDocente = new JLabel(
-		"(a designar)");
+	JLabel lblCartelAAsignarDesignacionAsignacionDocente = new JLabel(S179);
 	lblCartelAAsignarDesignacionAsignacionDocente
 		.setBounds(90, 229, 75, 14);
 	panelDesignacionAsignacionDocente
@@ -2067,7 +2063,7 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 	listaDocenteLigadosMateria.setBounds(591, 350, 545, 235);
 	panelDesignacionAsignacionDocente.add(listaDocenteLigadosMateria);
 
-	lblDocenteLigadoMateria = new JLabel("Docentes Ligados  a Materias");
+	lblDocenteLigadoMateria = new JLabel(S180);
 	lblDocenteLigadoMateria.setHorizontalAlignment(SwingConstants.CENTER);
 	lblDocenteLigadoMateria.setFont(new Font("Arial", Font.BOLD, 18));
 	lblDocenteLigadoMateria.setBounds(595, 308, 541, 45);
