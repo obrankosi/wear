@@ -7,6 +7,11 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author grupo wear
+ * Modelo {@link Resolucion}
+ *
+ */
 public class Resolucion {
 
     private static JPA jpa = new JPA();
@@ -176,6 +181,9 @@ public class Resolucion {
 	return result;
     }
 
+    /**
+     * @return true ssi pertence 
+     */
     public boolean pertenece() {
     	 
     	String[] fieldNames = { "dni_alumno", "cod_actividad" };
@@ -194,6 +202,11 @@ public class Resolucion {
 	return false;
     }
 
+    /**
+     * @param dniAlumno
+     * @param codActividad
+     * @return {@link String} nota de alumno
+     */
     public String getNota(String dniAlumno, String codActividad) {
 	String[] fieldNames = { "dni_alumno", "cod_actividad" };
 	String[] values = { dniAlumno, codActividad };
@@ -210,6 +223,11 @@ public class Resolucion {
 	}
 	return "0";
     }
+    /**
+     * @param dniAlumno
+     * @param codActividad
+     * @return {@link String} fecha de la actividad
+     */
     public String getFecha(String dniAlumno,String codActividad) {
 		String[] fieldNames = { "dni_alumno", "cod_actividad" };
 		String[] values = { dniAlumno, codActividad };

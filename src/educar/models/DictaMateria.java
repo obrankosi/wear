@@ -8,7 +8,8 @@ import java.util.LinkedList;
 import educar.db.JPA;
 
 /**
- * @author edu
+ * @author grupo wear
+ * Modelo {@link DictaMateria}
  * 
  */
 public class DictaMateria {

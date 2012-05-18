@@ -7,6 +7,10 @@ import java.util.LinkedList;
 
 import educar.db.JPA;
 
+/**
+ * @author grupo wear
+ *Modelo {@link TieneActividad}
+ */
 public class TieneActividad {
 
     private static ResultSet rst;
