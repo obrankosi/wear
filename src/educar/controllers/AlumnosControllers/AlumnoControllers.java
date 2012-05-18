@@ -1,10 +1,12 @@
-package educar.controllers;
+package educar.controllers.AlumnosControllers;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+import educar.controllers.IController;
+import educar.controllers.IListController;
 import educar.gui.IView;
 import educar.gui.AlumnoView.AlumnoView;
 import educar.languaje.defaultLanguaje;

@@ -1,5 +1,6 @@
-package educar.controllers;
+package educar.controllers.DocenteControllers;
 
+import educar.controllers.IController;
 import educar.gui.IView;
 import educar.gui.DocenteView.DocenteView;
 import educar.languaje.defaultLanguaje;

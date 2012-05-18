@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.List;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -22,12 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import educar.controllers.AlumnoControllers;
-import educar.controllers.AlumnoListController;
-import educar.controllers.AlumnoListSolucionController;
-import educar.controllers.AlumnosViewController;
 import educar.controllers.IController;
 import educar.controllers.IListController;
+import educar.controllers.AlumnosControllers.AlumnoControllers;
+import educar.controllers.AlumnosControllers.AlumnoListController;
+import educar.controllers.AlumnosControllers.AlumnoListSolucionController;
+import educar.controllers.AlumnosControllers.AlumnosViewController;
 import educar.gui.IView;
 import educar.gui.Listener.AlumnoListListener;
 import educar.gui.Listener.AlumnoListener;

@@ -12,12 +12,11 @@ import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Docente;
 
 /**
- * @author grupo wear
- *controlador de los docente como administrador
+ * @author grupo wear controlador de los docente como administrador
  */
 public class gestionDocenteController implements IController, defaultLanguaje,
 	IListController {
-    
+
     private administrador view;
     private static Docente teacher = null;
     private static LinkedList<String> teachersList;
@@ -47,7 +46,7 @@ public class gestionDocenteController implements IController, defaultLanguaje,
     }
 
     /**
-     *busca en docente 
+     *busca en docente
      */
     private void searchTeacherInDbase() {
 	teacher = Docente.getDocente(view.getDniModif_D());
@@ -66,7 +65,7 @@ public class gestionDocenteController implements IController, defaultLanguaje,
     }
 
     /**
-     *borra docente 
+     *borra docente
      */
     private void deletTeacher() {//
 	searchTeacherInDbase();
@@ -79,42 +78,61 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	}
     }
 
-
     /**
-     *guarda docete 
+     *guarda docete
      */
     private void AddTeacher() {
 	if (view.fieldsIsOkAlta_D()) {// si no ingreso algun campo no permite
 	    // guardad
-	    Docente docente = new Docente(view.getDniAlta_D(), view
-		    .getNombreAlta_D(), view.getApellidoAlta_D(), view
-		    .getFechaAlta_D(), view.getTelefonoAlta_D(), view
-		    .getDireccionAlta_D());
-	    if (docente.save()) {
+	    String telefono = view.getTelefonoAlta_D().trim();
+	    String fecha = view.getFechaAlta_D().trim();
+	    String dniDocente = view.getDniAlta_D().trim();
+	    boolean fechaOk = FuncionesAuxiliares.correctDateFormat(fecha);
+	    boolean dniOk = FuncionesAuxiliares.hasAllNumbers(dniDocente);
+	    boolean telOk = FuncionesAuxiliares.hasAllNumbers(telefono);
+	    if (fechaOk && dniOk && telOk) {
+		Docente docente = new Docente(dniDocente, view
+			.getNombreAlta_D(), view.getApellidoAlta_D(), fecha,
+			telefono, view.getDireccionAlta_D());
+		if (docente.save()) {
+		    view
+			    .present("docente agregado correctamente. Se creo el Usuario para docente");
+		} else {
+		    view.present("verifique los datos ingresados sean validos");
+		}
+	    } else
 		view
-			.present("docente agregado correctamente. Se creo el Usuario para docente");
-	    } else {
-		view.present("verifique los datos ingresados sean validos");
-	    }
+			.present("ingreso mal el campo Dni o Telefono (NUMEROS) o Fecha (aaaa-mm-dd)");
 	} else
 	    view.present("faltan completar campos");
     }
 
     /**
-     *Modifica docente 
+     *Modifica docente
      */
     private void modifyTeacher() {
 	if (teacher != null) {
-	    String[] values = { view.getDniModif_D(),
-		    view.getApellidoModif_D(), view.getNombreModif_D(),
-		    view.getFechaModif_D(), view.getTelefonoModif_D(),
-		    view.getDireccionModif_D() };
-	    try {
-		teacher.update(values, teacher.getDni());
-		view.present("actualizacion realizada");
-	    } catch (SQLException e) {
-		view.present("NO se puede actualizar");
+	    String telefono = view.getTelefonoModif_D().trim();
+	    String fecha = view.getFechaModif_D().trim();
+	    String dniDocente = view.getDniModif_D().trim();
+	    boolean fechaOk = FuncionesAuxiliares.correctDateFormat(fecha);
+	    boolean dniOk = FuncionesAuxiliares.hasAllNumbers(dniDocente);
+	    boolean telOk = FuncionesAuxiliares.hasAllNumbers(telefono);
+	    if (fechaOk && dniOk && telOk) {
+		String[] values = { dniDocente, view.getApellidoModif_D(),
+			view.getNombreModif_D(), fecha, telefono,
+			view.getDireccionModif_D() };
+		try {
+		    teacher.update(values, teacher.getDni());
+		    view.present("actualizacion realizada");
+		} catch (SQLException e) {
+		    view.present("NO se puede actualizar");
+		}
+	    } else {
+		view
+			.present("ingreso mal el campo Dni o Telefono (NUMEROS) o Fecha (aaaa-mm-dd)");
 	    }
+
 	} else {
 	    view.present("el docente no existe");
 	}
@@ -139,5 +157,5 @@ public class gestionDocenteController implements IController, defaultLanguaje,
     public void setView(IView view) {
 	this.view = (administrador) view;
     }
-    
+
 }

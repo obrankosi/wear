@@ -12,8 +12,7 @@ import educar.languaje.defaultLanguaje;
 import educar.models.AdminModels.Alumno;
 
 /**
- * @author grupo wear
- *controlador de los alumnos como administrador
+ * @author grupo wear controlador de los alumnos como administrador
  */
 public class gestionAlumnosController implements IController, defaultLanguaje,
 	IListController {
@@ -26,7 +25,6 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
     public void process(String model) {
 	if (model.compareTo(ADD) == 0) {
 	    AddStudent();
-	    view.deleteViewFieldsAlta_A();
 	    showStudentInList();
 	}
 	if (model.compareTo(DELETE) == 0) {
@@ -48,7 +46,7 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
     }
 
     /**
-     *Busca alumnos 
+     *Busca alumnos
      */
     private void searchAStudentInDbase() {
 	student = Alumno.getAlumno(view.getDniMod_A());
@@ -88,44 +86,66 @@ public class gestionAlumnosController implements IController, defaultLanguaje,
     }
 
     /**
-     *Agrega alumnos 
+     *Agrega alumnos
      */
     private void AddStudent() {
 	if (view.fieldsIsOkAlta_A()) {
 	    // guardad
-	    Alumno alumno = new Alumno(view.getDniAlta_A(), view
-		    .getNameAlta_A(), view.getLastnameAlta_A(), view
-		    .getFechaNacAlta_A(), view.getTelefonoAlta_A(), view
-		    .getDireccionAlta_A());
-	    if (alumno.save()) {
-		view
-			.present("alumno agregado correctamente. Se creo el Usuario para el alumno ");
-
+	    String telefono = view.getTelefonoAlta_A().trim();
+	    String fecha = view.getFechaNacAlta_A().trim();
+	    String dniAlumno = view.getDniAlta_A().trim();
+	    boolean fechaOk = FuncionesAuxiliares.correctDateFormat(fecha);
+	    boolean dniOk = FuncionesAuxiliares.hasAllNumbers(dniAlumno);
+	    boolean telOk = FuncionesAuxiliares.hasAllNumbers(telefono);
+	    if (fechaOk && dniOk && telOk) {
+		Alumno alumno = new Alumno(dniAlumno, view.getNameAlta_A(),
+			view.getLastnameAlta_A(), fecha, telefono, view
+				.getDireccionAlta_A());
+		if (alumno.save()) {
+		    view
+			    .present("alumno agregado correctamente. Se creo el Usuario para el alumno ");
+		    view.deleteViewFieldsAlta_A();
+		} else {
+		    view.present("verifique los datos ingresados sean validos");
+		}
 	    } else {
-		view.present("verifique los datos ingresados sean validos");
+		view
+			.present("ingreso mal el campo Dni o Tele (NUMEROS) o Fecha (aaaa-mm-dd)");
 	    }
 	} else
 	    view.present("faltan completar campos");
     }
 
     /**
-     *Modifica alumno 
+     *Modifica alumno
      */
     private void modifyStudent() {
 	if (student != null) {
-	    String[] values = { view.getDniMod_A(), view.getLastnameMod_A(),
-		    view.getNameMod_A(), view.getFechaNacMod_A(),
-		    view.getTelefonoMod_A(), view.getDireccionMod_A() };
-	    try {
-		Alumno.update(values, student.getDni());
-		view.present("acutalizacion realizada");
-	    } catch (SQLException e) {
-		e.printStackTrace();
-		view.present("NO se pude actualizar");
+	    String telefono = view.getTelefonoMod_A().trim();
+	    String fecha = view.getFechaNacMod_A().trim();
+	    String dniAlumno = view.getDniMod_A().trim();
+	    boolean fechaOk = FuncionesAuxiliares.correctDateFormat(fecha);
+	    boolean dniOk = FuncionesAuxiliares.hasAllNumbers(dniAlumno);
+	    boolean telOk = FuncionesAuxiliares.hasAllNumbers(telefono);
+	    if (fechaOk && dniOk && telOk) {
+		String[] values = { dniAlumno, view.getLastnameMod_A(),
+			view.getNameMod_A(), fecha, telefono,
+			view.getDireccionMod_A() };
+		try {
+		    Alumno.update(values, student.getDni());
+		    view.present("acutalizacion realizada");
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		    view.present("NO se pude actualizar");
+		}
+	    } else {
+		view
+			.present("ingreso mal el campo Dni o Tele (NUMEROS) o Fecha (aaaa-mm-dd)");
 	    }
 	} else {
 	    view.present("el alumno no existe");
 	}
+
     }
 
     private void showStudentInList() {

@@ -275,8 +275,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
 
 	menuCargo = new JTabbedPane(JTabbedPane.TOP);
 	menuCargo.setBounds(0, 0, 1151, 666);
-    menuCargo.setVisible(false);
-	
+	menuCargo.setVisible(false);
+
 	menuDedicacionDocente = new JTabbedPane(JTabbedPane.TOP);
 	menuDedicacionDocente.setBounds(0, 0, 1151, 666);
 	menuDedicacionDocente.setVisible(false);
@@ -2575,8 +2575,8 @@ public class administrador extends JFrame implements IView, defaultLanguaje {
     }
 
     public boolean camposVaciosAltaMateria() {
-	return (getNombreAltaCargo().compareTo("") == 0 || getCodigoFacultadAltaMateria()
-		.compareTo("") == 0 || getAddNameTF_M().compareTo("")==0);
+	return (getCodigoFacultadAltaMateria().compareTo("") == 0 || getAddNameTF_M()
+		.compareTo("") == 0);
     }
 
     // ||||||||||||||||GET & SET CARGO||||||||||||||||||||||||||||//

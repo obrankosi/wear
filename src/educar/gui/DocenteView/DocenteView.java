@@ -21,13 +21,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import educar.controllers.DocenteController;
-import educar.controllers.DocenteCorregirController;
-import educar.controllers.DocenteCorregirListResolucionesController;
-import educar.controllers.DocenteListaActividadesBorrar;
-import educar.controllers.DocenteViewController;
 import educar.controllers.IController;
 import educar.controllers.IListController;
+import educar.controllers.DocenteControllers.DocenteController;
+import educar.controllers.DocenteControllers.DocenteCorregirController;
+import educar.controllers.DocenteControllers.DocenteCorregirListResolucionesController;
+import educar.controllers.DocenteControllers.DocenteListaActividadesBorrar;
+import educar.controllers.DocenteControllers.DocenteViewController;
 import educar.gui.IView;
 import educar.gui.Listener.DocenteListListener;
 import educar.gui.Listener.DocenteListener;
