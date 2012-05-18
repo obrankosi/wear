@@ -11,8 +11,7 @@ import educar.models.AdminModels.FacultadNotFound;
 import educar.models.AdminModels.Subject;
 
 /**
- * @author edu
- * 
+ * @author grupo wear Modelo {@link Actividad}
  */
 public class Actividad {
 
@@ -35,7 +34,6 @@ public class Actividad {
 	this.setCodigoMateria(codMateria);
     }
 
-  
     /**
      * @param descripcionActiv
      * @param codMateria
@@ -250,7 +248,7 @@ public class Actividad {
 	}
 	return codMateria;
     }
-    
+
     public static String codigoUltimaIngresada() {
 	String codigo = new String();
 	JPA jpa = new JPA();
@@ -264,6 +262,5 @@ public class Actividad {
 	}
 	return codigo;
     }
-
 
 }
