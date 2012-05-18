@@ -222,7 +222,19 @@ public class Subject implements Comparable<Subject> {
 	} else
 	    return 1;
     }
-    
+
+    public static  boolean contenido(LinkedList<Subject> list, Subject materia) {
+	boolean encontre = false;
+	Subject newMateria;
+	for (int i = 0; i < list.size() && !encontre; i++) {
+	    newMateria = list.get(i);
+	    if (newMateria.compareTo(materia) == 0)
+		encontre = true;
+	}
+
+	return true;
+    }
+
     private static Subject getSubjectByCode(String codMateria)
 	    throws SubjectNotFound {
 
@@ -284,5 +296,5 @@ public class Subject implements Comparable<Subject> {
     public void setNullDocente() {
 	this.responsableTeacher = null;
     }
-    
+
 }
