@@ -64,10 +64,10 @@ public class DedicacionDocenteController implements IController,
 	    newArg = new DedicacionDocente(codFacultad, dniDocente, codCargo,
 		    hsDedicacion);
 	    if (newArg.delete()) {
-		view.present("Borrado exitoso");
+		view.present(BORRADOEXITOSO);
 	    }
 	} else {
-	    view.present("faltan ingresar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	}
 
     }
@@ -86,13 +86,13 @@ public class DedicacionDocenteController implements IController,
 	    newArg = new DedicacionDocente(codFacultad, dniDocente, codCargo,
 		    hsDedicacion);
 	    if (newArg.update()) {
-		view.present("Actualizacion correcta");
+		view.present(ACTUALIZACIONEXITOSO);
 	    } else {
-		view.present("no se actualizaron los datos");
+		view.present(ACTUALIZACIONFALLIDA);
 	    }
 
 	} else {
-	    view.present("faltan ingresar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	}
     }
 
@@ -114,20 +114,20 @@ public class DedicacionDocenteController implements IController,
 		    hsDedicacion);
 	    
 	    if (DedicacionDocente.containtDedicacionDocente(newArg)) {
-		view.present("el docente ya posee cargo");
+		view.present(S20);
 	    } else {
 		if (DedicacionDocente.containtDedicacionCargo(newArg)) {
-		    view.present("el cargo ya esta ocupado");
+		    view.present(S21);
 		} else {
 		    // **** guardar ****
 		    if (newArg.save()) {
-			view.present("guardado exitoso");
+			view.present(CARGADOEXITOSO);
 		    }
 		}
 	    }
 
 	} else {
-	    view.present("faltan ingresar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	}
 
     }
@@ -137,7 +137,7 @@ public class DedicacionDocenteController implements IController,
 	    docenteConCargo = DedicacionDocente.listDedicacion();
 	    view.setListDedicacionDocenteAlta(docenteConCargo);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de los cargos");
+	    view.present(ERROR);
 	}
     }
 

@@ -58,7 +58,7 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	    view.setFechaModif_D(teacher.getfN());
 	    view.setTelefonoModif_D(teacher.getTel());
 	} else {
-	    view.present("El dni del doncente no existe ");
+	    view.present(S29);
 	    view.deleteViewFieldsMod_D();
 	}
 
@@ -71,10 +71,10 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	searchTeacherInDbase();
 	if (!(view.getDniModif_D().compareTo("") == 0)) {
 	    if (teacher.destroy()) {
-		view.present("borrado del docente exitoso");
+		view.present(S30);
 	    } else
 		view
-			.present("No se puede borrar el docente verifique que no tenga materia a cargos o tareas");
+			.present(S31);
 	}
     }
 
@@ -96,16 +96,16 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 			telefono, view.getDireccionAlta_D());
 		if (docente.save()) {
 		    view
-			    .present("docente agregado correctamente. Se creo el Usuario para docente");
+			    .present(S32);
 		    view.deleteViewFieldsMod_D();
 		} else {
-		    view.present("verifique los datos ingresados sean validos");
+		    view.present(S33);
 		}
 	    } else
 		view
-			.present("ingreso mal el campo Dni o Telefono (NUMEROS) o Fecha (aaaa-mm-dd)");
+			.present(S27);
 	} else
-	    view.present("faltan completar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
     }
 
     /**
@@ -125,17 +125,17 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 			view.getDireccionModif_D() };
 		try {
 		    teacher.update(values, teacher.getDni());
-		    view.present("actualizacion realizada");
+		    view.present(ACTUALIZACIONEXITOSO);
 		} catch (SQLException e) {
-		    view.present("NO se puede actualizar");
+		    view.present(ACTUALIZACIONFALLIDA);
 		}
 	    } else {
 		view
-			.present("ingreso mal el campo Dni o Telefono (NUMEROS) o Fecha (aaaa-mm-dd)");
+			.present(S27);
 	    }
 
 	} else {
-	    view.present("el docente no existe");
+	    view.present(S34);
 	}
     }
 
@@ -144,7 +144,7 @@ public class gestionDocenteController implements IController, defaultLanguaje,
 	    teachersList = Docente.ListDocente();
 	    view.setListDocente_ABM(teachersList);
 	} catch (SQLException e) {
-	    view.present("no entro por la lista de alumnos");
+	    view.present(ERROR);
 	}
     }
 

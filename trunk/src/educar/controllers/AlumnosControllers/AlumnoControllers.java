@@ -61,13 +61,11 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	return reso.getNota(getCodigoAlumno(), codActividad);
     }
 
-    
     public static String getSolucion(String codActividad) {
-		Resolucion solucion = new Resolucion();
-		return solucion.getSolucion(getCodigoAlumno(), codActividad);
-	}
+	Resolucion solucion = new Resolucion();
+	return solucion.getSolucion(getCodigoAlumno(), codActividad);
+    }
 
-    
     /**
      *materias a las que se puede inscribir un alumno
      */
@@ -96,26 +94,28 @@ public class AlumnoControllers implements IController, defaultLanguaje,
      * Activiadades del alumno
      */
     public static void showActividadInList() {// / mostrar las actividades que
-		LinkedList<String> actividadListAux = null; // tieneun// alumno dado
-		actividadListAux = TieneActividad.listaActividadesAlumnos(getCodigoAlumno());
-	      String materia = null;               
-		actividadList= new LinkedList<String>();
-		if (actividadListAux != null){
-			for (int i = 0; i < actividadListAux.size(); i++) {
-			try {
-				materia =Subject.getSubject(Actividad.getCodMateriaActividad(actividadListAux.get(i))).getName();
-			} catch (ActividadNotFound e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
-			actividadList.add("Nro Actividad: "+actividadListAux.get(i)+" | "+"materia: "+materia);
-		
+	LinkedList<String> actividadListAux = null; // tieneun// alumno dado
+	actividadListAux = TieneActividad
+		.listaActividadesAlumnos(getCodigoAlumno());
+	String materia = null;
+	actividadList = new LinkedList<String>();
+	if (actividadListAux != null) {
+	    for (int i = 0; i < actividadListAux.size(); i++) {
+		try {
+		    materia = Subject.getSubject(
+			    Actividad.getCodMateriaActividad(actividadListAux
+				    .get(i))).getName();
+		} catch (ActividadNotFound e) {
+		    e.printStackTrace();
 		}
-		}
-		view.setListaActividad(actividadList);
+		actividadList.add(S48 + actividadListAux.get(i) + S11 + S49
+			+ materia);
 
+	    }
 	}
+	view.setListaActividad(actividadList);
 
+    }
 
     /**
      *inscribe alumno en una materia
@@ -126,16 +126,15 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	    if (!cursa.pertenece()) { // si en la materia q quiere incribirse ya
 		// esta incripto
 		if (cursa.save()) {
-		    view.present("Incripto correctamente Correctamente");
+		    view.present(S50);
 		} else {
-		    view
-			    .present("verifique los  datos ingresados sean validos");
+		    view.present(S51);
 		}
 	    } else {
-		view.present("Usted ya esta incripto en Dicha Materia");
+		view.present(S52);
 	    }
 	} else {
-	    view.present("faltan completar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	}
     }
 
@@ -160,8 +159,8 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	if (!(view.getSolucionActividad().compareTo("") == 0)) {
 	    if (!(getDniDocente().compareTo("") == 0)) {
 		Date fecha = new Date();
-		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat formato2 = new SimpleDateFormat("H:mm:ss");
+		SimpleDateFormat formato = new SimpleDateFormat(S53);
+		SimpleDateFormat formato2 = new SimpleDateFormat(S54);
 
 		Resolucion res = new Resolucion(formato2.format(fecha), formato
 			.format(fecha), getDniDocente(),
@@ -170,23 +169,21 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 		if (!res.pertenece()) {
 
 		    if (res.save()) {
-			view.present("Resolucion subida Correctamente");
+			view.present(S55);
 		    } else {
-			view
-				.present("verifique los datos ingresados sean validos");
+			view.present(S51);
 		    }
 		} else {
 		    Resolucion fecha1 = new Resolucion();
-		    view
-			    .present("Usted ya subio una resolucion de esta Actividad el dia : "
-				    + fecha1.getFecha(getCodigoAlumno(), view
-					    .getCodActividad()));
+		    view.present(S56
+			    + fecha1.getFecha(getCodigoAlumno(), view
+				    .getCodActividad()));
 		}
 	    } else {
-		view.present("por favor selecciones una actividad");
+		view.present(S57);
 	    }
 	} else {
-	    view.present("Faltar Completar Campo Resolucion");
+	    view.present(S58);
 	}
     }
 
@@ -203,6 +200,4 @@ public class AlumnoControllers implements IController, defaultLanguaje,
 	}
     }
 
-	
-	
 }

@@ -58,12 +58,12 @@ public class AsignacionDocenteController implements IController,
 		    docente, materia);
 	    if (dicta != null) {
 		dicta.delete();
-		view.present("Borrado exitoso");
+		view.present(BORRADOEXITOSO);
 	    } else
-		view.present("El docente : " + docente
-			+ " No dicta esta materia ");
+		view.present(S1 + docente
+			+ S2);
 	} else
-	    view.present("falta completar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	view.setVacioAsignacionDocente();
     }
 
@@ -79,12 +79,12 @@ public class AsignacionDocenteController implements IController,
 	    if (dicta == null) {
 		dicta = new AsignacionDocente(materia, docente);
 		dicta.save();
-		view.present("Asignacion cargada");
+		view.present(S3);
 	    } else
-		view.present("El docente : " + docente
-			+ " Ya esta Asignado a esta materia ");
+		view.present(S1 + docente
+			+ S4);
 	} else
-	    view.present("falta completar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	view.setVacioAsignacionDocente();
     }
 
@@ -97,17 +97,17 @@ public class AsignacionDocenteController implements IController,
 	    if (materia.getRTeacher() != null) {
 		materia.setNullDocente();
 		try {
-		    materia.updateNullDni("dni_docente = null");
+		    materia.updateNullDni(S5);
 		    view
-			    .present("el borrado del docente encargado fue exitoso");
+			    .present(S6);
 		} catch (SQLException e) {
 		    view
-			    .present("el borrado del docente encargado No se puedo realizar ");
+			    .present(S7);
 		}
 	    }
 	    view.setVacioAsignacionDocente();
 	} else {
-	    view.present("no hay docente que borrar");
+	    view.present(S8);
 	}
 
     }
@@ -121,13 +121,13 @@ public class AsignacionDocenteController implements IController,
 	if (!view.camposVaciosEncargadoMateria()) {// true ssi campos vacios
 	    if (materia.getRTeacher() != null) {
 		view
-			.present("la materia ya tiene docente encargado, borrelo primero y luego podra asignarle uno nuevo");
+			.present(S9);
 	    } else {
 		// materia que no tiene docente encargado
 		materia.setRTeacher(view.getDniAsignacionDocenteEncargado());
 		try {
 		    materia.update();
-		    view.present("Cargado Exitoso");
+		    view.present(CARGADOEXITOSO);
 		    asignoOk = true;
 		} catch (SQLException e) {
 		}
@@ -135,7 +135,7 @@ public class AsignacionDocenteController implements IController,
 	    // IMPORTANTE PARA EL FUNCIONAMIENTO VACIAR LOS CAMPOS
 	    view.setVacioAsignacionDocente();
 	} else {
-	    view.present("Faltan ingresar camapos ");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	}
 	if (asignoOk) {
 	    listaDocenteLigados(materia.getCode());
@@ -149,8 +149,8 @@ public class AsignacionDocenteController implements IController,
 	Docente newDocente;
 	for (int i = 0; i < docentesLigados.size(); i++) {
 	    newDocente = Docente.getDocente(docentes.get(i));
-	    newArgs = ("dni: " + docentes.get(i) + " | " + "nombre : "
-		    + newDocente.getName() + " | " + " apellido: " + newDocente
+	    newArgs = (S10 + docentes.get(i) + S11 + S12
+		    + newDocente.getName() + S11 + S13 + newDocente
 		    .getLastName());
 	    result.add(newArgs);
 	}
@@ -184,7 +184,7 @@ public class AsignacionDocenteController implements IController,
 	    materia = Subject.getSubject(FuncionesAuxiliares.idString(item));
 	    listaDocenteLigados(FuncionesAuxiliares.idString(item));
 	    if (materia.getRTeacher() != null) {
-		view.present("Atencion la materia tiene docente encargado");
+		view.present(S14);
 		view.setDniAsignacionDocenteEncargado(materia.getRTeacher());
 		view.setDocenteAsignacionDocenteEncargado("");
 	    } else {

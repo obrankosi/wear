@@ -20,8 +20,8 @@ import educar.models.userNotFound;
 import educar.models.AdminModels.Subject;
 
 /**
- * @author grupo wear
- *Controlador de la historia corregir como docente actividades
+ * @author grupo wear Controlador de la historia corregir como docente
+ *         actividades
  */
 public class DocenteCorregirController implements IController, defaultLanguaje,
 	IListController {
@@ -59,7 +59,7 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	if (!resoluicones.isEmpty()) {
 	    view.setListResoluciones(resoluicones);
 	} else {
-	    view.present("la actividad no tiene resoluciones cargadas");
+	    view.present(S67);
 	    view.setListResoluciones(resoluicones);
 	}
     }
@@ -102,7 +102,7 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	    materiasDicta.clear();
 	    for (int i = 0; i < listAct.size(); i++) {
 		act = listAct.get(i);
-		newArg = ("act_nro: " + act.getCodigoActividad() + " | " + getInfoMateria(
+		newArg = (S64 + act.getCodigoActividad() + S11 + getInfoMateria(
 			materiasEncargado, act.getCodigoMateria()));
 		materiasDicta.add(newArg);
 	    }
@@ -112,14 +112,15 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
     }
 
     /**
-     * @param codRes {@link String}
+     * @param codRes
+     *            {@link String}
      */
-    public static void setCodResolucion(String codRes){
+    public static void setCodResolucion(String codRes) {
 	codResolucion = codRes;
     }
-    
+
     /**
-     *Carga solucion 
+     *Carga solucion
      */
     private void cargarSolucion() {
 	if (!view.algunCampoVacioResolucion()) {
@@ -133,16 +134,16 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	    if (resolucion != null) {
 		// no se cargo la resolucion
 		if (resolucion.getResolucion().compareTo("") == 0) {
-		    view.present("El alumno todavia no cargo la solucion");
+		    view.present(S68);
 		    // resolucion cargada
 		} else {
 		    resolucion.setNota(notaResolucion);
 		    resolucion.update();
-		    view.present("Se a cargado la nota");
+		    view.present(S69);
 		}
 	    }
 	} else {
-	    view.present("faltan ingresar campos");
+	    view.present(FALTANCOMPLETARCAMPOS);
 	}
     }
 
@@ -155,7 +156,6 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	}
     }
 
-    
     /**
      * @param codActividad
      * @return resoluciones de una actividad
@@ -168,9 +168,9 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	resoluciones = Resolucion.getResolucionesActividad(codActividad);
 	for (int i = 0; i < resoluciones.size(); i++) {
 	    resolucion = resoluciones.get(i);
-	    newString = ("Res_nro: " + resolucion.getCodigoResolucion() + " | "
-		    + "alumno: " + resolucion.getDniAlumno() + " | "
-		    + "hrEnvio: " + resolucion.getHrEnvio() + " | " + "fecha: " + resolucion
+	    newString = (S70 + resolucion.getCodigoResolucion() + S11 + S71
+		    + resolucion.getDniAlumno() + S11 + S72
+		    + resolucion.getHrEnvio() + S11 + S73 + resolucion
 		    .getFecha());
 	    result.add(newString);
 	}
@@ -186,7 +186,7 @@ public class DocenteCorregirController implements IController, defaultLanguaje,
 	for (int i = 0; i < materias.size() && !encontre; i++) {
 	    materia = materias.get(i);
 	    if (materia.getCode().compareTo(codigoM) == 0) {
-		res = ("materia: " + materia.getName() + " | " + "facultad: " + materia
+		res = (S62 + materia.getName() + " | " + S63 + materia
 			.getCodigoFacultad());
 		encontre = true;
 	    }

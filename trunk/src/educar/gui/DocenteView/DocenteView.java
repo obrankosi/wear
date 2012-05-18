@@ -148,34 +148,33 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	panelAddActividadDocente.setBackground(SystemColor.activeCaption);
 	tabbedPane
 		.addTab(
-			"SUBIR ACTIVIDAD",
+			S101,
 			new ImageIcon(
 				DocenteView.class
 					.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelAddActividadDocente, null);
 	panelAddActividadDocente.setLayout(null);
 
-	JLabel lblListaMaterias = new JLabel("LISTA DE MATERIA");
+	JLabel lblListaMaterias = new JLabel(S102);
 	lblListaMaterias.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaMaterias.setFont(new Font("Arial", Font.BOLD, 23));
 	lblListaMaterias.setBounds(896, 29, 265, 42);
 	panelAddActividadDocente.add(lblListaMaterias);
 
-	JLabel lblDescripcionAddActividad = new JLabel("DESCRIPCION ACTIVIDAD");
+	JLabel lblDescripcionAddActividad = new JLabel(S103);
 	lblDescripcionAddActividad.setHorizontalAlignment(SwingConstants.LEFT);
 	lblDescripcionAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDescripcionAddActividad.setBounds(22, 114, 315, 42);
 	panelAddActividadDocente.add(lblDescripcionAddActividad);
 
-	JLabel lblCodigoMAteriaAddActividad = new JLabel("CODIGO MATERIA");
+	JLabel lblCodigoMAteriaAddActividad = new JLabel(S104);
 	lblCodigoMAteriaAddActividad
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCodigoMAteriaAddActividad.setFont(new Font("Arial", Font.BOLD, 20));
 	lblCodigoMAteriaAddActividad.setBounds(61, 384, 276, 49);
 	panelAddActividadDocente.add(lblCodigoMAteriaAddActividad);
 
-	JLabel lblCartelAddActividad = new JLabel(
-		"SELECCIONE LA MATERIA E INGRESE LA ACTIVIDAD A CARGAR");
+	JLabel lblCartelAddActividad = new JLabel(S105);
 	lblCartelAddActividad.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelAddActividad.setFont(new Font("Arial", Font.BOLD, 26));
 	lblCartelAddActividad.setBounds(0, 11, 886, 92);
@@ -219,26 +218,25 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	panelDeleteActividadDocente.setBackground(SystemColor.inactiveCaption);
 	tabbedPane
 		.addTab(
-			"BORRAR ACTIVIDAD",
+			S106,
 			new ImageIcon(
 				DocenteView.class
 					.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")),
 			panelDeleteActividadDocente, null);
 	panelDeleteActividadDocente.setLayout(null);
 
-	JLabel lblListaActividades = new JLabel("LISTA DE ACTIVIDADES");
+	JLabel lblListaActividades = new JLabel(S107);
 	lblListaActividades.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaActividades.setFont(new Font("Arial", Font.BOLD, 23));
 	lblListaActividades.setBounds(896, 29, 265, 42);
 	panelDeleteActividadDocente.add(lblListaActividades);
 
-	JLabel lblDescripcionDeleteActividad = new JLabel(
-		"DESCRIPCION ACTIVIDAD");
+	JLabel lblDescripcionDeleteActividad = new JLabel(S108);
 	lblDescripcionDeleteActividad.setFont(new Font("Arial", Font.BOLD, 20));
 	lblDescripcionDeleteActividad.setBounds(22, 114, 315, 42);
 	panelDeleteActividadDocente.add(lblDescripcionDeleteActividad);
 
-	JLabel lblCodigoMAteriaDeleteActividad = new JLabel("CODIGO MATERIA");
+	JLabel lblCodigoMAteriaDeleteActividad = new JLabel(S109);
 	lblCodigoMAteriaDeleteActividad
 		.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCodigoMAteriaDeleteActividad
@@ -246,8 +244,7 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	lblCodigoMAteriaDeleteActividad.setBounds(61, 384, 276, 49);
 	panelDeleteActividadDocente.add(lblCodigoMAteriaDeleteActividad);
 
-	JLabel lblCartelDeleteActividad = new JLabel(
-		"SELECCIONE LA ACTIVIDAD A ELIMINAR ");
+	JLabel lblCartelDeleteActividad = new JLabel(S110);
 	lblCartelDeleteActividad.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelDeleteActividad.setFont(new Font("Arial", Font.BOLD, 26));
 	lblCartelDeleteActividad.setBounds(0, 11, 886, 92);
@@ -265,10 +262,10 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	listaActividadDocente.setBounds(896, 77, 265, 515);
 	panelDeleteActividadDocente.add(listaActividadDocente);
 
-	 DocenteListListener lBorrarA = new DocenteListListener();
-	 IListController listaActividades = new DocenteListaActividadesBorrar();
-	 ((DocenteListaActividadesBorrar) listaActividades).setView(this);
-	 lBorrarA.associate(listaActividadDocente, listaActividades);
+	DocenteListListener lBorrarA = new DocenteListListener();
+	IListController listaActividades = new DocenteListaActividadesBorrar();
+	((DocenteListaActividadesBorrar) listaActividades).setView(this);
+	lBorrarA.associate(listaActividadDocente, listaActividades);
 
 	btnBorrarDeleteActividad = new JButton(DELETE);
 	btnBorrarDeleteActividad.setFont(new Font("Arial", Font.BOLD, 20));
@@ -297,38 +294,38 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	panelCorregirDocente.setLayout(null);
 	panelCorregirDocente.setVisible(false);
 
-	JLabel lblDniCorregir = new JLabel("D.N.I");
+	JLabel lblDniCorregir = new JLabel(S111);
 	lblDniCorregir.setHorizontalAlignment(SwingConstants.RIGHT);
 	lblDniCorregir.setFont(new Font("Arial", Font.BOLD, 23));
 	lblDniCorregir.setBounds(0, 585, 51, 54);
 	panelCorregirDocente.add(lblDniCorregir);
 
-	JLabel lblNombreAlumno = new JLabel("NOMBRE");
+	JLabel lblNombreAlumno = new JLabel(S112);
 	lblNombreAlumno.setFont(new Font("Arial", Font.BOLD, 20));
 	lblNombreAlumno.setHorizontalAlignment(SwingConstants.RIGHT);
 	lblNombreAlumno.setBounds(250, 585, 88, 54);
 	panelCorregirDocente.add(lblNombreAlumno);
 
-	JLabel lblResolucionCorregir = new JLabel("RESOLUCION");
+	JLabel lblResolucionCorregir = new JLabel(S113);
 	lblResolucionCorregir.setHorizontalAlignment(SwingConstants.LEFT);
 	lblResolucionCorregir.setFont(new Font("Arial", Font.BOLD, 17));
 	lblResolucionCorregir.setBounds(22, 308, 265, 37);
 	panelCorregirDocente.add(lblResolucionCorregir);
 
-	JLabel lblNotaCorregir = new JLabel("NOTA");
+	JLabel lblNotaCorregir = new JLabel(S114);
 	lblNotaCorregir.setHorizontalAlignment(SwingConstants.CENTER);
 	lblNotaCorregir.setFont(new Font("Arial", Font.BOLD, 23));
 	lblNotaCorregir.setBounds(537, 585, 69, 54);
 	panelCorregirDocente.add(lblNotaCorregir);
 
 	JLabel lblCartelCorregir = new JLabel(
-		"SELECCIONE LA RESOLUCION E INGRESE LA NOTA A CARGAR");
+		S115);
 	lblCartelCorregir.setHorizontalAlignment(SwingConstants.CENTER);
 	lblCartelCorregir.setFont(new Font("Arial", Font.BOLD, 24));
 	lblCartelCorregir.setBounds(0, 0, 887, 57);
 	panelCorregirDocente.add(lblCartelCorregir);
 
-	JLabel lblListaMisActividades = new JLabel("MIS ACTIVIDADES");
+	JLabel lblListaMisActividades = new JLabel(S116);
 	lblListaMisActividades.setHorizontalAlignment(SwingConstants.CENTER);
 	lblListaMisActividades.setFont(new Font("Arial", Font.BOLD, 23));
 	lblListaMisActividades.setBounds(897, 17, 295, 54);
@@ -395,13 +392,13 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	((DocenteCorregirListResolucionesController) listaRA).setView(this);
 	listaCorregirResolucion.associate(listaResolucionCorregir, listaRA);
 
-	label = new JLabel("LISTA DE RESOLUCIONES");
+	label = new JLabel(S117);
 	label.setHorizontalAlignment(SwingConstants.CENTER);
 	label.setFont(new Font("Arial", Font.BOLD, 23));
 	label.setBounds(897, 334, 295, 92);
 	panelCorregirDocente.add(label);
 
-	lblActividad = new JLabel("ACTIVIDAD");
+	lblActividad = new JLabel(S118);
 	lblActividad.setHorizontalAlignment(SwingConstants.LEFT);
 	lblActividad.setFont(new Font("Arial", Font.BOLD, 17));
 	lblActividad.setBounds(22, 44, 265, 37);
@@ -549,9 +546,9 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
      * @param actividades
      */
     public void setListActividadD(LinkedList<String> actividades) {
-	listaActividadDocente .removeAll();
+	listaActividadDocente.removeAll();
 	listaMateriaActividadDocente.removeAll();
-	litaCorregirMateria .removeAll();
+	litaCorregirMateria.removeAll();
 	for (int i = 0; i < actividades.size(); i++) {
 	    listaActividadDocente.add(actividades.get(i), i);
 	    listaMateriaActividadDocente.add(actividades.get(i), i);

@@ -39,7 +39,7 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	    try {
 		searchFacultadInDB();
 	    } catch (FacultadNotFound e) {
-		view.present("no se encontro la facultad");
+		view.present(S40);
 	    }
 	    showFacultadInList();
 	}
@@ -47,7 +47,7 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	    try {
 		deleteFacultad();
 	    } catch (FacultadNotFound e) {
-		view.present("no se pudo borrar la facultad");
+		view.present(S41);
 	    }
 	    showFacultadInList();
 	    view.deleteViewFieldsAlta_F();
@@ -75,7 +75,7 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	    if (fac != null) {
 		view.setNombreModificarFacultad(fac.getDescipcion());
 	    } else {
-		view.present("El codigo de facultad no existe");
+		view.present(S42);
 		view.deleteViewFieldsMod_F();
 	    }
 	}
@@ -88,7 +88,7 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	searchFacultadInDB();
 	if (!(view.getCodigoModificarFacultad().compareTo("") == 0)) {
 	    if (fac.destroy()) {
-		view.present("Borrado de la facultad exitoso");
+		view.present(S43);
 		view.deleteViewFieldsMod_F();
 	    }
 	}
@@ -101,12 +101,12 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	if (view.fieldsIsOkAlta_F()) {
 	    Facultad f = new Facultad(view.getNombreAltaFacultad().trim());
 	    if (f.save()) {
-		view.present("Facultad Agregada");
+		view.present(S44);
 	    } else {
-		view.present("Datos No validos");
+		view.present(S45);
 	    }
 	} else {
-	    view.present("Datos incompletos");
+	    view.present(S46);
 	}
     }
 
@@ -118,13 +118,13 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	    try {
 		Facultad.update(view.getNombreModificarFacultad(), view
 			.getCodigoModificarFacultad());
-		view.present("Actualizacion con exito");
+		view.present(ACTUALIZACIONEXITOSO);
 	    } catch (SQLException e) {
 		e.printStackTrace();
-		view.present("No se pudo actualizar");
+		view.present(ACTUALIZACIONFALLIDA);
 	    }
 	} else {
-	    view.present("La facultad no existe");
+	    view.present(S47);
 	}
     }
 
@@ -134,7 +134,7 @@ public class gestionFacultadController implements IController, defaultLanguaje,
 	    view.setListFacultad_ABM(facList);
 	} catch (SQLException e) {
 	    e.printStackTrace();
-	    view.present("error al actualizar la lista de facultades");
+	    view.present(ERROR);
 	}
     }
 
