@@ -1,3 +1,4 @@
+import static org.junit.Assert.*;
 import junit.framework.Assert;
 
 import org.junit.After;
@@ -33,7 +34,13 @@ public class AlumnoTest {
 	public void guardarElMismoALumno() {
 		 Assert.assertEquals(false, alumno.save());
 	}
-
+	
+	// Testea que la recuperacion de un alumno sea correcta. A re loco
+	@Test
+	public void getAlumno() {
+		assertEquals(Alumno.getAlumno(alumno.getDni()).getDni(), alumno.getDni());
+	}
+	
 	/**pruebo si el alumno creado y guardado anteriormente ahora puedo boorrarlo
 	 * 
 	 */
