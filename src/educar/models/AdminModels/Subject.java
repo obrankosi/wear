@@ -226,13 +226,14 @@ public class Subject implements Comparable<Subject> {
     public static  boolean contenido(LinkedList<Subject> list, Subject materia) {
 	boolean encontre = false;
 	Subject newMateria;
+	System.out.println(list.size());
 	for (int i = 0; i < list.size() && !encontre; i++) {
 	    newMateria = list.get(i);
 	    if (newMateria.compareTo(materia) == 0)
 		encontre = true;
 	}
 
-	return true;
+	return encontre;
     }
 
     private static Subject getSubjectByCode(String codMateria)
