@@ -54,6 +54,8 @@ public class AlumnoView extends JFrame implements IView, defaultLanguaje {
      * Create the frame.
      */
     public AlumnoView() {
+    	setTitle("ALUMNO");
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(AlumnoView.class.getResource("/educar/gui/AdminViews/imagenIcon/1336865201_graduated.png")));
 	setVisible(true);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();

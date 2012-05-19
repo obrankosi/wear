@@ -72,6 +72,8 @@ public class DocenteView extends JFrame implements IView, defaultLanguaje {
 	 * 
 	 */
     public DocenteView() {
+    	setTitle("DOCENTE");
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(DocenteView.class.getResource("/educar/gui/DocenteView/imagenIconDocente/1336865392_teacher.png")));
 	setVisible(true);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
