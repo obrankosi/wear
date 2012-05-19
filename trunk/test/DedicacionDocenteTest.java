@@ -1,7 +1,6 @@
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,6 +9,11 @@ import educar.models.AdminModels.DedicacionDocente;
 import educar.models.AdminModels.Docente;
 import educar.models.AdminModels.Facultad;
 
+/**
+ * @author grupo wear 
+ * test dedicacion docente No anda pero es la base de la idea
+ *
+ */
 public class DedicacionDocenteTest {
 
     private static Docente docente;
@@ -17,6 +21,7 @@ public class DedicacionDocenteTest {
     private static Cargos cargo;
     private static DedicacionDocente newTest;
 
+    
     @BeforeClass
     public void cargarDatos() {
 	String dni = "31454090";
@@ -25,16 +30,16 @@ public class DedicacionDocenteTest {
 	String fN = "1982-02-11";
 	String dir = "dinkeldein 1497";
 	String tel = "4627163";
-	Docente docente = new Docente(dni, name, lastName, fN, dir, tel);
+	Docente docente = new Docente(dni, name, lastName, fN,dir,tel);
 	docente.save();
 
 	String codigo = "50";
-	String descripcion = " Actividad : hacer test para que pueda aprobar la materia";
+	String descripcion = " Facultad de Test";
 	Facultad facultad = new Facultad(codigo, descripcion);
 	facultad.save();
 
 	String codigoCargo = "40";
-	String nombreCargo = "Director de Facultad";
+	String nombreCargo = "Director Test";
 	Cargos cargo = new Cargos(codigoCargo, nombreCargo);
 	cargo.save();
 
