@@ -42,9 +42,11 @@ public class AlumnoControllers implements IController, defaultLanguaje,
     public void process(String model) {
 	if (model.compareTo(SUBIR) == 0) {
 	    saveActividadInDBase();
+	    view.setVacioCargarSolucion();
 	}
 	if (model.compareTo(ADD) == 0) {
 	    saveMateriasInDBase();
+	    showMateriasInscriptoInList();
 	}
     }
 
@@ -55,7 +57,7 @@ public class AlumnoControllers implements IController, defaultLanguaje,
     /**
      * @param codActividad
      * @return {@link String} nota de la actividad
-     */
+     */	
     public static String getNota(String codActividad) {
 	Resolucion reso = new Resolucion();
 	return reso.getNota(getCodigoAlumno(), codActividad);

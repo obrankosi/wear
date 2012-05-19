@@ -148,7 +148,7 @@ public class AsignacionDocenteController implements IController,
 	String newArgs = new String();
 	Docente newDocente;
 	for (int i = 0; i < docentesLigados.size(); i++) {
-	    newDocente = Docente.getDocente(docentes.get(i));
+	    newDocente = Docente.getDocente(docentesLigados.get(i));
 	    newArgs = (S10 + docentes.get(i) + S11 + S12
 		    + newDocente.getName() + S11 + S13 + newDocente
 		    .getLastName());
