@@ -17,6 +17,7 @@ public class DocenteViewController implements IController, defaultLanguaje {
 	if (model.compareTo(ACTIVIDADOCENTEPANEL) == 0) {
 	    view.panelActividad();
 	    view.setListMAteriaD(DocenteController.misMaterias());
+	    view.setListActividadD(DocenteController.misActividades());
 	}
 	if (model.compareTo(CORREGIRDOCENTEPANEL) == 0) {
 	    view.panelCorregir();
